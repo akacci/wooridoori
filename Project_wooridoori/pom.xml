@@ -173,7 +173,7 @@
 	    <dependency>
 	       <groupId>org.aspectj</groupId>
 	       <artifactId>aspectjtools</artifactId>
-	       <version>1.8.0</version>
+	       <version>1.8.9</version>
 	    </dependency>
 	   
 	    <dependency>
