@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<head>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +18,7 @@ body, html {height: 100%}
     background-size: cover;
 }
 </style>
+</head>
 <body>
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
