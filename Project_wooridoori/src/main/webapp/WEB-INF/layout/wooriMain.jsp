@@ -32,7 +32,7 @@ body, html {height: 100%}
     <p c564+4lass="w3-large w3-center">35 days left</p>
   </div>
   <div class="w3-display-bottomleft w3-padding-large">
-    Powered by <a href="https://www.w3schools.com/w3css/defau
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
   </div>
 
 </div>
