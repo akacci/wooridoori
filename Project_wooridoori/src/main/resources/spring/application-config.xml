@@ -30,6 +30,4 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> <!--sqlSessionFactory injection  -->
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
-
-
 </beans>
