@@ -11,6 +11,11 @@
 	<context:annotation-config/>
 	<mvc:default-servlet-handler/>
     <mvc:annotation-driven />
+    
+    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">  <!--sqlSessionFactory injection  -->
+    <constructor-arg ref="sqlSessionFactory" index="0"/>
+    </bean>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
@@ -19,4 +24,5 @@
 	</bean>
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	<mvc:resources mapping="/css/**" location="/resources/css/"/>
+	
 </beans>
