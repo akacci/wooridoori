@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 	
-	@RequestMapping("/topmenu.wd")
+	@RequestMapping("/wtopmenu.wd")
 	public String main(){
-		return "/layout/topmenu";
+		return "/layout/wtopmenu";
 	}
 	@RequestMapping("/wfooter.wd")
 	public String wfooter(){
@@ -24,4 +24,10 @@ public class MainController {
 	public String asgd(HttpServletRequest req){
 		return "/layout/wooriMain";
 	}
+	@RequestMapping("/test.wd")
+	public String asgdd(HttpServletRequest req){
+		System.out.println("test");
+		return "/layout/test";
+	}
+
 }
