@@ -21,6 +21,9 @@ body, html {height: 100%}
 </head>
 <body>
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+<div>
+메뉴
+</div>
   <div class="w3-display-topleft w3-padding-large w3-xlarge">
 	<c:import url="/wtopmenu.wd"></c:import>
   </div>
@@ -29,16 +32,16 @@ body, html {height: 100%}
 	<c:import url="/wbody.wd"></c:import>
 	</h1>
     <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p class="w3-large w3-center">35 days left</p>
+    <p c564+4lass="w3-large w3-center">35 days left</p>
   </div>
   <div class="w3-display-bottomleft w3-padding-large">
 	ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
   </div>
-</div>
 
 <div style="width: 100%; height: 10%; bottom: 0">
 <c:import url="/wfooter.wd"></c:import>
 </div>
 
 </body>
+

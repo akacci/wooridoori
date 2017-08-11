@@ -10,6 +10,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 
+
 </head>
 <body>
 	<c:redirect url="wooriMain.wd"></c:redirect>
