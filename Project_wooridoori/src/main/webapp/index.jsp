@@ -14,6 +14,5 @@
 </head>
 <body>
 	<a href="wooriMain.wd?wbody_url=wbody.wd">메인</a>
-	<a href="slide.wd">슬라이드</a>
 </body>
 </html>

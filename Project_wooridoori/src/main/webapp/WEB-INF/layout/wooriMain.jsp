@@ -98,10 +98,29 @@ body, html {height: 100%}
     background-size: cover;
     animation: opac 0.8s;
 }
+
+.bgimg2 {
+	min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    animation: opac 0.8s;
+    background-color: olive;
+}
+
 </style>
 </head>
 <body>
-<div class="bgimg w3-display-container w3-text-white">
+
+<!-- Home화면 에서만 배경화면을 출력하기 위해 클래스명을 value값으로 변수a를 선언함.  -->
+<c:if test="${wbody_url eq '/wbody.wd'}">
+	<c:set var="a" value="bgimg"></c:set>
+</c:if>
+
+<c:if test="${wbody_url != '/wbody.wd'}">
+	<c:set var="a" value="bgimg2"></c:set>
+</c:if>
+
+<div class="${a} w3-display-container w3-text-white">
   <div class="w3-display-middle" style="width: 100%; height:83%;">
     <h1 class="w3-medium w3-animate-top">
 	<c:import url="${wbody_url}"></c:import>
@@ -120,7 +139,6 @@ body, html {height: 100%}
   
   <div class="w3-display-bottomleft w3-padding-large">
 	빅-수잔보이
-	
   </div>
   
   <div id="message_box" class="absolute_box w3-container w3-black2" style="white-space: pre-line; word-break:break-all;">
