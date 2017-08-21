@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+	<span class="w3-jumbo w3-ab" style="margin-left: 9%; margin-top: 5%;">도쿄</span>
 </body>
 </html>

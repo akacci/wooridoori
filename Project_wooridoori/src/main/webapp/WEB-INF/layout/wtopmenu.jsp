@@ -1,5 +1,7 @@
+<%@page import="org.springframework.beans.factory.parsing.Location"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,21 +16,18 @@
 	        x.className = x.className.replace(" w3-show", "");
 	    }
 	}
+	
+	function goHome() {
+		location.href="wooriMain.wd?wbody_url=wbody.wd";
+	}
 </script>
-<style type="text/css">
-	.bar-item{
-		color: white;
-		text-decoration: none;
-		font-size: 24px;
-	};
-</style>
 </head>
 <body>
 
 <div class="w3-bar w3-colorless">
-  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=test.wd">London</a></div>
-  <div class="w3-bar-item bar-item"><a class="bar-item" href="#" style="text-decoration: none;">Paris</a></div>
-  <div class="w3-bar-item bar-item"><a class="bar-item" href="#" style="text-decoration: none;">Dokyo</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=london.wd">London</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=paris.wd" style="text-decoration: none;">Paris</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=dokyo.wd" style="text-decoration: none;">Dokyo</a></div>
 
 <div class="w3-dropdown-click" style="float: right">
  <button onclick="myFunction()" class="w3-btn w3-colorless w3-xlarge w3-text-white">
@@ -43,11 +42,18 @@
 
 <div style="float:right">
   <div class="w3-bar-item">
-  <a  class="bar-item" href="test.wd">로그인 
+  <a class="bar-item" href="test.wd">login 
   <img src="resources/image/profile.png" width="35" height="35" style="vertical-align:text-bottom;"> </a>
   </div>
+  <b style="color: white;">&nbsp;|&nbsp;</b>
+  <button onclick="goHome()" class="w3-btn w3-colorless w3-xlarge w3-text-white">
+			<i class="fa fa-home"></i>
+  </button>
 </div>
 
+<div style="float:right">
+		
+</div>
 
 </div>
 </body>
