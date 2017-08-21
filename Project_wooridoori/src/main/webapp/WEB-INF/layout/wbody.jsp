@@ -12,7 +12,7 @@
 $(document).ready(function(){
 	var latitude=1;
 	var longitude=1;
-	var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+latitude+"&lon="+longitude+"&city=&county=&village=&appKey=32235c48-92ac-3a82-bf93-7fbee73f7069";
+	var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+latitude+"&lon="+longitude+"&city=&county=&village=&appKey=32235c48-92ac-3a82-bf93-7fbee73f7061";
 	$.ajax({
 		/*http://apis.skplanetx.com/weather/current/minutely?version=1&lat=1&lon=1&city=&county=&village=&appKey=32235c48-92ac-3a82-bf93-7fbee73f7069 */
 		url:Wurl,
@@ -37,6 +37,14 @@ $(document).ready(function(){
 
 </head>
 <body>
-	<div id="weather"></div>
+<div style="margin-left: 9%; margin-top: 5%;" >
+	<img src="resources/image/woori.png" width="200" height="60" style="margin-top: 20px">
+</div>
+<div style="margin-left: 10%;">
+	<input type="text" style="border:none;width: 550px;" class="w3-xlarge" title="검색">
+	<button class="w3-xlarge" style="background-color: white; border:none; margin-left:-3px; cursor: pointer;"><i class="fa fa-search" ></i></button>
+</div>
+	<div id="weather">
+	</div>
 </body>
 </html>
