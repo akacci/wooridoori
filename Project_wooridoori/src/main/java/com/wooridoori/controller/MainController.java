@@ -22,21 +22,34 @@ public class MainController {
 		return "/layout/wbody";
 	}
 	@RequestMapping("/wooriMain.wd")
-	public String asgd(HttpServletRequest req, Model model){
-		String url =  "/"+(String)req.getParameter("wbody_url");
+
+	public String wooriMain(
+			HttpServletRequest req,
+			Model model
+			){
+		String url="/"+(String)req.getParameter("wbody_url");
 		model.addAttribute("wbody_url", url);
 		return "/layout/wooriMain";
 	}
-	@RequestMapping("/loginform.wd")
-	public String loginform(HttpServletRequest req, Model model){
-		return "/member/loginform";
+	
+	@RequestMapping("/london.wd")
+	public String london(){
+		return "/layout/london";
 	}
-	@RequestMapping("/diatest.wd")
-	public String asgdd(HttpServletRequest req, Model model){
-		return "/member/diatest";
+	
+	@RequestMapping("/dokyo.wd")
+	public String dokyo(){
+		return "/layout/dokyo";
 	}
-	@RequestMapping("/test.wd")
-	public String asdf(){
-		return "/view/test";
+	
+	@RequestMapping("/paris.wd")
+	public String paris(){
+		return "/layout/paris";
+	}
+	
+	@RequestMapping("/slide.wd")
+	public String slide()
+	{
+		return "/view/test1";
 	}
 }
