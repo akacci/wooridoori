@@ -22,6 +22,7 @@ public class MainController {
 		return "/layout/wbody";
 	}
 	@RequestMapping("/wooriMain.wd")
+
 	public String wooriMain(
 			HttpServletRequest req,
 			Model model
@@ -51,5 +52,4 @@ public class MainController {
 	{
 		return "/view/test1";
 	}
-
 }

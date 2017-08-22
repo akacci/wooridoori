@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-여기는 footer
-</div>
+뜨냐?
 </body>
 </html>

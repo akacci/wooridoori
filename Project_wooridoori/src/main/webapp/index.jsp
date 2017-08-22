@@ -13,6 +13,7 @@
 
 </head>
 <body>
-	<a href="wooriMain.wd?wbody_url=wbody.wd">메인</a>
+	<c:redirect url="wooriMain.wd?wbody_url=wbody.wd"></c:redirect>
+
 </body>
 </html>
