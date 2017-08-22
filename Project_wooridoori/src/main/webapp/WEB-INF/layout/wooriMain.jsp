@@ -146,9 +146,9 @@ body, html {height: 100%}
   </div>
   
 	<button class="absolute_btn" style="background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer"
-	id="btn_prev"><</button>
+	id="btn_prev">&lt;</button>
 	<button class="absolute_btn" style="background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer;
-	margin-left: 41px" id="btn_next">></button>
+	margin-left: 41px" id="btn_next">&gt;</button>
 </div>
 
 <div style="width: 100%; height: 10%; bottom: 0">

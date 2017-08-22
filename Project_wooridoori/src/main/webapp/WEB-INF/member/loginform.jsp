@@ -46,9 +46,9 @@
               <input type="text" name="ecode" id="ecode" class="inpt" required="required" placeholder="CODE" style="width : 76.5%;float:left;margin-right:10px;">
               <input type="button" value="CHECK" class="inptb">
               <label for="ecode">ecode</label>
-              <input type="country" name="country" id="country" class="inpt" required="required" placeholder="COUNTRY">
+              <input type="text" name="country" id="country" class="inpt" required="required" placeholder="COUNTRY">
               <label for="country">country</label>
-              <input type="tel" name="tel" id="tel" class="inpt" required="required" placeholder="PHONE">
+              <input type="text" name="tel" id="tel" class="inpt" required="required" placeholder="PHONE">
               <label for="tel">tel</label>
               <div class="submit-wrap">
                  <input type="submit" value="Sign up" class="submit"> 
