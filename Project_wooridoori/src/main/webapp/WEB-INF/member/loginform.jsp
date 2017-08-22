@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Log in / Sign up</title>
 	<link rel="stylesheet" type="text/css" href='resources/css/loginform.css'>
-    <style rel="stylesheet"></style>
+    <style type="text/css"></style>
   </head>
   <body>
     <div class="modal-body">
