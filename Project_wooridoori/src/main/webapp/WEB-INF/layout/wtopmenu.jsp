@@ -39,14 +39,17 @@ $(document).ready(function(){
   
 </script>
 <style type="text/css">
+a:hover{
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
 <div class="w3-bar w3-colorless">
 
-  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=london.wd">London</a></div>
-  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=paris.wd" style="text-decoration: none;">Paris</a></div>
-  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=dokyo.wd" style="text-decoration: none;">Dokyo</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=london.wd" >London</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=paris.wd" >Paris</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=dokyo.wd" >Dokyo</a></div>
 
 <div class="w3-dropdown-click" style="float: right">
  <button onclick="myFunction()" class="w3-btn w3-colorless w3-xlarge w3-text-white">
@@ -61,7 +64,7 @@ $(document).ready(function(){
 
 <div style="float:right">
   <div class="w3-bar-item">
-  <a class="bar-item" href="test.wd" id="activeModal">login 
+  <a class="bar-item" data-toggle="modal" data-target="#myModal" id="activeModal" href="loginform.wd">login
   <img src="resources/image/profile.png" width="35" height="35" style="vertical-align:text-bottom;"> </a>
 
   </div>
@@ -70,7 +73,6 @@ $(document).ready(function(){
 			<i class="fa fa-home"></i>
   </button>
 </div>
-
 	<div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width: 380px;margin-top: 130px;margin-bottom: 0px;">
         <div class="modal-content" style=";margin-left: auto;margin-right: auto;">

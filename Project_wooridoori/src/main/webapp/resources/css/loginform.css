@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-      * {
+      body .container {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
       }
-      body {
+      body .container {
         font-family: 'Lato', sans-serif;
         background-color: #fff;
       }

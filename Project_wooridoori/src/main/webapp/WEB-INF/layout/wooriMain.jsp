@@ -99,8 +99,6 @@ body, html {height: 100%}
     background-size: cover;
     animation: opac 0.8s;
 }
-
-
 .bgimg2 {
 	min-height: 100%;
     background-position: center;
@@ -112,7 +110,6 @@ body, html {height: 100%}
 </style>
 </head>
 <body>
-
 <!-- Home화면 에서만 배경화면을 출력하기 위해 클래스명을 value값으로 변수a를 선언함.  -->
 <c:if test="${wbody_url eq '/wbody.wd'}">
 	<c:set var="a" value="bgimg"></c:set>
@@ -152,8 +149,6 @@ body, html {height: 100%}
 	id="btn_prev"><</button>
 	<button class="absolute_btn" style="background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer;
 	margin-left: 41px" id="btn_next">></button>
-  
-	
 </div>
 
 <div style="width: 100%; height: 10%; bottom: 0">

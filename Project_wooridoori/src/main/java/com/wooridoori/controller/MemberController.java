@@ -12,6 +12,10 @@ import com.wooridoori.dto.MemberDTO;
 @Controller
 public class MemberController {
 	
+	@RequestMapping("/loginform.wd")
+		public String loginform(HttpServletRequest req, Model model){
+		return "/member/loginform";
+	}
 	@RequestMapping("/loginaction.wd")
 	public String loginAction(HttpServletRequest req, Model model, @ModelAttribute MemberDTO dto){
 		String referrer = req.getHeader("Referer");
@@ -28,6 +32,6 @@ public class MemberController {
 //		
 		//m.addAttribute("");
 	
-//		return ;
+//		return false;
 //	}
 }
