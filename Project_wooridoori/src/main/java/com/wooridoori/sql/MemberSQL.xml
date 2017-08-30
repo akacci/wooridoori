@@ -6,7 +6,7 @@
 		insert into
 			wmember
 		values
-			(mem_seq.nextval, #{id}, #{name}, #{password}, #{email}, #{country}, #{tel}, 'Y', null, sysdate, sysdate)
+			(mem_seq.nextval, #{m_id}, #{name}, #{password}, #{email}, #{country}, #{tel}, 'N', null, sysdate, sysdate)
 	</insert>
 	<select id="idCheck" parameterType="String" resultType="int">
 		select
@@ -14,15 +14,15 @@
 		from
 			wmember
 		where
-			m_id = #{id}
+			m_id = #{m_id}
 	</select>
 	<select id="loginCheck" parameterType="mdto" resultType="int">
 		select
-			count(m_id) as id
+			count(m_id) as m_id
 		from
 			wmember
 		where
-			m_id = #{id}
+			m_id = #{m_id}
 				and
 			password = #{password}
 	</select>

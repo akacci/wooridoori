@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.MemberDTO;
+import com.wooridoori.service.GuideService;
 import com.wooridoori.service.MemberService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService mService;
+	@Autowired
+	MemberDAO mdao;
 	
 	@RequestMapping("/loginform.wd")
 	public String loginform(Model model){
@@ -30,12 +34,26 @@ public class MemberController {
 	public String loginAction(
 			HttpServletRequest req,
 			HttpSession session,
-			Model model,
-			@ModelAttribute MemberDTO dto
+			Model m,
+			@ModelAttribute MemberDTO mdto,
+			@RequestParam(defaultValue="서울특별시")String addr
 			){
 		req.getSession().setAttribute("prevPage", req.getHeader("Referer"));
 	    session.setAttribute("LOGIN", "YES");
-	    session.setAttribute("ID", dto.getM_id());
+	    session.setAttribute("ID", mdto.getM_id());
+	   
+	    boolean log=mdao.loginCheck(mdto);
+	    if(log){	    
+			//User info 
+			mdto=mService.getMemberInfo(mdto.getM_id());
+			session.setAttribute("id", mdto.getM_id());
+			session.setAttribute("name", mdto.getName());
+			session.setAttribute("guide", mdto.getGuide());			
+			int f=mdto.getE_mail().indexOf("@");						
+			session.setAttribute("email1", mdto.getE_mail().substring(0,f));
+			session.setAttribute("email2", mdto.getE_mail().substring(f+1, mdto.getE_mail().length()));
+			m.addAttribute("addr",addr);
+	    }
 		return "/member/login";
 	}
 	

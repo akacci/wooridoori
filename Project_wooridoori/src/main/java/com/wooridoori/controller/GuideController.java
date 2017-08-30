@@ -79,7 +79,7 @@ public class GuideController {
 						@RequestParam(defaultValue="서울특별시")String addr	) throws IOException{
 	//	System.out.println(mdto.getM_id()+""+mdto.getPassword());
 		boolean log=mdao.loginCheck(mdto);
-		System.out.println(req.getSession().getServletContext().getRealPath("")+"save\\GuidePreview\\");
+	//	System.out.println(req.getSession().getServletContext().getRealPath("")+"save\\GuidePreview\\");
 		if(log){
 			//Guide locate
 			m.addAttribute("list",gService.getList(addr));
