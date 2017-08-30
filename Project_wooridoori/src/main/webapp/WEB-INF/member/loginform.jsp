@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Log in / Sign up</title>
 	<link rel="stylesheet" type="text/css" href='resources/css/loginform.css'>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/member.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <style type="text/css"></style>
   </head>
   <body>
@@ -19,39 +24,39 @@
         </div>
         <div class="content">
           <div class="signin-cont cont">
-            <form id="frm-log" action="loginaction.wd" method="post">
+            <form id="frm-log" method="post" action="loginaction.wd">
               <input type="text" name="id" id="id" class="inpt" required="required" placeholder="ID">
               <label for="email">Your email</label>
               <input type="password" name="password" id="password" class="inpt" required="required" placeholder="PASSWORD">
               <label for="password">Your password</label>
-              <input type="checkbox" id="remember" class="checkbox" checked>
-              <label for="remember">Remember me</label>
+              <div><!-- reCAPTCHA_v2 -->
+<!--               	<script src='https://www.google.com/recaptcha/api.js'></script> -->
+<!--               	<div class="g-recaptcha" data-sitekey="6LdNBi0UAAAAAIEPW5MjvEO36V1-wDL-MYoQ9WxS"></div> -->
+              </div>
               <div class="submit-wrap">
-                <input type="button" value="Log in" class="submit" id="login">
-                <a href="#" class="more">Forgot your password?</a>
+                <input type="button" value="Log in" class="submit" id="btnlog">
+                <a href="#" class="forgotpass">Forgot your password?</a>
               </div>
             </form>
           </div>
           <div class="signup-cont cont">
-            <form action="#" method="post">
+            <form id="frm-sign" action="signupaction.wd" method="post">
               <input type="text" name="id" id="id" class="inpt" required="required" placeholder="ID">
               <label for="id">id</label>
               <input type="password" name="password" id="password" class="inpt" required="required" placeholder="PASSWORD">
               <label for="password">password</label>
               <input type="text" name="name" id="name" class="inpt" required="required" placeholder="NAME">
               <label for="name">name</label>
-              <input type="email" name="email" id="email" class="inpt" required="required" placeholder="EMAIL" style="width : 76.5%;float:left;margin-right:10px;">
+              <input type="email" name="email" id="email" class="inpt" required="required" placeholder="EMAIL">
               <label for="email">email</label>
-              <input type="button" value="SEND CODE" class="inptb">
-              <input type="text" name="ecode" id="ecode" class="inpt" required="required" placeholder="CODE" style="width : 76.5%;float:left;margin-right:10px;">
-              <input type="button" value="CHECK" class="inptb">
-              <label for="ecode">ecode</label>
-              <input type="country" name="country" id="country" class="inpt" required="required" placeholder="COUNTRY">
+              <select name="country" id="country" class="inpts">
+              	<c:forEach items="${Clist}" var="country"><option value="${country}" <c:if test="${country=='Republic of Korea'}">selected</c:if>>${country}</option></c:forEach>
+              </select>
               <label for="country">country</label>
-              <input type="tel" name="tel" id="tel" class="inpt" required="required" placeholder="PHONE">
+              <input type="text" name="tel" id="tel" class="inpt" required="required" placeholder="PHONE">
               <label for="tel">tel</label>
               <div class="submit-wrap">
-                 <input type="submit" value="Sign up" class="submit"> 
+                 <input type="button" value="Sign up" class="submit" id="btnsign"> 
                 <a href="#" class="more">Terms and conditions</a>
               </div>
             </form>
@@ -60,37 +65,10 @@
       </article>
     </section>
 </div>
+<div></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
     <script type="text/javascript">
-      $('.tabs .tab').click(function(){
-        if ($(this).hasClass('signin')) {
-          $('.tabs .tab').removeClass('active');
-          $('body .container').css('height','515px');
-          $('body .container .content form').css('height','390px');
-          $(this).addClass('active');
-          $('.cont').hide();
-          $('.signin-cont').show();
-        }
-        if ($(this).hasClass('signup')) {
-          $('.tabs .tab').removeClass('active');
-          $('body .container').css('height','570px');
-          $('body .container .content form').css('height','440px');
-          $(this).addClass('active');
-          $('.cont').hide();
-          $('.signup-cont').show();
-        }
-      });
-      $('#login').click(function(){
-    	 var id = $("#frm-log #id").val();
-    	 var password = $("#frm-log #password").val();
-    	 $.ajax({
-    		url: 'membercheck.wd',
-    		data:{id:id,password:password},
-    		success : function(data){
-    			
-    		}
-    	 });
-      });
+
     </script>
   </body>
 </html>

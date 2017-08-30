@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="content">
+	<select id="getContentData" parameterType="String" resultType="cdto">
+		select * from tour_inquiry where contentid = #{contentid}
+	</select>
+	<select id="getWeatherXY" parameterType="java.util.Map" resultType="wdto">
+		select * from w_addr where sido = #{sido} and gu = #{gu}
+	</select>
+</mapper>

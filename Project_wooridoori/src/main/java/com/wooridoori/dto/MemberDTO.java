@@ -5,6 +5,8 @@ public class MemberDTO {
 	private String password;
 	private String name;
 	private String email;
+	private String country;
+	private String tel;
 	public String getId() {
 		return id;
 	}
@@ -28,5 +30,17 @@ public class MemberDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 }

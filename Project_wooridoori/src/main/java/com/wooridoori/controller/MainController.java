@@ -22,13 +22,16 @@ public class MainController {
 		return "/layout/wbody";
 	}
 	@RequestMapping("/wooriMain.wd")
-
 	public String wooriMain(
 			HttpServletRequest req,
 			Model model
 			){
-		String url="/"+(String)req.getParameter("wbody_url");
-		model.addAttribute("wbody_url", url);
+		
+		String url = (String)req.getParameter("wbody_url");
+		if(url==null||url==""){
+			url = "wbody.wd";
+		}
+		model.addAttribute("wbody_url", "/"+url);
 		return "/layout/wooriMain";
 	}
 	
@@ -46,7 +49,10 @@ public class MainController {
 	public String paris(){
 		return "/layout/paris";
 	}
-	
+	@RequestMapping("/searchlist.wd")
+	public String searchList(){
+		return "/layout/search";
+	}
 	@RequestMapping("/slide.wd")
 	public String slide()
 	{

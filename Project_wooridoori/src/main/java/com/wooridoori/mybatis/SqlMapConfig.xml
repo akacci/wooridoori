@@ -2,5 +2,13 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+	<typeAliases>
+		<typeAlias type="com.wooridoori.dto.MemberDTO" alias="mdto"/>
+		<typeAlias type="com.wooridoori.dto.ContentDTO" alias="cdto"/>
+		<typeAlias type="com.wooridoori.dto.WeatherDTO" alias="wdto"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/wooridoori/sql/MemberSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/ContentSQL.xml"/>
+	</mappers>
 </configuration>

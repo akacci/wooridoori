@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<span class="w3-jumbo w3-ab" style="margin-left: 5%; margin-top: 5%;">Search</span>
+<c:redirect url="${sessionScope.prevPage}"/> 
 </body>
 </html>
