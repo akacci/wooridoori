@@ -345,6 +345,7 @@ a {
 .w3-badge, .w3-tag {
 	background-color: #000;
 	color: #fff;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	display: inline-block;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -509,6 +510,7 @@ a {
 
 .w3-bar .w3-bar-item {
 	padding: 8px 16px;
+	padding-top: 11px;
 	float: left;
 	width: auto;
 	border: none;
@@ -538,6 +540,7 @@ a {
 
 .bar-item{
 	color: white;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000; 
 	text-decoration: none;
 	font-size: 24px;
 };
@@ -1391,6 +1394,7 @@ to {
 
 .w3-blue, .w3-hover-blue:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #2196F3 !important
 }
 
@@ -1401,6 +1405,7 @@ to {
 
 .w3-brown, .w3-hover-brown:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #795548 !important
 }
 
@@ -1412,11 +1417,13 @@ to {
 .w3-blue-grey, .w3-hover-blue-grey:hover, .w3-blue-gray,
 	.w3-hover-blue-gray:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #607d8b !important
 }
 
 .w3-green, .w3-hover-green:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #4CAF50 !important
 }
 
@@ -1427,6 +1434,7 @@ to {
 
 .w3-indigo, .w3-hover-indigo:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #3f51b5 !important
 }
 
@@ -1447,26 +1455,31 @@ to {
 
 .w3-deep-orange, .w3-hover-deep-orange:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #ff5722 !important
 }
 
 .w3-pink, .w3-hover-pink:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #e91e63 !important
 }
 
 .w3-purple, .w3-hover-purple:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #9c27b0 !important
 }
 
 .w3-deep-purple, .w3-hover-deep-purple:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #673ab7 !important
 }
 
 .w3-red, .w3-hover-red:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #f44336 !important
 }
 
@@ -1477,6 +1490,7 @@ to {
 
 .w3-teal, .w3-hover-teal:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #009688 !important
 }
 
@@ -1492,11 +1506,13 @@ to {
 
 .w3-black, .w3-hover-black:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #000 !important
 }
 
 .w3-black2 {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: rgba(0,0,0,0.5) !important;
 }
 
@@ -1514,6 +1530,7 @@ to {
 .w3-dark-grey, .w3-hover-dark-grey:hover, .w3-dark-gray,
 	.w3-hover-dark-gray:hover {
 	color: #fff !important;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 	background-color: #616161 !important
 }
 
@@ -1555,6 +1572,7 @@ to {
 
 .w3-text-white, .w3-hover-text-white:hover {
 	color: #fff !important
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 }
 
 .w3-text-black, .w3-hover-text-black:hover {

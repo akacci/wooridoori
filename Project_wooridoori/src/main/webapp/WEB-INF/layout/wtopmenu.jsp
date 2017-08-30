@@ -13,13 +13,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    $('#activeModal').on("click", function () {
-        $.ajax({
-             url: "loginform.wd",
-             success: function(data){
-             }
-        });
-    });
+    
  
     // selectboxChange();
 });
@@ -47,7 +41,7 @@ a:hover{
 <body>
 <div class="w3-bar w3-colorless">
 
-  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=london.wd" >London</a></div>
+  <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=searchlist.wd">Search</a></div>
   <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=paris.wd" >Paris</a></div>
   <div class="w3-bar-item"><a class="bar-item" href="wooriMain.wd?wbody_url=dokyo.wd" >Dokyo</a></div>
 
@@ -64,9 +58,8 @@ a:hover{
 
 <div style="float:right">
   <div class="w3-bar-item">
-  <a class="bar-item" data-toggle="modal" data-target="#myModal" id="activeModal" href="loginform.wd">login
-  <img src="resources/image/profile.png" width="35" height="35" style="vertical-align:text-bottom;"> </a>
-
+  <c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><a class="bar-item" data-toggle="modal" data-target="#myModal" id="login" href="loginform.wd">login<img src="resources/image/profile.png" width="35" height="35" style="vertical-align:text-bottom;"></a></c:if>
+  <c:if test="${sessionScope.LOGIN eq 'YES'}"><a class="bar-item" data-toggle="modal" data-target="#myModal" id="logout" href="logoutform.wd">logout<img src="resources/image/profile.png" width="35" height="35" style="vertical-align:text-bottom;"></a></c:if>
   </div>
   <b style="color: white;">&nbsp;|&nbsp;</b>
   <button onclick="goHome()" class="w3-btn w3-colorless w3-xlarge w3-text-white">
