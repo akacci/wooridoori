@@ -5,7 +5,4 @@
 	<select id="getContentData" parameterType="String" resultType="cdto">
 		select * from tour_inquiry where contentid = #{contentid}
 	</select>
-	<select id="getWeatherXY" parameterType="java.util.Map" resultType="wdto">
-		select * from w_addr where sido = #{sido} and gu = #{gu}
-	</select>
 </mapper>

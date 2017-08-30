@@ -1,9 +1,27 @@
 package com.wooridoori.dao;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
+import java.util.List;
 
-public class GuideDAO extends SqlSessionDaoSupport{
-	public void test(){
-		System.out.println("dao에 들어온다.");
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.wooridoori.dto.GuideDTO;
+
+public class GuideDAO extends SqlSessionDaoSupport {
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	public List<GuideDTO> getList(String addr){
+		return sqlSessionTemplate.selectList("guide.getGuideList",addr);
+	}
+	public void writeGuide(GuideDTO dto){
+		sqlSessionTemplate.insert("guide.writeGuide",dto);
+	}
+	public String isGuide(String id){
+		return sqlSessionTemplate.selectOne("guide.isGuide",id);
+	}
+	public GuideDTO getContent(String num){
+		return sqlSessionTemplate.selectOne("guide.getContent", num);
 	}
 }

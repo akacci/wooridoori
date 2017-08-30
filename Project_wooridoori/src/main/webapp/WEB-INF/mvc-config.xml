@@ -1,71 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
-   xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- Uncomment and your base-package here:
+    <!-- Uncomment and your base-package here:
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
-	<context:component-scan base-package="com.wooridoori.controller"/>
-	<mvc:default-servlet-handler />
-<!--   <context:annotation-config/> -->
-	<mvc:annotation-driven/>
+   <context:component-scan
+            base-package="com.wooridoori.controller"/>
+     <mvc:default-servlet-handler />
+   <!--   <context:annotation-config/> -->
+     <mvc:annotation-driven/>
 
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<value>WEB-INF/oracleDB.properties</value>
-		</property>
-	</bean>
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="${DRIVER}"/>
-		<property name="url" value="${URL}"/>
-		<property name="username" value="${USERNAME}"/>
-		<property name="password" value="${PASSWORD}"/>
-	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation">
-			<value>classpath:com/wooridoori/mybatis/SqlMapConfig.xml</value>
-		</property>
-	</bean>
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">  <!--sqlSessionFactory injection  -->
-		<constructor-arg ref="sqlSessionFactory" index="0"/>
-	</bean>
 
-<!-- DAO --> 
-	<bean id="mDao" class="com.wooridoori.dao.MemberDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
-	<bean id="gDao" class="com.wooridoori.dao.GuideDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
-	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 
-<!-- Service -->
-	<bean class="com.wooridoori.service.MemberService" id="mService"/>
-	<bean class="com.wooridoori.service.ContentService" id="cService"/>
-
-<!-- Controller -->
-<!-- 	<bean class="com.wooridoori.controller.MemberController" id="mController"/> -->
-<!-- 	<bean class="com.wooridoori.controller.ContentController" id="cController"/>	 -->
-	
-   	<bean id="multipartResolver"
-         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize">
-			<value>500000000</value>
-		</property>      
+	<bean id="multipartResolver"
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="maxUploadSize">
+				<value>500000000</value>
+			</property>		
 	</bean>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-		<property name="prefix" value="/WEB-INF/"/>
-		<property name="suffix" value=".jsp"/>
+	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+	        <property name="prefix" value="/WEB-INF/"/>
+	        <property name="suffix" value=".jsp"/>
 	</bean>
 
 <!-- 리소스 파일 위치 등록 ==> 이 경로는 컨트롤러를 타지 않는다.. -->
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 
-	<!--E-mail Auth   -->
+	<!-- DAO --> 
+	<!-- 재윤 -->
+	<bean id="MemberDAO" class="com.wooridoori.dao.MemberDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
+	<bean id="GuideDAO" class="com.wooridoori.dao.GuideDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
+	
+	<!-- 수진 -->
+	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	
+	<!-- 재문 -->
+	
+	<!-- Service -->
+	<!-- 재윤 -->
+	 <bean class="com.wooridoori.service.GuideService" id="GuideService"/>
+	 <bean class="com.wooridoori.service.MemberService" id="MemberService"/>
+	<!-- 수진 -->
+	<bean class="com.wooridoori.service.MemberService" id="mService"/>
+	<bean class="com.wooridoori.service.ContentService" id="cService"/>
+	
+	
 
-   
+	
 </beans>

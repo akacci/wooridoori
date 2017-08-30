@@ -35,7 +35,7 @@ public class MemberController {
 			){
 		req.getSession().setAttribute("prevPage", req.getHeader("Referer"));
 	    session.setAttribute("LOGIN", "YES");
-	    session.setAttribute("ID", dto.getId());
+	    session.setAttribute("ID", dto.getM_id());
 		return "/member/login";
 	}
 	

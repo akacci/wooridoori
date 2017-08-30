@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wooridoori.dto.ContentDTO;
-import com.wooridoori.dto.WeatherDTO;
 import com.wooridoori.service.ContentService;
 
 @Controller
@@ -27,7 +26,6 @@ public class ContentController {
 		
 		HashMap<String, Object> map = cService.getContentData(contentid);
 		model.addAttribute("cdata", (ContentDTO)map.get("CDATA"));
-		model.addAttribute("wdata", (WeatherDTO)map.get("WDATA"));
 		model.addAttribute("contentid", contentid);
 		return "/layout/detail";
 	}

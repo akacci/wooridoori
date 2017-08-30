@@ -14,13 +14,22 @@ import com.wooridoori.dto.MemberDTO;
 
 @Service
 public class MemberService {
-	@Resource(name="mDao")
+	@Autowired
 	MemberDAO mDao;
 	@Autowired
 	GuideDAO gDao;
 
+	
+	public MemberDTO getMemberInfo(String id){
+		return mDao.getMemberInfo(id);
+	}
+	public void updateMemberPic(MemberDTO dto){
+		mDao.updateMemberPic(dto);
+	}
+	
+	/////////////////////////////////////////////////////////
 	public ArrayList<String> loginform(){
-		ArrayList<String> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<String>();
 		list.add("Afghanistan");
 		list.add("Albania");
 		list.add("Algeria");
