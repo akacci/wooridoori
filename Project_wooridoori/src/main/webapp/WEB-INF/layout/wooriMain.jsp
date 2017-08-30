@@ -5,11 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<c:set var="root" value="<%=request.getContextPath() %>"  />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<!-- 코로스 도메인 -->
+<script type="text/javascript" src="${root}/dist/jquery.ajax-cross-origin.min.js"></script>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">

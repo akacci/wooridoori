@@ -181,6 +181,23 @@
 	       <artifactId>spring-aop</artifactId>
 	       <version>${spring-framework.version}</version>
 	    </dependency>
+ 
+   <!-- 재윤 -->
+     	 <!--smtp   -->
+		<dependency>	
+			<groupId>javax.mail</groupId>	
+			<artifactId>mail</artifactId>	
+			<version>1.4.7</version>	
+		</dependency>
+	
+	<!-- openCV -->
+		<!-- https://mvnrepository.com/artifact/org.openpnp/opencv -->
+		<dependency>
+		    <groupId>org.openpnp</groupId>
+		    <artifactId>opencv</artifactId>
+		    <version>2.4.13-0</version>
+		</dependency> 
+   
    
 	</dependencies>	
 	

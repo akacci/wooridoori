@@ -25,7 +25,7 @@
         <div class="content">
           <div class="signin-cont cont">
             <form id="frm-log" method="post" action="loginaction.wd">
-              <input type="text" name="id" id="id" class="inpt" required="required" placeholder="ID">
+              <input type="text" name="m_id" id="id" class="inpt" required="required" placeholder="ID">
               <label for="email">Your email</label>
               <input type="password" name="password" id="password" class="inpt" required="required" placeholder="PASSWORD">
               <label for="password">Your password</label>
