@@ -7,6 +7,13 @@
 		<!--  -->
 		<typeAlias type="com.wooridoori.dto.MemberDTO" alias="mdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentDTO" alias="cdto"/>
+		<!-- recommend -->
+		<typeAlias type="com.wooridoori.dto.AreaCodeDTO" alias="adto"/>
+		<typeAlias type="com.wooridoori.dto.RecommendDTO" alias="rdto"/>
+		<typeAlias type="com.wooridoori.dto.RecommendAverageDTO" alias="radto"/>
+		<typeAlias type="com.wooridoori.dto.TourInquiryDTO" alias="tdto"/>
+		<typeAlias type="com.wooridoori.dto.ContentCodeDTO" alias="condto"/>
+		<typeAlias type="com.wooridoori.dto.ReferenceDTO" alias="refdto"/>
 	</typeAliases>
 	
 	<mappers>	
@@ -15,6 +22,11 @@
 		<!-- suzan -->
 		<mapper resource="com/wooridoori/sql/MemberSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/ContentSQL.xml"/>
+		<!-- recommend -->
+		<mapper resource="com/wooridoori/sql/AreaCodeSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/RecommendSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/RecommendAverageSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/TourInquirySQL.xml"/>
 	</mappers>
 	
 	
