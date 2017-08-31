@@ -13,10 +13,15 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		// selectboxChange();
+		
 	});
 
 	function myFunction() {
@@ -42,7 +47,7 @@ a:hover {
 	<div class="w3-bar w3-colorless">
 		<!-- 메뉴바 -->
 		<div class="w3-bar-item">
-			<a class="bar-item" href="wooriMain.wd?wbody_url=searchlist.wd">Search</a>
+			<a class="bar-item" href="searchlist.wd">Search</a>
 		</div>
 		<div class="w3-bar-item">
 			<a class="bar-item" href="wooriMain.wd?wbody_url=guideList.wd">Guide</a>

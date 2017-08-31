@@ -51,7 +51,6 @@
 	<!-- Service -->
 	<!-- 재윤 -->
 	 <bean class="com.wooridoori.service.GuideService" id="GuideService"/>
-	 <bean class="com.wooridoori.service.MemberService" id="MemberService"/>
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
