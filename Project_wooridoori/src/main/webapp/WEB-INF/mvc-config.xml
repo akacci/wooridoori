@@ -10,21 +10,19 @@
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
-   <context:component-scan
-            base-package="com.wooridoori.controller"/>
-     <mvc:default-servlet-handler />
-   <!--   <context:annotation-config/> -->
-     <mvc:annotation-driven/>
-
-
-
+	<context:component-scan base-package="com.wooridoori.controller"/>
+	  <mvc:default-servlet-handler />
+	<!--   <context:annotation-config/> -->
+	  <mvc:annotation-driven/>
+	    
+	    
 	<bean id="multipartResolver"
 			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 			<property name="maxUploadSize">
 				<value>500000000</value>
 			</property>		
 	</bean>
-
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
 	        <property name="prefix" value="/WEB-INF/"/>
@@ -42,7 +40,19 @@
 	<bean id="GuideDAO" class="com.wooridoori.dao.GuideDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
 	</bean>
-	
+	<!-- recommend -->
+	<bean id="RecommendDAO" class="com.wooridoori.dao.RecommendDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="RecommendAverageDAO" class="com.wooridoori.dao.RecommendAverageDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="ContentCodeDAO" class="com.wooridoori.dao.ContentCodeDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="RefrenceDAO" class="com.wooridoori.dao.ReferenceDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
 	<!-- 수진 -->
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
@@ -50,12 +60,12 @@
 	
 	<!-- Service -->
 	<!-- 재윤 -->
-	 <bean class="com.wooridoori.service.GuideService" id="GuideService"/>
+	<bean class="com.wooridoori.service.GuideService" id="GuideService"/>
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
-	
-	
-
+	<!-- recommend -->
+	<bean class="com.wooridoori.service.RecommendService" id="reService"/>
+	<bean class="com.wooridoori.service.RecommendAverageService" id="raService"/>
 	
 </beans>

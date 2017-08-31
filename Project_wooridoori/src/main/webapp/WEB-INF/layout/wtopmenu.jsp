@@ -53,7 +53,7 @@ a:hover {
 			<a class="bar-item" href="wooriMain.wd?wbody_url=guideList.wd">Guide</a>
 		</div>
 		<div class="w3-bar-item">
-			<a class="bar-item" href="wooriMain.wd?wbody_url=dokyo.wd">Dokyo</a>
+			<a class="bar-item" href="wooriMain.wd?wbody_url=recommend.wd">Dokyo</a>
 		</div>
 
 		<!-- 오른쪽 상단 메뉴 -->
