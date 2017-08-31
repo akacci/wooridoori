@@ -32,16 +32,4 @@
    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">  <!--sqlSessionFactory injection  -->
       <constructor-arg ref="sqlSessionFactory" index="0"/>
    </bean>
-
-	<!-- DAO --> 
-   <bean id="mDao" class="com.wooridoori.dao.MemberDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
-   <bean id="gDao" class="com.wooridoori.dao.GuideDAO">
-   		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-   </bean>
-   <bean id="cDao" class="com.wooridoori.dao.ContentDAO">
-   		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-   </bean>
-   <!-- Service -->
-   <bean class="com.wooridoori.service.MemberService" id="mService"/>
-   <bean class="com.wooridoori.service.ContentService" id="cService"/>
 </beans>
