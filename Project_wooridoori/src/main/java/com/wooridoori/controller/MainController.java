@@ -58,4 +58,8 @@ public class MainController {
 	{
 		return "/view/test1";
 	}
+	@RequestMapping("/topmenu.wd")
+	public String topmenu(){
+		return "/layout/wtopmenu2";
+	}
 }

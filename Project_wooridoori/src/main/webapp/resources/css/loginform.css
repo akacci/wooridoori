@@ -1,19 +1,19 @@
 @CHARSET "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-      body .container {
+      body .logform .container {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-      }
-      body .container {
         font-family: 'Lato', sans-serif;
+        margin: 0px;
         background-color: #fff;
-      }
-      body .container {
-        position: relative;
+        position: absolute;
         overflow: hidden;
         width: 350px;
         height: 515px;
+        top: 50%;
+        left: 50%;
+    	transform: translate(-50%, -50%);
 /*         margin: 80px auto 0; */
         background-color: #ffffff;
         -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -132,6 +132,20 @@
         color: #999999;
         border: 1px solid #d9d9d9;
         background: transparent;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+      }
+      body .container .content .message_div .log_message{
+      	font-size: 12px;
+        display: block;
+        width: 100%;
+        height: 42px;
+        margin-bottom: 12px;
+        padding: 12px;;
+        color: #f00;
+        border: 1px solid #f99;
+		background-color: #fee;
         -moz-border-radius: 2px;
         -webkit-border-radius: 2px;
         border-radius: 2px;

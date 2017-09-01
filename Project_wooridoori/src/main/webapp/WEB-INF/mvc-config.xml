@@ -24,7 +24,7 @@
 				<value>500000000</value>
 			</property>		
 	</bean>
-
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
 	        <property name="prefix" value="/WEB-INF/"/>
@@ -54,8 +54,5 @@
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
-	
-	
 
-	
 </beans>
