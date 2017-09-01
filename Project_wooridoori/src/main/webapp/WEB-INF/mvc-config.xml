@@ -64,8 +64,9 @@
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
+
 	<!-- recommend -->
 	<bean class="com.wooridoori.service.RecommendService" id="reService"/>
 	<bean class="com.wooridoori.service.RecommendAverageService" id="raService"/>
-	
+
 </beans>
