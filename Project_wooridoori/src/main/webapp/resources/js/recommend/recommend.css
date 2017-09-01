@@ -1,0 +1,334 @@
+  /*  div{
+      border: 0.5px solid gray;
+   }  */
+   
+   /* slider 부분 */
+	div,a {
+		padding:0;
+		margin:0;
+	}
+	
+	div#area,div#thema{
+		margin-bottom: 50px;
+	}
+	
+	span.category{
+		background-color: #fff;
+		top: 0;
+		left: 0;
+		width: 30px;
+		height: 50px;
+	}
+	
+	a.slide_left img, a.slide_right img{
+		background-color: #fff;
+		width: 100%;
+		height: 100%;
+	}
+	
+	#area div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#area div.slider a {
+		position:absolute;
+		top:150px;
+	}
+	
+	#area div.slider a.slide_left {
+		left:40px;
+		width:50px;
+	}
+	
+	#area div.slider a.slide_right {
+		right:40px;
+		width:50px;
+	}   
+	
+	#area div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		padding:20px;
+		margin:0 auto;
+		border:1px solid black;
+	}
+	
+	/* #thema div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#thema div.slider a {
+		position:absolute;
+		top: 450px;
+	}
+	
+	#thema div.slider a.slide_left {
+		left:40;
+		width:50px;
+	}
+	
+	#thema div.slider a.slide_right {
+		right:40;
+		width:50px;
+	}   
+	
+	#thema div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		top: 350px;
+		padding:20px;
+		margin:0 auto;
+		border:1px solid black;
+	} */
+	
+	#thema div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#thema div.slider a {
+		position:absolute;
+		top:450px;
+	}
+	
+	#thema div.slider a.slide_left {
+		left:40px;
+		width:50px;
+	}
+	
+	#thema div.slider a.slide_right {
+		right:40px;
+		width:50px;
+	}   
+	
+	#thema div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		padding:20px;
+		margin:0 auto;
+		border:1px solid black;
+	}
+	
+	/* #thema div.slider {
+		width:100%;
+		top:350px;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#thema div.slider a {
+		position:absolute;
+		top:450px;
+		background:#aaa;
+	}
+	
+	#thema div.slider a.slide_left {
+		left:40;
+		width:50px;
+	}
+	
+	#thema div.slider a.slide_right {
+		right:40;
+		width:50px;
+	}   
+	
+	#thema div.slider div#slider_body {
+		overflow:hidden;
+		top:350px;
+		width:1000px;
+		height:250px;
+		padding:20px;
+		margin:0 auto;
+		border:1px solid black;
+	} */
+	
+	div#slide_div{
+		width:10000px;
+	}
+   
+   /* 메뉴와 바디 부분 */			
+   div #re_smenu{
+   	top: 0;
+   	width: 100%;
+   	height: 100px;
+   }
+   
+   div #re_body{
+   	top: 110px;
+   	width: 100%;
+   	hight: 100%;
+   }
+   
+   /* re_menu */
+   div.aTag_Controller_box{
+		margin-left: 80%;				
+	}
+	span.span_aTag_Controller{
+		cursor: pointer;
+	}
+	
+	div>span>a.filter_aTag{
+		text-decoration: none;
+	}
+	
+	div>ul.filter_item_list_classification{
+		position: absolute;
+		background-color: #D5D5D5;
+		opacity: 0.9;
+		list-style: none;
+		width: 120px;
+		left: 980px;
+		top: 13px;
+		z-index: 7;		
+	}
+	div>ul.filter_item_list_theme{
+		position: absolute;
+		list-style: none;
+		background-color: #D5D5D5;
+		opacity: 0.9;
+		width: 150px;		
+		left: 1000px;
+		top: 13px;
+		z-index: 7;
+	}
+	
+	div>ul>li.filter_item{			
+		width: 100%;
+		cursor: pointer;
+	}
+	
+	/* re_body */
+	div.select_box_div{
+		position: relative;
+		float: left;
+		left:30px;
+		margin-left:10px;
+		margin-top:20px;
+		margin-right:30px;		
+		width: 250px;
+		height: 200px;
+	}
+	
+	div>ul.select_box_ul{
+		list-style: none;
+	}
+	
+	div>ul>li.select_box{
+		position: relative;	
+		left: 0;
+		top: 0;
+		border: 0.5px solid red;
+		width: 250px;
+		height: 200px;								
+	}	
+	
+	div.select_tourbox{	
+		position: absolute;		
+		left: 0;
+		top: 0;
+		margin: 0px;
+		z-index: 1;
+		background-repeat: no-repeat;
+		width: 250px;
+		height: 200px;
+	}
+	div>img.select_img{
+		position: relative;
+		padding: 0;
+		z-index: 2;
+		width: 250px;
+		height: 100%;
+	}	
+	
+	div.div_hover_box{
+		position: absolute;
+		left: 0;
+		top: 0;	
+		z-index: 3;
+		width: 250px;
+		height: 200px;	
+	}
+	
+	div.select_blockA{
+		position: relative;
+		padding: 0;
+		z-index: 4;
+		background: gray;
+		opacity:0.4;
+		width: 250px;
+		height: 90px;
+		cursor: pointer;	
+	}
+	div.select_blockB{
+		position: relative;
+		padding: 0;
+		background-color: gray;
+		z-index: 5;
+		width: 250px;
+		height: 90px;				
+	}
+	
+	span.first_trip_click{
+		margin-left: 80%;
+		width: 10%;
+		height: 5%;
+	}
+	
+	img.btn_first_trip{
+		width: 20px;
+		height: 20px;
+	}
+	
+	div.select_tourbox > img.tour_image{
+		width: 250px;
+		height: 100%;
+	}
+	
+	/* span.tour_name{
+		width: 300px;
+		height: 20px;
+		text-align: center;
+	} */
+		
+	span._filter_tag{	
+		border-radius: 10px;
+		background-color: gray;
+	}
+	
+	span._cc_img{
+		cursor: pointer;
+	}
+	
+	span._jc_img{
+		cursor: pointer;
+	}
+	
+	img._ccimg, img._jcimg{
+		width: 20px;
+	}
+	
+	span.filter_tag_exit{
+		cursor: pointer;
+	}
+	
+	.brightness {-webkit-filter: brightness(250%);filter: brightness(250%);}
+   
+   /* dialog */
+   #detail_tour{
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+		border: 0;
+	}
+   

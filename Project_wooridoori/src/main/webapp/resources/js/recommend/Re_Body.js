@@ -1,0 +1,189 @@
+/*var configFontAwesome = {
+	custom: {
+	    families: ['fontawesome'],
+	    urls: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css']
+	    },
+	    fontactive: function () {
+	        $('.rateit-fa').rateit();
+	    }
+};
+
+WebFont.load(configFontAwesome);*/
+		
+		
+$(function(){
+	
+	$(".div_hover_box").hide();
+	
+	/*$(".select_box_div").hover(function(e){
+		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
+		var inx = $(this).children("#cnt").val() - 1;
+		$("#"+topClass.attr("id")+" .div_hover_box").eq(inx).slideToggle("slow");							
+	});*/
+	
+	firstAreaData(); //처음 화면에 나오는 지역 데이터
+	firstThemaData(); //처음 화면에 나오는 테마 데이터
+	
+	/*image slider*/
+	var num = 0;
+	var slideWidth = $(".select_box_div").width();
+	var slideLength = $(".select_box_div").length;
+	
+	$("div.slider a.slide_left").click(function(e){
+		var topClass = $(e.target).parent().parent().parent();
+		num++;
+		if (num >= 1){
+			num = 0;
+			alert("시작입니다!");
+		} else {
+			$("#"+topClass.attr("id")+" .select_box_div").animate({left:'+='+slideWidth},100);
+		}
+	});
+	
+	$("div.slider a.slide_right").click(function(e){
+		var topClass = $(e.target).parent().parent().parent();
+		num--;
+		console.log(num);
+		if (num <= "-"+(slideLength-1)){
+			num = -(slideLength-2);
+			alert("끝입니다!");
+		} else {
+			$("#"+topClass.attr("id")+" .select_box_div").animate({left:'-='+slideWidth},100);
+		}
+	});
+	/*firsttrip, bookmark, preference, grade point ajax*/
+	var re_val = 0;
+	var fir_val = 'x';
+	var ja_val = 'x';
+	var cc_val = 'x';
+	var _contentid = null;
+	$(".rateit").click(function(){
+		re_val = $(this).rateit('value');
+		var inx = $(this).attr('inx');
+		_contentid = $(".contentid:eq("+inx+")").attr("value");
+		
+		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+	});
+	
+	$(".btn_first_trip").click(function(){	
+		
+		fir_val = $(this).attr("value");
+		
+		var inx = $(this).attr('inx');
+		_contentid = $(".contentid:eq("+inx+")").attr("value");
+		
+		if(fir_val=="n")
+		{
+			fir_val = $(this).attr("value","y");			
+		}
+		if(fir_val=="y")
+		{
+			fir_val = $(this).attr("value","n");
+		}
+		fir_val = $(this).attr("value");
+		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+	});
+	$("._jcimg").click(function(){
+		
+		ja_val = $(this).attr("value");
+		var inx = $(this).attr('inx');
+		_contentid = $("._contentid:eq("+inx+")").attr("value");
+		if(ja_val=="n")
+		{
+			ja_val = $(this).attr("value","y");
+		}
+		if(ja_val=="y")
+		{
+			ja_val = $(this).attr("value","n");
+		}
+		ja_val = $(this).attr("value");
+		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+	});
+	$("._ccimg").click(function(){
+		
+		cc_val = $(this).attr("value");
+		var inx = $(this).attr('inx');
+		_contentid = $("._contentid:eq("+inx+")").attr("value");
+		
+		if(cc_val == 'n')
+		{
+			cc_val = $(this).attr("value","y");
+		}
+		if(cc_val == 'y')
+		{
+			cc_val = $(this).attr("value","y");
+		}
+		cc_val = $(this).attr("value");
+		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+	});
+	
+});
+
+function firstAreaData(){
+	$.ajax({
+		url: "re_body_area.wd",
+		type: "post",
+		success:function(data){
+			var s_data = JSON.parse(data);
+			
+			for(var i = 0; i < s_data.length; i++){
+				$("#area #contentid").eq(i).val(s_data[i].contentid);
+				$("#area .select_img").eq(i).attr("src", s_data[i].firstimage);
+				$("#area .select_img").eq(i).onError = function(){
+					this.src = "images/no_image.png";
+				}
+				$("#area .first_trip")eq(i).attr("value","n");
+				$("#area .cc_img")eq(i).attr("value","n");
+				
+				$("._ccimg:eq("+i+")").attr("inx",i);
+				$(".rateit:eq("+i+")").attr("inx",i);
+				$("._jcimg:eq("+i+")").attr("inx",i);
+				$(".btn_first_trip:eq("+i+")").attr("inx",i);
+				if(s_data[i].title != null){
+					$("#area .tour_title").eq(i).text(s_data[i].title);
+				}
+			}
+			
+		}
+	});
+}
+
+function firstThemaData(){
+	$.ajax({
+		url: "re_body_thema.wd",
+		type: "post",
+		success:function(data){
+			var s_data = JSON.parse(data);
+			
+			for(var i = 0; i < s_data.length; i++){
+				$("#thema #contentid").eq(i).val(s_data[i].contentid);
+				$("#thema .select_img").eq(i).attr("src", s_data[i].firstimage);
+				$("#thema .select_img").eq(i).onError = function(){
+					this.src = "images/no_image.png";
+				}
+				$("#area .first_trip")eq(i).attr("value","n");
+				$("#area .cc_img")eq(i).attr("value","n");
+				
+				$("._ccimg:eq("+i+")").attr("inx",i);
+				$(".rateit:eq("+i+")").attr("inx",i);
+				$("._jcimg:eq("+i+")").attr("inx",i);
+				$(".btn_first_trip:eq("+i+")").attr("inx",i);
+				if(s_data[i].title != null){
+					$("#thema .tour_title").eq(i).text(s_data[i].title);
+				}
+			}
+			
+		}
+	});
+}
+function select_data(re_val,fir_val,ja_val,_contentid,cc_val){
+	
+	$.ajax({
+		url : "select_data.wd",
+		type : "post",
+		data : {"grade_point": re_val, "firsttrip":fir_val,"bookmark":ja_val,"contentid":_contentid,"pre_rence":cc_val},
+		success : function(data){
+			alert("저장되었습니다");
+		}
+	});
+}
