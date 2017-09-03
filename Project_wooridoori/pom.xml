@@ -1,22 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.springframework.samples.service.service</groupId>
-  <artifactId>Project_wooridoori</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-    <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.samples.service.service</groupId>
+	<artifactId>Project_wooridoori</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
 
 		<!-- Generic properties -->
 		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<!-- Web -->
 		<jsp.version>2.2</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>2.5</servlet.version>
-		
+
 
 		<!-- Spring -->
 		<spring-framework.version>4.1.9.RELEASE</spring-framework.version>
@@ -32,16 +33,16 @@
 		<junit.version>4.11</junit.version>
 
 	</properties>
-	
+
 	<dependencies>
-	
+
 		<!-- Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
-		
+
 		<!-- Other Web dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -60,7 +61,7 @@
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	
+
 		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -89,7 +90,7 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		
+
 		<!-- Test Artifacts -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -103,117 +104,122 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-	    <!-- oracle -->
-	    <dependency>
-	       <groupId>ojdbc</groupId>
-	       <artifactId>ojdbc</artifactId>
-	       <version>14</version>
-	    </dependency> 
-	      
-	    <!-- commons -->
-	    <dependency>
-	        <groupId>commons-io</groupId>
-	        <artifactId>commons-io</artifactId>
-	        <version>2.4</version>
-	    </dependency>
-	
-	    <dependency>
-	        <groupId>commons-dbcp</groupId>
-	        <artifactId>commons-dbcp</artifactId>
-	        <version>1.4</version>
-	    </dependency>
-	     
-	    <!-- File Upload  -->
-	    <dependency>                 
-	        <groupId>commons-fileupload</groupId>
-	        <artifactId>commons-fileupload</artifactId>
-	        <version>1.2.2</version>
-	    </dependency>
-	      
-	    <!--  File Upload  -->
-	    <dependency>            
-	        <groupId>servlets.com</groupId>
-	        <artifactId>cos</artifactId>
-	        <version>05Nov2002</version>
-	    </dependency>
-	      
-	    <!--myBatis  -->
-	    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-	    <dependency>
-	        <groupId>org.mybatis</groupId>
-	        <artifactId>mybatis</artifactId>
-	        <version>3.2.6</version>
-	    </dependency>
-	    <dependency>
-           <groupId>org.mybatis</groupId>
-           <artifactId>mybatis-spring</artifactId>
-           <version>1.1.1</version>
-        </dependency>
 
-	    <!--쿼리문 보는 (로그 사용하는) 커넥션-->
-	    <!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
-	    <dependency>
-	        <groupId>org.lazyluke</groupId>
-	        <artifactId>log4jdbc-remix</artifactId>
-	        <version>0.2.6</version>
-	    </dependency>
-	   
-	    <dependency>
-	        <groupId>org.aspectj</groupId>
-	        <artifactId>aspectjrt</artifactId>
-	        <version>1.8.0</version>
-	    </dependency>
-	   
-	    <dependency>
-	       <groupId>org.aspectj</groupId>
-	       <artifactId>aspectjweaver</artifactId>
-	       <version>1.8.0</version>
-	    </dependency>
-	    <dependency>
-	       <groupId>org.aspectj</groupId>
-	       <artifactId>aspectjtools</artifactId>
-	       <version>1.8.9</version>
-	    </dependency>
-	   
-	    <dependency>
-	       <groupId>org.springframework</groupId>
-	       <artifactId>spring-aop</artifactId>
-	       <version>${spring-framework.version}</version>
-	    </dependency>
- 
-   <!-- 재윤 -->
-     	 <!--smtp   -->
-		<dependency>	
-			<groupId>javax.mail</groupId>	
-			<artifactId>mail</artifactId>	
-			<version>1.4.7</version>	
+		<!-- oracle -->
+		<dependency>
+			<groupId>ojdbc</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>14</version>
 		</dependency>
-	
-	<!-- openCV -->
+
+		<!-- commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- File Upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- File Upload -->
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+		</dependency>
+
+		<!--myBatis -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!--쿼리문 보는 (로그 사용하는) 커넥션 -->
+		<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.8.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<!-- 재윤 -->
+		<!--smtp -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+		<!-- openCV -->
 		<!-- https://mvnrepository.com/artifact/org.openpnp/opencv -->
 		<dependency>
-		    <groupId>org.openpnp</groupId>
-		    <artifactId>opencv</artifactId>
-		    <version>2.4.13-0</version>
-		</dependency> 
-		
+			<groupId>org.openpnp</groupId>
+			<artifactId>opencv</artifactId>
+			<version>2.4.13-0</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.8.7</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.7</version>
 		</dependency>
-   
-   
-	</dependencies>	
-	
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+
+	</dependencies>
+
 	<repositories>
-      <repository>
-      <id>mvn</id>
-      <name>mvn</name>
-      <url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url>
-      </repository>
-    </repositories>
-    
+		<repository>
+			<id>mvn</id>
+			<name>mvn</name>
+			<url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url>
+		</repository>
+	</repositories>
+
 </project>

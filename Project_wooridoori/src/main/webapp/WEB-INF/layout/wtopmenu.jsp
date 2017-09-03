@@ -41,12 +41,15 @@ $(function(){
 		}
 	}
 	function goHome(){
-		location.href = "wooriMain.wd?wbody_url=wbody.wd";
+		location.href = "wooriMain.wd";
 	}
 </script>
 <style type="text/css">
 a:hover {
 	text-decoration: none;
+}
+.w3-bar-item #log{
+	cursor: pointer;
 }
 .log_dialog {
     display: none; /* Hidden by default */
@@ -64,7 +67,6 @@ a:hover {
 .logform {
     position: fixed;
     width: 363px;
-    height: 529px;
     top: 40%;
     left: 50%;
    	transform: translate(-50%, -50%);
@@ -112,10 +114,12 @@ a:hover {
 			<a class="bar-item" href="wooriMain.wd?wbody_url=guideList.wd">Guide</a>
 		</div>
 		<div class="w3-bar-item">
-
 			<a class="bar-item" href="dokyo.wd">test</a>
-
 		</div>
+		<c:if test="${sessionScope.ID eq 'admin'}">
+			<div class="w3-bar-item"><a class="bar-item" href="admin.wd">관리자</a>
+			</div>
+		</c:if>
 
 		<!-- 오른쪽 상단 메뉴 -->
 		<div class="w3-dropdown-click" style="float: right">
@@ -137,7 +141,8 @@ a:hover {
 				<a class="bar-item" id="log">
 					<c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><b id="logb" class="log_in">LOGIN</b></c:if>
 					<c:if test="${sessionScope.LOGIN eq 'YES'}"><b id="logb" class="log_out">LOGOUT</b></c:if>
-				<img src="resources/image/profile.png" width="35" height="35" style="vertical-align: text-bottom;"></a>
+					<img src="resources/image/profile.png" width="35" height="35" style="vertical-align: text-bottom;">
+				</a>
 			</div>
 			<!-- 홈버튼  -->
 			<b style="color: white;">&nbsp;|&nbsp;</b>
