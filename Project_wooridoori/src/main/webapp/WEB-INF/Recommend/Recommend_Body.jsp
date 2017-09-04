@@ -16,92 +16,171 @@
 
 <!-- 평점 먹이는 별 -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script> -->
-<!-- <script src="js/rateit/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="js/rateit/scripts/rateit.css"> -->
+<%-- <script src="<%=request.getContextPath()%>/resources/js/rateit/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/rateit/scripts/rateit.css"> --%>
 
 <!-- my js, css -->
-<script src="js/recommend/Re_Body.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="js/recommend/recommend.css?t=<%=System.currentTimeMillis()%>">
+<script src="<%=request.getContextPath()%>/resources/js/recommend/Re_Body.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/recommend/recommend.css?t=<%=System.currentTimeMillis()%>">
 
 <title>관광지 추천</title>
 </head>
 <body>
-	<div id="area">
-		<div class="slider">
-			<a href="#none" class="slide_left"><img src="images/Recommend/left.png"></a>
-			<div id="slider_body">
-				<span class="category">지역</span>
-				<c:forEach begin="1" end="10" varStatus="i">
-					<div id="slide_div">
-						<div class="select_box_div">
-							<input type="hidden" value="${i.index}" id="cnt">
-							<input type="hidden" class="contentid" id="contentid">
-							<div class="select_tourbox">
-								<img class="select_img" onError="this.src='images/Recommend/no_image.png'">
-							</div>
-							<div class="div_hover_box">				
-								<div class="select_blockA">
-									<span class="first_trip_click" name="first_trip" value="n">
-										<img src="images/delete.gif" class="btn_first_trip">
-									</span>
+	<div id="recommend_main">
+		<div id="area">
+			<div class="slider">
+				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
+				<div id="slider_body">
+					<span class="category">지역</span>
+					<c:forEach begin="1" end="10" varStatus="i">
+						<div id="slide_div">
+							<div class="select_box_div">
+								<input type="hidden" value="${i.index}" id="cnt">
+								<input type="hidden" class="contentid" id="contentid">
+								<div class="select_tourbox">
+									<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
 								</div>
-								<div class="select_blockB">
-									<ul class="select_box_ul">
-										<li><span class="tour_title">관광지명</span></li>
-										<li>
-											<div class="rateit bigstars"></div>
-										</li>
-										<li>							
-											<span class="_cc_img"><img class="_ccimg" name="cc_name" src="images/Recommend/like2.png" >추천</span>
-											<span class="_jc_img"><img class="_jcimg" name="jc_name" src="images/Recommend/like3.png" >즐겨찾기</span>
-										</li>				
-									</ul>
-								</div>								 
+								<div class="div_hover_box">				
+									<div class="select_blockA">
+										<span class="first_trip_click" name="first_trip" value="n">
+											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+										</span>
+									</div>
+									<div class="select_blockB">
+										<ul class="select_box_ul">
+											<li><span class="tour_title">관광지명</span></li>
+											<li>
+												<div class="rateit bigstars"></div>
+											</li>
+											<li>							
+												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png" >추천</span>
+												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png" >즐겨찾기</span>
+											</li>				
+										</ul>
+									</div>								 
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
+				<a href="#none" class="slide_right"><img src="<%=request.getContextPath()%>/resources/image/Recommend/right.png"></a>
 			</div>
-			<a href="#none" class="slide_right"><img src="images/Recommend/right.png"></a>
+		</div>
+		<div id="thema">
+			<div class="slider">
+				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
+				<div id="slider_body">
+					<span class="category">테마</span>
+					<c:forEach begin="1" end="10" varStatus="i">
+						<div id="slide_div">
+							<div class="select_box_div">
+								<input type="hidden" value="${i.index}" id="cnt">
+								<input type="hidden" class="contentid" id="contentid">
+								<div class="select_tourbox">
+									<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
+								</div>
+								<div class="div_hover_box">				
+									<div class="select_blockA">
+										<span class="first_trip_click" name="first_trip" value="Y">
+											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+										</span>
+									</div>
+									<div class="select_blockB">
+										<ul class="select_box_ul">
+											<li><span class="tour_title">관광지명</span></li>
+											<li>
+												<div class="rateit bigstars"></div>
+											</li>
+											<li>							
+												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
+												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
+											</li>				
+										</ul>
+									</div>								 
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<a href="#none" class="slide_right"><img src="<%=request.getContextPath()%>/resources/image/Recommend/right.png"></a>
+			</div>
+		</div>
+		<div id="non_favorite">
+			<div class="slider">
+				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
+				<div id="slider_body">
+					<span class="category">추천하고 싶은 곳</span>
+					<c:forEach begin="1" end="10" varStatus="i">
+						<div id="slide_div">
+							<div class="select_box_div">
+								<input type="hidden" value="${i.index}" id="cnt">
+								<input type="hidden" class="contentid" id="contentid">
+								<div class="select_tourbox">
+									<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
+								</div>
+								<div class="div_hover_box">				
+									<div class="select_blockA">
+										<span class="first_trip_click" name="first_trip" value="Y">
+											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+										</span>
+									</div>
+									<div class="select_blockB">
+										<ul class="select_box_ul">
+											<li><span class="tour_title">관광지명</span></li>
+											<li>
+												<div class="rateit bigstars"></div>
+											</li>
+											<li>							
+												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
+												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
+											</li>				
+										</ul>
+									</div>								 
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<a href="#none" class="slide_right"><img src="<%=request.getContextPath()%>/resources/image/Recommend/right.png"></a>
+			</div>
 		</div>
 	</div>
-	<div id="thema">
-		<div class="slider">
-			<a href="#none" class="slide_left"><img src="images/Recommend/left.png"></a>
-			<div id="slider_body">
-				<span class="category">테마</span>
-				<c:forEach begin="1" end="10" varStatus="i">
-					<div id="slide_div">
-						<div class="select_box_div">
-							<input type="hidden" value="${i.index}" id="cnt">
-							<input type="hidden" class="contentid" id="contentid">
-							<div class="select_tourbox">
-								<img class="select_img" onError="this.src=''">
-							</div>
-							<div class="div_hover_box">				
-								<div class="select_blockA">
-									<span class="first_trip_click" name="first_trip" value="Y">
-										<img src="images/delete.gif" class="btn_first_trip">
-									</span>
-								</div>
-								<div class="select_blockB">
-									<ul class="select_box_ul">
-										<li><span class="tour_title">관광지명</span></li>
-										<li>
-											<div class="rateit bigstars"></div>
-										</li>
-										<li>							
-											<span class="_cc_img"><img class="_ccimg" name="cc_name" src="images/Recommend/like2.png">추천</span>
-											<span class="_jc_img"><img class="_jcimg" name="jc_name" src="images/Recommend/like3.png">즐겨찾기</span>
-										</li>				
-									</ul>
-								</div>								 
-							</div>
-						</div>
+	<!-- recommend detail data list  -->
+	<div id="recommend_detail">
+		<div style="width:1200px; height:800px;">
+			<div style="width:1200px; height:800px;">
+				<div id="list" style="width:1200px; height:800px;">
+			<!-- <div class="select_box_div"> -->
+				<%-- <input type="hidden" value="${i.index}" id="cnt">
+				<input type="hidden" class="contentid" id="contentid">
+				<div class="select_tourbox">
+					<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
+				</div>
+				<div class="div_hover_box">				
+					<div class="select_blockA">
+						<span class="first_trip_click" name="first_trip" value="Y">
+							<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+						</span>
 					</div>
-				</c:forEach>
+					<div class="select_blockB">
+						<ul class="select_box_ul">
+							<li><span class="tour_title">관광지명</span></li>
+							<li>
+								<div class="rateit bigstars"></div>
+							</li>
+							<li>							
+								<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
+								<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
+							</li>				
+						</ul>
+					</div>								 
+				</div> --%>
+			<!-- </div> -->
+				</div>
+				<div id="div_more">
+					<a href="javascript:void(0);" id="btn_more">더보기</a>
+				</div>
 			</div>
-			<a href="#none" class="slide_right"><img src="images/Recommend/right.png"></a>
 		</div>
 	</div>
 	<!-- dialog  -->

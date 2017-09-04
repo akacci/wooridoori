@@ -1,7 +1,7 @@
 $(function(){
-	
 	var chart;
-	var options;
+	var chartVarN;
+	var chartVarY;
 	
 	$(".div_hover_box").hide();
 	
@@ -20,91 +20,120 @@ $(function(){
 	  	}
 	});
     
-    /*text.jsp hover event*/
-  	$(".select_box_div").hover(function(e){
+    /*hover event*/
+  	/*$(".select_box_div").hover(function(e){*/
+    $(document).on("mouseenter", ".select_box_div", function(e){
 		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
-		var inx = $(this).children("#cnt").val() - 1;
-		$("#"+topClass.attr("id")+" .div_hover_box").eq(inx).slideToggle("slow");							
+		var inx;
+		
+		if(topClass.attr("id") == "recommend_detail"){
+			inx = $(this).children("#cnt").val();
+		}else {
+			inx = $(this).children("#cnt").val() - 1;
+		}
+		
+		if(topClass.attr("id") != "" || topClass.attr("id") != null){
+			$("#"+topClass.attr("id")+" .div_hover_box").eq(inx).slideDown("slow");
+		}else{
+			$(".div_hover_box").eq(inx).slideDown("slow");
+		}
 	
       	/*dialog open*/
       	$(this).unbind("click").bind("click", function(e){
+      		$("#re_smenu").css("z-index","1");
+			$("#re_body").css("z-index","2");
+			
       		var contentid = $(this).find("#contentid").val();
       		
       		/*dialog_img, dialog_content, dialog_reivew data*/
       		dialog_content(contentid, e);
       		
-      		var chartVarN = chartVisitData(contentid, "N");
-      		var chartVarY = chartVisitData(contentid, "Y");
+      		chartVarN = chartVisitData(contentid, "N");
+      		chartVarY = chartVisitData(contentid, "Y");
       		/*dialog chart*/
-      	    Highcharts.chart("score_chart", {
-      	  	    chart: {
-      	  	    	renderTo: "score_chart",
-      	  	        type: "area"
-      	  	    },
-      	  	    title: {
-      	  	        text: ""
-      	  	    },
-      	  	    credits:{
-      	  	    	enabled: false
-      	  	    },
-      	  	    xAxis: {
-      	  	        allowDecimals: false,
-      	  	        title: {
-      	  	        	text: "인원수"
-      	  	        },
-      	  	        labels: {
-      	  	            formatter: function () {
-      	  	                return this.value + "명";
-      	  	            }
-      	  	        }
-      	  	    },
-      	  	    yAxis: {
-      	  	        title: {
-      	  	            text: "평점"
-      	  	        },
-      	  	        labels: {
-      	  	            formatter: function () {
-      	  	                return this.value + "점";
-      	  	            }
-      	  	        }
-      	  	    },
-      	  	    tooltip: {
-      	  	    	headerFormat: ''
-      	  	    },
-      	  	    plotOptions: {
-      	  	        area: {
-      	  	            pointStart: 1,
-      	  	            marker: {
-      	  	                enabled: false,
-      	  	                symbol: 'circle',
-      	  	                radius: 2,
-      	  	                states: {
-      	  	                    hover: {
-      	  	                        enabled: true
-      	  	                    }
-      	  	                }
-      	  	            }
-      	  	        }
-      	  	    },
-      		    navigation: {
-      		    	buttonOptions: {
-      		    		enabled: false
-      		    	}
-      		    },
-      	  	    series: [{
-      	  	    		data: chartVarN,
-	      	  	    	name: '방문객 평점',
-	      	  	    	color: '#F15F5F'
-      	  	    	},
-      	  	    	{
-      	  	    		data: chartVarY,
-      	  	    		name: '예상 평점',
-      	  	    		color: '#FAED7D',
-      	  	    	}]
-      	    });
-      		
-      		/*chart = new Hightcharts.Chart(options);*/
+      		/*new Highcharts.Chart(chart(chartVarN, chartVarY));*/
+      		chart = new Highcharts.Chart({
+    	  	    chart: {
+    	  	    	renderTo: "score_chart",
+    	  	        type: "area"
+    	  	    },
+    	  	    title: {
+    	  	        text: ""
+    	  	    },
+    	  	    credits:{
+    	  	    	enabled: false
+    	  	    },
+    	  	    xAxis: {
+    	  	        allowDecimals: false,
+    	  	        title: {
+    	  	        	text: "인원수"
+    	  	        },
+    	  	        labels: {
+    	  	            formatter: function () {
+    	  	                return this.value + "명";
+    	  	            }
+    	  	        }
+    	  	    },
+    	  	    yAxis: {
+    	  	        title: {
+    	  	            text: "평점"
+    	  	        },
+    	  	        labels: {
+    	  	            formatter: function () {
+    	  	                return this.value + "점";
+    	  	            }
+    	  	        }
+    	  	    },
+    	  	    tooltip: {
+    	  	    	headerFormat: ''
+    	  	    },
+    	  	    plotOptions: {
+    	  	        area: {
+    	  	            pointStart: 1,
+    	  	            marker: {
+    	  	                enabled: false,
+    	  	                symbol: 'circle',
+    	  	                radius: 2,
+    	  	                states: {
+    	  	                    hover: {
+    	  	                        enabled: true
+    	  	                    }
+    	  	                }
+    	  	            }
+    	  	        }
+    	  	    },
+    		    navigation: {
+    		    	buttonOptions: {
+    		    		enabled: false
+    		    	}
+    		    },
+    	  	    series: [{
+    	  	    		data: chartVarN,
+      	  	    	name: '방문객 평점',
+      	  	    	color: '#F15F5F'
+    	  	    	},
+    	  	    	{
+    	  	    		data: chartVarY,
+    	  	    		name: '예상 평점',
+    	  	    		color: '#FAED7D',
+    	  	    	}]
+    	    });
       	});
+      }).on("mouseleave", ".select_box_div", function(e){
+		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
+		var inx;
+		
+		if(topClass.attr("id") == "recommend_detail"){
+			inx = $(this).children("#cnt").val();
+		}else {
+			inx = $(this).children("#cnt").val() - 1;
+		}
+		
+		if(topClass.attr("id") != "" || topClass.attr("id") != null){
+			$("#"+topClass.attr("id")+" .div_hover_box").eq(inx).slideUp("slow");
+		}else{
+			$(".div_hover_box").eq(inx).slideUp("slow");
+		}
       });
     
     /*dialog_review_write 확인버튼 click event*/
@@ -112,11 +141,85 @@ $(function(){
     	review_insert();
     	$("#m_id").val("");
     	$("#pre_review").val("");
-    	new Hightcharts.Chart(options);
+    	$("#rateit_write").rateit("value", "");
+    	/*chartVarN = chartVisitData(contentid, "N");
+  		chartVarY = chartVisitData(contentid, "Y");*/
+    	/*new Highcharts.Chart(chart(chartVarN, chartVarY));*/
+  		chart.series[0].setData[0](chartVisitData(contentid, "N"),chartVisitData(contentid, "Y"));
+  		/*chart.series[0].setData[1](chartVisitData(contentid, "Y"));*/
     });
     
 });
 
+/*function chart(chartVarN, chartVarY){
+	new Highcharts.Chart({
+	  	    chart: {
+	  	    	renderTo: "score_chart",
+	  	        type: "area"
+	  	    },
+	  	    title: {
+	  	        text: ""
+	  	    },
+	  	    credits:{
+	  	    	enabled: false
+	  	    },
+	  	    xAxis: {
+	  	        allowDecimals: false,
+	  	        title: {
+	  	        	text: "인원수"
+	  	        },
+	  	        labels: {
+	  	            formatter: function () {
+	  	                return this.value + "명";
+	  	            }
+	  	        }
+	  	    },
+	  	    yAxis: {
+	  	        title: {
+	  	            text: "평점"
+	  	        },
+	  	        labels: {
+	  	            formatter: function () {
+	  	                return this.value + "점";
+	  	            }
+	  	        }
+	  	    },
+	  	    tooltip: {
+	  	    	headerFormat: ''
+	  	    },
+	  	    plotOptions: {
+	  	        area: {
+	  	            pointStart: 1,
+	  	            marker: {
+	  	                enabled: false,
+	  	                symbol: 'circle',
+	  	                radius: 2,
+	  	                states: {
+	  	                    hover: {
+	  	                        enabled: true
+	  	                    }
+	  	                }
+	  	            }
+	  	        }
+	  	    },
+		    navigation: {
+		    	buttonOptions: {
+		    		enabled: false
+		    	}
+		    },
+	  	    series: [{
+	  	    		data: chartVarN,
+  	  	    	name: '방문객 평점',
+  	  	    	color: '#F15F5F'
+	  	    	},
+	  	    	{
+	  	    		data: chartVarY,
+	  	    		name: '예상 평점',
+	  	    		color: '#FAED7D',
+	  	    	}]
+	    });
+}
+*/
 /*dialog_img, dialog_content data*/
 function dialog_content(contentid, e){
 	$.ajax({
@@ -125,11 +228,15 @@ function dialog_content(contentid, e){
 		data: {"contentid": contentid},
 		success: function(resData){
 			var data = JSON.parse(resData);
-			
-			$("#dialog_top_img").html("<img src='"+data.firstimage+"'>");
+			var no_image = "/Project_wooridoori/resources/image/Recommend/no_image.png";
+			$("#top_img").attr("src",data.firstimage);
 			$("#span_title").text(data.title);
 			$("#span_addr").text(data.addr1);
 			$("#frm_review #contentid").val(contentid);
+			
+			$("#top_img").onError = function(){
+				this.src = no_image;
+			}
 			
 			/*total score rateit*/
 			totalScore(contentid);

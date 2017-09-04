@@ -1,5 +1,6 @@
 package com.wooridoori.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,7 +32,12 @@ public class RecommendService {
 		return list;
 	}
 	
-	public List<TourInquiryDTO> selectAreaCodeOfTourList(HashMap<String, Object> areacode){
+	public List<TourInquiryDTO> selectCodeOfTourlist(HashMap<String, Object> code){
+		List<TourInquiryDTO> list = rdao.selectCodeOfTourlist(code);
+		return list;
+	}
+	
+	/*public List<TourInquiryDTO> selectAreaCodeOfTourList(HashMap<String, Object> areacode){
 		List<TourInquiryDTO> list = rdao.selectAreaCodeOfTourList(areacode);
 		return list;
 	}
@@ -39,7 +45,7 @@ public class RecommendService {
 	public List<TourInquiryDTO> selectCat2OfTourlist(HashMap<String, Object> cat2){
 		List<TourInquiryDTO> list = rdao.selectCat2OfTourlist(cat2);
 		return list;
-	}
+	}*/
 	
 	public List<ContentCodeDTO> selectContentCodeName(){
 		List<ContentCodeDTO> list = rdao.selectContentCodeName();
@@ -68,6 +74,11 @@ public class RecommendService {
 	
 	public List<TourInquiryDTO> selectFirstRecommendThema(){
 		List<TourInquiryDTO> list = rdao.selectFirstRecommendThema();
+		return list;
+	}
+	
+	public List<TourInquiryDTO> selectFirstRecommendNonFavorite(){
+		List<TourInquiryDTO> list = rdao.selectFirstRecommendNonFavorite();
 		return list;
 	}
 	

@@ -1,6 +1,7 @@
 package com.wooridoori.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,30 +30,12 @@ public class RecommendController {
 	RecommendService service;
 	
 	@RequestMapping("/recommend.wd")
-	public String recommendTest(){		
+	public String recommendTest(){
 		return "Recommend/Recommend";
 	}
 	
-	@RequestMapping("text.wd")
-	public String selectTourInquiry(Model model){
-		List<TourInquiryDTO> list = service.selectTourInquiry();
-		model.addAttribute("tourlist", list);
-		return "Recommend/text";
-	}
-	
-	/*@RequestMapping("/re_smenu.wd")
-	public String recommend_SMenu(Model model){
-		
-		List<TourInquiryDTO> list = rservice.re_Test();
-		List<ContentCodeDTO> contentcode_list = rservice.filter_main();
-		
-		model.addAttribute(list);
-		model.addAttribute(contentcode_list);
-		
-		return "view/Recommend_H";
-	}*/
-	
 	@RequestMapping(value="/re_body_area.wd", method=RequestMethod.POST)
+	@ResponseBody
 	public void recommendBodyArea(Model model,
 								 HttpServletResponse response){			
 		response.setContentType("text/html;charset=UTF-8"); // 한글
@@ -69,6 +52,7 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="/re_body_thema.wd", method=RequestMethod.POST)
+	@ResponseBody
 	public void recommendBodyThema(Model model,
 								 HttpServletResponse response){			
 		response.setContentType("text/html;charset=UTF-8"); // 한글
@@ -84,7 +68,25 @@ public class RecommendController {
 		}
 	}
 	
+	@RequestMapping(value="/re_body_nonfavorite.wd", method=RequestMethod.POST)
+	@ResponseBody
+	public void recommendBodyNonFavorite(Model model,
+								 		 HttpServletResponse response){			
+		response.setContentType("text/html;charset=UTF-8"); // 한글
+		ObjectMapper mapper = new ObjectMapper();
+		List<TourInquiryDTO> list = service.selectFirstRecommendNonFavorite();
+		
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {			
+			e.printStackTrace();
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping(value="selectareacode.wd", method=RequestMethod.POST)
+	@ResponseBody
 	public void selectAreaCode(Model model,
 							   HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐때문에
@@ -100,7 +102,53 @@ public class RecommendController {
 		}
 	}
 	
-	@RequestMapping(value="selectareacodeoftourlist.wd", method=RequestMethod.POST)
+	@RequestMapping(value="selectcodeoftourlist.wd", method=RequestMethod.POST)
+	@ResponseBody
+	public void selectCodeOfTourList(Model model,
+										 @RequestParam(value="areacode[]", defaultValue="") List<String> areacode,
+										 @RequestParam(value="themacode[]", defaultValue="") List<String> themacode,
+										 @RequestParam(value="end") int end,
+										 HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐때문에
+		ObjectMapper mapper = new ObjectMapper();
+		
+		List<String> arealist = new ArrayList<String>();
+		List<String> themalist = new ArrayList<String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for(int i = 0; i < areacode.size(); i++){
+			if(!areacode.get(i).equals("") || areacode.get(i) != null){
+				arealist.add(areacode.get(i));
+			}
+		}
+		
+		for(int i = 0; i < themacode.size(); i++){
+			if(!themacode.get(i).equals("") || themacode.get(i) != null){
+				themalist.add(themacode.get(i));
+			}
+		}
+		
+		map.put("areacode", arealist);
+		map.put("themacode", themalist);
+		map.put("end", end);
+		
+		for(int i = 0; i < map.size(); i++){
+			System.out.println("areacode--------"+map.get("areacode"));
+			System.out.println("themacode--------"+map.get("themacode"));
+		}
+		
+		List<TourInquiryDTO> list = service.selectCodeOfTourlist(map);
+
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*@RequestMapping(value="selectareacodeoftourlist.wd", method=RequestMethod.POST)
 	@ResponseBody
 	public void selectAreaCodeOfTourList(Model model,
 										 @RequestParam(value="areacode[]") List<String> areacode,
@@ -138,7 +186,7 @@ public class RecommendController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	@RequestMapping(value="selectcontentcodename.wd", method=RequestMethod.POST)
 	public void selectContentCode(Model model,
