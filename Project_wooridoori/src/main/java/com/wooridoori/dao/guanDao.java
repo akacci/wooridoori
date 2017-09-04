@@ -48,11 +48,24 @@ public class guanDao extends SqlSessionDaoSupport {
 		return gdto;
 	}
 	
-	//리스트에 뽑힐 내용
-	public List<guanDto> listView(String areacode, String sigungucode){
-		HashMap<String, String> map = new HashMap<String, String>();
+	//리스트 총 개수
+	public int getTotalCount(String areacode, String sigungucode){
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("areacode", areacode);
 		map.put("sigungucode", sigungucode);
+		
+		int totalCount = getSqlSession().selectOne("CountofTList", map);
+		
+		return totalCount;
+	}
+	
+	//리스트에 뽑힐 내용
+	public List<guanDto> listView(String areacode, String sigungucode, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("areacode", areacode);
+		map.put("sigungucode", sigungucode);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
 		List<guanDto> tlist = getSqlSession().selectList("TListOfMain", map );
 		
@@ -60,10 +73,12 @@ public class guanDao extends SqlSessionDaoSupport {
 	}
 	
 	//관광지 이름순 
-	public List<guanDto> listViewWithName(String areacode, String sigungucode){
-		HashMap<String, String> map = new HashMap<String, String>();
+	public List<guanDto> listViewWithName(String areacode, String sigungucode, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("areacode", areacode);
 		map.put("sigungucode", sigungucode);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
 		List<guanDto> tlist = getSqlSession().selectList("TListWithName", map );
 		
@@ -71,10 +86,12 @@ public class guanDao extends SqlSessionDaoSupport {
 	}
 	
 	//관광지 구분순
-	public List<guanDto> listViewWithCat(String areacode, String sigungucode){
-		HashMap<String, String> map = new HashMap<String, String>();
+	public List<guanDto> listViewWithCat(String areacode, String sigungucode, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("areacode", areacode);
 		map.put("sigungucode", sigungucode);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
 		List<guanDto> tlist = getSqlSession().selectList("TListWithCat", map );
 		
@@ -82,10 +99,12 @@ public class guanDao extends SqlSessionDaoSupport {
 	}
 	
 	//관광지 평점순 
-	public List<guanDto> listViewWithAvg(String areacode, String sigungucode){
-		HashMap<String, String> map = new HashMap<String, String>();
+	public List<guanDto> listViewWithAvg(String areacode, String sigungucode, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("areacode", areacode);
 		map.put("sigungucode", sigungucode);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
 		List<guanDto> tlist = getSqlSession().selectList("TListWithAvg", map );
 		
@@ -93,10 +112,12 @@ public class guanDao extends SqlSessionDaoSupport {
 	}
 	
 	//관광지 조회순
-	public List<guanDto> listViewWithCount(String areacode, String sigungucode){
-		HashMap<String, String> map = new HashMap<String, String>();
+	public List<guanDto> listViewWithCount(String areacode, String sigungucode, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("areacode", areacode);
 		map.put("sigungucode", sigungucode);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
 		
 		List<guanDto> tlist = getSqlSession().selectList("TListWithCount", map );
 		

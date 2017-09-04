@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 .t_wrap{
-	width: 1000px;
+	width: 1200px;
 	min-height:500px;
 	margin: 0 auto;
 }
@@ -29,6 +29,7 @@
 .tlist_table {
 	border-spacing: 0px;
 	margin: 0 auto;
+	width: 80%;
 }
 
 .tlist_table th {
@@ -39,6 +40,30 @@
 	border-bottom: 1px solid lightgray;
 }
 
+.table_cover{
+	width: 100%;
+}
+
+.tlist_arrange{
+	margin: 0 auto;
+	width: 15%;
+	height: 50px;
+	text-align: center;
+}
+
+.tlist_arrange li{
+	list-style: none;
+	margin: 0 auto;
+	text-align: center;
+	display: inline-block;
+	font-size: 15pt;
+}
+
+.tlist_arrange ul{
+	margin: 0;
+	padding: 0;
+}
+
 .goTop{
     z-index: 99999;
     position: fixed;
@@ -46,7 +71,7 @@
     left: 50%;
     display: block;
     width: 40px;
-    height: 50px;
+    height: 55px;
     font: 0/0 arial;
     padding: 0;
     margin-left: 559px;
@@ -92,7 +117,7 @@
     height: auto;
     position: relative;
     border: 1px solid lightgray;
-    border-top: 3px solid red;
+    border-top: 3px solid black;
     float: left;
     margin-top: 30px;
 }
@@ -146,13 +171,18 @@
 	display:inline-block;
 	float: right;
 	padding-right: 10px;
-	margin-right: 20px;
-	width: 150px;
+	margin-right: 10px;
+	width: 300px;
 	line-height: 70px;
 	background: url('../image/tlist/back.png') no-repeat right center;
 	background-size: 20px; 
 	margin-left: 10px;
 	cursor: pointer;
+}
+
+.tText_2_2 b{
+	margin-right: 15px;
+	float: right;
 }
 
 .first_cat{
