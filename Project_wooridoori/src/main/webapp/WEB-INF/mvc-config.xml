@@ -57,7 +57,9 @@
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- 재문 -->
-	
+	<bean id="guanDao" class="com.wooridoori.dao.guanDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	<!-- Service -->
 	<!-- 재윤 -->
 	<bean class="com.wooridoori.service.GuideService" id="GuideService"/>
