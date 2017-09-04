@@ -14,7 +14,7 @@
 		<typeAlias type="com.wooridoori.dto.TourInquiryDTO" alias="tdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentCodeDTO" alias="condto"/>
 		<typeAlias type="com.wooridoori.dto.ReferenceDTO" alias="refdto"/>
-		<typeAlias type="com.wooridoori.dto.guanDto" alias="gudto"/>
+		<typeAlias type="com.wooridoori.dto.GuanDTO" alias="gudto"/>
 	</typeAliases>
 	
 	<mappers>	

@@ -59,7 +59,7 @@
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- 재문 -->
-	<bean id="guanDao" class="com.wooridoori.dao.guanDao">
+	<bean id="guanDAO" class="com.wooridoori.dao.GuanDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	<!-- Service -->

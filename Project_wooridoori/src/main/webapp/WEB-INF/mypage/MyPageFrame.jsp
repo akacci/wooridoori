@@ -21,11 +21,12 @@
     <link href="resources/css/simple-sidebar.css" rel="stylesheet">
 
 </head>
-  <header>
-      <%@ include file= "../layout/wtopmenu.jsp" %>
-  </header>
-<body style="height: 1000px;">  
-
+   <header> 
+         <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
+         <%@include file="../layout/wtopmenu.jsp"%>
+   </header>
+<body style="height: 945px; margin-top: 55px; z-index: -100">    
+ 
     <div id="wrapper"> 
 
         <!-- Sidebar -->
@@ -125,7 +126,8 @@
     </script>
 
 </body>
- <footer class="container-fluid text-center">
-      <%@ include file= "../layout/wfooter.jsp" %>
- </footer>  
+<footer>
+         <%-- <jsp:include page= "../layout/wfooter.jsp"/> --%>
+         <%@include file="../layout/wfooter.jsp"%>
+</footer>
 </html>

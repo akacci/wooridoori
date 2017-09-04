@@ -105,7 +105,9 @@ a:hover {
 </style>
 </head>
 <body>
-	<div id="div_topMenu" class="w3-bar w3-colorless" style="position: fixed;top: 0;background-color: #313131;">
+
+	<div id="div_topMenu" class="w3-bar w3-colorless" style="position: fixed;top: 0;background-color: #313131; z-index: 1;">
+
 		<!-- 메뉴바 -->
 		<div class="w3-bar-item">
 			<a class="bar-item" href="tlist.wd">Search</a>
@@ -144,7 +146,7 @@ a:hover {
 			
 			<div class="w3-bar-item">
 				<a class="bar-item" id="log">
-					<c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><b id="logb" class="log_in">LOGIN</b></c:if>
+					<c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><b id="logb" class="log_in" style="color: white">LOGIN</b></c:if>
 					<c:if test="${sessionScope.LOGIN eq 'YES'}"><b id="logb" class="log_out">LOGOUT</b></c:if>
 					<img src="resources/image/profile.png" width="35" height="35" style="vertical-align: text-bottom;">
 				</a>
