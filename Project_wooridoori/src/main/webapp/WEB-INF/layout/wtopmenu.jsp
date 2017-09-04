@@ -108,7 +108,7 @@ a:hover {
 	<div id="div_topMenu" class="w3-bar w3-colorless" style="position: fixed;top: 0;background-color: #313131">
 		<!-- 메뉴바 -->
 		<div class="w3-bar-item">
-			<a class="bar-item" href="searchlist.wd">Search</a>
+			<a class="bar-item" href="tlist.wd">Search</a>
 		</div>
 		<div class="w3-bar-item">
 			<a class="bar-item" href="wooriMain.wd?wbody_url=guideList.wd">Guide</a>

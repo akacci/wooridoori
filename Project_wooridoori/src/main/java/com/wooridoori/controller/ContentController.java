@@ -16,17 +16,5 @@ public class ContentController {
 	@Autowired
 	ContentService cService;
 	
-	@RequestMapping("/list.wd")
-	public String list(Model model, @RequestParam String data){
-		model.addAttribute("data", data);
-		return "/layout/list";
-	}
-	@RequestMapping("/detail.wd")
-	public String detail(Model model, @RequestParam String contentid){
-		
-		HashMap<String, Object> map = cService.getContentData(contentid);
-		model.addAttribute("cdata", (ContentDTO)map.get("CDATA"));
-		model.addAttribute("contentid", contentid);
-		return "/layout/detail";
-	}
+
 }
