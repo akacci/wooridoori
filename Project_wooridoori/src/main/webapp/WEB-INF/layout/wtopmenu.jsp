@@ -44,7 +44,7 @@ a:hover {
 </style>
 </head>
 <body>
-	<div class="w3-bar w3-colorless">
+	<div class="w3-bar w3-colorless" style="background-color: #313131"> 
 		<!-- 메뉴바 -->
 		<div class="w3-bar-item">
 			<a class="bar-item" href="searchlist.wd">Search</a>
@@ -72,6 +72,11 @@ a:hover {
 		</div>
 
 		<div style="float: right">
+		
+			<div class="w3-bar-item">
+				<a class="bar-item"	href="mypage.wd">MY</a>
+			</div>
+			
 			<div class="w3-bar-item">
 				<c:if
 					test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}">

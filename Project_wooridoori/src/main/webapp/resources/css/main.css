@@ -1379,7 +1379,7 @@ to {
 /* Colors */
 .w3-colorless, .w3-hover-colorless:hover {
 	color: #000 !important;
-	background-color: rgba(0, 0, 0, 0) !important
+	background-color: rgba(0, 0, 0, 0)
 }
 
 .w3-amber, .w3-hover-amber:hover {

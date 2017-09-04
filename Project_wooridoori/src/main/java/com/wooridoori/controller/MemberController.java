@@ -1,6 +1,15 @@
 package com.wooridoori.controller;
 
+import java.io.Console;
+import java.io.IOException;
+import java.security.Provider.Service;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.MemberDTO;
 import com.wooridoori.service.GuideService;
@@ -62,7 +75,45 @@ public class MemberController {
 	public String logoutAction(HttpSession session){
 	    session.setAttribute("ID", null);
 	    session.setAttribute("LOGIN", "NO");
+	    session.setAttribute("id", null);
+	    session.setAttribute("name", null);
+	    session.setAttribute("guide", null);
+	    session.setAttribute("email1", null);
+	    session.setAttribute("email2", null);
+	    
 		return "redirect:wooriMain.wd";
+	}
+	
+	@RequestMapping("/mypage.wd")
+	public String mypageAction()
+	{
+		return "/mypage/MyPageFrame";
+	}
+	
+	@RequestMapping(value="ajax_mypage.wd", method=RequestMethod.GET)
+	@ResponseBody
+	public void ajax_mypageAction(
+			HttpSession session
+			,HttpServletResponse response
+			)
+	{
+		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> list = new ArrayList<String>();
+		
+		String id = session.getAttribute("id").toString();
+		MemberDTO dto = mService.getMemberInfo(id);
+		
+		
+		try {
+			response.getWriter().print(mapper.writeValueAsString(dto));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -86,5 +137,20 @@ public class MemberController {
 		mService.memberInsert(mdto);
 		model.addAttribute("wbody_url", mService.beforeAddress(req));
 		return "redirect:wooriMain.wd";
+	}
+	
+	@RequestMapping("/userInfo.wd")
+	public String userInfo(HttpSession session, Model model){
+
+		String login = session.getAttribute("LOGIN").toString();
+		if(login.equals("YES"))
+		{
+			System.out.println("로그인 상태");
+			String id = session.getAttribute("id").toString();
+			MemberDTO dto = mService.getMemberInfo(id);
+			model.addAttribute("dto",dto);
+		}
+		
+		return "/mypage/UserInfo";
 	}
 }

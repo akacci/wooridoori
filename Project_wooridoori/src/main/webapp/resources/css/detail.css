@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+	  #div_detail{width: 743px;margin-left: auto;margin-right: auto;padding: 10px;padding-left: auto;padding-right: auto;}
+	  #div_detail .content_detail{width: 100%;margin-left: auto;margin-right: auto;margin-bottom: 10px;padding: 10px;}
+	  #div_detail .content_detail h3{border-bottom: 2px solid black;background-color: #e6e6e6;color: black;padding: 5px;margin-top: 10px;cursor: pointer;}
+	  #div_detail .content_detail h3 a{color: black}
+	  #div_detail .content_detail h3:hover{background-color: #cccccc}
+     
+     
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+      #floating-panel { 
+      	position : absolute;
+        margin:0; 
+        padding:0;
+        z-index: 1;
+        background-color: rgba(0,0,0,0);
+        /* border: 1px solid #999; */
+        font-family: 'Roboto','sans-serif'; 
+        line-height: 0px; 
+        white-space: pre-line;
+        
+      }
+      .btn_drop{
+        background-color: rgba(0,0,0,0);
+      	border-style: none; 
+      	outline: none;
+      	
+      }
+      .btn_drop:HOVER{
+      	background-color: gray;
+      }
+	  .material-icons{
+	  	font-size: 30px; 
+	  	color: black;
+	  }
+	  
+	  .list{
+	  	display:flex;
+	  	align-content:flex-start;
+	  	flex-direction:column;
+	  	flex-wrap:wrap;
+	  	overflow:auto;
+	  	list-style:none;
+	  	padding: 10px;
+	  }
