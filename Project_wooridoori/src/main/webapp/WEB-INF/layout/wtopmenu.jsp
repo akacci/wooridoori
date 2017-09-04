@@ -105,7 +105,7 @@ a:hover {
 </style>
 </head>
 <body>
-	<div class="w3-bar w3-colorless" style="position: fixed;top: 0;background-color: #313131">
+	<div id="div_topMenu" class="w3-bar w3-colorless" style="position: fixed;top: 0;background-color: #313131">
 		<!-- 메뉴바 -->
 		<div class="w3-bar-item">
 			<a class="bar-item" href="searchlist.wd">Search</a>
@@ -114,7 +114,7 @@ a:hover {
 			<a class="bar-item" href="wooriMain.wd?wbody_url=guideList.wd">Guide</a>
 		</div>
 		<div class="w3-bar-item">
-			<a class="bar-item" href="dokyo.wd">test</a>
+			<a class="bar-item" href="recommend.wd">Recommend</a>
 		</div>
 		<c:if test="${sessionScope.ID eq 'admin'}">
 			<div class="w3-bar-item"><a class="bar-item" href="admin.wd">관리자</a>

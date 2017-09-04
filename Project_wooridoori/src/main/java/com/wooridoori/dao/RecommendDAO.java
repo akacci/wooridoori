@@ -16,7 +16,12 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 		return list;
 	}
 	
-	public List<TourInquiryDTO> selectAreaCodeOfTourList(HashMap<String, Object> areacode){
+	public List<TourInquiryDTO> selectCodeOfTourlist(HashMap<String, Object> code){
+		List<TourInquiryDTO> list = getSqlSession().selectList("selectCodeOfTourList", code);
+		return list;
+	}
+	
+	/*public List<TourInquiryDTO> selectAreaCodeOfTourList(HashMap<String, Object> areacode){
 		List<TourInquiryDTO> list = getSqlSession().selectList("selectAreaCodeOfTourList", areacode);
 		return list;
 	}
@@ -24,7 +29,7 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 	public List<TourInquiryDTO> selectCat2OfTourlist(HashMap<String, Object> cat2){
 		List<TourInquiryDTO> list = getSqlSession().selectList("selectCat2OfTourlist", cat2);
 		return list;
-	}
+	}*/
 	
 	public List<ContentCodeDTO> selectContentCodeName(){
 		List<ContentCodeDTO> list = getSqlSession().selectList("selectContentCodeName");
@@ -51,4 +56,8 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 		return list;
 	}
 	
+	public List<TourInquiryDTO> selectFirstRecommendNonFavorite(){
+		List<TourInquiryDTO> list = getSqlSession().selectList("selectFirstRecommendNonFavorite");
+		return list;
+	}
 }

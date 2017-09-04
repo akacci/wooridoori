@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="width: 100%; bottom: 0;position: fixed;font-size: 14px;background-color: #313131;color: rgb(140,140,140);font-weight:bold; ;padding: 6px;cursor: pointer;">
+<div id="div_footer" style="width: 100%; bottom: 0;position: fixed;font-size: 14px;background-color: #313131;color: rgb(140,140,140);font-weight:bold; ;padding: 6px;cursor: pointer;">
 여기는 footer
 </div>
 </body>

@@ -16,12 +16,51 @@
 			and rownum <![CDATA[<]]> 11
 	</select>
 	
+	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
+			select a.* 
+			from tour_inquiry a, 
+			     (select pre_cat1, pre_cat2, pre_cat3
+			      from pre_foreign_country
+			      where nation = 'Angola') b
+			where a.areacode not in (1, 6, 39)
+			and a.cat2 in (b.pre_cat1, b.pre_cat2, b.pre_cat3)
+			and rownum <![CDATA[<]]> 11
+			order by a.readcount desc
+	</select>
+	
 	<select id="selectContentCodeName" resultType="condto">
 		select distinct cat2, cat2_name
 		from content_code 
 	</select>
 	
-	<select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
+	<select id="selectCodeOfTourList" resultType="tdto" parameterType="HashMap">
+		select a.*
+		from (select rownum as rnum,
+			       b.*
+			from (select *
+				   from tour_inquiry
+				   <trim prefix="where" prefixOverrides="AND|OR">
+					   <if test="areacode.size != 0">
+						   and areacode in
+						   <foreach collection="areacode" item="areacode" open="(" close=")" separator=",">
+						   		#{areacode}
+						   </foreach>
+				       </if> 
+					   <if test="themacode.size != 0">
+						   and cat2 in
+					       <foreach collection="themacode" item="themacode" open="(" close=")" separator=",">
+						   		#{themacode}
+						   </foreach>
+					   </if>
+				   </trim>
+				   order by readcount asc) b
+				 )a
+		where a.rnum <![CDATA[>=]]> 1
+		and a.rnum <![CDATA[<=]]> #{end}
+		   
+	</select>
+	
+	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *
 		from tour_inquiry
 		<if test="areacode != null and areacode != ''">
@@ -43,7 +82,7 @@
 			</foreach>
 		</if>
 		order by readcount asc
-	</select>
+	</select> -->
 
 	<select resultType="condto" id="fliterSearchOfCat_Name"> 
 		select cat2_name

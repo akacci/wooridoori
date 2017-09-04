@@ -12,16 +12,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 
 <!-- my js -->
-<script src="js/recommend/recommend.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
+<script src="<%=request.getContextPath()%>/resources/js/recommend/recommend.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
 
 <title></title>
 </head>
 <body>
-<div id="re_smenu">
-	<c:import url="../Recommend/Recommend_H.jsp"></c:import>
-</div>
-<div id="re_body">
-	<c:import url="../Recommend/Recommend_Body.jsp"></c:import>
-</div>
+	<header> 
+	      <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
+	      <%@include file="../layout/wtopmenu.jsp"%>
+	</header>
+	<div id="re_smenu" style="z-index:2; position: relative;">
+		<c:import url="../Recommend/Recommend_H.jsp"></c:import>
+	</div>
+	<div id="re_body" style="z-index:1;">
+		<c:import url="../Recommend/Recommend_Body.jsp"></c:import>
+	</div>
+	<footer>
+	      <%-- <jsp:include page= "../layout/wfooter.jsp"/> --%>
+	      <%@include file="../layout/wfooter.jsp"%>
+	</footer>
 </body>
 </html>

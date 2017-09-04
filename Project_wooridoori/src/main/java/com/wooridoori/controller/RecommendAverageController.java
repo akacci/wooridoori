@@ -26,6 +26,7 @@ public class RecommendAverageController {
 	RecommendAverageService raService;
 	
 	@RequestMapping(value="todialogreview.wd", method=RequestMethod.POST)
+	@ResponseBody
 	public void selectDialogReview(Model model,
 						   @RequestParam("contentid") String contentid,
 						   HttpServletResponse response){
