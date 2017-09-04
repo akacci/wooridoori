@@ -1,6 +1,6 @@
 package com.wooridoori.dto;
 
-public class guanDto {
+public class GuanDTO {
 	
 	private String addr1;
 	private String areacode;
