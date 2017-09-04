@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,11 +67,49 @@ public class MemberController {
 
 	@RequestMapping("/logoutaction.wd")
 	public String logoutAction(HttpSession session){
-		session.setAttribute("ID", null);
-		session.setAttribute("LOGIN", "NO");
+	    session.setAttribute("ID", null);
+	    session.setAttribute("LOGIN", "NO");
+	    session.setAttribute("id", null);
+	    session.setAttribute("name", null);
+	    session.setAttribute("guide", null);
+	    session.setAttribute("email1", null);
+	    session.setAttribute("email2", null);
+	    
 		return "redirect:wooriMain.wd";
 	}
-
+	
+	@RequestMapping("/mypage.wd")
+	public String mypageAction()
+	{
+		return "/mypage/MyPageFrame";
+	}
+	
+	@RequestMapping(value="ajax_mypage.wd", method=RequestMethod.GET)
+	@ResponseBody
+	public void ajax_mypageAction(
+			HttpSession session
+			,HttpServletResponse response
+			)
+	{
+		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> list = new ArrayList<String>();
+		
+		String id = session.getAttribute("id").toString();
+		MemberDTO dto = mService.getMemberInfo(id);
+		
+		
+		try {
+			response.getWriter().print(mapper.writeValueAsString(dto));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	@RequestMapping("/membercheck.wd")
 	public @ResponseBody String memberCheck(HttpServletRequest req, HttpSession session, Model model, @ModelAttribute MemberDTO mdto){
@@ -93,6 +132,21 @@ public class MemberController {
 		model.addAttribute("wbody_url", mService.beforeAddress(req));
 		return "redirect:wooriMain.wd";
 	}
+  
+	@RequestMapping("/userInfo.wd")
+	public String userInfo(HttpSession session, Model model){
+
+		String login = session.getAttribute("LOGIN").toString();
+		if(login.equals("YES"))
+		{
+			System.out.println("로그인 상태");
+			String id = session.getAttribute("id").toString();
+			MemberDTO dto = mService.getMemberInfo(id);
+			model.addAttribute("dto",dto);
+		}
+		
+		return "/mypage/UserInfo";
+  
 	@RequestMapping("/membernation.wd")
 	public @ResponseBody void getNation(Model model, HttpServletRequest request, HttpServletResponse response){
 		ObjectMapper mapper = new ObjectMapper();

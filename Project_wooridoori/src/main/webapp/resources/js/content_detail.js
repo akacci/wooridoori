@@ -141,3 +141,340 @@ function weater_writer(x, y){
 		}
 	});
 }
+
+
+
+
+
+
+
+
+
+
+var btn_title;
+	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+	var infos_name = [];
+	var infos_image = [];
+	var infos_addr = [];
+	var infos_tel = [];
+	var infos_dist = [];
+	var infos_contentid = [];
+	
+	//음식점
+var food_markers_position=[];
+	var food_marker_objs = [];
+   //숙박
+	var hotel_markers_position = [];
+   var hotel_marker_objs = [];
+   //관광지
+   var tourist_markers_position = [];
+   var tourist_marker_objs = [];
+//쇼핑
+var shopping_markers_position = [];
+   var shopping_marker_objs = [];
+//레포츠
+var leports_markers_position = [];
+   var leports_marker_objs = [];
+//문화시설
+var culture_markers_position = [];
+   var culture_marker_objs = [];
+   
+   ///////
+   var empty_markers_position = [];
+   var empty_marker_objs = [];
+   
+   //clear를 위한 markers변수 
+   var markers = [];
+   var infos = [];
+   var marker;
+   var marker_icon;
+   var markerCluster;
+var map;
+
+
+
+function getData(contentType,lng,lat){
+  
+  var Url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?"
+  		+"ServiceKey=zp2z%2FnHsZIFM2BHnRojSdiYzKfscMUNQrST3SeiQk77cAiTnDhWPadoAtEurbNfy3eCaIC3xUQCZJd4zpCbi6g%3D%3D"
+  		+"&mapX="+lng+"&mapY="+lat+"&radius=999999&arrange=E&MobileOS=ETC&MobileApp=AppTesting"
+  		+"&contentTypeId="+contentType+"&numOfRows=26";
+  var searched_lat;
+  var searched_lng;
+  var name;
+  var image;
+  var address; 
+  var tel;
+  var dist;
+  var contentid;
+  
+  var i=0;
+  
+  	$.ajax({
+  		url: Url,
+  		async: false,
+  		success : function(xml){
+  			console.log(xml);
+  			var name = $(xml).find('item').each(function(index){
+  				
+  				name = $(this).find('title').text();
+  				image = $(this).find('firstimage2').text();
+  				address = $(this).find('addr1').text();
+  				tel = $(this).find('tel').text();
+  				dist = $(this).find('dist').text();
+  				contentid = $(this).find('contentid').text();
+  				
+  				searched_lat = $(this).find('mapy').text();
+  				searched_lng = $(this).find('mapx').text();
+  				
+  				//사진, 주소가 유효한 것만
+  				if(image!="" && address!="")
+					{
+  					
+      				
+      				if(contentType==39)
+      				{
+      					btn_title="음식점";
+      					food_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				if(contentType==32)
+      				{
+      					btn_title="숙박";
+      					hotel_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				if(contentType==12)
+      				{
+      					btn_title="관광지";
+      					tourist_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				if(contentType==38)
+      				{
+      					btn_title="쇼핑";
+      					shopping_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				if(contentType==28)
+      				{
+      					btn_title="레포츠";
+      					leports_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				if(contentType==14)
+      				{
+      					btn_title="문화시설";
+      					culture_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      				}
+      				
+      				infos_name[i]=name;
+  					infos_image[i]=image;
+  					infos_tel[i]=tel;
+  					infos_addr[i]=address;
+  					infos_dist[i]=dist;
+  					infos_contentid[i]=contentid;
+
+  					console.log("name : "+infos_name[i]+i+"///index : "+index);
+
+      				i=i+1;
+  				}
+					
+  			}); 
+  			 
+  		}
+  	});
+  }
+  
+
+	function moveToOriginalMarker(){
+		//클릭시 모든 infowindow 닫고 이동
+		for(var i = 0; i < infos.length; i++)
+		{
+			infos[i].close();
+		}
+		map.panTo({lat: current_lat, lng: current_lng});
+	}
+	
+function dropFood(){
+	 marker_icon = "resources/image/marker/free-map-marker-icon-dark.png"; 
+	 getData(39,current_lng,current_lat);
+	 flushMarkers(food_markers_position, food_marker_objs);
+	 
+	 btnClickEffect();
+	 $("#dropFood").children().css("color","black");
+	 printList(food_markers_position);
+ } 
+
+function dropHotel(){
+	 marker_icon = "resources/image/marker/free-map-marker-icon-blue-darker.png"; 
+	 getData(32,current_lng,current_lat);
+	 flushMarkers(hotel_markers_position, hotel_marker_objs);
+	 
+	 btnClickEffect();
+	 $("#dropHotel").children().css("color","blue");
+	 printList(hotel_markers_position);
+} 
+
+function dropTourist(){ 
+	 marker_icon = "resources/image/marker/free-map-marker-icon-red.png"; 
+	 getData(12,current_lng,current_lat);
+   flushMarkers(tourist_markers_position, tourist_marker_objs);
+   
+   btnClickEffect();
+	 $("#dropTourist").children().css("color","red");
+	 printList(tourist_markers_position);
+} 
+
+function dropShopping(){
+	 marker_icon = "resources/image/marker/free-map-marker-icon-orange.png"; 
+	 getData(38,current_lng,current_lat);
+   flushMarkers(shopping_markers_position, shopping_marker_objs);
+   
+   btnClickEffect();
+	 $("#dropShopping").children().css("color","orange");
+	 printList(shopping_markers_position);
+ } 
+
+function dropLeports(){
+	 marker_icon = "resources/image/marker/free-map-marker-icon-pink.png"; 
+	 getData(28,current_lng,current_lat);
+   flushMarkers(leports_markers_position, leports_marker_objs);
+   
+   btnClickEffect();
+	 $("#dropLeports").children().css("color","hotpink");
+	 printList(leports_markers_position);
+ } 
+
+function dropCulture(){
+	 marker_icon = "resources/image/marker/free-map-marker-icon-green.png"; 
+	 getData(14,current_lng,current_lat);
+   flushMarkers(culture_markers_position, culture_marker_objs);
+   
+   btnClickEffect();
+	 $("#dropCulture").children().css("color","green");
+	 printList(culture_markers_position);
+ }  
+
+function printList(empty_markers_position)
+{//${cdata.title}
+	var li="";
+
+	for(var i = 0; i<empty_markers_position.length; i++)
+	{
+	li=
+		li+"<li style='height:150px'>"
+		+"<img src='"+infos_image[i]+"' style='float:left; margin-right: 10px; width:195px; height:130px'/>"
+		+"<div class='info'>"
+		+"<h3 class='title' style='margin:0'><a style='cursor:pointer;' href='detail.wd?contentid="+infos_contentid[i]+"'>"+infos_name[i]
+		+"( "+infos_dist[i]+"m )"+"</a></h3>"
+		+"<p class='addr'>"+infos_addr[i]+"</p>"
+		+"<p class='tel'>"+infos_tel[i]+"</p>"
+		+"</div></li><hr>";
+	}
+	
+	$(".list").html(li);
+	
+
+}
+
+
+function btnClickEffect()
+{
+	  $("#title").text(btn_title);
+	  //버튼 클릭시 공통으로 적용되는 css처리 
+    $("i").css("color","black"); 
+}
+
+function flushMarkers(empty_markers_position, empty_marker_objs)
+{
+    clearMarkers(food_marker_objs);
+	clearMarkers(hotel_marker_objs);
+	clearMarkers(tourist_marker_objs);
+	clearMarkers(shopping_marker_objs);
+    clearMarkers(culture_marker_objs);
+    clearMarkers(leports_marker_objs);
+	  
+	
+     for(var i=0; i<empty_markers_position.length; i++){
+     addMarkers(empty_markers_position[i], i, empty_marker_objs);
+   }
+     addMarkerCluster(empty_marker_objs);
+	   
+}
+
+
+function addMarkerCluster(markers)
+{
+	//Add a marker clusterer to manage the markers.
+  	
+	markerCluster = new MarkerClusterer(map, markers,
+  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+	,minimumClusterSize: 3, zoomOnClick : true});
+	
+}
+  
+function addMarkers(position, index, markers){
+	  
+	  markers.push(marker=new google.maps.Marker({
+          position: position,
+          label: labels[index % labels.length],
+          animation: google.maps.Animation.DROP,
+          icon: marker_icon               
+        }) ); 
+      marker.setMap(map);
+      
+      console.log(index+'this lat is'+position.lat);
+      
+      var tel="";
+		
+      if(infos_tel[index]!=(""))
+	  {
+		tel="<br><br><b>전화번호</b><br>"+infos_tel[index];
+	  }
+       
+      //각 마커에 infowindow 등록
+      var infowindow = new google.maps.InfoWindow({ 
+    	
+			content: '<div style="white-space: pre-line; word-break:break-all; width:150px;">'
+			+'<b>'+infos_name[index]+'</b><br>' 
+			+'<img style="display:block;" border="0" SRC="'+infos_image[index]+'"'
+			+'width="150" height="100">'
+			+'<br><b>주소 ('+infos_dist[index]+'m)</b><br>' 
+			+infos_addr[index]+tel
+			+'</div>'
+			
+		}); 
+      infos[index]=infowindow;
+      
+      //마커 클릭이벤트
+  	google.maps.event.addListener(markers[index], 'click', function(){
+  		
+  		//마커 클릭시 모든 infowindow 닫고 클릭한 마커로 이동
+  		for(var i = 0; i < infos.length; i++)
+  		{
+  			infos[i].close();	
+  		}
+  		map.panTo(position);
+
+  		infos[index].open(map,markers[index]);
+  		
+  		
+  	});
+    }
+
+
+function clearMarkers(markers) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+
+    if (markerCluster) {
+  	  markerCluster.clearMarkers(); 
+      }
+    markers = []; 
+    
+	  food_marker_objs=[]; 
+	  hotel_marker_objs=[];
+	  tourist_marker_objs=[];
+	  
+	  shopping_marker_objs=[]; 
+	  leports_marker_objs=[];
+	  shopping_marker_objs=[];
+  }

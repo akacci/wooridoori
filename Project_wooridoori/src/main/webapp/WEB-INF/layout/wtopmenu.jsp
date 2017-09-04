@@ -137,6 +137,11 @@ a:hover {
 		</div>
 
 		<div style="float: right">
+		
+			<div class="w3-bar-item">
+				<a class="bar-item"	href="mypage.wd">MY</a>
+			</div>
+			
 			<div class="w3-bar-item">
 				<a class="bar-item" id="log">
 					<c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><b id="logb" class="log_in">LOGIN</b></c:if>

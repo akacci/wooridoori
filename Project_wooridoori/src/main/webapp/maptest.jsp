@@ -24,21 +24,20 @@
       }
       #floating-panel { 
         position: absolute;
-        top: 10%;
-        left: 15%;
-        margin:0; 
-        padding:0;
-        z-index: 0;
-        background-color: white; 
+        margin:14%; 
+        padding:0; 
+        z-index: 1;
+        background-color: rgba(0,0,0,0); 
         /* border: 1px solid #999; */
         font-family: 'Roboto','sans-serif'; 
         line-height: 0px; 
+        white-space: pre-line;
         
       }
       .btn_drop{
-        background-color: white;
+        background-color: rgba(0,0,0,0); 
       	border-style: none; 
-      	outline: none;
+      	outline: none; 
       }
       .btn_drop:HOVER{
       	background-color: gray;
@@ -82,7 +81,7 @@
       <span style="vertical-align: text-top; font-size: 24px;
       font-weight: bold;" id="title"></span> 
     </div> 
-    <div id="map">맵맵맵맵맵맵맵맵맵맵맵맵맵맵</div> 
+    <div id="map" style="height: 400px;">맵맵맵맵맵맵맵맵맵맵맵맵맵맵</div>   
     <div>
     	
     </div>
@@ -145,51 +144,7 @@
            	current_lat = map.getCenter().lat();
            	current_lng = map.getCenter().lng();
     	}); */
-        	
-    	
-	  }//-----
-	 
-        
-       /*  map.addListener('dragend', function() {
-         	current_lat = map.getCenter().lat();
-         	current_lng = map.getCenter().lng();
-            
-         	console.log(current_lat+","+current_lng);
-         	//현재 보이는 맵 중앙의 위도,경도를 기반으로 place_id를 얻어옴
-     		var allData = { "lat": current_lat, "lng": current_lng };
- 	    	$.ajax({
- 	    		url:"gapi.jsp",
- 	    		type:"GET",
- 	    		dataType:"JSON",
- 	    		data:allData,
- 	    		success:function(data){ 
- 	    			console.log(data.results.length);
- 	    			for(var i=0; i<data.results.length; i++)
- 	    				{
- 	    			place_id[i]=data.results[i].place_id;
- 	    			//얻어 온 place_id를 기반으로 place_name을 구함
- 	        		service=new google.maps.places.PlacesService(map);
- 	    			
- 	    	        service.getDetails({
- 	    	        	placeId:place_id[i]
- 	    	        },function(place,status){
-	    	        	alert(place.name);
- 	    	        	if (status == google.maps.places.PlacesServiceStatus.OK){
- 	    	        		 
- 	    	        		place_name=place.name; 
- 	    	        		console.log(place_name+i);
- 	    	        	}
- 	    	        });
- 	    	        console.log(place_id[i]);
- 	    		}
-	    				
- 				}
- 	    	});
- 	    	
-           });  
-       }
-       */
-	  
+	  }
 
         
 
