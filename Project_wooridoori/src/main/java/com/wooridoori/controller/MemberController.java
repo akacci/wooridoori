@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -146,6 +147,7 @@ public class MemberController {
 		}
 		
 		return "/mypage/UserInfo";
+	}
   
 	@RequestMapping("/membernation.wd")
 	public @ResponseBody void getNation(Model model, HttpServletRequest request, HttpServletResponse response){
