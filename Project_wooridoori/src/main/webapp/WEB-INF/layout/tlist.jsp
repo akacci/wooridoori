@@ -122,11 +122,11 @@
 					<table class="tlist_table">
 						<tr>
 							<th style="width: 70px">글번호</th>
-							<th style="width: 220px"><a class="t_standard" href="tarrange.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=1">관광지▼</a></th>
+							<th style="width: 220px"><a class="t_standard" href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=1">관광지▼</a></th>
 							<th style="width: 300px">지역</th>
-							<th style="width: 150px"><a class="t_standard" href="tarrange.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=2">구분▼</a></th>
-							<th style="width: 70px"><a class="t_standard" href="tarrange.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=3">평점▼</a></th>
-							<th style="width: 70px"><a class="t_standard" href="tarrange.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=4">조회수▼</a></th>
+							<th style="width: 150px"><a class="t_standard" href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=2">구분▼</a></th>
+							<th style="width: 70px"><a class="t_standard" href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=3">평점▼</a></th>
+							<th style="width: 70px"><a class="t_standard" href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=4">조회수▼</a></th>
 						</tr>
 						<c:forEach var="a" items="${tlist}" varStatus="i">
 							<tr class="tlist_item" onclick="location.href='detail.wd?contentid=${a.contentid}&areaname=${areaname}&sigungu=${sigungu}&depth=2'">

@@ -64,42 +64,22 @@ public class TListController {
 	
 	@RequestMapping("/category.wd")
 	public String cat(Model model,
+			@RequestParam(value="standard", defaultValue="") String standard,
 			@RequestParam String sigungu,
 			@RequestParam String areaname,
 			@RequestParam String depth){
 		
-		guanDto gdto = gdao.getCode(areaname, sigungu);
-		String areacode = gdto.getAreacode();
-		String  sigungucode = gdto.getSigungucode();
-		//String sigungucode = gdao.getSigunguCode(sigungu);
-		
-		List<guanDto> tlist = gdao.listView(areacode, sigungucode);
-		
-		model.addAttribute("tlist", tlist);
-		model.addAttribute("areaname", areaname);
-		model.addAttribute("sigungu", sigungu);
-		model.addAttribute("depth", depth);
-		return "/layout/tlist";
-	}
-	
-	@RequestMapping("/tarrange.wd")
-	public String arrange(Model model,
-			@RequestParam String standard,
-			@RequestParam String sigungu,
-			@RequestParam String areaname,
-			@RequestParam String depth){
 		guanDto gdto = gdao.getCode(areaname, sigungu);
 		String areacode = gdto.getAreacode();
 		String  sigungucode = gdto.getSigungucode();
 		
 		List<guanDto> tlist = new ArrayList<guanDto>();
-		
-		if(standard.equals("1")){
+		if(standard.equals("")){
+			tlist = gdao.listView(areacode, sigungucode);
+		}else if(standard.equals("1")){
 			tlist = gdao.listViewWithName(areacode, sigungucode);
-			System.out.println("스탠1도코드"+areacode+"시군구코드"+sigungucode);
 		}else if(standard.equals("2")){
 			tlist = gdao.listViewWithCat(areacode, sigungucode);
-			System.out.println("스탠2도코드"+areacode+"시군구코드"+sigungucode);
 		}else if(standard.equals("3")){
 			tlist = gdao.listViewWithAvg(areacode, sigungucode);
 		}else{
@@ -110,7 +90,6 @@ public class TListController {
 		model.addAttribute("areaname", areaname);
 		model.addAttribute("sigungu", sigungu);
 		model.addAttribute("depth", depth);
-		
 		return "/layout/tlist";
 	}
 	
