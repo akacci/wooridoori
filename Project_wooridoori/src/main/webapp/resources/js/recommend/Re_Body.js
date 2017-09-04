@@ -132,8 +132,8 @@ function firstAreaData(){
 				$("#area .select_img").eq(i).onError = function(){
 					this.src = "images/no_image.png";
 				}
-				$("#area .first_trip")eq(i).attr("value","n");
-				$("#area .cc_img")eq(i).attr("value","n");
+				$("#area .first_trip").eq(i).attr("value","n");
+				$("#area .cc_img").eq(i).attr("value","n");
 				
 				$("._ccimg:eq("+i+")").attr("inx",i);
 				$(".rateit:eq("+i+")").attr("inx",i);
@@ -161,8 +161,8 @@ function firstThemaData(){
 				$("#thema .select_img").eq(i).onError = function(){
 					this.src = "images/no_image.png";
 				}
-				$("#area .first_trip")eq(i).attr("value","n");
-				$("#area .cc_img")eq(i).attr("value","n");
+				$("#area .first_trip").eq(i).attr("value","n");
+				$("#area .cc_img").eq(i).attr("value","n");
 				
 				$("._ccimg:eq("+i+")").attr("inx",i);
 				$(".rateit:eq("+i+")").attr("inx",i);

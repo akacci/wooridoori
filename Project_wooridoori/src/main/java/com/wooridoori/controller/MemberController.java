@@ -1,10 +1,12 @@
 package com.wooridoori.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.MemberDTO;
 import com.wooridoori.service.GuideService;
@@ -31,13 +35,6 @@ public class MemberController {
 	MemberService mService;
 	@Autowired
 	MemberDAO mdao;
-
-	@RequestMapping("/loginform.wd")
-	public String loginform(Model model){
-		model.addAttribute("Clist", mService.loginform());
-		return "/member/loginform";
-	}
-
 
 	@RequestMapping("/loginaction.wd")
 	public String loginAction(
@@ -97,22 +94,16 @@ public class MemberController {
 		return "redirect:wooriMain.wd";
 	}
 	@RequestMapping("/membernation.wd")
-	public void wtlPipeLmListXml( 
-		      Model model, HttpServletRequest request, HttpServletResponse response)
-		            throws Exception {
-		     
-		     URL url = new URL("http://apis.data.go.kr/1262000/CountryBasicService/getCountryBasicList?numOfRows=197&ServiceKey=ohelTML%2FebWtWdtXdLCnZdIG7KRH8mN7N%2BwAiIv1%2BWmyR5RcCtksbUK3aYiYbsbTxrQ7BpvdMRRBBtiIVLaJZQ%3D%3D");
-		     HttpURLConnection request1 = (HttpURLConnection) url.openConnection();
-		     request1.setRequestMethod("GET");
-		     request1.connect();
-		     InputStream is = request1.getInputStream();
-		     BufferedReader bf_reader = new BufferedReader(new InputStreamReader(is));
-		     String responseData = IOUtils.toString(bf_reader);
-		     //System.out.println(responseData);
-		     
-		        response.setContentType("application/xml");
-		        response.setCharacterEncoding("utf-8");
-		        response.setHeader("Cache-Control", "no-cache");
-		        response.getWriter().print( responseData );
-		    }
+	public @ResponseBody void getNation(Model model, HttpServletRequest request, HttpServletResponse response){
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> list = mService.getNation();
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

@@ -26,7 +26,14 @@
 				and
 			password = #{password}
 	</select>
-	
+	<select id="getNation" resultType="String">
+		select
+			nation
+		from
+			pre_foreign_country
+		order by
+			nation
+	</select>
 	
 	<!--  -->
 	

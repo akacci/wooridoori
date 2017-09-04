@@ -11,7 +11,7 @@
 		<title>Welcome</title>
 	</head> 
 	<body>
-			<c:redirect url="wooriMain.wd?wbody_url=wbody.wd"></c:redirect>
+			<c:redirect url="wooriMain.wd"></c:redirect>
 	</body>
 	
 </html>
