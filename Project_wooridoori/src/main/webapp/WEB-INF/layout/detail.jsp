@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,19 +14,35 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/detail.css"/>
 
 <script type="text/javascript">
-	var contentId = ${cdata.contentid};
-	var contentTypeid = ${cdata.contenttypeid};
-	var mapx = ${cdata.mapx};//longitude
-	var mapy = ${cdata.mapy};//latitude
-	var data = {contentid:contentId,contenttypeid:contentTypeid,x:mapx,y:mapy};
-	
-	content_writer(data);
-	
-	
-
+	$(function() {
+		$(".content_detail .menu").click(
+				function() {
+					var find_info = $(this).parent().children(".info");
+					find_info.toggle();
+					if (find_info.css("display") == "none") {
+						$(this).children("span").children("i").removeClass(
+								"fa fa-caret-up");
+						$(this).children("span").children("i").addClass(
+								"fa fa-caret-down");
+					}
+					if (find_info.css("display") == "block") {
+						$(this).children("span").children("i").removeClass(
+								"fa fa-caret-down");
+						$(this).children("span").children("i").addClass(
+								"fa fa-caret-up");
+					}
+				});
+		var contentId = ${cdata.contentid};
+		var contentTypeid = ${cdata.contenttypeid};
+		var mapx = ${cdata.mapx};
+		var mapy = ${cdata.mapy};
+		var data = {contentid : contentId, contenttypeid : contentTypeid, x : mapx, y : mapy};
+		content_writer(data);
+	});
 	//초기 위치
 	var current_lng = ${cdata.mapx};
 	var current_lat = ${cdata.mapy};
+
 </script>
 </head>
 <header> 
@@ -34,6 +50,7 @@
          <%@include file="../layout/wtopmenu.jsp"%>
 </header>
 <body>
+
 	<div id="div_detail">
 		<div class="content_detail">
 			<h2>${cdata.title}</h2>
@@ -120,8 +137,12 @@
 		
 		<div class="content_detail">
 			<a href="searchlist.wd">리스트로 ㄱㄱ</a>
+
 		</div>
 	</div>
+	<footer>
+		<%@ include file="./wfooter.jsp"%>
+	</footer>
 </body>
 <footer>
          <%-- <jsp:include page= "../layout/wfooter.jsp"/> --%>

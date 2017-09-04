@@ -6,11 +6,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.PasswordAuthentication;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -19,10 +16,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +26,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.GuideDTO;

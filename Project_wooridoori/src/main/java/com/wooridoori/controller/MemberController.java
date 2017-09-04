@@ -1,17 +1,19 @@
 package com.wooridoori.controller;
 
-import java.io.Console;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.security.Provider.Service;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.MemberDTO;
 import com.wooridoori.service.GuideService;
@@ -35,14 +36,7 @@ public class MemberController {
 	MemberService mService;
 	@Autowired
 	MemberDAO mdao;
-	
-	@RequestMapping("/loginform.wd")
-	public String loginform(Model model){
-		model.addAttribute("Clist", mService.loginform());
-		return "/member/loginform";
-	}
-	
-	
+
 	@RequestMapping("/loginaction.wd")
 	public String loginAction(
 			HttpServletRequest req,
@@ -52,11 +46,11 @@ public class MemberController {
 			@RequestParam(defaultValue="서울특별시")String addr
 			){
 		req.getSession().setAttribute("prevPage", req.getHeader("Referer"));
-	    session.setAttribute("LOGIN", "YES");
-	    session.setAttribute("ID", mdto.getM_id());
-	   
-	    boolean log=mdao.loginCheck(mdto);
-	    if(log){	    
+		session.setAttribute("LOGIN", "YES");
+		session.setAttribute("ID", mdto.getM_id());
+
+		boolean log=mdao.loginCheck(mdto);
+		if(log){	    
 			//User info 
 			mdto=mService.getMemberInfo(mdto.getM_id());
 			session.setAttribute("id", mdto.getM_id());
@@ -66,11 +60,11 @@ public class MemberController {
 			session.setAttribute("email1", mdto.getE_mail().substring(0,f));
 			session.setAttribute("email2", mdto.getE_mail().substring(f+1, mdto.getE_mail().length()));
 			m.addAttribute("addr",addr);
-	    }
+		}
 		return "/member/login";
 	}
-	
-	
+
+
 	@RequestMapping("/logoutaction.wd")
 	public String logoutAction(HttpSession session){
 	    session.setAttribute("ID", null);
@@ -116,29 +110,29 @@ public class MemberController {
 		}
 	}
 	
-	
+
 	@RequestMapping("/membercheck.wd")
 	public @ResponseBody String memberCheck(HttpServletRequest req, HttpSession session, Model model, @ModelAttribute MemberDTO mdto){
 		return mService.loginCheck(mdto)?"yes":"no";
 	}
-	
+
 	@RequestMapping("/logoutform.wd")
 	public String logoutform(){
 		return "/member/logoutform";
 	}
-	
+
 	@RequestMapping("/idcheck.wd")
 	public @ResponseBody String idCheck(@RequestParam String id){
 		return mService.idCheck(id)?"Y":"N";
 	}
-	
+
 	@RequestMapping("/signupaction.wd")
 	public String signupAction(Model model, HttpServletRequest req, @ModelAttribute MemberDTO mdto){
 		mService.memberInsert(mdto);
 		model.addAttribute("wbody_url", mService.beforeAddress(req));
 		return "redirect:wooriMain.wd";
 	}
-	
+  
 	@RequestMapping("/userInfo.wd")
 	public String userInfo(HttpSession session, Model model){
 
@@ -152,5 +146,18 @@ public class MemberController {
 		}
 		
 		return "/mypage/UserInfo";
+  
+	@RequestMapping("/membernation.wd")
+	public @ResponseBody void getNation(Model model, HttpServletRequest request, HttpServletResponse response){
+		ObjectMapper mapper = new ObjectMapper();
+		List<String> list = mService.getNation();
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

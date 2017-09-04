@@ -1,21 +1,6 @@
 /*
  * CONTENT_DETAIL.JS 
  */
-
-$(function(){
-	
-	$(".content_detail .menu").click(function(){
-		var find_info = $(this).parent().children(".info");
-		find_info.toggle();
-		if(find_info.css("display")=="none"){
-			$(this).children("span").children("i").removeClass("fa fa-caret-up");
-			$(this).children("span").children("i").addClass("fa fa-caret-down");
-		}if(find_info.css("display")=="block"){
-			$(this).children("span").children("i").removeClass("fa fa-caret-down");
-			$(this).children("span").children("i").addClass("fa fa-caret-up");
-		}
-	});
-});
 function content_writer(data){
 	basic_writer(data.contentid, data.contenttypeid);
 	detail_writer(data.contentid, data.contenttypeid);

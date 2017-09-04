@@ -6,7 +6,7 @@
 		insert into
 			wmember
 		values
-			(mem_seq.nextval, #{m_id}, #{name}, #{password}, #{email}, #{country}, #{tel}, 'N', null, sysdate, sysdate)
+			(mem_seq.nextval, #{m_id}, #{name}, #{password}, #{e_mail}, #{nation}, #{tel}, 'N', null, sysdate, sysdate)
 	</insert>
 	<select id="idCheck" parameterType="String" resultType="int">
 		select
@@ -26,7 +26,14 @@
 				and
 			password = #{password}
 	</select>
-	
+	<select id="getNation" resultType="String">
+		select
+			nation
+		from
+			pre_foreign_country
+		order by
+			nation
+	</select>
 	
 	<!--  -->
 	

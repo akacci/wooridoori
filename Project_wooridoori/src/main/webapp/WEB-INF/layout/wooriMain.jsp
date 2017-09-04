@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<c:set var="root" value="<%=request.getContextPath() %>"  />
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- 코로스 도메인 -->
-<script type="text/javascript" src="${root}/dist/jquery.ajax-cross-origin.min.js"></script>
+
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -94,7 +93,7 @@
 
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
-body, html {height: 100%}
+body,html{width: 100%;height: 100%;}
 .bgimg {
     min-height: 100%;
     background-position: center;
@@ -115,6 +114,9 @@ body, html {height: 100%}
 </style>
 </head>
 <body>
+<header>
+		<%@ include file="./wtopmenu.jsp"%>
+</header>
 <!-- Home화면 에서만 배경화면을 출력하기 위해 클래스명을 value값으로 변수a를 선언함.  -->
 <c:if test="${wbody_url eq '/wbody.wd'}">
 	<c:set var="a" value="bgimg"></c:set>
@@ -128,7 +130,7 @@ body, html {height: 100%}
 	<c:set var="b" value="background-color: gray"></c:set>
 </c:if>
 
-<div class="${a} w3-display-container w3-text-white">
+<div class="${a} w3-display-container w3-text-white" style="margin-top: 60px; margin-bottom: 33px;">
   <div class="w3-display-middle" style="width: 100%; height:100%;padding-top: 70px;padding-bottom: 70px;overflow:auto ;">
 	<c:import url="${wbody_url}"></c:import>
 	
@@ -136,22 +138,19 @@ body, html {height: 100%}
     <p class="w3-large w3-center">35 days left</p> -->
     
   </div>
-  
-  <div class="w3-display-topleft w3-padding-small w3-large" style="width: 100%; ${b}">
-	<c:import url="/wtopmenu.wd"></c:import>
-  </div>
   <div id="message_box" class="absolute_box w3-container w3-black2" style="white-space: pre-line; word-break:break-all;">
   <p id="message"></p>
   
   </div>
   
-</div>
-
-<div class="wfooter" style="width: 100%; bottom: 0;position: fixed;font-size: 14px;background-color: #313131;color: rgb(140,140,140);font-weight:bold; ;padding: 6px;cursor: pointer;">
-<c:import url="/wfooter.wd"></c:import>
+	
 </div>
 <button class="absolute_btn" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer"
 	id="btn_prev">&lt;</button>
 	<button class="absolute_btn" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer;
 	margin-left: 41px" id="btn_next">&gt;</button>
+<footer>
+	<%@ include file="./wfooter.jsp"%>
+</footer>
 </body>
+</html>

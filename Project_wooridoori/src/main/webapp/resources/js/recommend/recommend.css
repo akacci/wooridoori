@@ -1,0 +1,431 @@
+  /*  div{
+      border: 0.5px solid gray;
+   }  */
+   body{
+   	margin-botton: 33px;
+   }
+   
+   div#div_topMenu{
+   	z-index: 9;
+   }
+   
+   div#div_footer{
+   	z-index:9;
+   }
+   
+   /* slider 부분 */
+	div,a {
+		padding:0;
+		margin:0;
+	}
+	
+	div#div_more{
+		position: fixed;
+		margin-top: 50px;
+		left: 1150px;
+		width: 8%;
+		height: 25px;
+		bottom: 42px;
+		background-color: #313131;
+		color: #fff;
+		/* z-index: 9; */
+		text-align: center;
+		text-decoration: none;
+		display: hidden;
+	}
+	
+	div#area,div#thema,div#non_favorite{
+		margin-bottom: 33px;
+	}
+	
+	span.category{
+		background-color: #fff;
+		top: 20;
+		left: 0;
+		width: 30px;
+		height: 30px;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	
+	a.slide_left img, a.slide_right img{
+		background-color: #fff;
+		width: 100%;
+		height: 100%;
+	}
+	
+	#area div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#area div.slider a {
+		position:absolute;
+		top:200px;
+	}
+	
+	#area div.slider a.slide_left {
+		left:100px;
+		width:50px;
+	}
+	
+	#area div.slider a.slide_right {
+		right:100px;
+		width:50px;
+	}   
+	
+	#area div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		padding:0 auto;
+		margin:0 auto;
+		/* border:1px solid black; */
+	}
+	
+	#thema div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#thema div.slider a {
+		position:absolute;
+		top:500px;
+	}
+	
+	#thema div.slider a.slide_left {
+		left:100px;
+		width:50px;
+	}
+	
+	#thema div.slider a.slide_right {
+		right:100px;
+		width:50px;
+	}   
+	
+	#thema div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		padding:0 auto;
+		margin:0 auto;
+	}
+	
+    #non_favorite div.slider {
+		width:100%;
+		height:250px;
+		margin:0 auto;
+	}
+	
+	#non_favorite div.slider a {
+		position:absolute;
+		top:800px;
+	}
+	
+	#non_favorite div.slider a.slide_left {
+		left:100px;
+		width:50px;
+	}
+	
+	#non_favorite div.slider a.slide_right {
+		right:100px;
+		width:50px;
+	}   
+	
+	#non_favorite div.slider div#slider_body {
+		overflow:hidden;
+		width:1000px;
+		height:250px;
+		padding:0 auto;
+		margin:0 auto;
+	}
+	
+	div#slide_div{
+		width:10000px;
+	}
+	
+   /* 메뉴와 바디 부분 */			
+   div#re_smenu{
+   	position: relative;
+   	top: 54px;
+   	width: 100%;
+   	height: 50px;
+   	z-index: 2;
+   }
+   
+   div#re_body{
+   	margin-top: 54px;
+   	width: 100%;
+   	hight: 100%;
+   	z-index: 1;
+   }
+   
+   /* re_menu */
+    div#content{
+    	background-color: #313131;
+    	/* opacity: 0.8; */
+    	color: #fff;
+    	z-index: 10;
+    }
+    
+    div#View{
+    	background-color: #313131;
+    	/* opacity:0.8; */
+    	width: 100%;
+    	height:20px;
+    	color: #fff;
+    }
+    
+    span._filter_tag{
+    	padding-left: 200px;
+    }
+    
+    div.aTag_Controller_box{
+		margin-left: 80%;				
+	}
+	span.span_aTag_Controller{
+		font-size: 18px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	
+	div>span>a.filter_aTag{
+		text-decoration: none;
+	}
+	
+	#list_classification.filter_item_list_classification{
+		position: absolute;
+		background-color: #313131;
+		opacity:0.99;
+		list-style: none;
+		width: 150px;
+		left: 980px;
+		top: 47px;
+		z-index:11;
+	}
+	
+	#list_theme.filter_item_list_theme{
+		position: absolute;
+		opacity:0.99;
+		list-style: none;
+		background-color: #313131;
+		width: 150px;		
+		left: 1030px;
+		top: 47px;
+		z-index:11;
+	}
+	
+	div>ul>li.filter_item{			
+		width: 100%;
+		cursor: pointer;
+		display: block;
+	}
+	
+	/* re_body */
+	div.select_box_div{
+		position: relative;
+		float: left;
+		left:30px;
+		margin-left:10px;
+		margin-top:20px;
+		margin-right:80px;		
+		width: 250px;
+		height: 200px;
+	}
+	
+	div>ul.select_box_ul{
+		list-style: none;
+	}
+	
+	div>ul>li.select_box{
+		position: relative;	
+		left: 0;
+		top: 0;
+		width: 250px;
+		height: 200px;								
+	}	
+	
+	div.select_tourbox{	
+		position: absolute;		
+		left: 0;
+		top: 0;
+		margin: 0px;
+		z-index: 1;
+		background-repeat: no-repeat;
+		width: 250px;
+		height: 200px;
+	}
+	div>img.select_img{
+		position: relative;
+		padding: 0;
+		z-index: 2;
+		width: 250px;
+		height: 100%;
+	}	
+	
+	div.div_hover_box{
+		position: absolute;
+		left: 0;
+		top: 0;	
+		z-index: 3;
+		width: 250px;
+		height: 200px;	
+	}
+	
+	div.select_blockA{
+		position: relative;
+		padding: 0;
+		z-index: 4;
+		background: #999;
+		opacity:0.4;
+		width: 250px;
+		height: 100px;
+		cursor: pointer;	
+	}
+	div.select_blockB{
+		position: relative;
+		padding: 0;
+		background-color: #777;
+		opacity:0.99;
+		z-index: 5;
+		width: 250px;
+		height: 100px;				
+	}
+	
+	/* recommend detail 아래 부분 */
+	#recommend_detail div.select_box_div{
+		position: relative;
+		float: left;
+		left:160px;
+		margin-left:10px;
+		margin-top:20px;
+		margin-right:80px;	
+		margin-bottom: 50px;	
+		width: 250px;
+		height: 200px;
+	}
+	
+	#recommend_detail div>ul.select_box_ul{
+		list-style: none;
+	}
+	
+	#recommend_detail div>ul>li.select_box{
+		position: relative;	
+		left: 0;
+		top: 0;
+		width: 250px;
+		height: 200px;								
+	}	
+	
+	#recommend_detail div.select_tourbox{	
+		position: absolute;		
+		left: 0;
+		top: 0;
+		margin: 0px;
+		z-index: 1;
+		background-repeat: no-repeat;
+		width: 250px;
+		height: 200px;
+	}
+	#recommend_detail div>img.select_img{
+		position: relative;
+		padding: 0;
+		z-index: 2;
+		width: 250px;
+		height: 100%;
+	}	
+	
+	#recommend_detail div.div_hover_box{
+		position: absolute;
+		left: 0;
+		top: 0;	
+		z-index: 3;
+		width: 250px;
+		height: 200px;	
+	}
+	
+	#recommend_detail div.select_blockA{
+		position: relative;
+		padding: 0;
+		z-index: 4;
+		background: #999;
+		opacity:0.4;
+		width: 250px;
+		height: 100px;
+		cursor: pointer;	
+	}
+	#recommend_detail div.select_blockB{
+		position: relative;
+		padding: 0;
+		background-color: #777;
+		opacity:0.99;
+		z-index: 5;
+		width: 250px;
+		height: 100px;				
+	}
+
+	/* 다시 전체 */
+	span.first_trip_click{
+		margin-left: 80%;
+		width: 10%;
+		height: 5%;
+	}
+	
+	img.btn_first_trip{
+		width: 20px;
+		height: 20px;
+	}
+	
+	div.select_tourbox > img.tour_image{
+		width: 250px;
+		height: 100%;
+	}
+	
+	/* span.tour_name{
+		width: 300px;
+		height: 20px;
+		text-align: center;
+	} */
+		
+	span._cc_img{
+		cursor: pointer;
+	}
+	
+	span._jc_img{
+		cursor: pointer;
+	}
+	
+	img._ccimg, img._jcimg{
+		width: 20px;
+	}
+	
+	span.filter_tag_exit{
+		cursor: pointer;
+	}
+	
+	.brightness {-webkit-filter: brightness(250%);filter: brightness(250%);}
+   
+   /* dialog */
+   #detail_tour{
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+		border: 0;
+	}
+	
+	#favorite_survey{
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+		border: 0;
+		visibility: hidden;
+	}
+   

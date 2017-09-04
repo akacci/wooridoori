@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommend">
+
+	<select resultType="tdto" id="selectFirstRecommendArea">
+		select *
+		from TOUR_INQUIRY
+		where addr1 like '%중랑구%' 
+	</select>
+	
+	<select resultType="tdto" id="selectFirstRecommendThema">
+			select *
+			from TOUR_INQUIRY
+			where cat1 = 'A02'
+			and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
+			select a.* 
+			from tour_inquiry a, 
+			     (select pre_cat1, pre_cat2, pre_cat3
+			      from pre_foreign_country
+			      where nation = 'Angola') b
+			where a.areacode not in (1, 6, 39)
+			and a.cat2 in (b.pre_cat1, b.pre_cat2, b.pre_cat3)
+			and rownum <![CDATA[<]]> 11
+			order by a.readcount desc
+	</select>
+	
+	<select id="selectContentCodeName" resultType="condto">
+		select distinct cat2, cat2_name
+		from content_code 
+	</select>
+	
+	<select id="selectCodeOfTourList" resultType="tdto" parameterType="HashMap">
+		select a.*
+		from (select rownum as rnum,
+			       b.*
+			from (select *
+				   from tour_inquiry
+				   <trim prefix="where" prefixOverrides="AND|OR">
+					   <if test="areacode.size != 0">
+						   and areacode in
+						   <foreach collection="areacode" item="areacode" open="(" close=")" separator=",">
+						   		#{areacode}
+						   </foreach>
+				       </if> 
+					   <if test="themacode.size != 0">
+						   and cat2 in
+					       <foreach collection="themacode" item="themacode" open="(" close=")" separator=",">
+						   		#{themacode}
+						   </foreach>
+					   </if>
+				   </trim>
+				   order by readcount asc) b
+				 )a
+		where a.rnum <![CDATA[>=]]> 1
+		and a.rnum <![CDATA[<=]]> #{end}
+		   
+	</select>
+	
+	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		<if test="areacode != null and areacode != ''">
+		where areacode in
+			<foreach collection="areacode" item="areacode" open="(" close=")" separator=",">
+				#{areacode} 
+			</foreach>
+		</if>
+		order by readcount asc
+	</select>
+	
+	<select id="selectCat2OfTourlist" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		<if test="cat2 != null and cat2 != ''">
+		where cat2 in
+			<foreach collection="cat2" item="cat2" open="(" close=")" separator=",">
+				#{cat2} 
+			</foreach>
+		</if>
+		order by readcount asc
+	</select> -->
+
+	<select resultType="condto" id="fliterSearchOfCat_Name"> 
+		select cat2_name
+		from content_code 
+	</select>
+	
+	<!-- first_trip insert, update -->	
+	<insert id="insertOfFirsttrip" parameterType="refdto">
+	MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            firsttrip = #{firsttrip},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (SEQ_MEMBER, 
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                SOLOTRIP,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence)
+	            VALUES(
+	                #{seq_member},
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{solotrip},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence})						
+	</insert>
+	
+	<!-- book_mark insert, update -->
+	<insert id="insertOfBookmark" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            bookmark = #{bookmark},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (SEQ_MEMBER, 
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                SOLOTRIP,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence)
+	            VALUES(
+	                #{seq_member},
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{solotrip},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence})	
+	</insert>
+	
+	<!-- grade_point insert, update -->
+	<insert id="insertOfGradePoint" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            GRADE_POINT = #{grade_point},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (SEQ_MEMBER, 
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                SOLOTRIP,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence)
+	            VALUES(
+	                #{seq_member},
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{solotrip},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	             	#{pre_rence})	
+	</insert>
+	<insert id="insertOfPreference" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            pre_rence = #{pre_rence},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (SEQ_MEMBER, 
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                SOLOTRIP,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence)
+	            VALUES(
+	                #{seq_member},
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{solotrip},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence})
+	</insert>
+</mapper>

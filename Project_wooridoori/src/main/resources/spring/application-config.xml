@@ -11,7 +11,7 @@
     <!-- Uncomment and add your base-package here:
          <context:component-scan
             base-package="org.springframework.samples.service"/>  -->
-   <!--Oracle DB setting  -->
+ <!--Oracle DB setting  -->
    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
       <property name="locations">
          <value>WEB-INF/oracleDB.properties</value>
@@ -32,4 +32,5 @@
    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">  <!--sqlSessionFactory injection  -->
       <constructor-arg ref="sqlSessionFactory" index="0"/>
    </bean>
+
 </beans>
