@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:set var="contextpath" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="contextpath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" type="text/css" href='resources/css/tlist.css?t=<%=System.currentTimeMillis()%>'>
 <style type="text/css">
 
@@ -46,6 +46,10 @@
 <title>Insert title here</title>
 </head>
 <body style="margin-top: 100px; margin-bottom: 100px; width: 100%; height: 1500px;">
+	<header> 
+         <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
+         <%@include file="../layout/wtopmenu.jsp"%>
+   </header>
 	<div class="t_wrap">
 
 	<div class="tText_1">
@@ -118,7 +122,7 @@
 						</div>
 					</a>
 				</div>
-				<div >
+				<div class="table_cover">
 					<table class="tlist_table">
 						<tr>
 							<th style="width: 70px">글번호</th>
@@ -130,7 +134,8 @@
 						</tr>
 						<c:forEach var="a" items="${tlist}" varStatus="i">
 							<tr class="tlist_item" onclick="location.href='detail.wd?contentid=${a.contentid}&areaname=${areaname}&sigungu=${sigungu}&depth=2'">
-								<td style="text-align: center;">${fn:length(tlist)-i.index}</td>
+								<td style="text-align: center;">${no}</td><%-- ${fn:length(tlist)-i.index} --%>
+								<c:set var="no" value="${no-1}"></c:set>
 								<td>${a.title }</td>
 								<td>${a.addr1 }</td>
 								<td style="text-align: center;">${a.cat3_name}</td>
@@ -139,6 +144,21 @@
 							</tr>
 						</c:forEach>
 					</table>
+					
+					<div class="tlist_arrange">
+						<ul >
+						<c:if test="${startPage>1 }">
+							<li style="float: left;"><a href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&pageNum=${startPage-1 }"><&nbsp;</a></li>
+						</c:if> 
+						<c:forEach var="pg" begin="${startPage}" end="${endPage }">
+							<li style="float: left;"><a href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&pageNum=${pg}">${pg }</a>&nbsp;</li>
+						</c:forEach>
+						<c:if test="${endPage<totalPage}">
+							<li style="float: left;"><a href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&pageNum=${endPage+1 }">&nbsp;></a></li>
+						</c:if>
+						</ul>
+					</div>
+					
 				</div>
 		</c:if>
 	</div>
@@ -147,5 +167,9 @@
 	<button type="button" onclick="javascript:window.scrollTo(0, 0);" class="goTop"><img src="//img.tourtips.com/images/cm/img_goTop.png" alt="맨위로"></button>
 	</div>
 </div>
+<footer>
+         <%-- <jsp:include page= "../layout/wfooter.jsp"/> --%>
+         <%@include file="../layout/wfooter.jsp"%>
+</footer>
 </body>
 </html>
