@@ -1,8 +1,8 @@
 package com.wooridoori.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,13 +72,33 @@ public class RecommendService {
 		return list;
 	}
 	
+	public List<TourInquiryDTO> selectLoginRecommendArea(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		String pre_cat1 = catMap.get("PRE_CAT1");
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendArea(pre_cat1);
+		return list;
+	}
+	
 	public List<TourInquiryDTO> selectFirstRecommendThema(){
 		List<TourInquiryDTO> list = rdao.selectFirstRecommendThema();
 		return list;
 	}
 	
+	public List<TourInquiryDTO> selectLoginRecommendThema(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		catMap.remove("PRE_CAT1");
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendThema(catMap);
+		return list;
+	}
+	
 	public List<TourInquiryDTO> selectFirstRecommendNonFavorite(){
 		List<TourInquiryDTO> list = rdao.selectFirstRecommendNonFavorite();
+		return list;
+	}
+	
+	public List<TourInquiryDTO> selectLoginRecommendNonFavorite(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendNonFavorite(catMap);
 		return list;
 	}
 	

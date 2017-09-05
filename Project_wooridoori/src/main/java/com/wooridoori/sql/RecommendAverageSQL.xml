@@ -7,6 +7,7 @@
 		select * 
 		from recommend_average
 		where contentid = #{contentid}
+		order by pre_score desc
 	</select>
 	
 	<select id="selectTotalReviewScore" parameterType="String" resultType="String">
@@ -24,12 +25,12 @@
 	
 	<insert id="insertRecommendAverageReview" parameterType="radto">
 		insert into recommend_average
-		values(#{contentid},
-		       #{seq_member},
+		values(seq_score_review.nextval,
+		       #{contentid},
 		       #{m_id},
 		       #{pre_score},
 		       #{pre_review},
-		       'N',
+		       #{visit_yn},
 		       sysdate,
 		       sysdate
 		       )

@@ -1,26 +1,6 @@
-/*var configFontAwesome = {
-	custom: {
-	    families: ['fontawesome'],
-	    urls: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css']
-	    },
-	    fontactive: function () {
-	        $('.rateit-fa').rateit();
-	    }
-};
-
-WebFont.load(configFontAwesome);*/
-		
-		
 $(function(){
 	
-	/*$(".div_hover_box").hide();*/
 	$("#recommend_detail").hide();
-	
-	/*$(".select_box_div").hover(function(e){
-		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
-		var inx = $(this).children("#cnt").val() - 1;
-		$("#"+topClass.attr("id")+" .div_hover_box").eq(inx).slideToggle("slow");							
-	});*/
 	
 	firstAreaData(); //처음 화면에 나오는 지역 데이터
 	firstThemaData(); //처음 화면에 나오는 테마 데이터

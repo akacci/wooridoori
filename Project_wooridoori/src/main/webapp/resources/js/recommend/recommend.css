@@ -6,11 +6,19 @@
    }
    
    div#div_topMenu{
-   	z-index: 9;
+   	z-index: 12;
+   }
+   
+   div.log_dialog{
+   	z-index: 13;
+   }
+   
+   div.log_form{
+   	z-index: 13;
    }
    
    div#div_footer{
-   	z-index:9;
+   	z-index:12;
    }
    
    /* slider 부분 */
@@ -179,7 +187,7 @@
     }
     
     span._filter_tag{
-    	padding-left: 200px;
+    	text-decoration: none;
     }
     
     div.aTag_Controller_box{

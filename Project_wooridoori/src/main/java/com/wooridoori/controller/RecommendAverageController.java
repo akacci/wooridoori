@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,15 @@ public class RecommendAverageController {
 
 	@Autowired
 	RecommendAverageService raService;
+	
+	@RequestMapping(value="sessionloginid.wd", method=RequestMethod.POST)
+	@ResponseBody
+	public String sessionLoginId(HttpSession session){
+		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
+		String str = id + "," + login;
+		return str;
+	}
 	
 	@RequestMapping(value="todialogreview.wd", method=RequestMethod.POST)
 	@ResponseBody

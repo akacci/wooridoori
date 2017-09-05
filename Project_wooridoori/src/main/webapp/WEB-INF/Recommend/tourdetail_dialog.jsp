@@ -49,16 +49,17 @@
 			<div id="dialog_review_write">
 				<form action="insertreview.wd" method="post" id="frm_review">
 					<div class="form-inline">
-					아이디 : <input type="text" class="form-control" name="m_id" id="m_id"> 
+					아이디 : <input type="text" class="form-control" name="m_id" id="m_id_dialog" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp; 
 					평점 : <div class="rateit" id="rateit_write"></div><br>
 					</div>
+					<br>
 					<div class="form-inline">
 						한줄평 : <input type="text" class="form-control" name="pre_review" id="pre_review">
 						<input type="button" class="btn btn-default btn-sm" id="insert_btn" value="확인">
 					</div>
 					<input type="hidden" name="contentid" id="contentid">
 					<input type="hidden" name="pre_score" id="pre_score">
-					<input type="hidden" name="seq_member" id="seq_member">
+					<input type="hidden" name="visit_yn" id="visit_yn">
 				</form> 
 				<div id="review_msg">
 				</div>
