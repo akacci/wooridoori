@@ -8,10 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <c:set var="root" value="<%=request.getContextPath() %>"  />
 <!-- tabs  -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -19,17 +20,12 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- Smart Board -->
 <%-- <script src="${root }/se2/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
 <script src="${root }/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" type="text/javascript" charset="utf-8"></script>
  --%>
- <!-- rate  -->
-<script src="${root }/gjunge-rateit.js-937fff8/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<script src="startStyle/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="${root }/gjunge-rateit.js-937fff8/scripts/rateit.css">
-<c:set var="root" value="${root }"  />
+
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds&callback=initMap" async defer></script>
 <!-- 1.preview pic  2.div to pic -->
@@ -130,6 +126,9 @@
 	.check{
 		display:inline;
 	}
+/* 	#target, #target2, #target3, #target4, #target5{
+		display: inline;
+	} */
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -171,8 +170,8 @@
 		/*  Upload guide front image */
 		$("#frontPic").click(function(){
 			$(".fileup").click();		
-			
 		});
+
 		//http://openapi.nsdi.go.kr/서비스제공 restful URI.xml?&authkey=인증키[&요청변수=값] 
 		//var Curl="http://openapi.nsdi.go.kr/nsdi/eios/service/rest?&authkey=a230ca22c40176414f4d13&admCodeNm=서울특별시";
 		
@@ -248,15 +247,22 @@
 		
 		/* Get meeting time */			
 		$(".meeting_time2").change(function(){
-			$("#gb_meet_time").val($(".meeting_time").val()+" "+$(this).val());
+			$("#gb_meet_time").val($(".meeting_time").val()+":"+$(this).val());
 		});
 		
 		$("#sbtn").click(function(){
 			/* Get language */
 			var lang=""; 
-			$("input[name=check]:checked").each(function() {
-				  lang+= $(this).val()+" ";
-				  $("#gb_language").val(lang);
+			$("input[name=check]:checked").each(function(idx) {
+				if($('input[name="check"]:checked').length==idx+1){
+					lang+= $(this).val();
+					alert($('input[name="check"]:checked').length);
+				}
+				else{
+					lang+= $(this).val()+", ";
+				 	$("#gb_language").val(lang);
+				}
+				alert("---"+lang);
 			});
 			/* Get service */
 			var serv=""; 
@@ -267,12 +273,16 @@
 			/* Send to form */
 			$("#frm").submit();
 		});
+		
+	
+		
+		
 	});	
 	
 	/* Draw map */
 	function initMap(lat, lng, address) {
 	    // 목표 위치
-		var myLatLng = {lat: lat, lng: lng};
+		var myLatLng = {lat: parseFloat(lat), lng: parseFloat(lng)};
 		var markerTitle = address;
 	   	// 지도 정보
 	    var map = new google.maps.Map(document.getElementById('map'), {
@@ -304,6 +314,9 @@
 
 </script>
 </head>
+	<header>
+		<%@ include file= "../layout/top.jsp" %>
+	</header> 
 <body>
 
 	<form action="GuideWriteAction.wd"
@@ -324,8 +337,8 @@
 		  
 		  <input type="hidden" name="gb_name" value="${sessionScope.name}" id="gb_name">
 		  <input type="hidden" name="gb_state" value="0" >
+
 		  <div id="tabs-1">
-		    <p><strong>Click this tab again to close the content pane.</strong></p>
 		   	<span>
 				여행 제목  *<br>
 				<input type="text" class="form-control"
@@ -381,7 +394,6 @@
 	<!-- page distribute  -->
 	 
   	<div id="tabs-2">
-	    <p><strong>Click this tab again to close the content pane.</strong></p>
 	  	<span>만나는 장소 위치 *<br></span>
 		<span>
 			<div class="col-sm-9 " >
@@ -466,51 +478,51 @@
 	
 	<!-- page distribute  -->
 
-  <div id="tabs-3">
-    <p><strong>Click this tab again to close the content pane.</strong></p>
- 	<span>
-		Hash Tag *<br>
-		<input type="text" class="form-control"
-		  style="width: 800px;" required="required"
-		  name="gb_keyword" placeholder="#Hash Tag">	
-		<b id="info">-여행 주제와 관련된 내용을 등록하세요. <br>
-	 	   -지역명,투어내용이 포함된 태그는 상품 노출에 더 효과적입니다.<br>
-	 	   -태그명 앞에 '#'을 붙여주세요. (ex:#이태원/#경리단길/#맛집투어)<br><br>
-	 	</b>	
-	</span>
-	<br><br>
-	
-	 <span>
-		여행 테마 *<br>
-			<select class="form-control theme" style="width: 800px;">
-				<option value="">선택하세요.</option>
-				<option value="문화재">문화재</option>
-				<option value="체험(예술)">체험(예술)</option>
-				<option value="체험(레져)">체험(레져)</option>
-				<option value="식도락">식도락</option>
-				<option value="자연">자연</option>
-			</select>	 		
-			<input type="hidden" name="gb_theme"  id="gb_theme">
-	</span>
-	<br><br>
-	
-	<span>
-	    <div class="image-editor">
-			여행 대표 사진 * <br>
-		   <input type="file" class="cropit-image-input fileup" id="fileup" name="fileup"><br>
-		   <div id="frontPic">
-		   		<input type="image" src="${root }/Guide_img/camera-icon.png" class="frontImg">&nbsp; <b>대표 사진 등록</b>
-		   </div>
-		   <b id="info">-여행 주제와 관련된 내용을 등록하세요. <br>
-		 	   -첫 사진이 상세보기 배경으로 등록됩니다.<br>
-		 	   -최소 가로400pixel 이상의 사진파일을 사용하세요.<br>
-		 	 </b><br>
-		 	<div class="cropit-image-preview"  id="target" style="width: 400px;"></div>
-	 	</div>
-	   <br><br> 
-	</span>	
-	
-	 </div>
+	 <div id="tabs-3">
+	 	<span>
+			Hash Tag *<br>
+			<input type="text" class="form-control"
+			  style="width: 800px;" required="required"
+			  name="gb_keyword" placeholder="#Hash Tag">	
+			<b id="info">-여행 주제와 관련된 내용을 등록하세요. <br>
+		 	   -지역명,투어내용이 포함된 태그는 상품 노출에 더 효과적입니다.<br>
+		 	   -태그명 앞에 '#'을 붙여주세요. (ex:#이태원/#경리단길/#맛집투어)<br><br>
+		 	</b>	
+		</span>
+		<br><br>
+		
+		 <span>
+			여행 테마 *<br>
+				<select class="form-control theme" style="width: 800px;">
+					<option value="">선택하세요.</option>
+					<option value="문화재">문화재</option>
+					<option value="체험(예술)">체험(예술)</option>
+					<option value="체험(레져)">체험(레져)</option>
+					<option value="식도락">식도락</option>
+					<option value="자연">자연</option>
+				</select>	 		
+				<input type="hidden" name="gb_theme"  id="gb_theme">
+		</span>
+		<br><br>
+		
+		<span>
+		    <div class="image-editor">
+				여행 대표 사진 * <br>
+			   <input type="file" class="cropit-image-input fileup" id="fileup" name="fileup" multiple="multiple"><br>
+			   <div id="frontPic">
+			   		<input type="image" src="${root }/Guide_img/camera-icon.png" class="frontImg">&nbsp; <b>대표 사진 등록</b>
+			   </div>
+			   <b id="info">-여행 주제와 관련된 내용을 등록하세요. <br>
+			 	   -첫 사진이 상세보기 배경으로 등록됩니다.<br>
+			 	   -최소 가로400pixel 이상의 사진파일을 사용하세요.<br>
+			 	 </b>
+			 	 <b id="info"> [Your preview images are must locate in the middle of the area]</b><br>
+			 	<div class="cropit-image-preview"  id="target" style="width: 400px;"></div>		
+		 	</div>
+		   <br><br> 
+		</span>	
+		
+	</div>
   
 </div>
 
@@ -524,12 +536,9 @@
 	 			  onclick="location.href='list.wd'">
 	 	<input type="button" value="미리보기"	 class="btn btn-info btn-sm"  style="width: 130px;"
 	 			  onclick="location.href='list.wd'">
- 	 
-
+ 	 <br><br><br>
 	</form>
-</fieldset>
-</div>
-
+	
 <%-- 
 <script type="text/javascript">
 var oEditors = [];
@@ -573,11 +582,15 @@ function pasteHTML(filepath){
     var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'"'+' style="max-width:400px;">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
 
-} --%>
+} 
 </script>
-	 <div class="rateit" data-rateit-mode="font">
-	</div>
-	 
+--%>
+
 
 </body>
+<%-- 	 
+   <footer class="container-fluid text-center">
+      <%@ include file= "../layout/wfooter.jsp" %>
+   </footer>    --%>
+
 </html>

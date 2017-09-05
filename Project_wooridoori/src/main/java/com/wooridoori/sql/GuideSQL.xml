@@ -12,8 +12,15 @@
    		and
    			 g.gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
 	</select>
-	
-	
+
+	<select id="getGuideListCount" parameterType="String" resultType="String">
+		select 
+			count(*)
+		from 
+			 guide_board 
+		where
+   			 gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+	</select>
 	
 	<insert id="writeGuide" parameterType="gdto">
 		insert into guide_board values
@@ -32,14 +39,33 @@
 	</select>
 	
 	<select id="getContent" parameterType="String" resultType="gdto">
-		select 
-			w.imagepath,g.*  
-		from 
-			wmember w, guide_board g
-    	where 
-    		seq_guide = #{num}
+	    	select 
+                w.imagepath,g.*  
+            from 
+                wmember w, guide_board g
+            where 
+                seq_guide = #{num} and g.gb_name like w.name 
 	
 	</select>
+	
+	<select id="hashSearch" parameterType="HashMap" resultType="gdto">
+		select
+			w.imagepath, g.*  
+		from 
+			wmember w, (select
+				* 
+			from
+				guide_board
+			where
+					gb_title like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+				or
+					gb_keyword like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+				or
+   			 		gb_category_addr like   '%'||#{hash,jdbcType=VARCHAR}||'%')g
+		 where
+		 	g.gb_category_addr like '%'||#{addr,jdbcType=VARCHAR}||'%'  and w.name= g.gb_name 
+	</select>
+	
 	
 	
 	
