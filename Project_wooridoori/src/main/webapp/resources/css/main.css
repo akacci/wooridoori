@@ -976,18 +976,19 @@ a {
 }
 
 .absolute_btn{
-	width:3.1%;
-	height:3.1%;
+	width:30px;
+	height:30px;
 	position:absolute;
 	left:88%;
-	top:93%;
+	bottom:7%;
+	
 }
 .absolute_box{
 	width:21%;
 	height:28%;
 	position:absolute;
 	left:75%;
-	top:70%;	
+	bottom:30%;
 }
 
 .w3-panel {
