@@ -44,7 +44,7 @@
                     <a onclick="userInfo()" href="#">사용자 정보</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="Recommend_Info()">Shortcuts</a> 
+                    <a href="javascript:void(0)" onclick="Recommend_Info()">Recommend Page</a> 
                 </li>
                 <li> 
                     <a href="#">Overview</a>
