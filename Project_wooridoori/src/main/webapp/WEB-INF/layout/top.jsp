@@ -14,7 +14,7 @@
 	.bar-item-t{
 		display: inline;
 		margin-left: 20px;
-		font-size: 24pt;
+		font-size: 18pt;
 		float: left;
 		padding-top: 12px;!important 
 	}
@@ -79,8 +79,8 @@
 	}
 </style>
 </head>  
-<body style="margin: 0;">
-	<div style="top:0; width:100%; height: 70px; background-color: #313131; margin:0; min-width: 900px;">
+<body style="margin: 0; position: fixed">
+	<div style="top:0; width:100%; height: 60px; background-color: #313131; margin:0; min-width: 900px;">
 		<div class="bar-item-t">
 			<a href="#">더</a>
 		</div> 
@@ -90,10 +90,10 @@
 		<div class="bar-item-t">
 			<a href="recommend.wd">수잔</a>
 		</div>  
-		
+		 
 		<div class="bar-item-icon dropdown">
 			<button class="dropbtn">
-				<img src="resources/image/top/menubar_white.png" width="40px" height="35px">
+				<img src="resources/image/top/menubar_white.png" width="35px" height="30px">
 			</button>
 			<div class="dropdown-content">
 			    <a href="#">Link 1</a>
@@ -104,11 +104,11 @@
 		
 		<div class="bar-item-icon">
 			<button onclick="goHome()"> 
-				<img src="resources/image/top/home_white.png" width="40px" height="35px">
+				<img src="resources/image/top/home_white.png" width="35px" height="30px">
 			</button>
 		</div> 
 		
-		<div class="bar-item-t" style="float: right;">
+		<div class="bar-item-t" style="float: right; margin-right: 20px">
 			<a href=""> 
 				login
 			</a>  
