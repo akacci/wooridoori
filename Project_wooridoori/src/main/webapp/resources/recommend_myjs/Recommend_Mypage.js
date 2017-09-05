@@ -1,8 +1,8 @@
-$(function () {
+(function ($) {
 	var id = "admin";
 	bubble_Data(id);
 	var donut_CountData = chart_BubbleData(id);
-	/*var bar_data = barChart_Data(id);*/
+	var bar_data = barChart_Data(id);
 	//DONUT CHART
 	var donut = new Morris.Donut({
 	  element: 'sales-chart',
@@ -15,27 +15,15 @@ $(function () {
 	var bar = new Morris.Bar({
 	  element: 'bar-chart',
 	  resize: true,
-	  data: [
-	    {y: '2006', a: 10.5, b: 90},
-	    {y: '2007', a: 75, b: 65},
-	    {y: '2008', a: 50, b: 40},
-	    {y: '2009', a: 75, b: 65},
-	    {y: '2010', a: 50, b: 40},
-	    {y: '2011', a: 75, b: 65},
-	    {y: '2012', a: 20, b: 90}
-	  ],
+	  data: bar_data,
 	  barColors: ['#00a65a', '#f56954'],
 	  xkey: 'y',
 	  ykeys: ['a', 'b'],
-	  labels: ['CPU', 'DISK'],
+	  labels: ['mygrade', 'totalgrade'],
 	  hideHover: 'auto'
   });
-});
+})(jQuery);
 
-$(document).ready(function (){
-	
-	
-});
 function bubble_Data(id)
 {
 	$.ajax({
@@ -55,10 +43,10 @@ function bubble_Data(id)
 				mypage += "<td class='mypage addr_span'>"+s_data[i].ADDR1+"</td>";
 				if(s_data[i].BOOKMARK == "y")
 				{
-					mypage += "<td class='mypage bookmark'>★</td>";
+					mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-star'></span></td>";
 				}else if(s_data[i].BOOKMARK !="y")
 				{
-					mypage += "<td class='mypage bookmark'>☆</td>";
+					mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-star'></td>";
 				}
 				if(s_data[i].PRE_RENCE == "y")
 				{
@@ -86,18 +74,19 @@ function barChart_Data(id){
 	$.ajax({
 		url: "barChartData.wd",
 		data: {"id":id},
-		type: "post",
 		async: false,
+		type: "post",		
 		success: function(data){
-			alert(data);
-			var bar_data = JOSN.parse(data);
+			var bar_data = JSON.parse(data);
 			for(var i = 0; i < bar_data.length; i++)
 			{
-				var my_grade = parseFloat(bar_data[i].MY_GRADE);
-				var total_grade = parseFloat(bar_data[i].TOTAL_GRADE);
-				bar_str.push({"Y":bar_data[i].CAT2_NAME,"a":my_grade,"b":tatal_grade});
+				var mygrade = parseFloat(bar_data[i].MY_GRADE);
+				var totalgrade = parseFloat(bar_data[i].TOTAL_GRADE);
+				var Category = bar_data[i].CAT2_NAME;
+				alert(Category);
+				bar_str.push({"Y":Category,"a":mygrade,"b":totalgrade});
 			}
-			console.log(bar_str+"--------------------------------------");
+			alert(bar_str);
 		}
 	});
 	return bar_str;
@@ -113,8 +102,8 @@ function chart_BubbleData(id){
 			var b_data = JSON.parse(data);
 			for(var i = 0; i < b_data.length; i++)
 			{
-				var cat2_cnt = parseInt(b_data[i].C_CAT2);
-				str.push({"label":b_data[i].CAT2_NAME, "value":cat2_cnt});				
+				var cat2_num = parseInt(b_data[i].C_CAT2);
+				str.push({"label":b_data[i].CAT2_NAME, "value":cat2_num});				
 			}
 			console.log(str);
 		}
