@@ -40,10 +40,19 @@ $(document).ready(function(){
 <div style="margin-left: 9%; margin-top: 5%;" >
 	<img src="resources/image/woori.png" width="200" height="60" style="margin-top: 20px">
 </div>
-<div style="margin-left: 10%;">
-	<input type="text" style="border:none;width: 550px;" class="w3-xlarge" title="검색">
-	<button class="w3-xlarge w3-text-black" style="background-color: white; border:none; margin-left:-3px; cursor: pointer;"><i class="fa fa-search" ></i></button>
-</div>
+
+<form action="category.wd" method="get">
+	<div style="margin-left: 10%;">
+		<input type="search" id="searchkey" name="searchkey" value="${searchkey}" style="border:none;width: 550px;" class="w3-xlarge" title="검색">
+		<button type="submit" id="submitbtn" class="w3-xlarge w3-text-black" style="background-color: white; border:none; margin-left:-3px; cursor: pointer;"><i class="fa fa-search" ></i></button>
+	</div>
+</form>
+
+
+
+
+
+
 	<div id="weather">
 	</div>
 </body>

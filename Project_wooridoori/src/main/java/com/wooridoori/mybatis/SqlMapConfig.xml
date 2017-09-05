@@ -14,7 +14,8 @@
 		<typeAlias type="com.wooridoori.dto.TourInquiryDTO" alias="tdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentCodeDTO" alias="condto"/>
 		<typeAlias type="com.wooridoori.dto.ReferenceDTO" alias="refdto"/>
-		<typeAlias type="com.wooridoori.dto.guanDto" alias="gudto"/>
+		<!--tlist  -->
+		<typeAlias type="com.wooridoori.dto.GuanDTO" alias="gudto"/>
 	</typeAliases>
 	
 	<mappers>	
@@ -28,7 +29,7 @@
 		<mapper resource="com/wooridoori/sql/RecommendSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendAverageSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/TourInquirySQL.xml"/>
-		<!-- search list -->
+		<!-- tlist -->
 		<mapper resource="com/wooridoori/sql/GuanSQL.xml"/>
 	</mappers>
 	
