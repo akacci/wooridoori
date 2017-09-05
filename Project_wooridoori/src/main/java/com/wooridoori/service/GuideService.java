@@ -30,7 +30,7 @@ import org.opencv.features2d.DMatch;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
-import org.opencv.imgcodecs.Imgcodecs;
+//import org.opencv.imgcodecs.Imgcodecs;
 
 
 //import org.opencv.imgcodecs.Imgcodecs;
@@ -50,13 +50,13 @@ public class GuideService{
 	static boolean isLoad=false;
 	
 	//	static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
-	static {	//Never use loadLibrary!! 
+	/*static {	//Never use loadLibrary!! 
 		if(isLoad==false){
 			System.load("C:\\opencv_2.4\\build\\java\\x64\\opencv_java2413.dll");
 			System.load("C:\\opencv\\build\\java\\x64\\opencv_java320.dll");
 			isLoad=true;
 		}
-	}
+	}*/
 	
 	
 	public List<GuideDTO> getList(String addr){

@@ -194,6 +194,11 @@
     	text-decoration: none;
     }
     
+    span._filter_tag a{
+    	color: #fff;
+    	text-decoration: none;
+    }
+    
     div.aTag_Controller_box{
 		margin-left: 80%;				
 	}

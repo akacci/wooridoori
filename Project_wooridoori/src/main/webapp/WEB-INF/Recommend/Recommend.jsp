@@ -16,7 +16,7 @@
 
 <title></title>
 </head>
-<body>
+<body style="">
 	<header> 
 	      <%-- <jsp:include page= "../layout/top.jsp"/> --%>
 	      <%@include file="../layout/top.jsp"%>

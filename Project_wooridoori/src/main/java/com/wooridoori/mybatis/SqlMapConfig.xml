@@ -31,6 +31,7 @@
 		<mapper resource="com/wooridoori/sql/AreaCodeSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendAverageSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/RecommendFavoriteSurveySQL.xml"/>
 		<mapper resource="com/wooridoori/sql/TourInquirySQL.xml"/>
 		<!-- search list -->
 		<mapper resource="com/wooridoori/sql/GuanSQL.xml"/>
