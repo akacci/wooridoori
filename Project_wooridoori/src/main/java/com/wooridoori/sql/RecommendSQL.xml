@@ -47,12 +47,8 @@
 	
 	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
 			select a.* 
-			from tour_inquiry a, 
-			     (select pre_cat1, pre_cat2, pre_cat3
-			      from pre_foreign_country
-			      where nation = 'Angola') b
+			from tour_inquiry a
 			where a.areacode not in (1, 6, 39)
-			and a.cat2 in (b.pre_cat1, b.pre_cat2, b.pre_cat3)
 			and rownum <![CDATA[<]]> 11
 			order by a.readcount desc
 	</select>

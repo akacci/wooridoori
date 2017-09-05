@@ -77,20 +77,11 @@ $(function(){
 				/*더보기 클릭 시*/
 				$("#btn_more").click(function(){
 					cnt++;
-					var end = 12 * cnt;
+					var end = 24 * cnt;
 					
 					selectCodeOfTourList(areaCode, themaCode, end);
 				});
 				
-				/*if(menu_division == "area" && (areaCode != "undefined" || areaCode != "")){
-					areaCode = $(this).attr("code");
-					selectAreaCodeOfTourList(areaCode);
-				}*/
-				
-				/*if(menu_division == "thema" && (themaCode != "undefined" || themaCode != "")){
-					themaCode = $(this).attr("code");
-					selectCat2OfTourList(themaCode);
-				}*/
 			}
 			
 			/*remove class ._filter_tag,._tag_a */
