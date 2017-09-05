@@ -1,5 +1,7 @@
 package com.wooridoori.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,4 +132,32 @@ public class RecommendService {
 		
 	}
 	
+	/*recommend mypage*/
+	public List<HashMap<String, Object>> bubble_Data(String id)
+	{
+		Date date = new Date();
+		SimpleDateFormat sdf;
+		sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		List<HashMap<String, Object>> list = refdao.selectBubbleData(id);
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		for(int i = 0; i<list.size(); i++)
+		{
+			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));
+			list.get(i).put("MODIFIED_DATE", MOD_DATE);								
+		}
+		return list;
+	}
+	
+	public List<HashMap<String, Object>> barCharts_Data(String id)
+	{
+		List<HashMap<String, Object>> list = refdao.barChart_Data(id);
+		return list;
+	}
+	public List<ReferenceDTO> bubble_Count(String id)
+	{
+		List<ReferenceDTO> list = refdao.bubble_Count(id);
+		return list;			
+	}
 }

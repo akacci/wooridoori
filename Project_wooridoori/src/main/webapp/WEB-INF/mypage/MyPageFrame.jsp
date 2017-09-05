@@ -43,7 +43,7 @@
                     <a onclick="userInfo()" href="#">사용자 정보</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a> 
+                    <a href="javascript:void(0)" onclick="Recommend_Info()">Shortcuts</a> 
                 </li>
                 <li> 
                     <a href="#">Overview</a>
@@ -75,7 +75,10 @@
  				$("#page").load("userInfo.wd"); 
  				
  			} 
- 			   
+ 			function Recommend_Info()
+ 			{
+ 				$("#page").load("re_mypage.wd")
+ 			}
  		</script>
  		
         <!-- Page Content -->
@@ -110,8 +113,8 @@
            $("#wrapper").toggleClass("toggled");
            b=1;
    		}
-   		console.log(e.pageX);
-   		console.log(e.pageY);
+   		/* console.log(e.pageX);
+   		console.log(e.pageY); */
    		if(e.pageX>250&&b==1)
    	    {
             e.preventDefault();
