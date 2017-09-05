@@ -137,16 +137,16 @@ body,html{width: 100%;height: 100%;}
     <p class="w3-large w3-center">35 days left</p> -->
     
   </div>
-  <div id="message_box" class="absolute_box w3-container w3-black2" style="white-space: pre-line; word-break:break-all;">
+  <div id="message_box" class="fixed_box w3-container w3-black2" style="white-space: pre-line; word-break:break-all;">
   <p id="message"></p>
   
   </div>
   
 	
 </div>
-<button class="absolute_btn" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer"
+<button class="fixed_btn_left" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer"
 	id="btn_prev">&lt;</button>
-	<button class="absolute_btn" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer;
+	<button class="fixed_btn_right" style="visibility:${btn_visible}; background-color: rgba(0,0,0,0.5); color: #fff; border:0; outline:0; cursor: pointer;
 	margin-left: 41px" id="btn_next">&gt;</button>
 <footer>
 	<%@ include file="./wfooter.jsp"%>
