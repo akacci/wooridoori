@@ -10,14 +10,12 @@
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
-
-   <context:component-scan
-            base-package="com.wooridoori.controller"/>
-     <mvc:default-servlet-handler />
-   <!--   <context:annotation-config/> -->
-     <mvc:annotation-driven/>
-
-
+	<context:component-scan base-package="com.wooridoori.controller"/>
+	  <mvc:default-servlet-handler />
+	<!--   <context:annotation-config/> -->
+	  <mvc:annotation-driven/>
+	    
+	    
 	<bean id="multipartResolver"
 			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 			<property name="maxUploadSize">
@@ -55,13 +53,15 @@
 	<bean id="RefrenceDAO" class="com.wooridoori.dao.ReferenceDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
 	</bean>
+	<bean id="RecommendFavoriteSurveyDAO" class="com.wooridoori.dao.RecommendFavoriteSurveyDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
 	<!-- 수진 -->
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- 재문 -->
-	<bean id="guanDao" class="com.wooridoori.dao.guanDao">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-	</bean>
+	<bean id="gdao" class="com.wooridoori.dao.GuanDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	
 	<!-- Service -->
 	<!-- 재윤 -->
 	<bean class="com.wooridoori.service.GuideService" id="GuideService"/>
@@ -72,5 +72,6 @@
 	<!-- recommend -->
 	<bean class="com.wooridoori.service.RecommendService" id="reService"/>
 	<bean class="com.wooridoori.service.RecommendAverageService" id="raService"/>
+	<bean class="com.wooridoori.service.RecommendFavoriteSurveyService" id="rfsService"/>
 
 </beans>

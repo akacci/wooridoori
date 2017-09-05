@@ -3,10 +3,31 @@
 
 <mapper namespace="recommend">
 
+	<select id="selectNationOfTourRank" resultType="HashMap">
+		select c.pre_cat1 as pre_cat1,
+			   c.pre_cat2 as pre_cat2,
+			   c.pre_cat3 as pre_cat3
+        from preference a,
+             wmember b, 
+             PRE_FOREIGN_COUNTRY c
+        where a.seq_member = b.num
+        and a.m_id = b.m_id
+        and b.NATION = c.NATION
+	</select>
+
 	<select resultType="tdto" id="selectFirstRecommendArea">
 		select *
 		from TOUR_INQUIRY
-		where addr1 like '%중랑구%' 
+		where areacode in (1, 6, 39) 
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendArea" parameterType="String">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 = #{PRE_CAT1}
+		and rownum <![CDATA[<]]> 11
 	</select>
 	
 	<select resultType="tdto" id="selectFirstRecommendThema">
@@ -14,6 +35,14 @@
 			from TOUR_INQUIRY
 			where cat1 = 'A02'
 			and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendThema" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 in (#{PRE_CAT2}, #{PRE_CAT3}) 
+		and rownum <![CDATA[<]]> 11
 	</select>
 	
 	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
@@ -28,9 +57,19 @@
 			order by a.readcount desc
 	</select>
 	
+	<select resultType="tdto" id="selectLoginRecommendNonFavorite" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode not in (1, 6, 39)
+		and cat2 in (#{PRE_CAT1}, #{PRE_CAT2}, #{PRE_CAT3})
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
+	</select>
+	
 	<select id="selectContentCodeName" resultType="condto">
 		select distinct cat2, cat2_name
 		from content_code 
+		where cat1 not in ('A03', 'C01')
 	</select>
 	
 	<select id="selectCodeOfTourList" resultType="tdto" parameterType="HashMap">

@@ -2,40 +2,34 @@ package com.wooridoori.dto;
 
 import java.sql.Timestamp;
 
-public class ReferenceDTO {
-
-	private int seq_member;
+public class RecommendFavoriteSurveyDTO {
+	
+	private String seq_member;
 	private String m_id;
 	private String areacode_ref;
 	private String sigungucode_ref;
 	private String category1;
 	private String category2;
 	private String category3;
-	private String content_id;
-	private String contenttype_id;
-	private String contentid;
+	private String contentid_ref;
+	private String contenttypeid_ref;
 	private char firsttrip;
 	private String age;
 	private char bookmark;
 	private char solotrip;
 	private String grouptrip;
-	private Timestamp cre_date;
+	private Timestamp create_date;
 	private Timestamp modified_date;
-	private float grade_point;
-	private String title;
-	private char pre_rence;
+	private Float grade_point;
+	private String title_ref;
+	private String pre_rence;
 	private String purpose_code;
+	private String stay_code;
 	
-	public String getContentid() {
-		return contentid;
-	}
-	public void setContentid(String contentid) {
-		this.contentid = contentid;
-	}
-	public int getSeq_member() {
+	public String getSeq_member() {
 		return seq_member;
 	}
-	public void setSeq_member(int seq_member) {
+	public void setSeq_member(String seq_member) {
 		this.seq_member = seq_member;
 	}
 	public String getM_id() {
@@ -74,17 +68,17 @@ public class ReferenceDTO {
 	public void setCategory3(String category3) {
 		this.category3 = category3;
 	}
-	public String getContent_id() {
-		return content_id;
+	public String getContentid_ref() {
+		return contentid_ref;
 	}
-	public void setContent_id(String content_id) {
-		this.content_id = content_id;
+	public void setContentid_ref(String contentid_ref) {
+		this.contentid_ref = contentid_ref;
 	}
-	public String getContenttype_id() {
-		return contenttype_id;
+	public String getContenttypeid_ref() {
+		return contenttypeid_ref;
 	}
-	public void setContenttype_id(String contenttype_id) {
-		this.contenttype_id = contenttype_id;
+	public void setContenttypeid_ref(String contenttypeid_ref) {
+		this.contenttypeid_ref = contenttypeid_ref;
 	}
 	public char getFirsttrip() {
 		return firsttrip;
@@ -116,11 +110,11 @@ public class ReferenceDTO {
 	public void setGrouptrip(String grouptrip) {
 		this.grouptrip = grouptrip;
 	}
-	public Timestamp getCre_date() {
-		return cre_date;
+	public Timestamp getCreate_date() {
+		return create_date;
 	}
-	public void setCre_date(Timestamp cre_date) {
-		this.cre_date = cre_date;
+	public void setCreate_date(Timestamp create_date) {
+		this.create_date = create_date;
 	}
 	public Timestamp getModified_date() {
 		return modified_date;
@@ -128,22 +122,22 @@ public class ReferenceDTO {
 	public void setModified_date(Timestamp modified_date) {
 		this.modified_date = modified_date;
 	}
-	public float getGrade_point() {
+	public Float getGrade_point() {
 		return grade_point;
 	}
-	public void setGrade_point(float grade_point) {
+	public void setGrade_point(Float grade_point) {
 		this.grade_point = grade_point;
 	}
-	public String getTitle() {
-		return title;
+	public String getTitle_ref() {
+		return title_ref;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitle_ref(String title_ref) {
+		this.title_ref = title_ref;
 	}
-	public char getPre_rence() {
+	public String getPre_rence() {
 		return pre_rence;
 	}
-	public void setPre_rence(char pre_rence) {
+	public void setPre_rence(String pre_rence) {
 		this.pre_rence = pre_rence;
 	}
 	public String getPurpose_code() {
@@ -152,5 +146,11 @@ public class ReferenceDTO {
 	public void setPurpose_code(String purpose_code) {
 		this.purpose_code = purpose_code;
 	}
-	
+	public String getStay_code() {
+		return stay_code;
+	}
+	public void setStay_code(String stay_code) {
+		this.stay_code = stay_code;
+	}
+
 }

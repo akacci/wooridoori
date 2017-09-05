@@ -54,7 +54,7 @@ $(function(){
 			
 			/*append class _filter_tag _tag_a*/
 			if(v == "n"){
-				var html = "<span class='_filter_tag' name='_tag' index='"+n+"'>&nbsp;&nbsp;#"+tmp+"</span>";
+				var html = "<span class='_filter_tag' name='_tag' index='"+n+"'>&nbsp;&nbsp;<a href='javascript:location.href=\"tlist.wd?areaname="+tmp+"\"'>#"+tmp+"</a></span>";
 				$("#View").append(html);
 				$(this).append($("<span class='_tag_a'> ◀</span>"));
 				$(this).attr("val","y");
