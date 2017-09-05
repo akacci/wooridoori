@@ -1,5 +1,6 @@
 package com.wooridoori.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,6 +16,10 @@ public class GuideDAO extends SqlSessionDaoSupport {
 	public List<GuideDTO> getList(String addr){
 		return sqlSessionTemplate.selectList("guide.getGuideList",addr);
 	}
+	public String getListCount(String addr){
+		return sqlSessionTemplate.selectOne("guide.getGuideListCount",addr);
+	}
+	
 	public void writeGuide(GuideDTO dto){
 		sqlSessionTemplate.insert("guide.writeGuide",dto);
 	}
@@ -24,4 +29,13 @@ public class GuideDAO extends SqlSessionDaoSupport {
 	public GuideDTO getContent(String num){
 		return sqlSessionTemplate.selectOne("guide.getContent", num);
 	}
+	
+	public List<GuideDTO> hashSearch(String addr,String hash){
+		HashMap<String,String> data=new HashMap<String, String>();
+		data.put("addr", addr);
+		data.put("hash", hash);
+		return sqlSessionTemplate.selectList("guide.hashSearch",data);
+	}
+	
+	
 }

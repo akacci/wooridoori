@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper	namespace="guideScore">
+	<insert id="guideScoreInsert" parameterType="gsdto">
+		insert into 
+			guide_score 
+		values(gscore_seq.nextval,#{gb_num},#{score},#{m_id})
+	</insert>
+	
+	
+	<update id="guideScoreUpdate" parameterType="gsdto">
+		update
+			guide_score
+		set
+			score = #{score}
+		where
+			m_id like #{m_id}
+				and 
+			gb_num=#{gb_num}
+	</update>
+	
+	<select id="isRated"  parameterType="gsdto" resultType="int">
+		select
+			count(*)
+		from 
+			guide_score
+		where
+			m_id like #{m_id}
+				and
+			gb_num=#{gb_num}
+	</select>
+	
+	
+</mapper>
