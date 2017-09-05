@@ -273,4 +273,69 @@ public class RecommendController {
 		service.insertOrUpdateFirsttrip(refdto);
 	}
 	
+	/*recommedn mypage*/
+	
+	@RequestMapping(value="re_mypage.wd")
+	public String recommend_mypage()
+	{
+		return "mypage/Recommend_Mypage";
+	}
+	
+	@RequestMapping(value="bubble_Data.wd", method=RequestMethod.POST)
+	public void bubble_data(@RequestParam String id, HttpServletResponse response)
+	{
+		response.setContentType("text/html;charset=UTF-8");
+		id = "admin";
+		List<HashMap<String, Object>> list = service.bubble_Data(id);
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="barChartData.wd", method=RequestMethod.POST)
+	public void barChart_Data(@RequestParam String id, HttpServletResponse response)
+	{
+		response.setContentType("text/html;charset=UTF-8");
+		List<HashMap<String, Object>> list = service.barCharts_Data(id);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println("------------------------------------------contoller"+list);
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="chart_BubbleData.wd", method=RequestMethod.POST)
+	public void chart_Bubble(@RequestParam String id, HttpServletResponse response)
+	{
+		id="admin";
+		response.setContentType("text/html;charset=UTF-8");
+		List<ReferenceDTO> list = service.bubble_Count(id);		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			response.getWriter().print(mapper.writeValueAsString(list));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

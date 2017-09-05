@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wooridoori.dto.AreaCodeDTO;
 import com.wooridoori.dto.ContentCodeDTO;
+import com.wooridoori.dto.ReferenceDTO;
 import com.wooridoori.dto.TourInquiryDTO;
 
 public class RecommendDAO extends SqlSessionDaoSupport{
@@ -81,4 +82,5 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 		List<TourInquiryDTO> list = getSqlSession().selectList("selectLoginRecommendNonFavorite", pre_cat);
 		return list;
 	}
+	
 }

@@ -99,6 +99,32 @@
 		   
 	</select>
 	
+	<!-- mypage chart sql -->
+	<select id="bubbleOfCount" parameterType="String" resultType="Hashmap">
+		select distinct count(a.category2) as c_cat2, 
+								(select distinct cat2_name 
+								from content_code 
+								where a.category2 = cat2) as cat2_name
+							from PREFERENCE a
+							where a.m_id like 'admin'
+							group by a.category2
+	</select>
+	<select id="barchartsOfData" parameterType="String" resultType="Hashmap">
+		select avg(a.grade_point) as my_grade, avg(b.grade_point) as total_grade, c.cat2_name
+		from preference a, preference b, content_code c
+		where b.category2 = a.category2
+		and c.cat2 = a.category2
+		and a.m_id = #{id}
+        group by c.cat2_name
+	</select>
+	<select id="selectOfBubbleData" parameterType="String" resultType="Hashmap">
+		select DISTINCT a.*, c.cat2_name, b.addr1
+		from preference a, tour_inquiry b, content_code c
+		where c.cat2 = a.category2
+		and b.contentid = a.contentid_ref
+		and m_id = #{id}
+	</select>
+	
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *
 		from tour_inquiry
