@@ -36,10 +36,11 @@
             
                 <li class="sidebar-brand">
                     <a href="#">
-                    	<img src="resources/image/profile.png" width="30" height="30">The Suzan Maestro
+                    	<img src="resources/main/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
-                </li> 
+                </li>  
                 <li>
+                    <hr style="border: 0.3px double black;"> 
                     <a onclick="userInfo()" href="#">사용자 정보</a>
                 </li>
                 <li>
@@ -66,7 +67,7 @@
          
         <div id="sidebar-wrapper2" style="text-align: center; display: table;">
          <div style="display: table-cell; vertical-align: middle;">
-         <b style="color: white;">▶</b> 
+         <b style="color: black;">▶</b> 
          </div>
         </div> 
  		

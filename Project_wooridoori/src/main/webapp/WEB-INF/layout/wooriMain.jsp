@@ -22,15 +22,15 @@
 		switch(slideIndex)
 		{
 			case 1:
-				imageUrl="url('resources/image/hill.jpg')";
+				imageUrl="url('resources/image/main/tree.jpg')";
 				message="정부는 살충제 성분이 검출된 농가에서 생산된 계란의 유통경로를 추적해 살충제계란의 번호를 공개했다";
 				break;
 			case 2:
-				imageUrl="url('resources/image/dawn.jpg')";
+				imageUrl="url('resources/image/main/dawn.jpg')";
 				message="[한경닷컴 IT교육센터만의 특별함] 교육비 무료 , 교재 무료";
 				break;
 			case 3:
-				imageUrl="url('resources/image/tree.jpg')";
+				imageUrl="url('resources/image/main/winter.jpg')";
 				message="[문재인 대통령 취임 100일 기자회견] 민주 “소통하는 대통령”vs 한국당 “자화자찬 쇼통”";
 				break;
 		}
@@ -39,7 +39,7 @@
 	}
 	
 	$(function(){
-		imageUrl="url('resources/image/hill.jpg')";
+		imageUrl="url('resources/image/main/tree.jpg')";
 		$(".bgimg").css("background-image",imageUrl);
 		$("#message").text(message);
 		$("#message_box").hide();
@@ -95,6 +95,7 @@ body,h1 {font-family: "Raleway", sans-serif}
 body,html{width: 100%;height: 100%;}
 .bgimg {
     min-height: 100%;
+    width : 100%;
     background-position: center;
     background-size: cover;
     animation: opac 0.8s;
@@ -129,7 +130,7 @@ body,html{width: 100%;height: 100%;}
 	<c:set var="b" value="background-color: gray"></c:set>
 </c:if>
 
-<div class="${a} w3-display-container w3-text-white" style="margin-bottom: 33px;">
+<div class="${a} w3-display-container w3-text-white">
   <div class="w3-display-middle" style="width: 100%; height:100%;overflow:auto ;">
 	<c:import url="${wbody_url}"></c:import> 
 	
