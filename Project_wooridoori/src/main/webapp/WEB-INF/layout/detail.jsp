@@ -52,7 +52,7 @@
 <body>
 
 	<div id="div_detail">
-		<div class="content_detail">
+		<div class="content_detail" style="margin-top: 61px">
 			<h2>${cdata.title}</h2>
 		</div>
 		<div class="content_detail">

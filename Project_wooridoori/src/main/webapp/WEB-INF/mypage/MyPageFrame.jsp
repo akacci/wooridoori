@@ -8,7 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content=""> 
+     
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
    
     <title>Simple Sidebar - Start Bootstrap Template</title>
@@ -23,7 +24,7 @@
 </head>
    <header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
-         <%@include file="../layout/wtopmenu.jsp"%>
+         <%@include file="../layout/top.jsp"%>
    </header>
 <body style="height: 945px; margin-top: 55px; z-index: -100">    
  
