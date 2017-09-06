@@ -35,16 +35,19 @@ $(function(){
 			var v = $(this).attr("val");
 			var n = $(this).attr("name");
 			var menu_division = $(this).attr("division");
+			var link_detail;
 			var tmp;
 			
 			/*menu area, thema 구분*/
-			if(menu_division == "area"){			
+			if(menu_division == "area"){	
+				link_detail = "tlist.wd?areaname=";
 				for(var i = 0; i < areaName.length; i++){
 					if(i==n){
 						tmp = areaName[i];
 					}
 				}
 			}else{
+				link_detail = "category.wd?cat2_name=";
 				for(var i = 0; i < themaName.length; i++){
 					if(i==n){
 						tmp = themaName[i];
@@ -54,7 +57,7 @@ $(function(){
 			
 			/*append class _filter_tag _tag_a*/
 			if(v == "n"){
-				var html = "<span class='_filter_tag' name='_tag' index='"+n+"'>&nbsp;&nbsp;<a href='javascript:location.href=\"tlist.wd?areaname="+tmp+"\"'>#"+tmp+"</a></span>";
+				var html = "<span class='_filter_tag' name='_tag' index='"+n+"'>&nbsp;&nbsp;<a href='javascript:location.href=\""+link_detail+tmp+"\"'>#"+tmp+"</a></span>";
 				$("#View").append(html);
 				$(this).append($("<span class='_tag_a'> ◀</span>"));
 				$(this).attr("val","y");
