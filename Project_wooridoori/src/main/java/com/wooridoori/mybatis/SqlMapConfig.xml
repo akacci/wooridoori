@@ -4,9 +4,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.wooridoori.dto.GuideDTO" alias="gdto"/>
-		<!--  -->
+		<!-- suzan -->
 		<typeAlias type="com.wooridoori.dto.MemberDTO" alias="mdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentDTO" alias="cdto"/>
+		<typeAlias type="com.wooridoori.dto.QnABoardDTO" alias="qnadto"/>
 		<!-- recommend -->
 		<typeAlias type="com.wooridoori.dto.AreaCodeDTO" alias="adto"/>
 		<typeAlias type="com.wooridoori.dto.RecommendDTO" alias="rdto"/>
@@ -15,6 +16,7 @@
 		<typeAlias type="com.wooridoori.dto.ContentCodeDTO" alias="condto"/>
 		<typeAlias type="com.wooridoori.dto.ReferenceDTO" alias="refdto"/>
 		<typeAlias type="com.wooridoori.dto.GuanDTO" alias="gudto"/>
+		
 	</typeAliases>
 	
 	<mappers>	
@@ -23,6 +25,8 @@
 		<!-- suzan -->
 		<mapper resource="com/wooridoori/sql/MemberSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/ContentSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/QnABoardSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/AdminSQL.xml"/>
 		<!-- recommend -->
 		<mapper resource="com/wooridoori/sql/AreaCodeSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendSQL.xml"/>

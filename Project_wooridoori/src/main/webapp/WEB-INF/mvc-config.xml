@@ -57,6 +57,8 @@
 	</bean>
 	<!-- 수진 -->
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="qnaDao" class="com.wooridoori.dao.QnABoardDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="adminDao" class="com.wooridoori.dao.AdminDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- 재문 -->
 	<bean id="guanDAO" class="com.wooridoori.dao.GuanDAO">
@@ -68,6 +70,8 @@
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
+	<bean class="com.wooridoori.service.QnABoardService" id="qnaService"/>
+	<bean class="com.wooridoori.service.AdminService" id="adminService"/>
 
 	<!-- recommend -->
 	<bean class="com.wooridoori.service.RecommendService" id="reService"/>

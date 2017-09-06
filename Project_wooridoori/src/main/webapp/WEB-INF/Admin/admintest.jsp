@@ -2,23 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- 구글차트 -->
+<meta name="description" content="">
+<meta name="author" content="">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<c:if test="${sessionScope.ID eq 'admin'}">
 <script type="text/javascript">
 $(function(){
-	var data = '${data}';
-	$("#page").load(data);
+	var data = ${data};
+	$("#page").load(data); 
 });
-</script>
-</c:if>
+	</script>
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
 	
@@ -34,7 +31,7 @@ $(function(){
          <%@include file="../layout/wtopmenu.jsp"%>
    </header>
 <body style="height: 945px; margin-top: 55px; z-index: -100">    
- 
+
     <div id="wrapper"> 
 
         <!-- Sidebar -->
@@ -94,7 +91,7 @@ $(function(){
                 <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
-        </div> 
+        </div>
         <!-- /#page-content-wrapper -->
 
     </div>

@@ -67,7 +67,7 @@ a:hover {
 .logform {
     position: fixed;
     width: 363px;
-    top: 40%;
+    top: 50%;
     left: 50%;
    	transform: translate(-50%, -50%);
     background-color: #ddd;
