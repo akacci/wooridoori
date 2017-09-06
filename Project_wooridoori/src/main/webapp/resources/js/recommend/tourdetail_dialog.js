@@ -192,6 +192,12 @@ function dialog_content(contentid, e){
 			if(!$(".rateit").has(e.target).length){
 				sessionLoginId();
 				$("#detail_tour").dialog("open");
+			}else if(!$("._ccimg").has(e.target).length){
+				alert(2);
+				/*sessionLoginId();
+				$("#detail_tour").dialog("open");*/
+			}else if(!$("._jcimg").has(e.target).length){
+				alert(3);
 			}
 			
 		}
@@ -247,6 +253,9 @@ function review_insert(){
 		});
 	}else{
 		$("#review_msg").html("<b style='color:red;font-size:14pt;'>&nbsp;&nbsp;* 한줄평을 입력하세요</b>");
+		setTimeout(function() {
+			$("#review_msg").empty();
+		}, 5000);
 	}
 }
 
