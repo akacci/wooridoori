@@ -118,13 +118,19 @@
         group by c.cat2_name
 	</select>
 	<select id="selectOfBubbleData" parameterType="String" resultType="Hashmap">
+	
 		select DISTINCT a.*, c.cat2_name, b.addr1
 		from preference a, tour_inquiry b, content_code c
 		where c.cat2 = a.category2
 		and b.contentid = a.contentid_ref
 		and m_id = #{id}
 	</select>
-	
+	<select id="totalcountOfPreference" parameterType="String" resultType="int">
+		select count(*)
+		from preference
+		where m_id = #{id}
+	</select>
+   
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *
 		from tour_inquiry
