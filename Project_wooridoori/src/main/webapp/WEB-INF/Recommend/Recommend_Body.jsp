@@ -14,11 +14,6 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!-- 평점 먹이는 별 -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script> -->
-<%-- <script src="<%=request.getContextPath()%>/resources/js/rateit/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/rateit/scripts/rateit.css"> --%>
-
 <!-- my js, css -->
 <script src="<%=request.getContextPath()%>/resources/js/recommend/Re_Body.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/recommend/recommend.css?t=<%=System.currentTimeMillis()%>">
