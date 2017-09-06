@@ -2,24 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- 구글차트 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<c:if test="${sessionScope.ID eq 'admin'}">
 <script type="text/javascript">
 $(function(){
-	var data = '${data}';
-	$("#page").load(data);
+	var data = ${data};
+	$("#page").load(data); 
 });
-</script>
-</c:if>
-
+	</script>
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
 	
@@ -32,10 +28,10 @@ $(function(){
 </head>
    <header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
-         <%@include file="../layout/top.jsp"%>
+         <%@include file="../layout/wtopmenu.jsp"%>
    </header>
 <body style="height: 945px; margin-top: 55px; z-index: -100">    
- 
+
     <div id="wrapper"> 
 
         <!-- Sidebar -->
@@ -44,15 +40,14 @@ $(function(){
             
                 <li class="sidebar-brand">
                     <a href="#">
-                    	<img src="resources/main/profile.png" width="30" height="30">The Suzan Maestro
+                    	<img src="resources/image/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
-                </li>  
+                </li> 
                 <li>
-                    <hr style="border: 0.3px double black;"> 
-                    <a onclick="userInfo()" href="#">사용자 정보</a>
+                    <a onclick="userInfo('userInfo.wd')" href="#">사용자 정보</a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onclick="Recommend_Info()">Recommend Page</a> 
+                    <a href="#">Shortcuts</a> 
                 </li>
                 <li> 
                     <a href="#">Overview</a>
@@ -67,7 +62,7 @@ $(function(){
                     <a href="#">Services</a>
                 </li>
                 <li>
-                    <a onclick="qnaBoard()" href="#">QnA</a>
+                    <a onclick="userInfo('qna.wd')" href="#">QnA</a>
                 </li>
             </ul>
         </div>
@@ -75,7 +70,7 @@ $(function(){
          
         <div id="sidebar-wrapper2" style="text-align: center; display: table;">
          <div style="display: table-cell; vertical-align: middle;">
-         <b style="color: black;">▶</b> 
+         <b style="color: white;">▶</b> 
          </div>
         </div> 
  		
@@ -84,13 +79,7 @@ $(function(){
  				$("#page").load(data); 
  				
  			} 
- 			function Recommend_Info()
- 			{
- 				$("#page").load("re_mypage.wd")
- 			}
-      function qnaBoard(){
-        $("#page").load("qna.wd"); 
-      }
+ 			   
  		</script>
  		
         <!-- Page Content -->
@@ -102,7 +91,7 @@ $(function(){
                 <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
             </div>
-        </div> 
+        </div>
         <!-- /#page-content-wrapper -->
 
     </div>

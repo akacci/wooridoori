@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaboard">
+	<!-- 글쓰기_유저 -->
+	<insert id="writerUserQnABoard" parameterType="qnaDto">
+		insert into
+			qnaboard
+		values
+			(qnaseq.nextval, #{title}, #{content}, #{writer}, sysdate, 'N', 0, #{kind}, 'N')
+	</insert>
+	<!-- 특정유저 글찾기 -->
+	<select id="getUserQnA" parameterType="HashMap" resultType="qnaDto">
+		<![CDATA[
+			select
+				*
+			from 
+				(select ROWNUM as RNUM, b.* from (select * from qnaboard where writer=#{id} and deleteboard = 'N' order by wdate desc)b)a
+			where
+				RNUM>=#{startNum} and RNUM <= #{endNum}
+			]]>
+	</select>
+	<select id="getTotalCount" parameterType="String" resultType="int">
+		select
+			count(*)
+		from
+			qnaboard
+		where
+			writer=#{id} and deleteboard = 'N'
+	</select>
+</mapper>
