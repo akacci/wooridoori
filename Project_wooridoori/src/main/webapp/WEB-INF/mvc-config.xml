@@ -40,6 +40,9 @@
 	<bean id="GuideDAO" class="com.wooridoori.dao.GuideDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
 	</bean>
+	<bean id="GuideScoreDAO" class="com.wooridoori.dao.GuideScoreDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
 	<!-- recommend -->
 	<bean id="RecommendDAO" class="com.wooridoori.dao.RecommendDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
@@ -58,16 +61,21 @@
 	</bean>
 	<!-- 수진 -->
 	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="qnaDao" class="com.wooridoori.dao.QnABoardDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="adminDao" class="com.wooridoori.dao.AdminDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- 재문 -->
 	<bean id="gdao" class="com.wooridoori.dao.GuanDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
 	
 	<!-- Service -->
 	<!-- 재윤 -->
-	<bean class="com.wooridoori.service.GuideService" id="GuideService"/>
+	<bean class="com.wooridoori.service.GuideService" id="gService"/>
+	<bean class="com.wooridoori.service.GuideService" id="gsService"/>
 	<!-- 수진 -->
 	<bean class="com.wooridoori.service.MemberService" id="mService"/>
 	<bean class="com.wooridoori.service.ContentService" id="cService"/>
+	<bean class="com.wooridoori.service.QnABoardService" id="qnaService"/>
+	<bean class="com.wooridoori.service.AdminService" id="adminService"/>
 
 	<!-- recommend -->
 	<bean class="com.wooridoori.service.RecommendService" id="reService"/>

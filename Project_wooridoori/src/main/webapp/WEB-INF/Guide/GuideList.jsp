@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -12,11 +13,16 @@
 <c:set var="root" value="<%=request.getContextPath() %>"  />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
 <!-- Currency rate for cross domain -->
 <script type="text/javascript" src="${root}/dist/jquery.ajax-cross-origin.min.js"></script>
-<!-- 크로스도메인 해결 플러그인 -->
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds" async defer></script>
+
        
 
 
@@ -33,7 +39,7 @@
     	margin-left: 150px;
     	margin-top: 50px;
 		position: relative;
-    	z-index: 1;
+    	z-index: 3;
 	}
 	#hash{
 		font-size:10pt;
@@ -85,7 +91,7 @@
 
 	#m{
 	/* 	border: 1px solid #dedede; */
-		margin-left: 160px;
+		margin-left: 147px;
     	margin-top: 20px;
     	width: 300px;
     	height: 100px;
@@ -97,27 +103,29 @@
 	}
 
 	/* 리스트 */
-	#list{
+	.list{
 		border: 1px solid #dedede;
-		margin-left: 500px;
+		margin-left: 470px;
     	margin-top: 20px;
     	margin-bottom:0px;
-    	width: 710px;
+    	width: 740px;
 	}
 	#content{
 		padding: 10px;
-		padding-left:200px;
+		padding-left:280px;
 		padding-right:20px;
-		margin-left: 40px;
+	
     	margin-bottom:-10px;
 	}	
-	#g_user{
+	.g_user{
 		float: left;
 	}
-	#package{
+	.hash b{
 		font-family: monospace;
-		font-size: 10pt;
-		
+		font-size: 10pt;		
+	}
+	.hash b:HOVER{
+		cursor: pointer;
 	}
 	#price{
 		font-family: fantasy;
@@ -146,29 +154,105 @@
 	  	border-bottom-right-radius: 50% 50%;
 	  	border-bottom-left-radius: 50% 50%; 
 	  }
-	#title:HOVER, #g_user:HOVER{
+	#title:HOVER, .g_user:HOVER{
 		font-weight: bold;
 		cursor: pointer;
 	} 
+	.g_user{
+		height:100%;
+		width: 235px;
+		overflow: hidden;
+		position: relative;
+	}
+	.contentImg{
+		display: inline;
+		height:153px;
+		width: 235px; 
+		overflow: hidden;
+		position: absolute;
+	}
+	#currency{
+		font-size: 10pt;
+	}
+	.prev{
+		display: inline;
+		font-size: 24pt;
+		color: white;
+		font-weight:bold;
+		margin-left: 0px;
+		margin-top: 50px; 
+		position: absolute;
+		cursor: pointer;
+		z-index: 2;
+		display: none;  
+	}
+	 .next{
+		display: inline;
+		font-size: 24pt;
+		color: white;
+		font-weight:bold;
+ 		margin-left: 210px;
+		margin-top: 50px; 
+		position: absolute;
+		cursor: pointer;
+	  	display: none;  
+	}
 </style>
-<c:set var="root" value="<%=request.getContextPath() %>"  />
 <script type="text/javascript">
 	$(document).ready(function(){
 		 $(".menu").children("a").click(function(){
 		        $(this).next().slideToggle();	//ul	            
-	        });	 	 
+	        });
+		 
+		 /* image slider */
+/*  		 $(".g_user").hide();
+		 $(".contentImg img:first-child").show();
+		 $("#prev, #next").hide();
+		 $(".g_user").hover(function(){
+			 $(this).next("#prev").show();
+			 $(this).next("#prev").next("#next").show();
+		 },function(){
+			 $(this).next("#prev").hide();
+			 $(this).next("#prev").next("#next").hide();
+		 });
+		 
+		  */
+		var lat;
+		var lng;
+		 
+		/* Select Lat,Lon of map */
+		$address =$("#city").attr("addr");
+		var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $address + "&key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds";
+		$.ajax({
+			url : url ,
+			dataType : "json" ,
+			type : "post" ,
+			async:false,
+			success : function(data) {
+				lat = data.results[0].geometry.location.lat;
+				lng = data.results[0].geometry.location.lng;
+			} ,
+			error : function (xh, code, msg) {
+				alert("주소양식이 적절하지 않습니다.");
+			}
+		});
+		
+		 
+		 
+		 
  		 var mIcon=["SKY_A0038","SKY_A0101,08","SKY_A0202,09","SKY_A0303,10","SKY_A0412,40","SKY_A0513,41", "SKY_A0614,42","SKY_A0718" ,"SKY_A0821","SKY_A0932","SKY_A1004","SKY_A1129","SKY_A1226","SKY_A1327", "SKY_A1428" ];
 		 /* 현재날씨 */
  		 	var root=$("#weather").attr("root");
-			var city="서울";
-			var county="용산구";
-			var village="갈월동";
-		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat=&lon=&city="+city+"&county="+county+"&village="+village+"&appKey=4e235220-bbba-3ed6-a61d-7dfd07f58a39";
+			var city=($("#city").attr("addr")).substring(0,2);
+		/* 	var county="용산구";
+			var village="갈월동"; */
+		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&appKey=e08ba558-1e6b-326b-986e-9526ca7a0532";
 		   $.ajax({
 		      url:Wurl,
 		      type:"GET",
 		      dataType:"JSON",
 		      cache:false,
+		      async:false,
 		      success:function(data){
 		         var path=data.weather.minutely[0].sky.code;	
 		         var weather= data.weather.minutely[0].sky.name;
@@ -184,7 +268,7 @@
 		        		 }
 		        	 }
 		         }
-		         $("#weather").append(city+" 현재	: <b style='color:green;'>"+temp.substring(0,temp.length-3)+"°C</b> ["+weather+"] <img src='"+root+"/weather/"+img+".png' width='30px;'><br>");
+		         $("#weather").append(city+" 현재	: <b style='color:green;'>"+temp.substring(0,temp.length-3)+"℃</b> ["+weather+"] <img src='"+root+"/weather/"+img+".png' width='25px;'><br>");
 		         
 		      },complete : function(data) {
 		         //alert("complete");
@@ -195,12 +279,13 @@
 		   
 		   var fIcon=["SKY_S0038","SKY_S0101,08","SKY_S0202,09","SKY_S0303,10","SKY_S0412,40","SKY_S0513,41", "SKY_S0614,42","SKY_S0718" ,"SKY_S0821","SKY_S0932","SKY_S1004","SKY_S1129","SKY_S1226","SKY_S1327", "SKY_S1428" ];  
 		   /* 2day forecast */
- 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat=&lon=&city="+city+"&county="+county+"&village="+village+"&foretxt=Y&appKey=4e235220-bbba-3ed6-a61d-7dfd07f58a39";
+ 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=5c3c93ac-4dfc-3678-b291-a4b92caea652";
 			$.ajax({
 			      url:Furl,
 			      type:"GET",
 			      dataType:"JSON",
 			      cache:false,
+			      async:false,
 			      success:function(data){
 				     var time=data.weather.forecast3days[0].timeRelease;
 			    	 var fTime=parseInt(time.substring(time.length-8,time.length-6));
@@ -269,8 +354,8 @@
 			        		 }
 			        	 }
 			         }
-			         $("#weather").append("내일 오전/오후	: <b style='color:red;'>"+parseFloat(tempH).toFixed(0)+"°C</b>/<b style='color:blue;'>"+parseFloat(tempM).toFixed(0)+"°C</b><img src='"+root+"/weather/"+ta_img+".png' width='30px;'>/<img src='"+root+"/weather/"+tp_img+".png' width='30px;'><br>");
-			         $("#weather").append("모레 오전/오후	: <b style='color:red;'>"+parseFloat(tempH2).toFixed(0)+"°C</b>/<b style='color:blue;'>"+parseFloat(tempM2).toFixed(0)+"°C</b><img src='"+root+"/weather/"+ta2_img+".png' width='30px;'>/<img src='"+root+"/weather/"+tp2_img+".png' width='30px;'><br>");
+			         $("#weather").append("내일 오전/오후	: <b style='color:red;'>"+parseFloat(tempH).toFixed(0)+"℃</b>/<b style='color:blue;'>"+parseFloat(tempM).toFixed(0)+"℃</b><img src='"+root+"/weather/"+ta_img+".png' width='30px;'>/<img src='"+root+"/weather/"+tp_img+".png' width='25px;'><br>");
+			         $("#weather").append("모레 오전/오후	: <b style='color:red;'>"+parseFloat(tempH2).toFixed(0)+"℃</b>/<b style='color:blue;'>"+parseFloat(tempM2).toFixed(0)+"℃</b><img src='"+root+"/weather/"+ta2_img+".png' width='30px;'>/<img src='"+root+"/weather/"+tp2_img+".png' width='25px;'><br>");
 			      },complete : function(data) {
 			         //alert("complete");
 			       },error : function(xhr, status, error) {
@@ -281,12 +366,13 @@
 		   
 		  var pIcon=["SKY_W0038","SKY_W0101,08","SKY_W0202,09","SKY_W0303,10","SKY_W0418","SKY_W0721","SKY_W0912,40","SKY_W1021","SKY_W1104","SKY_W1213,41","SKY_W1332" ];
 		   /* 중기예보 */
- 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat=&lon=&city="+city+"&county="+county+"&village="+village+"&foretxt=Y&appKey=53a83a8a-6a67-3026-aa64-97d8851d6223";
+ 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=e08ba558-1e6b-326b-986e-9526ca7a0532";
 		$.ajax({
 		      url:Purl,
 		      type:"GET",
 		      dataType:"JSON",
 		      cache:false,
+		      async:false,
 		      success:function(data){
 		         var a_path=data.weather.forecast6days[0].sky.amCode3day;
 		         var p_path=data.weather.forecast6days[0].sky.pmCode3day;
@@ -313,7 +399,7 @@
 		        	 }
 		         }
 	
-		         $("#weather").append("글피 오전/오후	: <b style='color:red;'>"+tempH+"°C</b>/<b style='color:blue;'>"+tempM+"°C</b><img src='"+root+"/weather/"+a_img+".png' width='30px;'>/<img src='"+root+"/weather/"+p_img+".png' width='30px;'><br>");
+		         $("#weather").append("글피 오전/오후	: <b style='color:red;'>"+tempH+"℃</b>/<b style='color:blue;'>"+tempM+"℃</b><img src='"+root+"/weather/"+a_img+".png' width='25px;'>/<img src='"+root+"/weather/"+p_img+".png' width='25px;'><br>");
 		       },complete : function(data) {
 		         //alert("complete");
 		       },error : function(xhr, status, error) {
@@ -322,14 +408,15 @@
 		   });   
 		
 		// Go to content
-		$("#title, #g_user").click(function(){
+		$("#title, .g_user").click(function(){
 			var num=$(this).attr("num");
-			location.href="guideContent.wd?num="+num;
+			var addr="${addr}";
+			location.href="guideContent.wd?num="+num+"&addr="+addr;
 		});
 		
 		
-		//	exim currency
-		var rate_KtoU,rate_KtoE,rate_KtoC,rate_KtoJ,rate_KtoUK;
+		//	exim currency (CORS problem)
+/* 		var rate_KtoU,rate_KtoE,rate_KtoC,rate_KtoJ,rate_KtoUK;
  		var ccurl =
  			"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=Avm51DeaHc8RmKifWkWgOFmw7UseHsZY&data=AP01&searchdate=20170825";		
 	
@@ -366,26 +453,76 @@
 		           alert("error: "+error);
 		        
 				}
-			});  
+			});   */
 		    
  
 	
 		
-/*		// YQL Currency	
-		var Curl_KtoU="https:https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USD%22%2C%22KRW%22)&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+		// YQL Currency	
+/* 		var Curl_KtoU="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22KRWUSD%22&format=xml&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		var Curl_KtoE="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22KRWEUR%22&format=xml&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		var Curl_KtoC="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22KRWCNY%22&format=xml&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		var Curl_KtoJ="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22KRWJPY%22&format=xml&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		var Curl_KtoP="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22KRWPHP%22&format=xml&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+ */
+  		var Curl="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22KRW%22%2C%22USD%22%2C%22PHP%22%2C%22EUR%22%2C%22CNY%22%2C%22JPY%22%2C%22GBP%22)&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		//대만 TWD
- 		$.ajax({
+		var utok_size="${fn:length(list)} ";
+		$.ajax({
+			url:Curl,
+			type:"GET",
+			dataType:"XML",
+			success:function(data){
+				var utok=0;
+				$(data).find("results").find("rate").each(function(){
+					var rate=$(this).find("Ask").text();	
+					if(i==0){
+						$("#currency").append("<b><img src='./Guide_img/us.png'> 미국   USD	$");
+						$("#currency").append((1000/parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						utok=1000/(parseFloat(rate));
+						for(var i=1;i<=parseInt(utok_size);i++){		// Loop of list size 
+							$("#price_d"+i).append(" ($"+(parseInt($("#price_d"+i).attr("pri"+i))/parseFloat(rate)).toFixed(1)+")");
+						}
+					}
+					else if(i==2){
+						$("#currency").append("<b><img src='./Guide_img/ph.png'> 필리핀 PHP	₱");
+						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+					}
+					else if(i==3){
+						$("#currency").append("<b><img src='./Guide_img/eu.png'> 유럽   EUR	€");
+						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+					}
+					else if(i==4){
+						$("#currency").append("<b><img src='./Guide_img/ch.png'> 중국   CNY	¥");
+						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+					}
+					else if(i==5){
+						$("#currency").append("<b><img src='./Guide_img/jp.png'> 일본   JPY	¥");
+						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+					}
+					else if(i==6){
+						$("#currency").append("<b><img src='./Guide_img/uk.png'> 영국 GBP	£");
+						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+					}
+					++i;
+				});				
+			} 
+			
+		});  
+		
+		
+		
+		
+		
+		
+	/* 	$.ajax({
 			url:Curl_KtoU,
 			type:"GET",
 			dataType:"XML",
 			success:function(data){
 				rate_KtoU=$(data).find("results").find("rate").find("Ask").text();
 				$("#currency").append("<b><img src='./Guide_img/us.png'> 미국   USD	$");
-				$("#currency").append((parseFloat(rate_KtoU)*1000).toFixed(1)+"	: ￦1000<br>");
+				$("#currency").append(1/(parseFloat(rate_KtoU)).toFixed(1)+"	: ￦1000<br>");
 				for(var i=1;i<=2;i++){		// Loop of list size 
 					$("#price_d"+i).append(" ($"+(parseInt($("#price_d"+i).attr("pri"+i))*parseFloat(rate_KtoU)).toFixed(1)+")");
 				}
@@ -431,24 +568,72 @@
 				rate_KtoP=$(data).find("results").find("rate").find("Ask").text();
 				$("#currency").append((parseFloat(rate_KtoP)*1000).toFixed(1)+"	: ￦1000<br>");
 			}
-		});
-		*/
+		}); */
+		
+		
+		
+		
+		
+		
+		/* content image slider */
+	 	$(".contentImg").hide();
+		$(".contentImg:first-child").show();		//default image
+		$(".contentImg").hover(function(){
+			if($(this).nextAll(".contentImg").length>0){			
+				$(this).children(".next").show();
+				$(".next").click(function(){
+					$(this).parent().hide();
+					$(this).parent().next().show();
+				 });		
+			}else{
+				$(".next").hide();				
+			}
+			if($(this).prevAll(".contentImg").length>0){
+				$(this).children(".prev").show();
+				$(".prev").click(function(){
+					$(this).parent().hide();
+				 	$(this).parent().prev().show(); 
+				});
+			}else{
+				$(".prev").hide();					
+			}			
+		},function(){
+			$(this).children(".next").hide();
+			$(this).children(".prev").hide();			
+		}); 
+ 
+		   /* Hash tag search */
+		   $(".hash").click(function(){
+		   		var addr="${addr}";
+	 	   		var hash=$(this).children("b").attr("hash");
+		   		location.href="hashSearch.wd?addr="+addr+"&hash="+hash;   
+		   	});
+		
+		
 	});
 
 
 	
 	
+	
+	
+	
 </script>
 </head>
 <body>		
-	<input type="button" id="write" value="write" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd'">
-	 <%-- 	<img src="${root }/Guide_img/seoul.jpg" width="300px">  --%>
+
+	<header style="z-index: inherit;">
+		<%@ include file= "../layout/wtopmenu.jsp" %>
+	</header>
+	 <br><br><br><br>
+	 
+	 
 	 <!--상단 표시  -->
 		<div class="top_g">				<!-- 시,도,군      (상단)
 											한줄 설명
 											해시태그  -->
 			<span id="korea">대한민국<br>
-				<span id="city"> 서울 <br>
+				<span id="city" addr="${addr }" lat="${lat }"  lng="${lng }" > ${addr } <br>
 					<span id="comment">대한민국의 심장</span>
 				</span>
 			</span>
@@ -460,7 +645,8 @@
 			<a href="" id="hash" >#여의도</a>	
 		</div>
 	
-
+<input type="button" id="write" value="write" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd?addr=${addr}'">
+	
 		<!-- 메뉴와 리스트는 같은 div  -->
 		<div class="form-horizontal">
 			<div class="form-group">
@@ -499,12 +685,20 @@
 		
 			<!-- 리스트 -->
 			<c:forEach items="${list }" var="i" varStatus="stat">
-				<div id="list" class="form-group">
-					
-						<img src="save/GuidePreview/${i.gb_preview_imgpath}" style="max-height:150px; max-width:220px; " id="g_user"  num="${i.seq_guide}">
+				<div class="list" class="form-group">
+					<c:forTokens items="${i.gb_preview_imgpath}" delims="," var="imgPath">
+						<div class="contentImg" >						
+							<img src="save/GuidePreview/${imgPath}"  class="g_user"   num="${i.seq_guide}">
+							<span class="prev"><</span>
+							<span class="next">></span>
+						</div>
+					</c:forTokens>
+						
+						
+						
 						<div id="content" class="form-group">
 							<img src="save/GuideFace/${i.imagepath}" id="guide"  >
-							<a href="" id="name" >${i.gb_name }</a><br>
+							<a href="" id="name" >${i.gb_name }</a><br><br>
 							<span id="title"  num="${i.seq_guide}">${i.gb_title }</span>
 							<br><br>
 							<c:forEach begin="0" end="4" >
@@ -513,13 +707,17 @@
 							<span id="rater">(30)</span>
 							<img src="${root }/Guide_img/time.png"width="18px" id="g_time_img"><span id="g_time">${i.gb_time }</span>
 							<br>
-							<span id="package">${i.gb_keyword }</span> &nbsp;&nbsp;&nbsp;
-							</span>				
+							
 							<span id="price">
 								<fmt:formatNumber type="currency" currencySymbol="￦" value="${i.gb_price }"  />
 								<span class="price_d" id="price_d${stat.count}" pri${stat.count}="${i.gb_price }">
 								</span>	
 							</span>
+							<c:forTokens items="${i.gb_keyword}" delims="#" var="hash" varStatus="i" >
+								<a class="hash">#<b hash="${hash }">${hash } </b></a>
+							</c:forTokens>	
+						
+
 <%-- 								<fmt:parseNumber var="dollar" value="${i.gb_price/1100 }" integerOnly="true" />					
 								(&#36;${dollar }) --%>
 												
@@ -528,11 +726,14 @@
 				</div>
 				</c:forEach>
 			</div>
+			<br><br><br>
 		</div>
 		<div id="pa"></div>
 	
 		
-		
+	<footer class="container-fluid text-center">
+      <%@ include file= "../layout/wfooter.jsp" %>
+   </footer> 
 		
 </body>
 </html>

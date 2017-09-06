@@ -65,7 +65,6 @@ public class MemberController {
 		return "/member/login";
 	}
 
-
 	@RequestMapping("/logoutaction.wd")
 	public String logoutAction(HttpSession session){
 	    session.setAttribute("ID", null);
@@ -80,8 +79,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage.wd")
-	public String mypageAction()
+	public String mypageAction(Model model, HttpSession session)
 	{
+		if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
+			String data = "admin.wd";
+			model.addAttribute("data", data);
+		}
 		return "/mypage/MyPageFrame";
 	}
 	

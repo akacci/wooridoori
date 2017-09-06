@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,6 @@
 <title>관리자페이지</title>
 <style type="text/css">
 .a_contents{
-	margin-top: 60px;
 	margin-bottom: 33px;
 	width: 850px;
 	margin-left: auto;
@@ -113,7 +114,6 @@
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- 구글차트 -->
 <script type="text/javascript">
 
 //	==============QnA===============
@@ -122,12 +122,15 @@
 	});
 	google.charts.setOnLoadCallback(drawQChart);
 	function drawQChart() {
+		var nnum = ${n};
+		var mnum = ${m};
+		var rnum = ${r};
 		var data = google.visualization.arrayToDataTable([
-				[ "Element", "Density", { role : "style" } ],
-				[ "Copper", 8.94, "#b87333" ],
-				[ "Silver", 10.49, "silver" ],
-				[ "Gold", 19.30, "gold" ],
-				[ "Platinum", 21.45, "color: #e5e4e2" ] ]);
+				[ "kind", "count", { role : "style" } ],
+				[ "일반문의", nnum, "orange" ],
+				[ "회원문의", mnum, "green" ],
+				[ "신고", rnum, "blue" ],
+			]);
 
 		var view = new google.visualization.DataView(data);
 		view.setColumns([ 0, 1, {
@@ -138,7 +141,7 @@
 		}, 2 ]);
 
 		var options = {
-			title : "Density of Precious Metals, in g/cm^3",
+			title : "문의 내역",
 			width : 400,
 			height : 220,
 			bar : {	groupWidth : "95%" },
@@ -155,14 +158,16 @@
 
 	function drawMChart() {
 		var data = google.visualization.arrayToDataTable([
-				[ 'Year', 'Sales', 'Expenses' ], [ '2013', 1000, 400 ],
-				[ '2014', 1170, 460 ], [ '2015', 660, 1120 ],
+				[ 'Day', 'Member', 'Total' ],
+				[ '2013', 1000, 400 ],
+				[ '2014', 1170, 460 ],
+				[ '2015', 660, 1120 ],
 				[ '2016', 1030, 540 ] ]);
 
 		var options = {
-			title : 'Company Performance',
+			title : 'Sign up',
 			hAxis : {
-				title : 'Year',
+				title : 'Day',
 				titleTextStyle : {
 					color : '#333'
 				}
@@ -179,31 +184,17 @@
 </script>
 </head>
 <body>
-	<header>
-		<%@ include file="../layout/wtopmenu.jsp"%>
-	</header>
 	<div class="a_contents admin">
 		<div id="div_detail">
-			<span class="tab">전체</span>
-			<span class="tab">QnA질문리스트</span>
-			<span class="tab">회원관리</span>
-			<span class="tab">+a</span>
-		</div>
-		<div id="div_detail">
 			<div class="M_list">
-				<div class="p_title">QnA질문리스트(8)<hr class="title_hr"></div>
+				<div class="p_title">QnA질문리스트(${noncheckCount})<hr class="title_hr"></div>
 				<div class="preview bgcolor_black">
 					<div class="Q_list">
 						<hr class="p_hr"><div style="text-align: center;"><div class="q_title">TITLE</div><span class="q_writer">Writer</span></div><hr class="p_hr">
 						<div>
-							<div class="q_title">제목란 입니다.</div><span class="q_writer">글쓴이</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
+							<c:forEach var="data" items="${qlist}" end="7">
+								<div class="q_title">${data.title}</div><span class="q_writer">${data.writer}</span>
+							</c:forEach>
 						</div>
 					</div>
 			</div>
@@ -218,14 +209,9 @@
 					<div class="Q_list">
 						<hr class="p_hr"><div style="text-align: center;"><div class="m_id">ID</div><span class="sign_date">Sign date</span></div><hr class="p_hr">
 						<div>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
-							<div class="m_id">asdf</div><span class="sign_date">17.09.04 00:00</span>
+						<c:forEach var="m" items="${mlist}" end="7">
+							<div class="m_id">${m.m_id}</div><span class="sign_date"><fmt:formatDate value="${m.cre_date}" pattern="YY.MM.dd"/></span>
+						</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -251,8 +237,5 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-		<%@ include file="../layout/wfooter.jsp"%>
-	</footer>
 </body>
 </html>

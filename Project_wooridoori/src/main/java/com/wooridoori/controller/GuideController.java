@@ -6,8 +6,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.PasswordAuthentication;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -16,19 +20,26 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.GuideDTO;
@@ -93,24 +104,58 @@ public class GuideController {
 	
 	
 	////////////////////////////////Guide///////////////////////////////////////
+	//Guide Select List
+	@RequestMapping("guideSelect.wd")
+	public String getSelect(){
+		return "Guide/GuideSelect";
+	}
 	
 	//Get list	
 	@RequestMapping("guideList.wd")
-	public String getList(HttpSession session, String addr, Model m, HttpServletRequest request){
-			m.addAttribute("list",gService.getList(addr));
+	public String getList(HttpSession session, String addr, Model m, 
+							@RequestParam(defaultValue="") String hash, HttpServletRequest request){
+			if(!(hash.isEmpty())){					//Hash List
+				List<GuideDTO> sList =gService.hashSearch(addr,hash);
+				m.addAttribute("list",sList);
+				m.addAttribute("addr",addr);
+			}
+			else{						// Area List
+				m.addAttribute("list",gService.getList(addr));
+				m.addAttribute("addr",addr);
+			}
+/*			m.addAttribute("lat",lat);
+			m.addAttribute("lng",lng);*/
+
 			return "Guide/GuideList";		
 	}
+	
+	//Get List count
+	@RequestMapping("getLocalGuide.wd")
+	@ResponseBody
+	public String getLocalGuide(String addr){
+		return gService.getListCount(addr);
+	}
+	
+		
+	
 	
 	//Authentication check before write
 	@RequestMapping("guideAuthentic.wd")
 	public String guideAuthentic(HttpSession session, String addr, Model m){
-		System.out.println(gService.isGuide((String)session.getAttribute("id")));
-		if(gService.isGuide((String)session.getAttribute("id")).equals("Y")){	// Write guide board if guide auth already
+		//System.out.println(gService.isGuide((String)session.getAttribute("id")));
+		if((String)session.getAttribute("id")==null){			// Login state
+			//m.addAttribute("list",gService.getList(addr));
 			m.addAttribute("addr",addr);
-			return "redirect:guideWriteForm.wd";
-		}			
-		else{																	// auth guide
-			return "Guide/GuideAuthentic";
+			return "redirect:guideList.wd";
+		}
+		else{
+			if(gService.isGuide((String)session.getAttribute("id")).equals("Y")){	// Write guide board if guide auth already
+				m.addAttribute("addr",addr);
+				return "redirect:guideWriteForm.wd";
+			}			
+			else{																	// auth guide
+				return "Guide/GuideAuthentic";
+			}
 		}
 	}
 	
@@ -193,7 +238,7 @@ public class GuideController {
 		return d;
 	}
 	
-	//Guide write board
+/*	//Guide write board
 	@RequestMapping("GuideWriteAction.wd")
 	public String guideWrite(Model m, String addr, MultipartFile fileup,
 							MultipartHttpServletRequest request, 
@@ -223,7 +268,7 @@ public class GuideController {
 
 		
 		//Data packaging
-/*		dto.setgb_preview_imgpath(fName);
+		dto.setgb_preview_imgpath(fName);
 		dto.setGb_address_name(multi.getParameter("gb_name"));
 		dto.setGb_content(multi.getParameter("gb_content"));
 		dto.setGb_address(multi.getParameter("gb_address"));
@@ -239,7 +284,7 @@ public class GuideController {
 		dto.setGb_title(multi.getParameter("gb_title"));
 		dto.setGb_service(multi.getParameter("gb_service"));
 		dto.setGb_theme(multi.getParameter("gb_theme"));
-		dto.setGb_time(multi.getParameter("gb_time"));*/
+		dto.setGb_time(multi.getParameter("gb_time"));
 		
 		gService.writeGuide(dto);
 		
@@ -248,17 +293,87 @@ public class GuideController {
 		return "redirect:guideList.wd";
 	}
 	
+	*/
+	
+	//Guide write board
+		@RequestMapping("GuideWriteAction.wd")
+		public String guideWrite(Model m, String addr, 
+								MultipartHttpServletRequest request, 
+								GuideDTO dto
+								) throws IOException{
+		//	GuideDTO dto =new GuideDTO();
+			
+			//Guide preview img path
+			String path=request.getSession().getServletContext().getRealPath("")+"save\\GuidePreview\\";
+			System.out.println(path);
+			SimpleDateFormat  fmt = new SimpleDateFormat("yyyyMMdd_HH_mm");
+			String date =  fmt.format(new Date());
+			//String fName=dto.getGb_name()+"_pre_"+date+".png";
+		    String imgPath="";
+			File dir = new File(path); //파일 저장 경로 확인, 없으면 만든다.
+		    if (!dir.exists()) {
+		        dir.mkdirs();
+		    }
+			//MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest)request;
+		//	multi=new MultipartRequest(request, path,1024*1024*100,"UTF-8",new DefaultFileRenamePolicy());
+			List<MultipartFile> files=request.getFiles("fileup");
+		    
+		    for(int i=0;i<files.size();i++){
+		    	byte[] bytes = files.get(i).getBytes();
+				String fName=dto.getGb_name()+i+"_pre_"+date+".png";	    	
+			    File file = new File(path + fName);
+			    OutputStream out = new FileOutputStream(file);
+			    out.write(bytes);
+			    if(i==(files.size()-1)){
+			    	imgPath+=fName;
+			    }
+			    else{
+			    	imgPath+=fName+",";
+			    }
+		    }
+		   // byte[] bytes = fileup.getBytes();
+		   // File file = new File(path + fName);
+
+/*	        OutputStream out = new FileOutputStream(file);        
+	        out.write(bytes);*/
+
+
+		    dto.setgb_preview_imgpath(imgPath);
+			
+			//Data packaging
+
+			gService.writeGuide(dto);
+			
+			m.addAttribute("addr",(dto.getGb_category_addr()).substring(0,dto.getGb_category_addr().indexOf(" ")));
+			//m.addAttribute("list",gService.getList(addr));
+			return "redirect:guideList.wd";
+		}
+	
+	
+	
 	//Guide content
 	@RequestMapping("guideContent.wd")
-	public String guideContent(String num, Model m){
+	public String guideContent(String num, Model m,String addr){
 		System.out.println(num);
 		GuideDTO gdto=gService.getContent(num);
 		
-		
+		m.addAttribute("num",num);
+		m.addAttribute("addr",addr);
 		m.addAttribute("gdto",gdto);
 		return "Guide/GuideContent";
 	}
 	
+	
+	//Hash search
+	@RequestMapping("hashSearch.wd")
+	public String hashSearchList(String addr,String hash, Model m){
+		
+		m.addAttribute("hash",hash);
+		m.addAttribute("addr",addr);
+		return "redirect:guideList.wd";
+	}
+	
+
 	
 	
 	////////////////////////////////////////////////////////////////////////
