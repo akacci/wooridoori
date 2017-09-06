@@ -82,7 +82,7 @@
 <body style="margin: 0; position: fixed">
 	<div style="top:0; width:100%; height: 60px; background-color: #313131; margin:0; min-width: 900px;">
 		<div class="bar-item-t">
-			<a href="#">더</a>
+			<a href="tlist.wd">더</a>
 		</div> 
 		<div class="bar-item-t">
 			<a href="#">그레이트</a> 
