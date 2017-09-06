@@ -264,7 +264,10 @@ function getData(contentType,lng,lat){
       					culture_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
       				}
       				
-      				infos_name[i]=name;
+      				if(name.length<17)
+      				{
+      					infos_name[i]=name;
+      				}else{infos_name[i]=name.substring(0,15)+"...";}
   					infos_image[i]=image;
   					infos_tel[i]=tel;
   					infos_addr[i]=address;
@@ -355,17 +358,21 @@ function dropCulture(){
 function printList(empty_markers_position)
 {//${cdata.title}
 	var li="";
-
+	var tel="";
+	
 	for(var i = 0; i<empty_markers_position.length; i++)
 	{
+		if(infos_tel[i]==""){tel="<br>";}
+		else{tel=infos_tel[i];}
 	li=
-		li+"<li style='height:150px'>"
-		+"<img src='"+infos_image[i]+"' style='float:left; margin-right: 10px; width:195px; height:130px'/>"
+		li+"<li style='height:180px; box-shadow: 0 0 5px 5px gray;'>"
+		+"<img src='"+infos_image[i]+"' style='float:left; margin-right: 10px;  height:180px; width:270px'/>"
 		+"<div class='info'>"
-		+"<h3 class='title' style='margin:0'><a style='cursor:pointer;' href='detail.wd?contentid="+infos_contentid[i]+"'>"+infos_name[i]
+		+"<h3 class='title' style='margin:0'><a style='cursor:pointer; color:white; text-decoration:none;' href='detail.wd?contentid="+infos_contentid[i]+"'>["+labels[i % labels.length]+"] "+infos_name[i]
 		+"( "+infos_dist[i]+"m )"+"</a></h3>"
 		+"<p class='addr'>"+infos_addr[i]+"</p>"
-		+"<p class='tel'>"+infos_tel[i]+"</p>"
+		+"<p class='tel'>"+tel+"</p>"
+		+"<img src='resources/image/marker/search_dir.png' width='50px' style='float:right; bottom:0'/>"
 		+"</div></li><hr>";
 	}
 	

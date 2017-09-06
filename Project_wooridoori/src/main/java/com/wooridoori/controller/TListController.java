@@ -136,8 +136,8 @@ public class TListController {
 	
 	@RequestMapping("/detail.wd")
 	public String detail(Model model, @RequestParam String contentid,
-						@RequestParam String areaname,
-						@RequestParam String sigungu,
+						@RequestParam (value="areaname", defaultValue="") String areaname,
+						@RequestParam (value="sigungu", defaultValue="") String sigungu,
 						@RequestParam (value="depth", defaultValue="") String depth,
 						@RequestParam (value="pageNum", defaultValue="1") int currentPage){
 		
