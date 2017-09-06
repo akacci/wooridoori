@@ -142,15 +142,7 @@ function weater_writer(x, y){
 	});
 }
 
-
-
-
-
-
-
-
-
-
+// 승훈
 var btn_title;
 	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
