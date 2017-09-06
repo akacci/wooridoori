@@ -6,11 +6,19 @@
    }
    
    div#div_topMenu{
-   	z-index: 9;
+   	z-index: 12;
+   }
+   
+   div.log_dialog{
+   	z-index: 13;
+   }
+   
+   div.log_form{
+   	z-index: 13;
    }
    
    div#div_footer{
-   	z-index:9;
+   	z-index:12;
    }
    
    /* slider 부분 */
@@ -32,6 +40,11 @@
 		text-align: center;
 		text-decoration: none;
 		display: hidden;
+	}
+	
+	div#div_more #btn_more{
+		text-decoration: none;
+		color: #fff;
 	}
 	
 	div#area,div#thema,div#non_favorite{
@@ -149,14 +162,13 @@
    /* 메뉴와 바디 부분 */			
    div#re_smenu{
    	position: relative;
-   	top: 54px;
+   	top: 0px;
    	width: 100%;
    	height: 50px;
    	z-index: 2;
    }
    
    div#re_body{
-   	margin-top: 54px;
    	width: 100%;
    	hight: 100%;
    	z-index: 1;
@@ -179,7 +191,12 @@
     }
     
     span._filter_tag{
-    	padding-left: 200px;
+    	text-decoration: none;
+    }
+    
+    span._filter_tag a{
+    	color: #fff;
+    	text-decoration: none;
     }
     
     div.aTag_Controller_box{
@@ -202,7 +219,7 @@
 		list-style: none;
 		width: 150px;
 		left: 980px;
-		top: 47px;
+		top: 27px;
 		z-index:11;
 	}
 	
@@ -213,7 +230,7 @@
 		background-color: #313131;
 		width: 150px;		
 		left: 1030px;
-		top: 47px;
+		top: 27px;
 		z-index:11;
 	}
 	

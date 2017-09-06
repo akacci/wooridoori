@@ -3,7 +3,10 @@
 
 <configuration>
 	<typeAliases>
+		<!-- Jay -->
 		<typeAlias type="com.wooridoori.dto.GuideDTO" alias="gdto"/>
+
+		<typeAlias type="com.wooridoori.dto.GuideScoreDTO" alias="gsdto"/>
 		<!-- suzan -->
 		<typeAlias type="com.wooridoori.dto.MemberDTO" alias="mdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentDTO" alias="cdto"/>
@@ -20,8 +23,10 @@
 	</typeAliases>
 	
 	<mappers>	
+		<!-- Jay -->
 		<mapper resource="/com/wooridoori/sql/LoginSQL.xml"/>
 		<mapper resource="/com/wooridoori/sql/GuideSQL.xml"/>
+		<mapper resource="/com/wooridoori/sql/GuideScoreSQL.xml"/>
 		<!-- suzan -->
 		<mapper resource="com/wooridoori/sql/MemberSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/ContentSQL.xml"/>
@@ -31,6 +36,7 @@
 		<mapper resource="com/wooridoori/sql/AreaCodeSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/RecommendAverageSQL.xml"/>
+		<mapper resource="com/wooridoori/sql/RecommendFavoriteSurveySQL.xml"/>
 		<mapper resource="com/wooridoori/sql/TourInquirySQL.xml"/>
 		<!-- search list -->
 		<mapper resource="com/wooridoori/sql/GuanSQL.xml"/>

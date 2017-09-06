@@ -16,10 +16,10 @@
 
 <title></title>
 </head>
-<body>
+<body style="">
 	<header> 
-	      <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
-	      <%@include file="../layout/wtopmenu.jsp"%>
+	      <%-- <jsp:include page= "../layout/top.jsp"/> --%>
+	      <%@include file="../layout/top.jsp"%>
 	</header>
 	<div id="re_smenu" style="z-index:2; position: relative;">
 		<c:import url="../Recommend/Recommend_H.jsp"></c:import>
@@ -28,8 +28,8 @@
 		<c:import url="../Recommend/Recommend_Body.jsp"></c:import>
 	</div>
 	<footer>
-	      <%-- <jsp:include page= "../layout/wfooter.jsp"/> --%>
-	      <%@include file="../layout/wfooter.jsp"%>
+	      <jsp:include page= "../layout/wfooter.jsp"/>
+	      <%-- <%@include file="../layout/wfooter.jsp"%> --%>
 	</footer>
 </body>
 </html>

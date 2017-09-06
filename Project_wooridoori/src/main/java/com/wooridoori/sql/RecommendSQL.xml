@@ -3,10 +3,31 @@
 
 <mapper namespace="recommend">
 
+	<select id="selectNationOfTourRank" resultType="HashMap">
+		select c.pre_cat1 as pre_cat1,
+			   c.pre_cat2 as pre_cat2,
+			   c.pre_cat3 as pre_cat3
+        from preference a,
+             wmember b, 
+             PRE_FOREIGN_COUNTRY c
+        where a.seq_member = b.num
+        and a.m_id = b.m_id
+        and b.NATION = c.NATION
+	</select>
+
 	<select resultType="tdto" id="selectFirstRecommendArea">
 		select *
 		from TOUR_INQUIRY
-		where addr1 like '%중랑구%' 
+		where areacode in (1, 6, 39) 
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendArea" parameterType="String">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 = #{PRE_CAT1}
+		and rownum <![CDATA[<]]> 11
 	</select>
 	
 	<select resultType="tdto" id="selectFirstRecommendThema">
@@ -16,21 +37,35 @@
 			and rownum <![CDATA[<]]> 11
 	</select>
 	
+	<select resultType="tdto" id="selectLoginRecommendThema" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 in (#{PRE_CAT2}, #{PRE_CAT3}) 
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
 	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
 			select a.* 
-			from tour_inquiry a, 
-			     (select pre_cat1, pre_cat2, pre_cat3
-			      from pre_foreign_country
-			      where nation = 'Angola') b
+			from tour_inquiry a
 			where a.areacode not in (1, 6, 39)
-			and a.cat2 in (b.pre_cat1, b.pre_cat2, b.pre_cat3)
 			and rownum <![CDATA[<]]> 11
 			order by a.readcount desc
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendNonFavorite" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode not in (1, 6, 39)
+		and cat2 in (#{PRE_CAT1}, #{PRE_CAT2}, #{PRE_CAT3})
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
 	</select>
 	
 	<select id="selectContentCodeName" resultType="condto">
 		select distinct cat2, cat2_name
 		from content_code 
+		where cat1 not in ('A03', 'C01')
 	</select>
 	
 	<select id="selectCodeOfTourList" resultType="tdto" parameterType="HashMap">
@@ -58,6 +93,32 @@
 		where a.rnum <![CDATA[>=]]> 1
 		and a.rnum <![CDATA[<=]]> #{end}
 		   
+	</select>
+	
+	<!-- mypage chart sql -->
+	<select id="bubbleOfCount" parameterType="String" resultType="Hashmap">
+		select distinct count(a.category2) as c_cat2, 
+								(select distinct cat2_name 
+								from content_code 
+								where a.category2 = cat2) as cat2_name
+							from PREFERENCE a
+							where a.m_id like 'admin'
+							group by a.category2
+	</select>
+	<select id="barchartsOfData" parameterType="String" resultType="Hashmap">
+		select avg(a.grade_point) as my_grade, avg(b.grade_point) as total_grade, c.cat2_name
+		from preference a, preference b, content_code c
+		where b.category2 = a.category2
+		and c.cat2 = a.category2
+		and a.m_id = #{id}
+        group by c.cat2_name
+	</select>
+	<select id="selectOfBubbleData" parameterType="String" resultType="Hashmap">
+		select DISTINCT a.*, c.cat2_name, b.addr1
+		from preference a, tour_inquiry b, content_code c
+		where c.cat2 = a.category2
+		and b.contentid = a.contentid_ref
+		and m_id = #{id}
 	</select>
 	
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">

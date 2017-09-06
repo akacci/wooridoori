@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- 구글차트 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <c:if test="${sessionScope.ID eq 'admin'}">
@@ -19,6 +19,7 @@ $(function(){
 });
 </script>
 </c:if>
+
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
 	
@@ -31,7 +32,7 @@ $(function(){
 </head>
    <header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
-         <%@include file="../layout/wtopmenu.jsp"%>
+         <%@include file="../layout/top.jsp"%>
    </header>
 <body style="height: 945px; margin-top: 55px; z-index: -100">    
  
@@ -43,14 +44,15 @@ $(function(){
             
                 <li class="sidebar-brand">
                     <a href="#">
-                    	<img src="resources/image/profile.png" width="30" height="30">The Suzan Maestro
+                    	<img src="resources/main/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
-                </li> 
+                </li>  
                 <li>
-                    <a onclick="userInfo('userInfo.wd')" href="#">사용자 정보</a>
+                    <hr style="border: 0.3px double black;"> 
+                    <a onclick="userInfo()" href="#">사용자 정보</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a> 
+                    <a href="javascript:void(0)" onclick="Recommend_Info()">Recommend Page</a> 
                 </li>
                 <li> 
                     <a href="#">Overview</a>
@@ -65,7 +67,7 @@ $(function(){
                     <a href="#">Services</a>
                 </li>
                 <li>
-                    <a onclick="userInfo('qna.wd')" href="#">QnA</a>
+                    <a onclick="qnaBoard()" href="#">QnA</a>
                 </li>
             </ul>
         </div>
@@ -73,7 +75,7 @@ $(function(){
          
         <div id="sidebar-wrapper2" style="text-align: center; display: table;">
          <div style="display: table-cell; vertical-align: middle;">
-         <b style="color: white;">▶</b> 
+         <b style="color: black;">▶</b> 
          </div>
         </div> 
  		
@@ -82,7 +84,13 @@ $(function(){
  				$("#page").load(data); 
  				
  			} 
- 			   
+ 			function Recommend_Info()
+ 			{
+ 				$("#page").load("re_mypage.wd")
+ 			}
+      function qnaBoard(){
+        $("#page").load("qna.wd"); 
+      }
  		</script>
  		
         <!-- Page Content -->

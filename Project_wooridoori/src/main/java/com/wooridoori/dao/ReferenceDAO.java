@@ -1,5 +1,8 @@
 package com.wooridoori.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wooridoori.dto.ReferenceDTO;
@@ -27,5 +30,21 @@ public class ReferenceDAO extends SqlSessionDaoSupport{
 	public void insertPreference(ReferenceDTO refdto)
 	{
 		getSqlSession().insert("insertOfPreference",refdto);
+	}
+	
+	/*recommend mypage*/
+	public List<HashMap<String, Object>> selectBubbleData(String id)
+	{		
+		return getSqlSession().selectList("selectOfBubbleData", id);	
+	}
+	
+	public List<HashMap<String, Object>> barChart_Data(String id)
+	{
+		return getSqlSession().selectList("barchartsOfData", id);
+	}
+	
+	public List<ReferenceDTO> bubble_Count(String id)
+	{
+		return getSqlSession().selectList("bubbleOfCount", id);		
 	}
 }

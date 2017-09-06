@@ -1,8 +1,10 @@
 package com.wooridoori.service;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,13 +74,33 @@ public class RecommendService {
 		return list;
 	}
 	
+	public List<TourInquiryDTO> selectLoginRecommendArea(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		String pre_cat1 = catMap.get("PRE_CAT1");
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendArea(pre_cat1);
+		return list;
+	}
+	
 	public List<TourInquiryDTO> selectFirstRecommendThema(){
 		List<TourInquiryDTO> list = rdao.selectFirstRecommendThema();
 		return list;
 	}
 	
+	public List<TourInquiryDTO> selectLoginRecommendThema(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		catMap.remove("PRE_CAT1");
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendThema(catMap);
+		return list;
+	}
+	
 	public List<TourInquiryDTO> selectFirstRecommendNonFavorite(){
 		List<TourInquiryDTO> list = rdao.selectFirstRecommendNonFavorite();
+		return list;
+	}
+	
+	public List<TourInquiryDTO> selectLoginRecommendNonFavorite(){
+		Map<String, String> catMap = rdao.selectNationOfTourRank();
+		List<TourInquiryDTO> list = rdao.selectLoginRecommendNonFavorite(catMap);
 		return list;
 	}
 	
@@ -110,4 +132,32 @@ public class RecommendService {
 		
 	}
 	
+	/*recommend mypage*/
+	public List<HashMap<String, Object>> bubble_Data(String id)
+	{
+		Date date = new Date();
+		SimpleDateFormat sdf;
+		sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		List<HashMap<String, Object>> list = refdao.selectBubbleData(id);
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		
+		for(int i = 0; i<list.size(); i++)
+		{
+			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));
+			list.get(i).put("MODIFIED_DATE", MOD_DATE);								
+		}
+		return list;
+	}
+	
+	public List<HashMap<String, Object>> barCharts_Data(String id)
+	{
+		List<HashMap<String, Object>> list = refdao.barChart_Data(id);
+		return list;
+	}
+	public List<ReferenceDTO> bubble_Count(String id)
+	{
+		List<ReferenceDTO> list = refdao.bubble_Count(id);
+		return list;			
+	}
 }

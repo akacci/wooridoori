@@ -13,19 +13,18 @@ public class ReferenceDTO {
 	private String category3;
 	private String content_id;
 	private String contenttype_id;
+	private String contentid;
 	private char firsttrip;
 	private String age;
 	private char bookmark;
 	private char solotrip;
-	private char grouptrip;
+	private String grouptrip;
 	private Timestamp cre_date;
 	private Timestamp modified_date;
 	private float grade_point;
 	private String title;
 	private char pre_rence;
-	
-	private String contentid;
-	
+	private String purpose_code;
 	
 	public String getContentid() {
 		return contentid;
@@ -111,10 +110,10 @@ public class ReferenceDTO {
 	public void setSolotrip(char solotrip) {
 		this.solotrip = solotrip;
 	}
-	public char getGrouptrip() {
+	public String getGrouptrip() {
 		return grouptrip;
 	}
-	public void setGrouptrip(char grouptrip) {
+	public void setGrouptrip(String grouptrip) {
 		this.grouptrip = grouptrip;
 	}
 	public Timestamp getCre_date() {
@@ -147,8 +146,11 @@ public class ReferenceDTO {
 	public void setPre_rence(char pre_rence) {
 		this.pre_rence = pre_rence;
 	}
-	
-	
-	
+	public String getPurpose_code() {
+		return purpose_code;
+	}
+	public void setPurpose_code(String purpose_code) {
+		this.purpose_code = purpose_code;
+	}
 	
 }

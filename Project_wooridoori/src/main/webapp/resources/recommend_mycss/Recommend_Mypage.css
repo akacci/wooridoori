@@ -1,0 +1,51 @@
+
+/* bubble char */
+.bubbleChart {
+	min-width: 100px;
+	max-width: 700px;
+	height: 700px;
+	margin: 0 auto;
+}
+.bubbleChart svg{
+	background: #000000;
+}
+
+/* average, bookmark, like list */
+div#mypage_list_div{
+	width: 1000px;
+	
+}
+ul#mypage_list_ul{
+	list-style: none;
+}
+li.mypage_list_li{
+	width: 100%;
+}
+span{
+	background-color: gray;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+div.mypage_average_span{
+	width: 10%;
+}
+div.rateit{
+	background-color: gray;
+	border-radius: 20px;
+	float: left;
+}
+div.mypage_addr_span{
+	width: 25%;
+}
+div.mypage_category_span{
+	width: 15%;
+}
+div.mypage_bookmark{
+	width: 5%;
+}
+div.mypage_like{
+	width: 5%;
+}
+div.mypage_day_span{
+	width: 15%;
+}

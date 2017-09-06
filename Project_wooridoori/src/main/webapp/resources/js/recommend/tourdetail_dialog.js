@@ -48,76 +48,11 @@ $(function(){
       		/*dialog_img, dialog_content, dialog_reivew data*/
       		dialog_content(contentid, e);
       		
+      		/*dialog chart*/
       		chartVarN = chartVisitData(contentid, "N");
       		chartVarY = chartVisitData(contentid, "Y");
-      		/*dialog chart*/
-      		/*new Highcharts.Chart(chart(chartVarN, chartVarY));*/
-      		chart = new Highcharts.Chart({
-    	  	    chart: {
-    	  	    	renderTo: "score_chart",
-    	  	        type: "area"
-    	  	    },
-    	  	    title: {
-    	  	        text: ""
-    	  	    },
-    	  	    credits:{
-    	  	    	enabled: false
-    	  	    },
-    	  	    xAxis: {
-    	  	        allowDecimals: false,
-    	  	        title: {
-    	  	        	text: "인원수"
-    	  	        },
-    	  	        labels: {
-    	  	            formatter: function () {
-    	  	                return this.value + "명";
-    	  	            }
-    	  	        }
-    	  	    },
-    	  	    yAxis: {
-    	  	        title: {
-    	  	            text: "평점"
-    	  	        },
-    	  	        labels: {
-    	  	            formatter: function () {
-    	  	                return this.value + "점";
-    	  	            }
-    	  	        }
-    	  	    },
-    	  	    tooltip: {
-    	  	    	headerFormat: ''
-    	  	    },
-    	  	    plotOptions: {
-    	  	        area: {
-    	  	            pointStart: 1,
-    	  	            marker: {
-    	  	                enabled: false,
-    	  	                symbol: 'circle',
-    	  	                radius: 2,
-    	  	                states: {
-    	  	                    hover: {
-    	  	                        enabled: true
-    	  	                    }
-    	  	                }
-    	  	            }
-    	  	        }
-    	  	    },
-    		    navigation: {
-    		    	buttonOptions: {
-    		    		enabled: false
-    		    	}
-    		    },
-    	  	    series: [{
-    	  	    		data: chartVarN,
-      	  	    	name: '방문객 평점',
-      	  	    	color: '#F15F5F'
-    	  	    	},
-    	  	    	{
-    	  	    		data: chartVarY,
-    	  	    		name: '예상 평점',
-    	  	    		color: '#FAED7D',
-    	  	    	}]
-    	    });
+      		new Highcharts.Chart(scoreChart(chartVarN, chartVarY));
+      		
       	});
       }).on("mouseleave", ".select_box_div", function(e){
 		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
@@ -142,19 +77,30 @@ $(function(){
     	$("#m_id").val("");
     	$("#pre_review").val("");
     	$("#rateit_write").rateit("value", "");
-    	/*chartVarN = chartVisitData(contentid, "N");
-  		chartVarY = chartVisitData(contentid, "Y");*/
-    	/*new Highcharts.Chart(chart(chartVarN, chartVarY));*/
-  		chart.series[0].setData[0](chartVisitData(contentid, "N"),chartVisitData(contentid, "Y"));
-  		/*chart.series[0].setData[1](chartVisitData(contentid, "Y"));*/
+    	
+    	chartVarN = chartVisitData($("#dialog_review_write #contentid").val(), "N");
+  		chartVarY = chartVisitData($("#dialog_review_write #contentid").val(), "Y");
+    	new Highcharts.Chart(scoreChart(chartVarN, chartVarY));
     });
     
 });
 
-/*function chart(chartVarN, chartVarY){
-	new Highcharts.Chart({
+function sessionLoginId(){
+	$.ajax({
+		url:"sessionloginid.wd",
+		type:"post",
+		success:function(resData){
+			var id = resData.substr(0, resData.indexOf(","));
+			var login = resData.substr(resData.indexOf(",")+1, resData.length);
+			$("#m_id_dialog").val(id);
+			$("#visit_yn").val(login.substr(0,1).trim());
+		}
+	});
+}
+
+function scoreChart(chartVarN, chartVarY){
+	$("#score_chart").highcharts({
 	  	    chart: {
-	  	    	renderTo: "score_chart",
 	  	        type: "area"
 	  	    },
 	  	    title: {
@@ -209,8 +155,8 @@ $(function(){
 		    },
 	  	    series: [{
 	  	    		data: chartVarN,
-  	  	    	name: '방문객 평점',
-  	  	    	color: '#F15F5F'
+	  	  	    	name: '방문객 평점',
+	  	  	    	color: '#F15F5F'
 	  	    	},
 	  	    	{
 	  	    		data: chartVarY,
@@ -219,7 +165,7 @@ $(function(){
 	  	    	}]
 	    });
 }
-*/
+
 /*dialog_img, dialog_content data*/
 function dialog_content(contentid, e){
 	$.ajax({
@@ -244,6 +190,7 @@ function dialog_content(contentid, e){
 			dialog_review(contentid);
 			
 			if(!$(".rateit").has(e.target).length){
+				sessionLoginId();
 				$("#detail_tour").dialog("open");
 			}
 			
@@ -286,7 +233,7 @@ function dialog_review(contentid){
 function review_insert(){
 	var contentid = $("#frm_review #contentid").val();
 	$("#pre_score").val($("#rateit_write").rateit("value"));
-	$("#seq_member").val("seq_member");
+
 	var frm_data = $("#frm_review").serialize();
 	
 	if($("#pre_review").val() != ""){
