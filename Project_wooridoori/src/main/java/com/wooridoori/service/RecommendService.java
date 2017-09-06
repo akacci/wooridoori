@@ -133,22 +133,71 @@ public class RecommendService {
 	}
 	
 	/*recommend mypage*/
-	public List<HashMap<String, Object>> bubble_Data(String id)
+	public List<HashMap<String, Object>> bubble_Data(String id, int currentPage)
 	{
+		
 		Date date = new Date();
 		SimpleDateFormat sdf;
 		sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		
-		List<HashMap<String, Object>> list = refdao.selectBubbleData(id);
-		HashMap<String, Object> hashmap = new HashMap<String, Object>();
-		
+		List<HashMap<String, Object>> list = refdao.selectBubbleData(id);		
+				
 		for(int i = 0; i<list.size(); i++)
 		{
 			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));
-			list.get(i).put("MODIFIED_DATE", MOD_DATE);								
-		}
+			list.get(i).put("MODIFIED_DATE", MOD_DATE);				
+		}		
+		
 		return list;
 	}
+	public HashMap<String, Object> paging_Data(String id, int currentPage)
+	{		
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();		
+		//페이징 처리
+		int perPage=10; //한페이지당 보여지는 글의 갯수
+		int perBlock=5; //한블럭당 보여지는 페이지번호의 수
+		int totalPage; //총 페이지의 갯수
+		int startNum;//한페이지당 보여지는 시작번호
+		int endNum;//한페이지당 보여지는 끝번호
+		int startPage; //한 블럭당 보여지는 시작페이지번호
+		int endPage; //한 블럭당 보여지는 끝페이지번호
+		int no; //게시글에 붙일 시작번호		
+		
+		int totalCount = refdao.totalCount_Mypage(id);
+		
+		startNum=(currentPage-1)*perPage+1;
+		endNum=startNum+perPage-1;
+		
+		no=totalCount-((currentPage-1)*perPage);
+		
+		totalPage=(totalCount/perPage)+(totalCount%perPage>0?1:0);
+				
+		if(endNum>totalCount)
+		{
+			endNum=totalCount;
+		}			
+		
+		startPage= (currentPage)/perBlock*perBlock+1;
+		endPage=startPage+perBlock-1;
+		
+		if(endPage>totalPage)
+		{
+			endPage=totalPage;
+		}
+		
+		hashmap.put("no", no);
+		hashmap.put("perPage",perPage);
+		hashmap.put("perBlock",perBlock);
+		hashmap.put("totalPage",totalPage);
+		hashmap.put("startNum",startNum);
+		hashmap.put("endNum",endNum);
+		hashmap.put("startPage",startPage);
+		hashmap.put("endPage",endPage);
+		hashmap.put("currentPage", currentPage);
+		
+		
+		return hashmap;
+	}
+	
 	
 	public List<HashMap<String, Object>> barCharts_Data(String id)
 	{
