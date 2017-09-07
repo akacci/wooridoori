@@ -3,16 +3,18 @@
 
 <mapper namespace="recommend">
 
-	<select id="selectNationOfTourRank" resultType="HashMap">
-		select c.pre_cat1 as pre_cat1,
+	<select id="selectNationOfTourRank" resultType="HashMap" parameterType="String">
+		select distinct c.pre_cat1 as pre_cat1,
 			   c.pre_cat2 as pre_cat2,
 			   c.pre_cat3 as pre_cat3
-        from preference a,
-             wmember b, 
+        from wmember b, 
              PRE_FOREIGN_COUNTRY c
-        where a.seq_member = b.num
-        and a.m_id = b.m_id
-        and b.NATION = c.NATION
+             where b.m_id = #{value}
+		  and b.NATION = c.NATION
+        <if test="value != 'GUEST' or value.equals('GUEST')">
+	      and a.m_id = b.m_id
+	      and a.seq_member = b.num
+        </if>
 	</select>
 
 	<select resultType="tdto" id="selectFirstRecommendArea">
@@ -114,13 +116,24 @@
         group by c.cat2_name
 	</select>
 	<select id="selectOfBubbleData" parameterType="String" resultType="Hashmap">
+	
 		select DISTINCT a.*, c.cat2_name, b.addr1
 		from preference a, tour_inquiry b, content_code c
 		where c.cat2 = a.category2
 		and b.contentid = a.contentid_ref
 		and m_id = #{id}
 	</select>
-	
+	<select id="totalcountOfPreference" parameterType="String" resultType="int">
+		select count(*)
+		from preference
+		where m_id = #{id}
+	</select>
+	<select id="searchOfPreference" parameterType="String" resultType="HashMap">
+		select *
+		from preference
+		where m_id = #{id}		
+	</select>
+   
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *
 		from tour_inquiry
@@ -180,9 +193,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -200,7 +216,10 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})						
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)						
 	</insert>
 	
 	<!-- book_mark insert, update -->
@@ -226,16 +245,19 @@
 	                ref.CONTENTTYPEID_ref,
 	                FIRSTTRIP,
 	                AGE,
-	                BOOKMARK,
-	                SOLOTRIP,
+	                BOOKMARK,	                
 	                GROUPTRIP,
 	                CREATE_DATE,
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
-	            VALUES(
-	                #{seq_member},
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq
+	                )
+	            VALUES(	            	
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -253,7 +275,11 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})	
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval	                	                
+	                )	
 	</insert>
 	
 	<!-- grade_point insert, update -->
@@ -286,9 +312,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -337,9 +366,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -357,6 +389,9 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)
 	</insert>
 </mapper>

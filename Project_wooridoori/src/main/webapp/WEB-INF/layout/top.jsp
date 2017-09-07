@@ -30,24 +30,24 @@
 <style type="text/css">
 .w3-bar-item #log{
    cursor: pointer;
+
 }
 .log_dialog {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     top: 0;
-    left: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-   
 }
 /* The Modal (background) */
 .logform {
     position: fixed;
     width: 363px;
+
     top: 50%;
     left: 50%;
       transform: translate(-50%, -50%);
@@ -152,11 +152,12 @@
        background-color: gray;
    }
 </style>
+
 </head>  
 <body style="margin: 0;">
    <div style="top:0; width:100%; height: 60px; background-color: #313131; margin:0; min-width: 900px;">
       <div class="bar-item-t">
-         <a href="#">더</a>
+         <a href="tlist.wd">더</a>
       </div> 
       <div class="bar-item-t">
          <a href="#">그레이트</a> 

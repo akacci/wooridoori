@@ -31,6 +31,11 @@ public class ReferenceDAO extends SqlSessionDaoSupport{
 	{
 		getSqlSession().insert("insertOfPreference",refdto);
 	}
+	public List<HashMap<String, String>> searchOfpreference(String id)
+	{
+		List<HashMap<String, String>> list = getSqlSession().selectList("searchOfPreference",id);
+		return list;
+	}
 	
 	/*recommend mypage*/
 	public List<HashMap<String, Object>> selectBubbleData(String id)
@@ -46,5 +51,10 @@ public class ReferenceDAO extends SqlSessionDaoSupport{
 	public List<ReferenceDTO> bubble_Count(String id)
 	{
 		return getSqlSession().selectList("bubbleOfCount", id);		
+	}
+	
+	public int totalCount_Mypage(String id)
+	{
+		return getSqlSession().selectOne("totalcountOfPreference", id);
 	}
 }

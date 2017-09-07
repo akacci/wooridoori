@@ -42,13 +42,16 @@ public class RecommendController {
 								 HttpSession session){			
 		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
+		System.out.println("controller------------------------"+id);
+		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendArea();
+			list = service.selectLoginRecommendArea(id);
 		}else{
 			list = service.selectFirstRecommendArea();
 		}
@@ -68,13 +71,14 @@ public class RecommendController {
 								 HttpServletResponse response,
 								 HttpSession session){		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendThema();
+			list = service.selectLoginRecommendThema(id);
 		}else{
 			list = service.selectFirstRecommendThema();
 		}
@@ -94,13 +98,14 @@ public class RecommendController {
 								 		 HttpServletResponse response,
 										 HttpSession session){	
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>(); 
 		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendNonFavorite();
+			list = service.selectLoginRecommendNonFavorite(id);
 		}else{
 			list = service.selectFirstRecommendNonFavorite();
 		}
@@ -245,30 +250,34 @@ public class RecommendController {
 	
 	@RequestMapping(value="/select_data.wd", method=RequestMethod.POST)
 	@ResponseBody
-	public void select_data(@RequestParam Float grade_point, 
-				@RequestParam char firsttrip, 
-				@RequestParam char bookmark,
-				@RequestParam String contentid,
-				@RequestParam char pre_rence,
+	public void select_data(@RequestParam(value="grade_point", defaultValue="0") Float grade_point, 
+				@RequestParam(value="firsttrip", defaultValue="x") char firsttrip, 
+				@RequestParam(value="bookmark", defaultValue="x") char bookmark,
+				@RequestParam(value="contentid", defaultValue="x") String contentid,
+				@RequestParam(value="pre_rence", defaultValue="x") char pre_rence,
+				/*@RequestParam(value="areacode", defaultValue="no_code") String areacode,*/
+				@RequestParam(value="grouptrip",defaultValue="x")String grouptrip,
+				@RequestParam(value="age",defaultValue="0")String age,
+				@RequestParam(value="purpose_code", defaultValue="no_code")String purpose_code,
+				@RequestParam(value="stay_code", defaultValue="no_code")String stay_code,
 				ReferenceDTO refdto,
 				HttpSession session)
 	{	
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
-		String m_id = id;
-		String age = "20";
-		char solotrip = 'n';
-		String grouptrip = "n";
+		String m_id = id;		
 		/*session.setAttribute("m_id", "adimn");*/
-		
-		refdto.setSeq_member(1);
+				
 		refdto.setM_id(m_id);
-		refdto.setContent_id(contentid);
-		refdto.setAge(age);
+		refdto.setContent_id(contentid);		
 		refdto.setFirsttrip(firsttrip);
 		refdto.setBookmark(bookmark);
-		refdto.setSolotrip(solotrip);
+		refdto.setPre_rence(pre_rence);
+		refdto.setGrade_point(grade_point);
+		refdto.setAge(age);
+		/*refdto.setAreacode_ref(areacode);*/
 		refdto.setGrouptrip(grouptrip);
-		refdto.setGrade_point(grade_point);		
+		refdto.setPurpose_code(purpose_code);
+		refdto.setStay_code(stay_code);		
 		
 		service.insertOrUpdateFirsttrip(refdto);
 	}
@@ -282,11 +291,13 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="bubble_Data.wd", method=RequestMethod.POST)
-	public void bubble_data(@RequestParam String id, HttpServletResponse response)
+	public void bubble_data(@RequestParam(value="id", defaultValue="_id") String id,
+							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+							HttpServletResponse response)
 	{
 		response.setContentType("text/html;charset=UTF-8");
-		id = "admin";
-		List<HashMap<String, Object>> list = service.bubble_Data(id);
+		
+		List<HashMap<String, Object>> list = service.bubble_Data(id,currentPage);
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
@@ -298,6 +309,27 @@ public class RecommendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+				
+	}
+	@RequestMapping(value="paging_mypage.wd", method=RequestMethod.POST)
+	public void paging_mypage(@RequestParam(value="id", defaultValue="_id") String id,
+							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+							HttpServletResponse response)
+	{
+			response.setContentType("text/html;charset=UTF-8");
+			
+			HashMap<String, Object> list = service.paging_Data(id,currentPage);
+			ObjectMapper mapper = new ObjectMapper();
+			
+			try {
+				response.getWriter().print(mapper.writeValueAsString(list));
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 	}
 	
 	@RequestMapping(value="barChartData.wd", method=RequestMethod.POST)
@@ -337,4 +369,28 @@ public class RecommendController {
 			e.printStackTrace();
 		}
 	}
+	
+	/*@RequestMapping(value="openBoardList.wd")
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{
+	    ModelAndView mv = new ModelAndView("/sample/boardList");
+	     
+	    return mv;
+	}
+	 
+	@RequestMapping(value="/sample/selectBoardList.do")
+	public ModelAndView selectBoardList(CommandMap commandMap) throws Exception{
+	    ModelAndView mv = new ModelAndView("jsonView");
+	     
+	    List<Map<String,Object>> list = sampleService.selectBoardList(commandMap.getMap());
+	    mv.addObject("list", list);
+	    if(list.size() > 0){
+	        mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+	    }
+	    else{
+	        mv.addObject("TOTAL", 0);
+	    }
+	     
+	    return mv;
+	}*/
+
 }
