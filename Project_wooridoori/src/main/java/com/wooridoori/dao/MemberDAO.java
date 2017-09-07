@@ -44,4 +44,7 @@ public class MemberDAO extends SqlSessionDaoSupport{
 			List<String> list = sqlSessionTemplate.selectList("member.getNation");
 			return list;
 	}
+	public String getID_NUM(MemberDTO mdto){
+		return getSqlSession().selectOne("member.getID_NUM", mdto);
+	}
 }

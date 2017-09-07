@@ -6,7 +6,7 @@
 		insert into
 			qnaboard
 		values
-			(qnaseq.nextval, #{title}, #{content}, #{writer}, sysdate, 'N', 0, #{kind}, 'N')
+			(qnaseq.nextval, #{title}, #{content}, #{writer}, sysdate, 'N', null, #{kind}, 'N', #{id_num})
 	</insert>
 	<!-- 특정유저 글찾기 -->
 	<select id="getUserQnA" parameterType="HashMap" resultType="qnaDto">
@@ -14,7 +14,7 @@
 			select
 				*
 			from 
-				(select ROWNUM as RNUM, b.* from (select * from qnaboard where writer=#{id} and deleteboard = 'N' order by wdate desc)b)a
+				(select ROWNUM as RNUM, b.* from (select * from qnaboard where id_num=#{id_num} and deleteboard = 'N' order by num desc)b)a
 			where
 				RNUM>=#{startNum} and RNUM <= #{endNum}
 			]]>
@@ -25,6 +25,14 @@
 		from
 			qnaboard
 		where
-			writer=#{id} and deleteboard = 'N'
+			id_num=#{id_num} and deleteboard = 'N'
 	</select>
+	<update id="writeAnswer" parameterType="qnaDto">
+		update
+			qnaboard
+		set
+			content = #{content}, acheck = 'Y', adate = sysdate
+		where
+			num = #{num}
+	</update>
 </mapper>

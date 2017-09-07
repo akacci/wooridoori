@@ -50,7 +50,7 @@
 .admin #div_detail .M_list .preview{
 	position: relative;
 	float: left;
-	height: 220px;
+	height: 300px;
 	width: 400px;
 	margin: 7px;
 }
@@ -143,7 +143,7 @@
 		var options = {
 			title : "문의 내역",
 			width : 400,
-			height : 220,
+			height : 300,
 			bar : {	groupWidth : "95%" },
 			legend : { position : "none" },
 		};
@@ -166,6 +166,8 @@
 
 		var options = {
 			title : 'Sign up',
+			width : 400,
+			height : 300,
 			hAxis : {
 				title : 'Day',
 				titleTextStyle : {
@@ -192,7 +194,7 @@
 					<div class="Q_list">
 						<hr class="p_hr"><div style="text-align: center;"><div class="q_title">TITLE</div><span class="q_writer">Writer</span></div><hr class="p_hr">
 						<div>
-							<c:forEach var="data" items="${qlist}" end="7">
+							<c:forEach var="data" items="${qlist}" end="10">
 								<div class="q_title">${data.title}</div><span class="q_writer">${data.writer}</span>
 							</c:forEach>
 						</div>
@@ -215,25 +217,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="M_list">
-				<div class="p_title">+a<hr class="title_hr"></div>
-				<div class="preview bgcolor_black">
-					<div class="Q_list">
-						<hr class="p_hr"><div style="text-align: center;"><div class="q_title">Title</div><span class="q_writer">Writer</span></div><hr class="p_hr">
-						<div>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-							<div class="q_title">asdf</div><span class="q_writer">writer</span>
-						</div>
-					</div>
-				</div>
-				<div class="preview"></div>
 			</div>
 		</div>
 	</div>
