@@ -80,6 +80,13 @@
         </div> 
  		
  		<script type="text/javascript">
+ 		$(function(){
+ 			var data = ${data}
+ 			if(data != null && data.length != 0){
+ 				changePage(data);
+ 				data = null;
+ 			}
+ 		})
  			function userInfo(){
  				$("#page").load("userInfo.wd");  	
  			} 

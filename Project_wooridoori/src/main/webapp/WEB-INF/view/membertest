@@ -1,3 +1,4 @@
+insert into	wmember values (mem_seq.nextval, 'admin',   'admin',   1234, 'admin@naver.com',   'South Korer', '010-0006-0006', 'N', null, sysdate, sysdate);
 insert into	wmember values (mem_seq.nextval, 'test006', 'test006', 1234, 'test006@naver.com', 'South Korer', '010-0006-0006', 'N', null, sysdate, sysdate);
 insert into	wmember values (mem_seq.nextval, 'test007', 'test007', 1234, 'test007@naver.com', 'South Korer', '010-0007-0007', 'N', null, sysdate, sysdate);
 insert into	wmember values (mem_seq.nextval, 'test008', 'test008', 1234, 'test008@naver.com', 'South Korer', '010-0008-0008', 'N', null, sysdate, sysdate);
