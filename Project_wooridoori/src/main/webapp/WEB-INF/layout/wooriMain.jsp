@@ -188,7 +188,6 @@
 </script>
 
 <style>
-body,h1 {font-family: "Raleway", sans-serif}
 body,html{width: 100%;height: 100%;}
 .bgimg {
     min-height: 100%;

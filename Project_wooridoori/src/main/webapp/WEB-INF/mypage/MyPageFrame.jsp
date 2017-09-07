@@ -14,7 +14,6 @@
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
     <link href="resources/css/mypage.css" rel="stylesheet">
-	  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
 
     <!-- Custom styles for this template -->
     <link href="resources/css/simple-sidebar.css" rel="stylesheet">
@@ -54,9 +53,6 @@
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a onclick="admintest2()" href="#">admin</a>
-                </li>
-                <li>
                     <a onclick="changePage('qna.wd')" href="#">QnA</a>
                 </li>
 				<c:if test="${sessionScope.ID eq 'admin'}">
@@ -85,7 +81,7 @@
  		
  		<script type="text/javascript">
  			function userInfo(){
- 				$("#page").load(); 	
+ 				$("#page").load("userInfo.wd");  	
  			} 
 			function Recommend_Info()
  			{
@@ -93,9 +89,6 @@
  			}
 		    function qnaBoard(){
 		        $("#page").load("qna.wd"); 
-		    }
-		    function admintest2(){
-		   	  	$("#page").load("admintest2.wd");
 		    }
       
 			function changePage(data){
