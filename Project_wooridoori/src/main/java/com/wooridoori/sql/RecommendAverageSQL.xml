@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommendaverage">
+
+	<select id="selectRecommendAverage" resultType="radto" parameterType="String">
+		select * 
+		from recommend_average
+		where contentid = #{contentid}
+		order by pre_score desc
+	</select>
+	
+	<select id="selectTotalReviewScore" parameterType="String" resultType="String">
+		select round(avg(pre_score), 2)
+		from recommend_average
+		where contentid = #{contentid}	
+	</select>
+	
+	<select id="selectVisitYnList" parameterType="HashMap" resultType="Hashmap">
+		select pre_score
+		from recommend_average
+		where contentid = #{contentid}
+		and visit_yn = #{visit_yn}
+	</select>
+	
+	<insert id="insertRecommendAverageReview" parameterType="radto">
+		insert into recommend_average
+		values(seq_score_review.nextval,
+		       #{contentid},
+		       #{m_id},
+		       #{pre_score},
+		       #{pre_review},
+		       #{visit_yn},
+		       sysdate,
+		       sysdate
+		       )
+	</insert>
+
+</mapper>

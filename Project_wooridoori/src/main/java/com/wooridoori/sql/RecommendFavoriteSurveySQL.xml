@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommendfavoritesurvey">
+	
+	<select id="selectStayCode" resultType="condto">
+		select cat3, cat3_name
+		from content_code
+		where cat2 = 'B0201'
+	</select>
+	
+	<select id="selectCat2OfSurvey" resultType="HashMap" parameterType="String">
+		select a.areacode_ref as areacode,
+			   a.purpose_code as purpose_code,
+			   a.stay_code as stay_code,
+		       b.p_cat1 as p_cat1,
+		       b.p_cat2 as p_cat2,
+		       b.p_cat3 as p_cat3
+		from preference a,
+		     preference_filter b
+		where a.m_id = #{id}
+		and a.age = b.age
+		and a.grouptrip = b.personnel 
+	</select>
+	
+	<select id="selectPreferenceOfArea" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode = #{AREACODE}
+		and cat2 in (#{P_CAT1},#{P_CAT2},#{P_CAT3})
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
+	</select>
+	
+	<select id="selectPreferenceOfPurpose" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode = #{AREACODE}
+		and cat2 in (#{PURPOSE_CODE},#{business})
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
+	</select>
+	
+	<select id="selectPreferenceOfStay" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode = #{AREACODE}
+		and cat3 = #{STAY_CODE}
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
+	</select>
+	
+	<update id="insertPreference" parameterType="HashMap">
+		update preference
+		set areacode_ref = #{areacode},
+			age = #{age},
+		    grouptrip = #{grouptrip},
+		    purpose_code = #{purpose_code},
+		    stay_code = #{stay_code}
+		where m_id = #{m_id}
+	</update>
+</mapper>

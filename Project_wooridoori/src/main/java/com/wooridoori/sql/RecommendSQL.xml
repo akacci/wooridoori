@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recommend">
+
+	<select id="selectNationOfTourRank" resultType="HashMap" parameterType="String">
+		select distinct c.pre_cat1 as pre_cat1,
+			   c.pre_cat2 as pre_cat2,
+			   c.pre_cat3 as pre_cat3
+        from preference a,
+        	 wmember b, 
+             PRE_FOREIGN_COUNTRY c
+             where b.m_id = #{value}
+		  and b.NATION = c.NATION
+        <if test="value != 'GUEST' or value.equals('GUEST')">
+	      and a.m_id = b.m_id	      
+        </if>
+	</select>
+
+	<select resultType="tdto" id="selectFirstRecommendArea">
+		select *
+		from TOUR_INQUIRY
+		where areacode in (1, 6, 39) 
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendArea" parameterType="String">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 = #{PRE_CAT1}
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectFirstRecommendThema">
+			select *
+			from TOUR_INQUIRY
+			where cat1 = 'A02'
+			and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendThema" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode in (1, 6, 39)
+		and cat2 in (#{PRE_CAT2}, #{PRE_CAT3}) 
+		and rownum <![CDATA[<]]> 11
+	</select>
+	
+	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
+			select a.* 
+			from tour_inquiry a
+			where a.areacode not in (1, 6, 39)
+			and rownum <![CDATA[<]]> 11
+			order by a.readcount desc
+	</select>
+	
+	<select resultType="tdto" id="selectLoginRecommendNonFavorite" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		where areacode not in (1, 6, 39)
+		and cat2 in (#{PRE_CAT1}, #{PRE_CAT2}, #{PRE_CAT3})
+		and rownum <![CDATA[<]]> 11
+		order by readcount desc
+	</select>
+	
+	<select id="selectContentCodeName" resultType="condto">
+		select distinct cat2, cat2_name
+		from content_code 
+		where cat1 not in ('A03', 'C01')
+	</select>
+	
+	<select id="selectCodeOfTourList" resultType="tdto" parameterType="HashMap">
+		select a.*
+		from (select rownum as rnum,
+			       b.*
+			from (select *
+				   from tour_inquiry
+				   <trim prefix="where" prefixOverrides="AND|OR">
+					   <if test="areacode.size != 0">
+						   and areacode in
+						   <foreach collection="areacode" item="areacode" open="(" close=")" separator=",">
+						   		#{areacode}
+						   </foreach>
+				       </if> 
+					   <if test="themacode.size != 0">
+						   and cat2 in
+					       <foreach collection="themacode" item="themacode" open="(" close=")" separator=",">
+						   		#{themacode}
+						   </foreach>
+					   </if>
+				   </trim>
+				   order by readcount asc) b
+				 )a
+		where a.rnum <![CDATA[>=]]> 1
+		and a.rnum <![CDATA[<=]]> #{end}
+		   
+	</select>
+	
+	<!-- mypage chart sql -->
+	<select id="bubbleOfCount" parameterType="String" resultType="Hashmap">
+		select distinct count(a.category2) as c_cat2, 
+								(select distinct cat2_name 
+								from content_code 
+								where a.category2 = cat2) as cat2_name
+							from PREFERENCE a
+							where a.m_id like #{id}
+							group by a.category2
+	</select>
+	<select id="barchartsOfData" parameterType="String" resultType="Hashmap">
+		select avg(a.grade_point) as my_grade, avg(b.grade_point) as total_grade, c.cat2_name
+		from preference a, preference b, content_code c
+		where b.category2 = a.category2
+		and c.cat2 = a.category2
+		and a.m_id = #{id}
+        group by c.cat2_name
+	</select>
+	<select id="selectOfBubbleData" parameterType="String" resultType="Hashmap">
+	
+		select DISTINCT a.*, c.cat2_name, b.addr1
+		from preference a, tour_inquiry b, content_code c
+		where c.cat2 = a.category2
+		and b.contentid = a.contentid_ref
+		and m_id = #{id}
+	</select>
+	<select id="totalcountOfPreference" parameterType="String" resultType="int">
+		select count(*)
+		from preference
+		where m_id = #{id}
+	</select>
+	<select id="searchOfPreference" parameterType="String" resultType="HashMap">
+		select *
+		from preference
+		where m_id = #{id}		
+	</select>
+   
+	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		<if test="areacode != null and areacode != ''">
+		where areacode in
+			<foreach collection="areacode" item="areacode" open="(" close=")" separator=",">
+				#{areacode} 
+			</foreach>
+		</if>
+		order by readcount asc
+	</select>
+	
+	<select id="selectCat2OfTourlist" resultType="tdto" parameterType="HashMap">
+		select *
+		from tour_inquiry
+		<if test="cat2 != null and cat2 != ''">
+		where cat2 in
+			<foreach collection="cat2" item="cat2" open="(" close=")" separator=",">
+				#{cat2} 
+			</foreach>
+		</if>
+		order by readcount asc
+	</select> -->
+
+	<select resultType="condto" id="fliterSearchOfCat_Name"> 
+		select cat2_name
+		from content_code 
+	</select>
+	
+	<!-- first_trip insert, update -->	
+	<insert id="insertOfFirsttrip" parameterType="refdto">
+	MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            firsttrip = #{firsttrip},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
+	            VALUES(
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)						
+	</insert>
+	
+	<!-- book_mark insert, update -->
+	<insert id="insertOfBookmark" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            bookmark = #{bookmark},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,	                
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq
+	                )
+	            VALUES(
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval	                	                
+	                )	
+	</insert>
+	
+	<!-- grade_point insert, update -->
+	<insert id="insertOfGradePoint" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            GRADE_POINT = #{grade_point},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert ( 
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,	                
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq
+	                )
+	            VALUES(
+	                 #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval	                	                
+	                )	
+	</insert>
+	<insert id="insertOfPreference" parameterType="refdto">
+		MERGE INTO preference ref
+	    USING (select *
+		    from TOUR_INQUIRY
+		    where contentid = #{contentid}) ti
+	    ON (m_id = #{m_id} and contentid_ref = #{contentid})
+	        WHEN matched THEN
+	            UPDATE SET 
+	            pre_rence = #{pre_rence},
+	            modified_date = sysdate
+	        WHEN not matched THEN
+	            insert (
+	                M_ID, 
+	                ref.AREACODE_ref,
+	                ref.SIGUNGUCODE_ref,
+	                ref.CATEGORY1,
+	                ref.CATEGORY2,
+	                ref.CATEGORY3,
+	                ref.CONTENTID_ref,
+	                ref.CONTENTTYPEID_ref,
+	                FIRSTTRIP,
+	                AGE,
+	                BOOKMARK,
+	                GROUPTRIP,
+	                CREATE_DATE,
+	                modified_date,
+	                GRADE_POINT,	                
+	                ref.TITLE_ref,
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
+	            VALUES(
+	                #{m_id},
+	                ti.AREACODE,
+	                ti.sigungucode,
+	                ti.cat1,
+	                ti.cat2,
+	                ti.cat3,
+	                #{contentid},
+	                ti.contenttypeid,
+	                #{firsttrip},
+	                #{age},
+	                #{bookmark},
+	                #{grouptrip},
+	                sysdate,
+	                sysdate,
+	                #{grade_point},
+	                ti.title,
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)
+	</insert>
+</mapper>

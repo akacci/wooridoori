@@ -10,13 +10,76 @@
          <context:component-scan
             base-package="org.springframework.samples.web"/>  -->
 
-
-    <mvc:annotation-driven />
-
+	<context:component-scan base-package="com.wooridoori.controller"/>
+	  <mvc:default-servlet-handler />
+	<!--   <context:annotation-config/> -->
+	  <mvc:annotation-driven/>
+	    
+	    
+	<bean id="multipartResolver"
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="maxUploadSize">
+				<value>500000000</value>
+			</property>		
+	</bean>
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-	        <property name="prefix" value="/WEB-INF/view/"/>
+	        <property name="prefix" value="/WEB-INF/"/>
 	        <property name="suffix" value=".jsp"/>
 	</bean>
+
+<!-- 리소스 파일 위치 등록 ==> 이 경로는 컨트롤러를 타지 않는다.. -->
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+
+	<!-- DAO --> 
+	<!-- 재윤 -->
+	<bean id="MemberDAO" class="com.wooridoori.dao.MemberDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
+	<bean id="GuideDAO" class="com.wooridoori.dao.GuideDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
+	<bean id="GuideScoreDAO" class="com.wooridoori.dao.GuideScoreDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>	
+	</bean>
+	<!-- recommend -->
+	<bean id="RecommendDAO" class="com.wooridoori.dao.RecommendDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="RecommendAverageDAO" class="com.wooridoori.dao.RecommendAverageDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="ContentCodeDAO" class="com.wooridoori.dao.ContentCodeDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="RefrenceDAO" class="com.wooridoori.dao.ReferenceDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<bean id="RecommendFavoriteSurveyDAO" class="com.wooridoori.dao.RecommendFavoriteSurveyDAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>
+	</bean>
+	<!-- 수진 -->
+	<bean id="cDao" class="com.wooridoori.dao.ContentDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="qnaDao" class="com.wooridoori.dao.QnABoardDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	<bean id="adminDao" class="com.wooridoori.dao.AdminDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	
+	<!-- 재문 -->
+	<bean id="gdao" class="com.wooridoori.dao.GuanDAO"><property name="sqlSessionTemplate" ref="sqlSessionTemplate"/></bean>
+	
+	<!-- Service -->
+	<!-- 재윤 -->
+	<bean class="com.wooridoori.service.GuideService" id="gService"/>
+	<bean class="com.wooridoori.service.GuideService" id="gsService"/>
+	<!-- 수진 -->
+	<bean class="com.wooridoori.service.MemberService" id="mService"/>
+	<bean class="com.wooridoori.service.ContentService" id="cService"/>
+	<bean class="com.wooridoori.service.QnABoardService" id="qnaService"/>
+	<bean class="com.wooridoori.service.AdminService" id="adminService"/>
+
+	<!-- recommend -->
+	<bean class="com.wooridoori.service.RecommendService" id="reService"/>
+	<bean class="com.wooridoori.service.RecommendAverageService" id="raService"/>
+	<bean class="com.wooridoori.service.RecommendFavoriteSurveyService" id="rfsService"/>
 
 </beans>

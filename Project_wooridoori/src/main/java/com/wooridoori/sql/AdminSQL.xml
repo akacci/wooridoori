@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna_admin">
+	<!-- QnA -->
+	<select id="getqnalist_noncheck_top" resultType="qnadto">
+		<![CDATA[
+			select
+				*
+			from
+				(select * from qnaboard where acheck = 'N' order by wdate desc)
+			where
+				ROWNUM <=10
+		]]>
+	</select>
+	<select id="getqnalist_all" resultType="qnadto">
+		<![CDATA[
+			select
+				*
+			from
+				qnaboard
+			order by
+				wdate desc
+		]]>
+	</select>
+	<select id="getnoncheckcount" resultType="int">
+		select
+			count(*)
+		from
+			qnaboard
+		where
+			acheck = 'N'
+	</select>
+	<select id="getQnAKindCount" resultType="HashMap">
+		select
+			kind, count(kind) c
+		from
+			qnaboard
+		group by
+			kind
+	</select>
+	<select id="getAllQnAList" resultType="qnadto">
+		select
+			*
+		from
+			qnaboard
+		order by
+			num desc
+	</select>
+	<select id="getQnABoard" parameterType="String" resultType="qnadto">
+		select
+			*
+		from
+			qnaboard
+		where
+			num = #{num}
+	</select>
+	<!-- QnA end -->
+	<!-- member -->
+	<select id="getAllMemberList" resultType="mdto">
+		select
+			*
+		from
+			wmember
+		where
+			m_id != 'admin' and guide != 'D'
+		order by
+			to_char(cre_date,'YY.MM.DD') desc
+	</select>
+	<select id="getChartListDay" parameterType="HashMap"  resultType="HashMap">
+		select
+			to_char(cre_date,'YY.MM.DD') as day, count(*) as count from wmember
+		where
+			to_char(cre_date,'YY.MM.DD') between #{start} and #{end}
+		group by
+			to_char(cre_date,'YY.MM.DD')
+		order by
+			to_char(cre_date,'YY.MM.DD')
+	</select>
+</mapper>

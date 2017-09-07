@@ -1,1 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper	namespace="guide">
+	<select id="getGuideList" parameterType="String" resultType="gdto">
+		select 
+			w.imagepath, g.*  
+		from 
+			wmember w, guide_board g
+   		where
+   			w.name= g.gb_name 
+   		and
+   			 g.gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+	</select>
+
+	<select id="getGuideListCount" parameterType="String" resultType="String">
+		select 
+			count(*)
+		from 
+			 guide_board 
+		where
+   			 gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+	</select>
+	
+	<insert id="writeGuide" parameterType="gdto">
+		insert into guide_board values
+			(guide_seq.nextval,	#{gb_name},	#{gb_title},
+				 #{gb_address}, #{gb_lat},	#{gb_lon},
+    			#{gb_keyword},	#{gb_content},	'0',
+    			#{gb_preview_imgpath}, 0,	#{gb_language},
+	    		#{gb_time}, #{gb_price}, 0, 
+	    		sysdate,	null,	#{gb_category_addr},
+	    		#{gb_address_name},	#{gb_service},	#{gb_meet_time}, #{gb_theme}
+    		)
+	</insert>
+	
+	<select id="isGuide" parameterType="String" resultType="String">
+		select guide from wmember where m_id=#{id}
+	</select>
+	
+	<select id="getContent" parameterType="String" resultType="gdto">
+	    	select 
+                w.imagepath,g.*  
+            from 
+                wmember w, guide_board g
+            where 
+                seq_guide = #{num} and g.gb_name like w.name 
+	
+	</select>
+	
+	<select id="hashSearch" parameterType="HashMap" resultType="gdto">
+		select
+			w.imagepath, g.*  
+		from 
+			wmember w, (select
+				* 
+			from
+				guide_board
+			where
+					gb_title like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+				or
+					gb_keyword like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+				or
+   			 		gb_category_addr like   '%'||#{hash,jdbcType=VARCHAR}||'%')g
+		 where
+		 	g.gb_category_addr like '%'||#{addr,jdbcType=VARCHAR}||'%'  and w.name= g.gb_name 
+	</select>
+	
+	
+	
+	
+</mapper>
