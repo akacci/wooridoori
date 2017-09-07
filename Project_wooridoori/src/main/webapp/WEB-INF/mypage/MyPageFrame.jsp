@@ -44,6 +44,12 @@
                     <a href="javascript:void(0)" onclick="Recommend_Info()">Recommend Page</a> 
                 </li>
                 <li> 
+                    <a href="javascript:void(0)" onclick="guideReservation()">Guide Reservation</a>
+                </li>
+                <li> 
+                    <a href="javascript:void(0)" onclick="guideReuest()">Guide Request</a>
+                </li>
+                <li> 
                     <a href="#">Overview</a>
                 </li>
                 <li>
@@ -93,6 +99,12 @@
 			function Recommend_Info()
  			{
  				$("#page").load("re_mypage.wd")
+ 			}
+			function guideReservation(){
+ 				$("#page").load("guideReservationList.wd");
+ 			}
+ 			function guideReuest(){
+ 				$("#page").load("selectRequestList.wd");
  			}
 		    function qnaBoard(){
 		        $("#page").load("qna.wd"); 

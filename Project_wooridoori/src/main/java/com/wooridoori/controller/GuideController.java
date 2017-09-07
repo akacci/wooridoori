@@ -43,7 +43,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.GuideDTO;
+import com.wooridoori.dto.GuideReplyDTO;
 import com.wooridoori.dto.MemberDTO;
+import com.wooridoori.service.GuideReplyService;
+import com.wooridoori.service.GuideScoreService;
 import com.wooridoori.service.GuideService;
 import com.wooridoori.service.MemberService;
 
@@ -59,8 +62,10 @@ public class GuideController {
 	GuideService gService;
 	@Autowired
 	MemberService mService;
-	
-	
+	@Autowired
+	GuideReplyService grService;
+	@Autowired
+	GuideScoreService gsService;
 	
 	///////////////////////////////Login///////////////////////////////////////
 	//id,idsave
@@ -74,7 +79,7 @@ public class GuideController {
 		return "Login/loginForm";
 	}
 	
-	@RequestMapping("login.wd")
+/*	@RequestMapping("login.wd")
 	public String loginProc(Model m, HttpServletRequest req,
 						@ModelAttribute MemberDTO mdto,
 						HttpSession session,
@@ -100,7 +105,7 @@ public class GuideController {
 		else{
 			return "Login/loginForm";	
 		}
-	}
+	}*/
 	
 	
 	////////////////////////////////Guide///////////////////////////////////////
@@ -113,16 +118,85 @@ public class GuideController {
 	//Get list	
 	@RequestMapping("guideList.wd")
 	public String getList(HttpSession session, String addr, Model m, 
-							@RequestParam(defaultValue="") String hash, HttpServletRequest request){
-			if(!(hash.isEmpty())){					//Hash List
-				List<GuideDTO> sList =gService.hashSearch(addr,hash);
-				m.addAttribute("list",sList);
-				m.addAttribute("addr",addr);
-			}
-			else{						// Area List
-				m.addAttribute("list",gService.getList(addr));
-				m.addAttribute("addr",addr);
-			}
+							@RequestParam(defaultValue="") String hash, HttpServletRequest request,
+							@RequestParam(value="pageNum",defaultValue="1")int currentPage ){
+
+		int totalCount=0;
+		if(!(hash.isEmpty())){					//Hash Search List
+			totalCount=Integer.parseInt(gService.getGuideHashListCount(addr, hash));
+		}
+		else{						// Default List
+			totalCount=Integer.parseInt(gService.getListCount(addr));
+		}
+		//리스트
+		int perPage=5; //한페이지당 보여지는 글의 갯수
+		int perBlock=5; //한블럭당 보여지는 페이지번호의 수
+		int totalPage; //총 페이지의 갯수
+		int startNum;//한페이지당 보여지는 시작번호
+		int endNum;//한페이지당 보여지는 끝번호
+		int startPage; //한 블럭당 보여지는 시작페이지번호
+		int endPage; //한 블럭당 보여지는 끝페이지번호
+		int no; //게시글에 붙일 시작번호
+		
+		//총 페이지수
+		totalPage=(totalCount/perPage)+(totalCount%perPage>0?1:0);
+		//각 페이지에 보여질 시작번호와 끝번호 구하기
+		startNum=(currentPage-1)*perPage+1;
+		endNum=startNum+perPage-1;
+		//예를 들어 모두 45개의 글이 있을경우
+		  //마지막 페이지는 endnum 이 45 가 되야함
+		  if(endNum>totalCount)
+				endNum=totalCount;
+		
+		//각 블럭에 보여질 시작 페이지번호와 끝 페이지 번호 구하기
+		startPage= (currentPage-1)/perBlock*perBlock+1;
+		endPage=startPage+perBlock-1;
+		//예를 들어 총 34페이지일경우
+		//마지막 블럭은 30-34 만 보여야함
+		if(endPage>totalPage)
+		   endPage=totalPage;
+		
+		no=totalCount-((currentPage-1)*perPage);
+		
+		m.addAttribute("totalPage",totalPage);
+		m.addAttribute("startPage",startPage);
+		m.addAttribute("endPage",endPage);
+		m.addAttribute("totalCount",totalCount);
+		m.addAttribute("currentPage",currentPage);
+		m.addAttribute("no",no);
+
+		
+		
+	
+		if(!(hash.isEmpty())){					//Hash Search List
+			List<GuideDTO> sList =gService.hashSearch(addr,hash,startNum,endNum);
+			//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
+			no=totalCount-((currentPage-1)*perPage);
+			m.addAttribute("list",sList);
+			m.addAttribute("addr",addr);
+			String []rater=new String[sList.size()];
+			
+			for(int i=0;i<sList.size();i++){
+				int idx=Integer.parseInt(sList.get(i).getSeq_guide());
+				rater[i]= gsService.guideRateCount(idx);
+			}			
+			m.addAttribute("rater",rater);
+		}
+		else{						// Default List				
+			List<GuideDTO> list=gService.getList(addr,startNum,endNum);
+			//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
+			no=totalCount-((currentPage-1)*perPage);
+			m.addAttribute("list",list);
+			m.addAttribute("addr",addr);
+			String []rater=new String[list.size()];
+			
+			for(int i=0;i<list.size();i++){
+				int idx=Integer.parseInt(list.get(i).getSeq_guide());
+				rater[i]= gsService.guideRateCount(idx);
+			}			
+			m.addAttribute("rater",rater);
+
+		}
 /*			m.addAttribute("lat",lat);
 			m.addAttribute("lng",lng);*/
 
@@ -173,6 +247,7 @@ public class GuideController {
 		
 		boolean isSafe=gService.recog((String)session.getAttribute("id"));
 		if(isSafe){
+			gService.guideAuthUpdate((String) session.getAttribute("id"));
 			return "Guide/GuideWriteForm";
 		}
 		else{
@@ -353,13 +428,28 @@ public class GuideController {
 	
 	//Guide content
 	@RequestMapping("guideContent.wd")
-	public String guideContent(String num, Model m,String addr){
-		System.out.println(num);
+	public String guideContent(HttpSession session,String num, Model m,String addr){
+		//contents
 		GuideDTO gdto=gService.getContent(num);
-		
+		//reply
+		List<GuideReplyDTO> grList= grService.getReplyList(Integer.parseInt(num));
 		m.addAttribute("num",num);
+		m.addAttribute("grList",grList);
 		m.addAttribute("addr",addr);
 		m.addAttribute("gdto",gdto);
+
+		if((String)session.getAttribute("id")!=null){
+			//Get info of member for reservation
+			String tel=mService.getMemberInfo((String)session.getAttribute("id")).getTel();
+			String email=mService.getMemberInfo((String)session.getAttribute("id")).getE_mail();
+			m.addAttribute("tel",tel);
+			m.addAttribute("email",email);
+		}
+		//guideNearestOfList
+		double lat=Double.parseDouble(gdto.getGb_lat());
+		double lon=Double.parseDouble(gdto.getGb_lon());
+		List<GuideDTO> nList=gService.guideNearestOfList(lat, lon);
+		m.addAttribute("nList",nList);
 		return "Guide/GuideContent";
 	}
 	

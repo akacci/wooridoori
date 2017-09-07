@@ -2,15 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper	namespace="guide">
-	<select id="getGuideList" parameterType="String" resultType="gdto">
-		select 
-			w.imagepath, g.*  
-		from 
-			wmember w, guide_board g
-   		where
-   			w.name= g.gb_name 
-   		and
-   			 g.gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+	<select id="getGuideList" parameterType="HashMap" resultType="gdto">
+	<![CDATA[
+		select a.* 
+		from
+			(select rownum as rnum, b.* from
+			(select 
+				w.imagepath, g.*  
+			from 
+				wmember w, guide_board g
+	   		where
+	   			w.name= g.gb_name 
+	   		and
+	   			 g.gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+	   		order by 
+	   			seq_guide desc)b)a
+	   	where 
+	   		a.rnum >= to_number(#{start}) and a.rnum <= to_number(#{end})
+   		]]>	
+   			
+   			 
 	</select>
 
 	<select id="getGuideListCount" parameterType="String" resultType="String">
@@ -22,15 +33,49 @@
    			 gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
 	</select>
 	
+	<update id="guideAuthUpdate" parameterType="String">
+		update
+			wmember
+		set
+			guide='Y'
+		where
+			m_id=#{m_id}
+	</update>
+	
 	<insert id="writeGuide" parameterType="gdto">
-		insert into guide_board values
+		insert into
+			guide_board(
+				SEQ_GUIDE,
+				GB_NAME,
+				GB_TITLE,
+				GB_ADDRESS,
+				GB_LAT,
+				GB_LON,
+				GB_KEYWORD,
+				GB_CONTENT,
+				GB_STATE,
+				GB_PREVIEW_IMGPATH,
+				GB_HITS,
+				GB_LANGUAGE,
+				GB_TIME,
+				GB_PRICE,
+				CRE_DATE,
+				UPD_DATE,
+				GB_CATEGORY_ADDR,
+				GB_ADDRESS_NAME,
+				GB_SERVICE,
+				GB_MEET_TIME,
+				GB_THEME,
+				GB_SCORE
+			)
+		values
 			(guide_seq.nextval,	#{gb_name},	#{gb_title},
 				 #{gb_address}, #{gb_lat},	#{gb_lon},
     			#{gb_keyword},	#{gb_content},	'0',
     			#{gb_preview_imgpath}, 0,	#{gb_language},
-	    		#{gb_time}, #{gb_price}, 0, 
+	    		#{gb_time}, #{gb_price},  
 	    		sysdate,	null,	#{gb_category_addr},
-	    		#{gb_address_name},	#{gb_service},	#{gb_meet_time}, #{gb_theme}
+	    		#{gb_address_name},	#{gb_service},	#{gb_meet_time}, #{gb_theme},0
     		)
 	</insert>
 	
@@ -49,22 +94,65 @@
 	</select>
 	
 	<select id="hashSearch" parameterType="HashMap" resultType="gdto">
-		select
-			w.imagepath, g.*  
-		from 
-			wmember w, (select
-				* 
-			from
-				guide_board
-			where
-					gb_title like   '%'||#{hash,jdbcType=VARCHAR}||'%'
-				or
-					gb_keyword like   '%'||#{hash,jdbcType=VARCHAR}||'%'
-				or
-   			 		gb_category_addr like   '%'||#{hash,jdbcType=VARCHAR}||'%')g
-		 where
-		 	g.gb_category_addr like '%'||#{addr,jdbcType=VARCHAR}||'%'  and w.name= g.gb_name 
+	<![CDATA[
+		select a.* 
+		from
+			(select rownum as rnum, b.* from
+			(select
+				w.imagepath, g.*  
+			from 
+				wmember w, (select
+					* 
+				from
+					guide_board
+				where
+						gb_title like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+					or
+						gb_keyword like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+					or
+	   			 		gb_category_addr like   '%'||#{hash,jdbcType=VARCHAR}||'%')g
+			 where
+			 	g.gb_category_addr like '%'||#{addr,jdbcType=VARCHAR}||'%'  and w.name= g.gb_name 
+			 order by seq_guide desc)b)a
+		where 
+	   		a.rnum >= to_number(#{start}) and a.rnum <= to_number(#{end})
+	]]>
 	</select>
+
+   		<select id="getGuideHashListCount" parameterType="HashMap" resultType="String">
+		select 
+			count(*)
+		from 
+			 guide_board 
+		where
+   			 gb_category_addr like   '%'||#{addr,jdbcType=VARCHAR}||'%'
+   			and
+   			(gb_title like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+					or
+						gb_keyword like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+					or
+	   			 		gb_category_addr like   '%'||#{hash,jdbcType=VARCHAR}||'%'
+	   		)
+	</select>
+			 
+	
+	<select id="guideNearestOfList" parameterType="HashMap" resultType="gdto">
+	<![CDATA[
+		select 
+			SEQ_GUIDE,	GB_NAME,	GB_TITLE,	GB_ADDRESS,	GB_LAT,
+			GB_LON,	GB_KEYWORD,	GB_CONTENT,	GB_STATE,   GB_PREVIEW_IMGPATH,
+			GB_HITS,	GB_LANGUAGE,	GB_TIME,	GB_PRICE,	CRE_DATE,
+			UPD_DATE,	GB_CATEGORY_ADDR,	GB_ADDRESS_NAME,	GB_SERVICE,
+			GB_MEET_TIME,	GB_THEME,	GB_SCORE,
+			power((gb_lat-#{lat}),2) + power((gb_lon-#{lon}),2)
+		from
+			guide_board
+		where
+			power((gb_lat-#{lat}),2) + power((gb_lon-#{lon}),2) <= 0.002 
+		
+		]]>	
+	</select>
+	
 	
 	
 	

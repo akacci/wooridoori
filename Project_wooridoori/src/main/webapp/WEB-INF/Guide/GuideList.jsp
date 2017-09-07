@@ -22,9 +22,11 @@
 <script type="text/javascript" src="${root}/dist/jquery.ajax-cross-origin.min.js"></script>
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds" async defer></script>
+ <!-- rate  -->
+<script src="${root }/gjunge-rateit.js-937fff8/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="${root }/gjunge-rateit.js-937fff8/scripts/rateit.css">
 
        
-
 
 <style type="text/css">
 	#cl-dashboard{display: none;} 
@@ -166,7 +168,7 @@
 	}
 	.contentImg{
 		display: inline;
-		height:153px;
+		height:159px;
 		width: 235px; 
 		overflow: hidden;
 		position: absolute;
@@ -196,6 +198,12 @@
 		position: absolute;
 		cursor: pointer;
 	  	display: none;  
+	}
+	#bottom_g{
+		margin-bottom: 80px;
+	}
+	.rateit{
+		color:yellow; 
 	}
 </style>
 <script type="text/javascript">
@@ -242,7 +250,7 @@
 		 
  		 var mIcon=["SKY_A0038","SKY_A0101,08","SKY_A0202,09","SKY_A0303,10","SKY_A0412,40","SKY_A0513,41", "SKY_A0614,42","SKY_A0718" ,"SKY_A0821","SKY_A0932","SKY_A1004","SKY_A1129","SKY_A1226","SKY_A1327", "SKY_A1428" ];
 		 /* 현재날씨 */
- 		 	var root=$("#weather").attr("root");
+ 		 	var root="${root}";
 			var city=($("#city").attr("addr")).substring(0,2);
 		/* 	var county="용산구";
 			var village="갈월동"; */
@@ -468,6 +476,8 @@
   		var Curl="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22KRW%22%2C%22USD%22%2C%22PHP%22%2C%22EUR%22%2C%22CNY%22%2C%22JPY%22%2C%22GBP%22)&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 		//대만 TWD
 		var utok_size="${fn:length(list)} ";
+		utok_size=parseInt(utok_size);
+		var i=0;
 		$.ajax({
 			url:Curl,
 			type:"GET",
@@ -480,8 +490,8 @@
 						$("#currency").append("<b><img src='./Guide_img/us.png'> 미국   USD	$");
 						$("#currency").append((1000/parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
 						utok=1000/(parseFloat(rate));
-						for(var i=1;i<=parseInt(utok_size);i++){		// Loop of list size 
-							$("#price_d"+i).append(" ($"+(parseInt($("#price_d"+i).attr("pri"+i))/parseFloat(rate)).toFixed(1)+")");
+						for(var j=1;j<=utok_size;j++){		// Loop of list size 
+							$("#price_d"+j).append(" ($"+(parseInt($("#price_d"+j).attr("pri"+j))/parseFloat(rate)).toFixed(1)+")");
 						}
 					}
 					else if(i==2){
@@ -501,7 +511,7 @@
 						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
 					}
 					else if(i==6){
-						$("#currency").append("<b><img src='./Guide_img/uk.png'> 영국 GBP	£");
+						$("#currency").append("<b><img src='./Guide_img/uk.png'> 영국   GBP	£");
 						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
 					}
 					++i;
@@ -609,12 +619,14 @@
 		   		location.href="hashSearch.wd?addr="+addr+"&hash="+hash;   
 		   	});
 		
+		/* Rate was default */
+
+		
+		
 		
 	});
 
 
-	
-	
 	
 	
 	
@@ -623,9 +635,9 @@
 <body>		
 
 	<header style="z-index: inherit;">
-		<%@ include file= "../layout/wtopmenu.jsp" %>
+		<%@ include file= "../layout/top.jsp" %>
 	</header>
-	 <br><br><br><br>
+	
 	 
 	 
 	 <!--상단 표시  -->
@@ -648,7 +660,7 @@
 <input type="button" id="write" value="write" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd?addr=${addr}'">
 	
 		<!-- 메뉴와 리스트는 같은 div  -->
-		<div class="form-horizontal">
+		<div class="form-horizontal" id="bottom_g">
 			<div class="form-group">
 			
 				<!--메뉴  -->
@@ -662,10 +674,11 @@
 			        <li class="menu">
 			            <a><img src="${root }/Guide_img/list_img.png" alt="가이드 테마" width="10px"/>가이드 테마</a>
 			            <ul class="submenu">
-			                <li>문화재</li>
-			                <li>체험(예술)</li>
-			                <li>체험(레져)</li>
-			                <li>식도락</li>
+			                <li><a href="themeSearch.wd">문화재</a></li>
+			                <li><a href="themeSearch.wd">체험(예술)</a></li>
+			                <li><a href="themeSearch.wd">체험(레져)</a></li>
+			                <li><a href="themeSearch.wd">식도락</a></li>
+			                <li><a href="themeSearch.wd">자연</a></li>
 			            </ul>
 			        </li>
 			 
@@ -680,7 +693,7 @@
 			    	</ul>
 			</div>
 				
-		
+	
 		
 		
 			<!-- 리스트 -->
@@ -701,10 +714,13 @@
 							<a href="" id="name" >${i.gb_name }</a><br><br>
 							<span id="title"  num="${i.seq_guide}">${i.gb_title }</span>
 							<br><br>
-							<c:forEach begin="0" end="4" >
+							
+							<div class="rateit" data-rateit-value="${i.gb_score }" data-rateit-readonly="true"></div>
+<%-- 							<c:forEach begin="0" end="4" >
 								<img src="${root }/Guide_img/star.png">
-							</c:forEach>
-							<span id="rater">(30)</span>
+							</c:forEach> --%>
+							<span id="rate">(${rater[stat.index] })</span>
+							
 							<img src="${root }/Guide_img/time.png"width="18px" id="g_time_img"><span id="g_time">${i.gb_time }</span>
 							<br>
 							
@@ -726,11 +742,33 @@
 				</div>
 				</c:forEach>
 			</div>
-			<br><br><br>
 		</div>
-		<div id="pa"></div>
-	
-		
+
+
+	<!-- 페이징처리 -->
+	<div style="margin-left: 350px; margin-bottom: 100px;" class="text-center" wid>
+		<ul class="pagination">
+			<!-- 이전(첫블럭이 아니면 보이게하기) -->
+			<c:if test="${startPage>1}">
+				<li><a href="guideList.wd?pageNum=${startPage-1 }&addr=${addr}"> ◀</a></li>
+			</c:if>
+			<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+				<li><c:if test="${currentPage==i }">
+						<a style="color: red" href="guideList.wd?pageNum=${i }&addr=${addr}">${i }</a>
+					</c:if> <c:if test="${currentPage!=i }">
+						<a style="color: black" href="guideList.wd?pageNum=${i }&addr=${addr}">${i }</a>
+					</c:if></li>
+			</c:forEach>
+
+			<!-- 다음 (마지막 블럭이 아니면보이기):클릭시 현재페이지는
+					 다음블럭의 startPage 로 가려면 어떻게 주어야할까요 -->
+			<c:if test="${endPage<totalPage }">
+				<li><a href="guideList.wd?pageNum=${endPage+1 }&addr=${addr}"> ▶</a></li>
+			</c:if>
+		</ul>
+	</div>
+
+
 	<footer class="container-fluid text-center">
       <%@ include file= "../layout/wfooter.jsp" %>
    </footer> 

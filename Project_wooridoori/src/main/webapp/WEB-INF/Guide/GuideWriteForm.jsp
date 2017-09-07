@@ -254,21 +254,25 @@
 			/* Get language */
 			var lang=""; 
 			$("input[name=check]:checked").each(function(idx) {
-				if($('input[name="check"]:checked').length==idx+1){
+				if($('input[name="check"]:checked').length==idx){//+1
 					lang+= $(this).val();
-					alert($('input[name="check"]:checked').length);
+					//alert($('input[name="check"]:checked').length);
 				}
 				else{
 					lang+= $(this).val()+", ";
 				 	$("#gb_language").val(lang);
 				}
-				alert("---"+lang);
 			});
 			/* Get service */
 			var serv=""; 
-			$("input[name=check2]:checked").each(function() {
+			$("input[name=check2]:checked").each(function(idx) {
+				if($('input[name="check2"]:checked').length==idx){
+					serv+= $(this).val();
+				}
+				else{
 					serv+= $(this).val()+" ";
 				  $("#gb_service").val(serv);
+				}
 			});
 			/* Send to form */
 			$("#frm").submit();
@@ -314,9 +318,9 @@
 
 </script>
 </head>
-	<header>
+<%-- 	<header>
 		<%@ include file= "../layout/top.jsp" %>
-	</header> 
+	</header>  --%>
 <body>
 
 	<form action="GuideWriteAction.wd"
