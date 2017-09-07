@@ -94,7 +94,7 @@
  			} 
 			function Recommend_Info()
  			{
- 				$("#page").load("re_mypage.wd")
+ 				$("#page").load("re_mypage.wd");
  			}
 		    function qnaBoard(){
 		        $("#page").load("qna.wd"); 
