@@ -24,15 +24,11 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/ionicons.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/AdminLTE.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/_all-skins.min.css?t=<%=System.currentTimeMillis()%>">
-<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/bootstrap.min.js?j=<%=System.currentTimeMillis()%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/fastclick.js?j=<%=System.currentTimeMillis()%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/adminlte.min.js?j=<%=System.currentTimeMillis()%>"></script> --%>
-<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/demo.js?j=<%=System.currentTimeMillis()%>"></script> --%>
 
 <title>관광지 추천</title>
 </head>
 <body>
+	<div id="success_message"></div>
 	<div id="recommend_main">
 		<div id="area">
 			<div class="slider">
@@ -50,22 +46,25 @@
 								<div class="div_hover_box">				
 									<div class="select_blockA">
 										<span class="first_trip_click" value="n" inx="${i.count}">
-											<span class = "glyphicon glyphicon-ok-circle" style="right:5px; top:5px; font-size: 2em; color: pink;"></span>
+											<!-- <img class="check_img" src="resources/image/Recommend/Check-icon.png"> -->
+											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
 									<div class="select_blockB">
 										<ul class="select_box_ul">
-											<li><span class="tour_title">관광지명</span></li>
-											<li>
-												<div class="rateit bigstars" inx="${i.count}"></div>
+											<li class="select_box_li"><span class="tour_title">관광지명</span></li>
+											<li class="rateit_box">
+												<div class="rateit bigstars" id="rateit_false" inx="${i.count}"></div>
 											</li>
 											<li>
-												<span class="_ccimg" value="n" inx="${i.count}">
-													<span class="glyphicon glyphicon-heart" style="font-size: 2em; color: pink;"></span>
-												</span>						
-												<span class="_jcimg" value="n" inx="${i.count}">												
-													<span class="glyphicon glyphicon-book" style="font-size: 2em; color: pink;"></span>
-												</span>												
+												<div class="_ccimg" value="n" inx="${i.count}">
+													좋아요
+													<img class="ccimg" src="resources/image/Recommend/cc_img_1.png">													
+												</div>						
+												<div class="_jcimg" value="n" inx="${i.count}">
+													즐겨찾기												
+													<img class="jcimg" src="resources/image/Recommend/jc_img_1.png">													
+												</div>												
 											</li>				
 										</ul>
 									</div>								 
@@ -93,18 +92,24 @@
 								<div class="div_hover_box">				
 									<div class="select_blockA">
 										<span class="first_trip_click" name="first_trip" value="Y">
-											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
 									<div class="select_blockB">
 										<ul class="select_box_ul">
 											<li><span class="tour_title">관광지명</span></li>
-											<li>
+											<li class="rateit_box">
 												<div class="rateit bigstars"></div>
 											</li>
 											<li>							
-												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
-												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
+												<div class="_ccimg" value="n" inx="${i.count}">
+													좋아요
+													<img class="ccimg" src="resources/image/Recommend/cc_img_1.png">													
+												</div>						
+												<div class="_jcimg" value="n" inx="${i.count}">
+													즐겨찾기												
+													<img class="jcimg" src="resources/image/Recommend/jc_img_1.png">													
+												</div>
 											</li>				
 										</ul>
 									</div>								 
@@ -132,18 +137,24 @@
 								<div class="div_hover_box">				
 									<div class="select_blockA">
 										<span class="first_trip_click" name="first_trip" value="Y">
-											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
 									<div class="select_blockB">
 										<ul class="select_box_ul">
 											<li><span class="tour_title">관광지명</span></li>
-											<li>
+											<li class="rateit_box">
 												<div class="rateit bigstars"></div>
 											</li>
 											<li>							
-												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
-												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
+												<div class="_ccimg" value="n" inx="${i.count}">
+													좋아요
+													<img class="ccimg" src="resources/image/Recommend/cc_img_1.png">													
+												</div>						
+												<div class="_jcimg" value="n" inx="${i.count}">
+													즐겨찾기												
+													<img class="jcimg" src="resources/image/Recommend/jc_img_1.png">													
+												</div>
 											</li>				
 										</ul>
 									</div>								 
@@ -193,7 +204,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<!-- dialog  -->
 	<div id="detail_tour">
 		<c:import url="../Recommend/tourdetail_dialog.jsp"/> 

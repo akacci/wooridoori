@@ -1,4 +1,4 @@
-   var configFontAwesome = {
+ /*  var configFontAwesome = {
 	   custom: {
 	       families: ['fontawesome'],
 	       urls: ['https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css']
@@ -8,7 +8,7 @@
 	       }
    };
    
-   WebFont.load(configFontAwesome);
+   WebFont.load(configFontAwesome);*/
    
    $(function(){		
 	   
