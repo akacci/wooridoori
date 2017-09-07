@@ -21,7 +21,6 @@ $(function(){
 	});
     
     /*hover event*/
-  	/*$(".select_box_div").hover(function(e){*/
     $(document).on("mouseenter", ".select_box_div", function(e){
 		var topClass = $(e.target).parent().parent().parent().parent().parent().parent();
 		var inx;

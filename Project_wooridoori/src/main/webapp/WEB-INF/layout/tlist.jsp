@@ -77,9 +77,9 @@
 
 	});
 </script>
-<title>Insert title here</title>
+<title>관광지 검색</title>
 </head>
-<body style="width: 100%; height: 1500px;">
+<body style="width: 100%; height: auto; min-height: 1000px;">
 	<header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
          <%@include file="../layout/top.jsp"%>
@@ -169,7 +169,7 @@
 				</div>
 				<div class="Ttable_cover" id="Ttable_cover">
 					<table class="tlist_table" id="tlist_table">
-						<tr>
+						<tr class="tfirst_tr">
 							<th style="width: 70px">글번호</th>
 							<th style="width: 220px"><a class="t_standard" href="category.wd?areaname=${areaname}&sigungu=${sigungu}&depth=2&standard=1">관광지▼</a></th>
 							<th style="width: 300px">지역</th>

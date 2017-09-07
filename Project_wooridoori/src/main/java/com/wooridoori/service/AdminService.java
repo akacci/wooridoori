@@ -39,6 +39,9 @@ public class AdminService {
 		}
 		return map;
 	}
+	public List<QnABoardDTO> getQnAList(){
+		return adminDao.getQnAList();
+	}
 	
 	/* Member */
 	public List<MemberDTO> getAllMemberList(){

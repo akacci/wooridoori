@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,20 +11,10 @@
 <meta name="author" content="">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- 구글차트 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<c:if test="${sessionScope.ID eq 'admin'}">
-<script type="text/javascript">
-$(function(){
-	var data = '${data}';
-	$("#page").load(data);
-});
-</script>
-</c:if>
-
     <title>Simple Sidebar - Start Bootstrap Template</title>
-
-	
     <!-- Bootstrap core CSS -->
     <link href="resources/css/mypage.css" rel="stylesheet">
+	  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
 
     <!-- Custom styles for this template -->
     <link href="resources/css/simple-sidebar.css" rel="stylesheet">
@@ -67,8 +57,22 @@ $(function(){
                     <a onclick="admintest2()" href="#">admin</a>
                 </li>
                 <li>
-                    <a onclick="qnaBoard()" href="#">QnA</a>
+                    <a onclick="changePage('qna.wd')" href="#">QnA</a>
                 </li>
+				<c:if test="${sessionScope.ID eq 'admin'}">
+					<li>
+	                    <a onclick="changePage('admin.wd')" href="#">관리자페이지</a>
+	                </li>
+					<li>
+	                    <a onclick="changePage('adminQnAList.wd')" href="#">QnA관리자페이지</a>
+	                </li>
+	                <li>
+	                    <a onclick="changePage('adminMemberList.wd')" href="#">전체회원관리페이지</a>
+	                </li>
+	                <li>
+	                    <a onclick="changePage('adminGuideList.wd')" href="#">가이드관리페이지</a>
+	                </li>
+				</c:if>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -80,11 +84,10 @@ $(function(){
         </div> 
  		
  		<script type="text/javascript">
- 			function userInfo(data){
- 				$("#page").load(data); 
- 				
+ 			function userInfo(){
+ 				$("#page").load(); 	
  			} 
- 			function Recommend_Info()
+			function Recommend_Info()
  			{
  				$("#page").load("re_mypage.wd")
  			}
@@ -94,6 +97,10 @@ $(function(){
 		    function admintest2(){
 		   	  	$("#page").load("admintest2.wd");
 		    }
+      
+			function changePage(data){
+				$("#page").load(data);
+			}
  		</script>
  		
         <!-- Page Content -->

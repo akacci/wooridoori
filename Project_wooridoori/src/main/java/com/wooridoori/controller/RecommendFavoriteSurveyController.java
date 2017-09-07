@@ -18,15 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wooridoori.dto.ContentCodeDTO;
+import com.wooridoori.dto.ReferenceDTO;
 import com.wooridoori.dto.TourInquiryDTO;
 import com.wooridoori.service.RecommendFavoriteSurveyService;
+import com.wooridoori.service.RecommendService;
 
 @Controller
 public class RecommendFavoriteSurveyController {
 	
 	@Autowired
 	RecommendFavoriteSurveyService rfsService;
-	
+		
 	@RequestMapping(value="sessionlogin.wd", method=RequestMethod.POST)
 	@ResponseBody
 	public String sessionLogin(HttpSession session){
@@ -37,9 +39,9 @@ public class RecommendFavoriteSurveyController {
 	}
 	
 	@RequestMapping(value="selectstaycode.wd", method=RequestMethod.POST)
-	public void selectStayCode(HttpServletResponse response){
+	public void selectStayCode(HttpServletResponse response, HttpSession session){
 		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐때문에
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mapper = new ObjectMapper();		
 		
 		List<ContentCodeDTO> list = rfsService.selectStayCode();
 		
@@ -121,20 +123,39 @@ public class RecommendFavoriteSurveyController {
 								@RequestParam(value="purpose") String purpose,
 								@RequestParam(value="person") String person,
 								@RequestParam(value="stay") String stay,
-								HttpSession session){
+								HttpSession session,
+								HttpServletResponse response){
+		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		Map<String, String> map = new HashMap<String, String>();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		int totcnt = rfsService.totalCountPreference(id);		
 		if(login.equals("YES")){
+			if(totcnt != 0){
 			map.put("m_id", id);
 			map.put("areacode", areacode);
 			map.put("age", age);
 			map.put("grouptrip", person);
 			map.put("purpose_code", purpose);
 			map.put("stay_code", stay);
+			
+			rfsService.insertPreference(map);
+			}else{
+				map.put("error", "insert_error");
+			}
 		}
-		
-		rfsService.insertPreference(map);
+		try {
+			response.getWriter().print(mapper.writeValueAsString(map));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

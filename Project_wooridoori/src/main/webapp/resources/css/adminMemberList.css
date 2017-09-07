@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+.allmem_table{
+	margin-bottom: 100px;
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.allmem_row{
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+
+.allmem_cellcol{
+	
+}

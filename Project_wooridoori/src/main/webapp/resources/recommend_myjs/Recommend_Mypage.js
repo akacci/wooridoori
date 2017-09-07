@@ -3,7 +3,7 @@
 	var currentPage = 1;
 	var data_table = bubble_Data(id,currentPage);
 	mypage_paging(id,currentPage);
-	/*$('#example1').DataTable( {
+	/*$('#example1').DataTable({
         ajax: data_table,
         columns: [
             { "Tourist destination": true },

@@ -405,17 +405,23 @@
 		height: 20px;
 		text-align: center;
 	} */
-		
-	span._cc_img{
-		cursor: pointer;
+	
+	span._ccimg, span._jcimg, span.first_trip_click{
+		width: 50px;
+		height: 50px;
+		cursor: pointer;	
 	}
 	
-	span._jc_img{
-		cursor: pointer;
-	}
 	
-	img._ccimg, img._jcimg{
-		width: 20px;
+	
+	span.glyphicon glyphicon-heart-empty{		
+		font-size: 2em; 
+		color: red; 
+		font-weight: 0.5px;		
+	}	
+	
+	span.glyphicon glyphicon-heart-empty:hover{
+		color: bule;
 	}
 	
 	span.filter_tag_exit{

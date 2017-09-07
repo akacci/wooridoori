@@ -38,6 +38,14 @@
 		group by
 			kind
 	</select>
+	<select id="getAllQnAList" resultType="qnadto">
+		select
+			*
+		from
+			qnaboard
+		order by
+			num desc
+	</select>
 	<!-- QnA end -->
 	<!-- member -->
 	<select id="getAllMemberList" resultType="mdto">

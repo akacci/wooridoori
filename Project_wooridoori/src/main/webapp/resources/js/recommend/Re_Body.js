@@ -35,29 +35,26 @@ $(function(){
 	});
 	
 	/*firsttrip, bookmark, preference, grade point ajax*/
-	var re_val = 0;
-	var fir_val = 'x';
-	var ja_val = 'x';
-	var cc_val = 'x';
-	var _contentid = null;
+	
 	$(".rateit").click(function(){
-		re_val = $(this).rateit('value');
+		var re_val = $(this).rateit('value');
 		var inx = $(this).attr('inx');
-		_contentid = $(".contentid:eq("+inx+")").attr("value");
+		var _contentid = $(".contentid:eq("+inx+")").attr("value");
 		
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
 	
-	$(".btn_first_trip").click(function(){	
-		
-		fir_val = $(this).attr("value");
-		
+	$(".first_trip_click").hover(function(){
+		$(this).children("span",function(){
+			$(this).css("color", "red");
+		});
+		var fir_val = $(this).attr("value");		
 		var inx = $(this).attr('inx');
-		_contentid = $(".contentid:eq("+inx+")").attr("value");
+		var _contentid = $(".contentid:eq("+inx+")").attr("value");
 		
 		if(fir_val=="n")
 		{
-			fir_val = $(this).attr("value","y");			
+			fir_val = $(this).attr("value","y");
 		}
 		if(fir_val=="y")
 		{
@@ -68,7 +65,7 @@ $(function(){
 	});
 	$("._jcimg").click(function(){
 		
-		ja_val = $(this).attr("value");
+		var ja_val = $(this).attr("value");
 		var inx = $(this).attr('inx');
 		_contentid = $("._contentid:eq("+inx+")").attr("value");
 		if(ja_val=="n")
@@ -82,22 +79,24 @@ $(function(){
 		ja_val = $(this).attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
-	$("._ccimg").click(function(){
-		
-		cc_val = $(this).attr("value");
-		var inx = $(this).attr('inx');
-		_contentid = $("._contentid:eq("+inx+")").attr("value");
-		
-		if(cc_val == 'n')
-		{
-			cc_val = $(this).attr("value","y");
-		}
-		if(cc_val == 'y')
-		{
-			cc_val = $(this).attr("value","y");
-		}
-		cc_val = $(this).attr("value");
-		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+	$("._ccimg").hover(function(){
+		$(this).children.attr("class","glyphicon glyphicon-heart");
+		$(this).onclick(function(){
+			cc_val = $(this).attr("value");
+			var inx = $(this).attr('inx');
+			_contentid = $("._contentid:eq("+inx+")").attr("value");
+			
+			if(cc_val == 'n')
+			{
+				cc_val = $(this).attr("value","y");
+			}
+			if(cc_val == 'y')
+			{
+				cc_val = $(this).attr("value","y");
+			}
+			cc_val = $(this).attr("value");
+			select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		});
 	});
 	
 });
