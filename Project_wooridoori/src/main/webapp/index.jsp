@@ -14,5 +14,4 @@
 	<body>
 			<c:redirect url="wooriMain.wd"></c:redirect>
 	</body>
-
 </html>

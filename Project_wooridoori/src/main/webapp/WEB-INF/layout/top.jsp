@@ -1,15 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"	src="<%=request.getContextPath()%>/resources/js/member.js"></script>
+<link rel="stylesheet" type="text/css"	href='resources/css/loginform.css'>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+	$(function(){
+		$(".login").click(function(){
+			var log = $("#logb").attr("class");
+			console.log(log);
+			create_logform(log);
+			$(".log_dialog").css("display","block");
+		});
+		$(window).click(function(event){
+			if(event.target.className == 'log_dialog'){
+				$(".log_dialog").css("display","none");
+			};
+		});
+	});
 	function goHome(){
 		location.href = "wooriMain.wd";
 	}
 </script>
+<style type="text/css">
+.w3-bar-item #log{
+	cursor: pointer;
+}
+.log_dialog {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	
+}
+/* The Modal (background) */
+.logform {
+    position: fixed;
+    width: 363px;
+    top: 40%;
+    left: 50%;
+   	transform: translate(-50%, -50%);
+    background-color: #ddd;
+}
+
+/* The Close Button */
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+</style>
 <style type="text/css">
 	.bar-item-t{
 		display: inline;
@@ -78,8 +151,8 @@
 	    background-color: gray;
 	}
 </style>
-</head>  
-<body style="margin: 0; position: fixed">
+</head>   
+<body style="margin: 0;">
 	<div style="top:0; width:100%; height: 60px; background-color: #313131; margin:0; min-width: 900px;">
 		<div class="bar-item-t">
 			<a href="tlist.wd">더</a>
@@ -109,8 +182,9 @@
 		</div> 
 		
 		<div class="bar-item-t" style="float: right; margin-right: 20px">
-			<a href=""> 
-				login
+			<a class="login" href="#"> 
+				<c:if test="${sessionScope.LOGIN eq 'NO' or empty sessionScope.LOGIN}"><b id="logb" class="log_in" style="color: white">LOGIN</b></c:if>
+				<c:if test="${sessionScope.LOGIN eq 'YES'}"><b id="logb" class="log_out" style="color: white">LOGOUT</b></c:if>
 			</a>  
 		</div>
 		 
@@ -118,5 +192,11 @@
 			<a href="mypage.wd">MY</a>
 		</div>
 	</div>
+	<div class="log_dialog">
+	<div class="logform">
+	
+	
+	</div>
+</div>
 </body>
 </html>
