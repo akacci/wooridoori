@@ -72,18 +72,18 @@
 		</c:forEach>
 		</div>
 		<div class="tlist_arrange">
-						<ul style="text-decoration: none;">
-						<c:if test="${startPage>1 }">
-							<li style="float: left;"><a href="#" onclick="userInfo('qna.wd?pageNum=${startPage-1}')"><&nbsp;</a></li>
-						</c:if> 
-						<c:forEach var="pg" begin="${startPage}" end="${endPage }">
-							<li style="float: left;"><a href="#" onclick="userInfo('qna.wd?pageNum=${pg}')">${pg }</a>&nbsp;</li>
-						</c:forEach>
-						<c:if test="${endPage<totalPage}">
-							<li style="float: left;"><a href="#" onclick="userInfo('qna.wd?pageNum=${endPage+1}')">&nbsp;></a></li>
-						</c:if>
-						</ul>
-					</div>
+			<ul style="text-decoration: none;">
+			<c:if test="${startPage>1 }">
+				<li style="float: left;"><a onclick="changePage('qna.wd?pageNum=${startPage-1}')"><&nbsp;</a></li>
+			</c:if> 
+			<c:forEach var="pg" begin="${startPage}" end="${endPage }">
+				<li style="float: left;"><a onclick="changePage('qna.wd?pageNum=${pg}')">${pg }</a>&nbsp;</li>
+			</c:forEach>
+			<c:if test="${endPage<totalPage}">
+				<li style="float: left;"><a onclick="changePage('qna.wd?pageNum=${endPage+1}')">&nbsp;></a></li>
+			</c:if>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

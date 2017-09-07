@@ -81,7 +81,7 @@
  		
  		<script type="text/javascript">
  		$(function(){
- 			var data = ${data}
+ 			var data = ${data}+"";
  			if(data != null && data.length != 0){
  				changePage(data);
  				data = null;
@@ -94,10 +94,6 @@
  			{
  				$("#page").load("re_mypage.wd")
  			}
-		    function qnaBoard(){
-		        $("#page").load("qna.wd"); 
-		    }
-      
 			function changePage(data){
 				$("#page").load(data);
 			}
