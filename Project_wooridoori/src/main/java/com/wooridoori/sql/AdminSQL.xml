@@ -46,6 +46,14 @@
 		order by
 			num desc
 	</select>
+	<select id="getQnABoard" parameterType="String" resultType="qnadto">
+		select
+			*
+		from
+			qnaboard
+		where
+			num = #{num}
+	</select>
 	<!-- QnA end -->
 	<!-- member -->
 	<select id="getAllMemberList" resultType="mdto">

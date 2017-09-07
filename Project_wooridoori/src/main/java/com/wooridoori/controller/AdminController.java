@@ -1,19 +1,17 @@
 package com.wooridoori.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wooridoori.dto.MemberDTO;
 import com.wooridoori.dto.QnABoardDTO;
-import com.wooridoori.dto.ReferenceDTO;
 import com.wooridoori.service.AdminService;
 
 @Controller
@@ -50,5 +48,16 @@ public class AdminController {
 		model.addAttribute("n", kmap.get("n"));
 		model.addAttribute("list", adminService.getQnAList());
 		return "Admin/adminQnAList";
+	}
+	@RequestMapping("answer_qnawrite.wd")
+	public void goAdminQnAWrite(Model model, @ModelAttribute QnABoardDTO qnadto, @RequestParam String content_qna){
+		System.out.println(content_qna);
+	}
+
+	@RequestMapping("answerqna.wd")
+	public String goAdminQnAWrite(Model model, @RequestParam String num){
+		
+		model.addAttribute("data",adminService.getQnABoard(num));
+		return "Admin/adminQnAwrite";
 	}
 }

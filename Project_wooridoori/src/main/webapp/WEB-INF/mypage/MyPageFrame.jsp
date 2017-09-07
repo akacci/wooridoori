@@ -14,7 +14,6 @@
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
     <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
     <!-- Custom styles for this template -->
     <link href="resources/css/simple-sidebar.css" rel="stylesheet">
 
@@ -33,7 +32,7 @@
             
                 <li class="sidebar-brand">
                     <a href="#">
-                    	<img src="resources/main/profile.png" width="30" height="30">The Suzan Maestro
+                    	<img src="" width="30" height="30">The Suzan Maestro
                     </a>
                 </li>  
                 <li>
@@ -83,6 +82,13 @@
         </div> 
  		
  		<script type="text/javascript">
+ 		$(function(){
+ 			var data = ${data}
+ 			if(data != null && data.length != 0){
+ 				changePage(data);
+ 				data = null;
+ 			}
+ 		})
  			function userInfo(){
  				$("#page").load(); 	
  			} 
