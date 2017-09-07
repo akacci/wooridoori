@@ -282,11 +282,13 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="bubble_Data.wd", method=RequestMethod.POST)
-	public void bubble_data(@RequestParam String id, HttpServletResponse response)
+	public void bubble_data(@RequestParam(value="id", defaultValue="_id") String id,
+							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+							HttpServletResponse response)
 	{
 		response.setContentType("text/html;charset=UTF-8");
-		id = "admin";
-		List<HashMap<String, Object>> list = service.bubble_Data(id);
+		
+		List<HashMap<String, Object>> list = service.bubble_Data(id,currentPage);
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
@@ -298,6 +300,27 @@ public class RecommendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+				
+	}
+	@RequestMapping(value="paging_mypage.wd", method=RequestMethod.POST)
+	public void paging_mypage(@RequestParam(value="id", defaultValue="_id") String id,
+							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+							HttpServletResponse response)
+	{
+			response.setContentType("text/html;charset=UTF-8");
+			
+			HashMap<String, Object> list = service.paging_Data(id,currentPage);
+			ObjectMapper mapper = new ObjectMapper();
+			
+			try {
+				response.getWriter().print(mapper.writeValueAsString(list));
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
 	}
 	
 	@RequestMapping(value="barChartData.wd", method=RequestMethod.POST)
@@ -337,4 +360,28 @@ public class RecommendController {
 			e.printStackTrace();
 		}
 	}
+	
+	/*@RequestMapping(value="openBoardList.wd")
+	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{
+	    ModelAndView mv = new ModelAndView("/sample/boardList");
+	     
+	    return mv;
+	}
+	 
+	@RequestMapping(value="/sample/selectBoardList.do")
+	public ModelAndView selectBoardList(CommandMap commandMap) throws Exception{
+	    ModelAndView mv = new ModelAndView("jsonView");
+	     
+	    List<Map<String,Object>> list = sampleService.selectBoardList(commandMap.getMap());
+	    mv.addObject("list", list);
+	    if(list.size() > 0){
+	        mv.addObject("TOTAL", list.get(0).get("TOTAL_COUNT"));
+	    }
+	    else{
+	        mv.addObject("TOTAL", 0);
+	    }
+	     
+	    return mv;
+	}*/
+
 }

@@ -33,7 +33,7 @@
             
                 <li class="sidebar-brand">
                     <a href="#">
-                    	<img src="resources/main/profile.png" width="30" height="30">The Suzan Maestro
+                    	<img src="resources/image/main/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
                 </li>  
                 <li>

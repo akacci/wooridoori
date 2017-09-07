@@ -11,12 +11,17 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <!-- my js -->
 <script src="<%=request.getContextPath()%>/resources/js/recommend/recommend.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
 
 <title></title>
 </head>
-<body style="">
+<body style="margin:0px;">
 	<header> 
 	      <%-- <jsp:include page= "../layout/top.jsp"/> --%>
 	      <%@include file="../layout/top.jsp"%>

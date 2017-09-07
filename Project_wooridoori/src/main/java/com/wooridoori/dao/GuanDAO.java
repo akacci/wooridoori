@@ -129,4 +129,48 @@ public class GuanDAO extends SqlSessionDaoSupport {
 		getSqlSession().update("updateReadcountOfTList", contentid);
 	}
 	
+	//관광지 검색 리스트
+	public List<GuanDTO> tSearchList(String searchkey, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchkey", searchkey);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		List<GuanDTO> slist = getSqlSession().selectList("searchList", map);
+		
+		return slist;
+	}
+	//검색리스트 총 개수
+	public int getTotalSCount(String searchkey){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchkey", searchkey);
+		
+		int totalCount=getSqlSession().selectOne("CountofSList", map);
+		
+		return totalCount;
+	}
+	
+	//카테고리 받아서 출력
+	public List<GuanDTO> ListofCat2(String cat2, int startNum, int endNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cat2", cat2);
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		List<GuanDTO> clist = getSqlSession().selectList("TListbyCategory", map);
+		
+		return clist;
+	} 
+	
+	//카테고리 리스트 총 개수
+	public int getTotalCCount(String cat2){
+		int totalCount=getSqlSession().selectOne("CountofCList", cat2);
+		
+		return totalCount;
+	} 
+	
+	//cat 이름으로 코드 구하기
+	public String getCat2Name(String cat2_name){
+		String cat2 = getSqlSession().selectOne("GetCatcodewithCat", cat2_name);
+		return cat2;
+	}
+	
 }

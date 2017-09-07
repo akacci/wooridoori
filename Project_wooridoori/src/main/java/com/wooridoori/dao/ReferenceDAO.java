@@ -47,4 +47,9 @@ public class ReferenceDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectList("bubbleOfCount", id);		
 	}
+	
+	public int totalCount_Mypage(String id)
+	{
+		return getSqlSession().selectOne("totalcountOfPreference", id);
+	}
 }

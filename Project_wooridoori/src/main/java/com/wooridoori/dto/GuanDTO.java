@@ -3,6 +3,7 @@ package com.wooridoori.dto;
 public class GuanDTO {
 	
 	private String addr1;
+	private String addr2;
 	private String areacode;
 	private String cat1;
 	private String cat2;
@@ -21,7 +22,20 @@ public class GuanDTO {
 	private String title;
 	private String zipcode;
 	private String cat3_name;
+	private String searchkey;
 	
+	public String getSearchkey() {
+		return searchkey;
+	}
+	public void setSearchkey(String searchkey) {
+		this.searchkey = searchkey;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
 	public String getSigunguname() {
 		return sigunguname;
 	}

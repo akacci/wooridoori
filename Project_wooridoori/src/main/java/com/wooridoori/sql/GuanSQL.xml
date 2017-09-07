@@ -14,11 +14,12 @@
 	<select id="GetSigunguInfo" parameterType="String" resultType="gudto">
 	    select e.sigunguname, d.sigungucode, d.m2, d.firstimage from area_code e,
 		(select b.sigungucode, b.m2, c.firstimage, b.areacode from tour_inquiry c, 
-		(select a.sigungucode, max(t.contentid) m2, a.areacode from tour_inquiry t, (select sigungucode, max(readcount) m, areacode
+		(select a.sigungucode, max(t.contentid) m2, a.areacode from tour_inquiry t, 
+		(select sigungucode, max(readcount) m, areacode 
 		from tour_inquiry where areacode = #{areacode} group by sigungucode, areacode) a 
 		where a.m = t.readcount group by a.sigungucode, a.areacode) b
 		where b.m2=c.contentid) d
-		where e.sigungucode = d.sigungucode and e.areacode = d.areacode order by sigunguname
+		where e.sigungucode = d.sigungucode and e.areacode = d.areacode and e.sigunguname is not null order by sigunguname
 	</select>
 	
 	<select id="GetcodeOfArea" parameterType="String" resultType="String">
@@ -44,8 +45,10 @@
 	
 	<select id="CountofTList" parameterType="HashMap" resultType="int">
 		select count(*) from (select ROWNUM as RNUM, d.* from (select * from 
-		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
- 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode  
+		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, 
+		b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
+ 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name 
+ 		from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode  
 		inner join content_code c on b.cat3 = c.cat3 where b.areacode=#{areacode} and b.sigungucode=#{sigungucode}) )d )e 
 	</select>
 	
@@ -101,5 +104,66 @@
 	<update id="updateReadcountOfTList" parameterType="String">
 		update tour_inquiry set readcount = readcount+1 where contentid = #{contentid}
 	</update>
-		
+	
+	
+	<!-- 검색 / 출력 -->
+	<select id="CountofSList" parameterType="HashMap" resultType="int">
+	<![CDATA[
+		select count(*) from (select ROWNUM as RNUM, d.* from (select * from 
+		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, 
+		b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
+ 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name 
+ 		from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode and a.areacode = b.areacode
+		inner join content_code c on b.cat3 = c.cat3 where (a.areaname LIKE '%${searchkey}%' 
+		or a.sigunguname LIKE '%${searchkey}%' or b.title LIKE '%${searchkey}%' 
+ 		or b.addr1 LIKE '%${searchkey}%' or b.addr2 LIKE '%${searchkey}%' or c.cat3_name LIKE '%${searchkey}%')
+		order by b.readcount desc))d)e 
+	]]>	
+	</select>
+	
+	<select id="searchList" parameterType="HashMap" resultType="gudto">
+	<![CDATA[
+		select e.* from (select ROWNUM as RNUM, d.* from (select * from 
+		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, 
+		b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
+ 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name 
+ 		from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode and a.areacode = b.areacode
+		inner join content_code c on b.cat3 = c.cat3 where (a.areaname LIKE '%${searchkey}%' 
+		or a.sigunguname LIKE '%${searchkey}%' or b.title LIKE '%${searchkey}%' 
+ 		or b.addr1 LIKE '%${searchkey}%' or b.addr2 LIKE '%${searchkey}%' or c.cat3_name LIKE '%${searchkey}%')
+		order by b.readcount desc))d)e 
+		where e.RNUM>=#{startNum} and e.RNUM<=#{endNum}
+	]]>	
+	</select>
+	
+	<!-- 카테고리로 출력 -->
+	<select id="TListbyCategory" parameterType="HashMap" resultType="gudto">
+	<![CDATA[
+		select e.* from (select ROWNUM as RNUM, d.* from (select * from 
+		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, 
+		b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
+ 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name 
+ 		from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode  
+		inner join content_code c on b.cat3 = c.cat3 where b.cat2 = #{cat2} 
+		order by b.readcount desc) )d where ROWNUM<=150)e 
+		where e.RNUM>=#{startNum} and e.RNUM<=#{endNum}
+	]]>			
+	</select>
+	
+	<select id="CountofCList" parameterType="String" resultType="int">
+	<![CDATA[	
+		select count(*) from (select ROWNUM as RNUM, d.* from (select * from 
+		(select distinct b.addr1, b.areacode, b.cat1, b.cat2, b.cat3, 
+		b.contentid, b.contenttypeid, b.firstimage, b.firstimage2, b.modifiedtime, 
+ 		b.mapx, b.mapy, b.readcount, b.sigungucode, b.tel, b.title, b.zipcode, c.cat3_name 
+ 		from area_code a inner join tour_inquiry b on a.sigungucode = b.sigungucode  
+		inner join content_code c on b.cat3 = c.cat3 where b.cat2 = #{cat2}
+		order by b.readcount desc) )d where ROWNUM<=150)e 
+	]]>		
+	</select>
+	
+	<select id="GetCatcodewithCat" parameterType="String" resultType="String">
+		select distinct cat2 from content_code where cat2_name = #{cat2_name}
+	</select>
+	
 </mapper>
