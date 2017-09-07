@@ -21,10 +21,10 @@
 
 <title></title>
 </head>
-<body style="margin:0px;">
+<body>
 	<header> 
-	      <%-- <jsp:include page= "../layout/top.jsp"/> --%>
-	      <%@include file="../layout/top.jsp"%>
+	      <jsp:include page= "../layout/top.jsp"/>
+	      <%-- <%@include file="../layout/top.jsp"%> --%>
 	</header>
 	<div id="re_smenu" style="z-index:2; position: relative;">
 		<c:import url="../Recommend/Recommend_H.jsp"></c:import>
