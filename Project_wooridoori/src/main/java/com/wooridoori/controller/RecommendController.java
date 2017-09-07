@@ -42,13 +42,16 @@ public class RecommendController {
 								 HttpSession session){			
 		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
+		System.out.println("controller------------------------"+id);
+		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendArea();
+			list = service.selectLoginRecommendArea(id);
 		}else{
 			list = service.selectFirstRecommendArea();
 		}
@@ -68,13 +71,14 @@ public class RecommendController {
 								 HttpServletResponse response,
 								 HttpSession session){		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendThema();
+			list = service.selectLoginRecommendThema(id);
 		}else{
 			list = service.selectFirstRecommendThema();
 		}
@@ -94,13 +98,14 @@ public class RecommendController {
 								 		 HttpServletResponse response,
 										 HttpSession session){	
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
 		response.setContentType("text/html;charset=UTF-8"); // 한글
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>(); 
 		
 		if(login.equals("YES")){
-			list = service.selectLoginRecommendNonFavorite();
+			list = service.selectLoginRecommendNonFavorite(id);
 		}else{
 			list = service.selectFirstRecommendNonFavorite();
 		}
@@ -387,5 +392,5 @@ public class RecommendController {
 	     
 	    return mv;
 	}*/
-	
+
 }

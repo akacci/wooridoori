@@ -1,12 +1,3 @@
-	html,body{
-		overflow-x: hidden;
-		overflow-y: auto;  
-	}
-	
-	div{
-		border: 0;
-	}
-	
 	.ui-dialog {
 		top: 0;
 		left: 0;
@@ -77,15 +68,15 @@
 		top: 670px;
 	}
 	
-	#rateit_write{
+	#dialog_review_write #rateit_write{
 		width: 80px;
 	}
 	
-	#m_id{
+	#dialog_review_write #m_id{
 		width: 80px;
 	}
 	
-	#pre_review{
+	#dialog_review_write #pre_review{
 		width: 650px;
 	}
 	
@@ -94,4 +85,9 @@
 		left: 0px;
 		margin: 0 0 0 0;
 		padding: 0 0 0 0;
+	}
+	
+	#ialog_review_read{
+		bottom: 0px;
+		height: 30px;
 	}

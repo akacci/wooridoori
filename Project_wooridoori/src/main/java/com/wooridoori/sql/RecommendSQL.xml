@@ -3,13 +3,18 @@
 
 <mapper namespace="recommend">
 
-	<select id="selectNationOfTourRank" resultType="HashMap">
-		select c.pre_cat1 as pre_cat1,
+	<select id="selectNationOfTourRank" resultType="HashMap" parameterType="String">
+		select distinct c.pre_cat1 as pre_cat1,
 			   c.pre_cat2 as pre_cat2,
 			   c.pre_cat3 as pre_cat3
         from wmember b, 
              PRE_FOREIGN_COUNTRY c
-        where c.NATION = b.NATION
+             where b.m_id = #{value}
+		  and b.NATION = c.NATION
+        <if test="value != 'GUEST' or value.equals('GUEST')">
+	      and a.m_id = b.m_id
+	      and a.seq_member = b.num
+        </if>
 	</select>
 
 	<select resultType="tdto" id="selectFirstRecommendArea">
