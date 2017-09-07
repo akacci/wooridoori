@@ -42,6 +42,9 @@ public class AdminService {
 	public List<QnABoardDTO> getQnAList(){
 		return adminDao.getQnAList();
 	}
+	public QnABoardDTO getQnABoard(String num){
+		return adminDao.getQnABoard(num);
+	}
 	
 	/* Member */
 	public List<MemberDTO> getAllMemberList(){

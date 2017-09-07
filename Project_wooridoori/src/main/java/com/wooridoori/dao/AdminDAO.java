@@ -26,6 +26,9 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public List<QnABoardDTO> getQnAList(){
 		return getSqlSession().selectList("qna_admin.getAllQnAList");
 	}
+	public QnABoardDTO getQnABoard(String num){
+		return getSqlSession().selectOne("qna_admin.getQnABoard", num);
+	}
 	
 	/* Member */
 	public List<MemberDTO> getAllMemberList(){
