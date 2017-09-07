@@ -1,36 +1,14 @@
 (function ($) {
 	var currentPage = 1;
-	var data_table = bubble_Data();
-	/*mypage_paging(id,currentPage);*/
-	/*$('#example1').DataTable({
-        ajax: data_table,
-        columns: [
-            { "Tourist destination": true },
-            { "Grade": true },
-            { "Category": true },
-            { "Address": true },
-            { "Bookmark": true },
-            { "Recommend": true },
-            { "First trip": true },
-            { "Date modified": true }  
-        ]
-    } );*/
-	  /*  $('#example1').DataTable()
-	    $('#example2').DataTable({
-	      'paging'      : true,
-	      'lengthChange': false,
-	      'searching'   : false,
-	      'ordering'    : true,
-	      'info'        : true,
-	      'autoWidth'   : false
-	    });*/
+	var data_table = bubble_Data();	
 	var donut_CountData = chart_BubbleData();
 	var bar_data = barChart_Data();
+	mypage_paging(currentPage);
 	//DONUT CHART
 	var donut = new Morris.Donut({
 	  element: 'sales-chart',
 	  resize: true,
-	  colors: ["#3c8dbc", "#f56954"],
+	  colors: ["#3c8dbc", "#f56954", "#86E57F", "#FAED7D", "#A566FF"],
 	  data: donut_CountData,
 	  hideHover: 'auto'
 	});
@@ -44,7 +22,7 @@
 	  ykeys: ['a', 'b'],
 	  labels: ['mygrade', 'totalgrade'],
 	  hideHover: 'auto'
-  });
+	});
 })(jQuery);
 
 function bubble_Data()
@@ -55,35 +33,39 @@ function bubble_Data()
 		success: function(bubdata){
 			alert(bubdata);
 			var s_data = JSON.parse(bubdata);
-			var mypage = "";			
-			
+			var mypage = "";					
 				for (var i=0; i < s_data.length; i++)
-				{				
+				{	
+					var title = $.trim(s_data[i].TITLE_REF);
+					var contentid = $.trim(s_data[i].CONTENTID_REF);
 					mypage += "<tr class='mypage_list'>";					
-					mypage += "<td class='mypage_title_span'>"+s_data[i].TITLE_REF+"</td>";
+					mypage += "<td class='mypage_title_span' value="+contentid+" onclick='javascript:click_title(this)'>"+title+"</td>";
 					mypage += "<td class='mypage_grade'>"
 					mypage += "<div class='rateit bigstars'></div>"+s_data[i].GRADE_POINT+"</td>";
 					mypage += "<td class='mypage category_span'>"+s_data[i].CAT2_NAME+"</td>";
 					mypage += "<td class='mypage addr_span'>"+s_data[i].ADDR1+"</td>";
-					if(s_data[i].BOOKMARK == "y")
+					var bookmark = $.trim(s_data[i].BOOKMARK);
+					var preference = $.trim(s_data[i].PRE_RENCE);
+					var firsttrip = $.trim(s_data[i].FIRSTTRIP);
+					if(bookmark == 'y')
 					{
-						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-star'></span></td>";
+						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-thumbs-up'></span></td>";						
 					}else{
-						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-star'></td>";
+						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-thumbs-down'></span></td>";						
 					}
-					if(s_data[i].PRE_RENCE == "y")
+					if(preference == 'y')
 					{
-						mypage += "<td class='mypage like'>♥</td>";
+						mypage += "<td class='mypage like'><span class='glyphicon glyphicon-heart'></span></td>";
 					}else{
-						mypage += "<td class='mypage like'>○</td>";
+						mypage += "<td class='mypage like'><span class='glyphicon glyphicon-heart-empty'></span></td>";
 					}
-					if(s_data[i].FIRST_TRIP == 'y')
+					if(firsttrip == 'y')
 					{
-						mypage += "<td class='mypage_firsttrip_span'>♠</td>";
+						mypage += "<td class='mypage_firsttrip_span'><span class='glyphicon glyphicon-ok'></span></td>";
 					}else{
-						mypage += "<td class='mypage_firsttrip_span'>♤</td>";
+						mypage += "<td class='mypage_firsttrip_span'><span class='glyphicon glyphicon-remove'></span></td>";
 					}
-					mypage += "<td class='mypage_day_span'>"+s_data[i].MODIFIED_DATE+"</td>";
+					mypage += "<td class='mypage_day_span'>"+s_data[i].MODIFIED_DATE+"</td>";					
 					mypage += "</tr>"					
 					
 				}
@@ -93,11 +75,11 @@ function bubble_Data()
 	});	
 };
 
-function mypage_paging(id, currentPage)
+function mypage_paging(currentPage)
 {
 	$.ajax({
 		url: "paging_mypage.wd",
-		data: {"id":id, "currentPage":currentPage},
+		data: {"currentPage":currentPage},
 		type: "post",
 		async: false,
 		success: function(data){
@@ -106,30 +88,29 @@ function mypage_paging(id, currentPage)
 			
 			var mypage = "";
 			
-			/*mypage += "<tr>";*/
-			mypage += "<td>";			
-			if(s_data[i].startPage > s_data[i].perBlock)
+			mypage += "<tr>";
+			mypage += "<td colspan='5'>";			
+			if(s_data.startPage > s_data.perBlock)
 			{
 				mypage += "<span class='glyphicon glyphicon-chevron-left'></span>";
 			}
-			for(var j = startPage; j <= endPage; j++)
+			for(var j = s_data.startPage; j <= s_data.endPage; j++)
 			{
-				mypage += "<button type='button' class='btn btn-success'>"+s_data[j].currentPage+"</button>";
-				alert(s_data[j].currentPage);
+				mypage += "<button type='button' class='btn btn-success'>"+s_data.currentPage+"</button>";
 			}
 			/*if(s_data[i].totalCount > 0)
 			{
 				mypage += "<button type='button' class='btn btn-success'>"+i+"</button>";
 			}*/
 			
-			if(s_data[i].endPage < s_data[i].totalPage)
+			if(s_data.endPage < s_data.totalPage)
 			{
 				mypage += "<span class='glyphicon glyphicon-chevron-right'></span>";
 			}						
 			mypage += "</td>";			
-			/*mypage += "</tr>";*/
+			mypage += "</tr>";
 	
-			$(mypage).insertAfter("#paging_my");
+			$("#mypage_paging").append(mypage);
 		}
 	});
 };
@@ -141,7 +122,6 @@ function barChart_Data(){
 		type: "post",		
 		success: function(data){
 			var bar_data = JSON.parse(data);
-			alert(data);
 				for(var i = 0; i < bar_data.length; i++)
 				{
 					var mygrade = parseFloat(bar_data[i].MY_GRADE);
@@ -166,7 +146,6 @@ function chart_BubbleData(){
 		async: false,
 		type: "post",
 		success: function(data){
-			alert(data);
 			var b_data = JSON.parse(data);
 			
 			for(var i = 0; i < b_data.length; i++)
@@ -179,3 +158,8 @@ function chart_BubbleData(){
 	});
 	return str;
 };
+
+function click_title(e){
+	var contentid = $(e).attr("value");
+	alert(contentid);
+}
