@@ -41,9 +41,11 @@
 	<select id="selectLogOfMember" parameterType="mdto" resultType="String">
 		select count(*) from wmember where m_id=#{m_id, jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
 	</select>
+	
 	<select id="selectInfoOfMember" parameterType="String" resultType="mdto">
 		select m_id,name,e_mail,nation,tel,guide,imagepath from wmember where m_id=#{m_id}
 	</select>
+
 	<update id="updatePicOfMember" parameterType="mdto" >
 		update wmember set imagepath=#{imagepath} where m_id=#{m_id}
 	</update>

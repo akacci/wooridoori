@@ -20,6 +20,7 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public List<HashMap<String, String>> getQnAKindCount(){
 		List<HashMap<String, String>> list = getSqlSession().selectList("qna_admin.getQnAKindCount");
 		System.out.println(list);
+		
 		return list;
 	}
 	public List<QnABoardDTO> getQnAList(){

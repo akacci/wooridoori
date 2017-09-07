@@ -40,7 +40,7 @@
 		var mapy = ${cdata.mapy};
 		var data = {contentid : contentId, contenttypeid : contentTypeid, x : mapx, y : mapy};
 		var title = "${cdata.title}";
-		var appKey = "4e235220-bbba-3ed6-a61d-7dfd07f58a39";
+		//var appKey = "4e235220-bbba-3ed6-a61d-7dfd07f58a39";
 		
 		content_writer(data);
 		
@@ -179,6 +179,12 @@
 		font-weight: bold;
 		font-size: 8pt;
 	}
+	
+	.inpt {
+		height:10px;
+	}
+	
+	
 </style>
 </head>
 <header> 
@@ -212,7 +218,6 @@
 			<h3 class="menu basic_m"><a>지도</a><span><i class="fa fa-caret-down" style="float: right;margin-right: 10px;"></i></span></h3>
 			<div style="font-size: 24px; text-align:center; margin:0 auto;
 		      font-weight: bold;" id="title">지도에 표시할 테마를 지정해 주세요.</div> 
-		       
 			
 			<div id="floating-panel">
 			  <span class="space" style="line-height: 30px"></span>
@@ -253,7 +258,7 @@
 			<script>
 				function initMap() {
 				    map = new google.maps.Map(document.getElementById('map'), {
-				      zoom: 16,
+				      zoom: 12,
 				      center: {lat: current_lat, lng: current_lng}
 				    });
 				    
@@ -270,7 +275,7 @@
 		</div>
 		
 		
-		<div class="content_detail" style="width: 60%; margin-left: 17.5%;">
+		<div class="content_detail" style="width: 60%; margin-left: 17.5%; overflow: hidden">
 			<ul class="list"></ul> 
 			<a href="searchlist.wd">리스트로 ㄱㄱ</a>
 		</div>
