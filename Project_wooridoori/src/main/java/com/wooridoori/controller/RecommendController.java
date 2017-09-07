@@ -48,7 +48,6 @@ public class RecommendController {
 		ObjectMapper mapper = new ObjectMapper();
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
-		System.out.println("controller------------------------"+id);
 		
 		if(login.equals("YES")){
 			list = service.selectLoginRecommendArea(id);
@@ -250,12 +249,11 @@ public class RecommendController {
 	
 	@RequestMapping(value="/select_data.wd", method=RequestMethod.POST)
 	@ResponseBody
-	public void select_data(@RequestParam(value="grade_point", defaultValue="0") Float grade_point, 
+	public void select_data(@RequestParam(value="grade_point") Float grade_point, 
 				@RequestParam(value="firsttrip", defaultValue="x") char firsttrip, 
 				@RequestParam(value="bookmark", defaultValue="x") char bookmark,
 				@RequestParam(value="contentid", defaultValue="x") String contentid,
 				@RequestParam(value="pre_rence", defaultValue="x") char pre_rence,
-				/*@RequestParam(value="areacode", defaultValue="no_code") String areacode,*/
 				@RequestParam(value="grouptrip",defaultValue="x")String grouptrip,
 				@RequestParam(value="age",defaultValue="0")String age,
 				@RequestParam(value="purpose_code", defaultValue="no_code")String purpose_code,
@@ -274,10 +272,11 @@ public class RecommendController {
 		refdto.setPre_rence(pre_rence);
 		refdto.setGrade_point(grade_point);
 		refdto.setAge(age);
-		/*refdto.setAreacode_ref(areacode);*/
 		refdto.setGrouptrip(grouptrip);
 		refdto.setPurpose_code(purpose_code);
-		refdto.setStay_code(stay_code);		
+		refdto.setStay_code(stay_code);	
+		
+		System.out.println("------++++++++++++++++++------------"+refdto.getGrade_point());
 		
 		service.insertOrUpdateFirsttrip(refdto);
 	}
@@ -291,13 +290,14 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="bubble_Data.wd", method=RequestMethod.POST)
-	public void bubble_data(@RequestParam(value="id", defaultValue="_id") String id,
-							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+	public void bubble_data(/*@RequestParam(value="currentPage", defaultValue="1") int currentPage,*/
+							HttpSession session,
 							HttpServletResponse response)
 	{
 		response.setContentType("text/html;charset=UTF-8");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
-		List<HashMap<String, Object>> list = service.bubble_Data(id,currentPage);
+		List<HashMap<String, Object>> list = service.bubble_Data(id);
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
@@ -312,11 +312,13 @@ public class RecommendController {
 				
 	}
 	@RequestMapping(value="paging_mypage.wd", method=RequestMethod.POST)
-	public void paging_mypage(@RequestParam(value="id", defaultValue="_id") String id,
+	public void paging_mypage(
 							@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
-							HttpServletResponse response)
+							HttpServletResponse response,
+							HttpSession session)
 	{
 			response.setContentType("text/html;charset=UTF-8");
+			String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 			
 			HashMap<String, Object> list = service.paging_Data(id,currentPage);
 			ObjectMapper mapper = new ObjectMapper();
@@ -333,13 +335,13 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="barChartData.wd", method=RequestMethod.POST)
-	public void barChart_Data(@RequestParam String id, HttpServletResponse response)
+	public void barChart_Data(HttpSession session, HttpServletResponse response)
 	{
 		response.setContentType("text/html;charset=UTF-8");
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		List<HashMap<String, Object>> list = service.barCharts_Data(id);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println("------------------------------------------contoller"+list);
 		try {
 			response.getWriter().print(mapper.writeValueAsString(list));
 		} catch (JsonProcessingException e) {
@@ -352,9 +354,9 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="chart_BubbleData.wd", method=RequestMethod.POST)
-	public void chart_Bubble(@RequestParam String id, HttpServletResponse response)
+	public void chart_Bubble(HttpSession session, HttpServletResponse response)
 	{
-		id="admin";
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		response.setContentType("text/html;charset=UTF-8");
 		List<ReferenceDTO> list = service.bubble_Count(id);		
 		ObjectMapper mapper = new ObjectMapper();

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class ReferenceDTO {
 
-	private int seq_member;
 	private String m_id;
 	private String areacode_ref;
 	private String sigungucode_ref;
@@ -40,12 +39,6 @@ public class ReferenceDTO {
 	}
 	public void setContentid(String contentid) {
 		this.contentid = contentid;
-	}
-	public int getSeq_member() {
-		return seq_member;
-	}
-	public void setSeq_member(int seq_member) {
-		this.seq_member = seq_member;
 	}
 	public String getM_id() {
 		return m_id;

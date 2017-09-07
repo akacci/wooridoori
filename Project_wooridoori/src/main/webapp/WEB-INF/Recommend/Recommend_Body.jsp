@@ -24,11 +24,11 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/ionicons.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/AdminLTE.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/_all-skins.min.css?t=<%=System.currentTimeMillis()%>">
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/bootstrap.min.js?j=<%=System.currentTimeMillis()%>"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/fastclick.js?j=<%=System.currentTimeMillis()%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/adminlte.min.js?j=<%=System.currentTimeMillis()%>"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/demo.js?j=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/adminlte.min.js?j=<%=System.currentTimeMillis()%>"></script> --%>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/demo.js?j=<%=System.currentTimeMillis()%>"></script> --%>
 
 <title>관광지 추천</title>
 </head>
@@ -49,7 +49,7 @@
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" value="n" >
+										<span class="first_trip_click" value="n" inx="${i.count}">
 											<span class = "glyphicon glyphicon-ok-circle" style="right:5px; top:5px; font-size: 2em; color: pink;"></span>
 										</span>
 									</div>
@@ -57,13 +57,13 @@
 										<ul class="select_box_ul">
 											<li><span class="tour_title">관광지명</span></li>
 											<li>
-												<div class="rateit bigstars"></div>
+												<div class="rateit bigstars" inx="${i.count}"></div>
 											</li>
 											<li>
-												<span class="_ccimg" value="n">
+												<span class="_ccimg" value="n" inx="${i.count}">
 													<span class="glyphicon glyphicon-heart" style="font-size: 2em; color: pink;"></span>
 												</span>						
-												<span class="_jcimg" value="n">												
+												<span class="_jcimg" value="n" inx="${i.count}">												
 													<span class="glyphicon glyphicon-book" style="font-size: 2em; color: pink;"></span>
 												</span>												
 											</li>				

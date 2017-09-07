@@ -134,7 +134,7 @@ public class RecommendFavoriteSurveyController {
 		
 		int totcnt = rfsService.totalCountPreference(id);		
 		if(login.equals("YES")){
-			if(totcnt != 0){
+			if(totcnt > 0){
 			map.put("m_id", id);
 			map.put("areacode", areacode);
 			map.put("age", age);
