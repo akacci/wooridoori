@@ -1,5 +1,6 @@
 <%@page import="com.wooridoori.dto.MemberDTO"%>
 <%@page import="org.springframework.beans.factory.parsing.Location"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -59,9 +60,9 @@
                      <div class="col-sm-6">
                      <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
                 
-                <input id="profile-image-upload" class="hidden" type="file">
+                <input id="profile-image-upload" class="hidden">
 				
-				<div style="color:#999;" >click here to change profile image</div>
+				<div style="color:#999;" >profile image</div>
                 <!--Upload Image Js And Css-->             
                 </div>
               
@@ -90,12 +91,14 @@
 			<div class="bot-border"></div>
 			
 			<div class="col-sm-5 col-xs-6 tital " >Nationality</div><div class="col-sm-7">${dto.nation}</div>
-			
 			  <div class="clearfix"></div>
 			<div class="bot-border"></div>
 			
 			<div class="col-sm-5 col-xs-6 tital " >Tel</div><div class="col-sm-7">${dto.tel}</div>
-			
+			  <div class="clearfix"></div>
+			<div class="bot-border"></div>
+			<fmt:formatDate value="${dto.cre_date}" pattern="yyyy-MM-dd HH:mm" var="date"/>
+			<div class="col-sm-5 col-xs-6 tital " >Create date</div><div class="col-sm-7">${date}</div>
 			  <div class="clearfix"></div>
 			<div class="bot-border"></div>
             <!-- /.box-body -->
@@ -105,15 +108,6 @@
     </div> 
   </div>
 </div>  
-
-
-<script>
-$(function() {
-    $('#profile-image1').on('click', function() {
-        $('#profile-image-upload').click();
-    });
-});       
-</script> 
 
 </div>
 

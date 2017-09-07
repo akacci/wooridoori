@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="selectInfoOfMember" parameterType="String" resultType="mdto">
-		select m_id,name,e_mail,nation,tel,guide,imagepath from wmember where m_id=#{m_id}
+		select m_id,name,e_mail,nation,tel,guide,imagepath,cre_date from wmember where m_id=#{m_id}
 	</select>
 
 	<update id="updatePicOfMember" parameterType="mdto" >

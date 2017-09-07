@@ -101,7 +101,7 @@
    
    .bar-item-icon{
       display: inline;
-      padding-top: 16px; 
+      padding-top: 12px; 
       margin-right: 10px;
       float: right;
    }
@@ -191,7 +191,10 @@
       </div>
        
       <div class="bar-item-t" style="float: right;">
-         <a href="mypage.wd">MY</a>
+      	
+      <c:if test="${!empty sessionScope.LOGIN and sessionScope.LOGIN eq 'YES'}">
+        <a href="mypage.wd">MY</a>
+      </c:if>
       </div>
    </div>
    <div class="log_dialog">
