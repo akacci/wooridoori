@@ -7,7 +7,8 @@
 		select distinct c.pre_cat1 as pre_cat1,
 			   c.pre_cat2 as pre_cat2,
 			   c.pre_cat3 as pre_cat3
-        from wmember b, 
+        from preference a,
+        	 wmember b, 
              PRE_FOREIGN_COUNTRY c
              where b.m_id = #{value}
 		  and b.NATION = c.NATION

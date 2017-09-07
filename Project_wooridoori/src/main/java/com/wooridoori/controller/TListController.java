@@ -143,7 +143,8 @@ public class TListController {
 	}
 	
 	@RequestMapping("/tsearch.wd")
-	public String tsearch(@RequestParam (value="depth", defaultValue="") String depth,
+	public String tsearch(Model model,
+						@RequestParam (value="depth", defaultValue="") String depth,
 						@RequestParam(value="searchkey", defaultValue="") String searchkey){
 		depth = "2";
 		if(!searchkey.equals("")){
@@ -151,6 +152,20 @@ public class TListController {
 		}else{
 			return "redirect:/index";
 		}
+	}
+	
+	@RequestMapping("/goguide.wd")
+	public String goguide(Model model ,@RequestParam (value="areaname", defaultValue="") String areaname){
+		String addr = "";
+		
+		if(areaname.equals("제주도")){
+			addr = "제주";
+		}else{
+			addr = areaname;
+		}
+		
+		model.addAttribute("addr", addr);
+		return "redirect:guideList.wd";
 	}
 	
 }

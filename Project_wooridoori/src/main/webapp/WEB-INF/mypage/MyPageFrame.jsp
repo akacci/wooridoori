@@ -83,6 +83,14 @@
         </div> 
  		
  		<script type="text/javascript">
+ 			$(function(){
+ 				var data1 = ${data1}+"";
+ 				if(data1!=null && data1.length != 0){
+ 					changePage(data1);
+ 					data1=null;
+ 				}
+ 			});
+ 		
  			function userInfo(){
  				$("#page").load(); 	
  			} 

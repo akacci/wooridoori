@@ -79,11 +79,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage.wd")
-	public String mypageAction(Model model, HttpSession session)
+	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1)
 	{
 		if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
 			String data = "admin.wd";
+			System.out.println(data1);
 			model.addAttribute("data", data);
+			model.addAttribute("data1", data1);
 		}
 		return "/mypage/MyPageFrame";
 	}

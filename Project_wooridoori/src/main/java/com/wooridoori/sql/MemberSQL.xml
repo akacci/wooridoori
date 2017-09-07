@@ -34,6 +34,9 @@
 		order by
 			nation
 	</select>
+	<delete id="doDeleteMember" parameterType="String">
+		delete from wmember where num=#{wnum}
+	</delete>
 	
 	<!--  -->
 	

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +46,16 @@ public class AdminController {
 		model.addAttribute("mlist", mlist);
 		return "Admin/adminMemberList";
 	}
+	
+	@RequestMapping("deleteMember.wd")
+	public String doDeleteMember(Model model, @RequestParam(value="wnum", defaultValue="") String wnum ){
+		
+		
+		String data1 = adminService.doDeleteMember(wnum);
+		model.addAttribute("data1", data1);
+		return "redirect:mypage.wd";
+	}
+	
 	@RequestMapping("adminQnAList.wd")
 	public String goAdminQnAList(Model model){
 		HashMap<String, String> kmap = adminService.getQnAKindCount();
