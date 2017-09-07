@@ -96,10 +96,6 @@
  			{
  				$("#page").load("re_mypage.wd");
  			}
-		    function qnaBoard(){
-		        $("#page").load("qna.wd"); 
-		    }
-      
 			function changePage(data){
 				$("#page").load(data);
 			}
