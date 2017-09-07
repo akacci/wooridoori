@@ -243,9 +243,9 @@ public class GuideController {
 	//
 	//Guide auth proc
 	@RequestMapping("authentication.wd")
-	public String guideAuthProc(HttpSession session,Model m) throws IOException{		//인증요청후 face recog
-		
-		boolean isSafe=gService.recog((String)session.getAttribute("id"));
+	public String guideAuthProc(HttpServletRequest request,HttpSession session,Model m) throws IOException{		//인증요청후 face recog
+		String path=request.getSession().getServletContext().getRealPath("");
+		boolean isSafe=gService.recog((String)session.getAttribute("id"),path);
 		if(isSafe){
 			gService.guideAuthUpdate((String) session.getAttribute("id"));
 			return "Guide/GuideWriteForm";
@@ -305,7 +305,7 @@ public class GuideController {
 		mService.updateMemberPic(mdto);
 		
 		// Ajax proc (detect face)
-		boolean detectFace=gService.detect(id);
+		boolean detectFace=gService.detect(id,uploadPath);
 		String d="true";
 		if(detectFace==false)
 			 d="false";

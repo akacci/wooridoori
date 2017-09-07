@@ -94,7 +94,7 @@ public class GuideService{
 	
 	
 	
-	public boolean faceRecog(String id) throws IOException{
+	public boolean faceRecog(String id,String path) throws IOException{
 /*		//Load the cascades
 		 CascadeClassifier faceDetector = new CascadeClassifier(GuideService.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
 		 CascadeClassifier face_cascade = new CascadeClassifier("haarcascade_frontalface_default.xml");
@@ -111,7 +111,7 @@ public class GuideService{
 		 //org.opencv.contrib.FaceRecognizer
 		
 		//detect(id);
-		boolean isWarn=recog(id);
+		boolean isWarn=recog(id,path);
 		return true;
 	}
 	
@@ -120,9 +120,9 @@ public class GuideService{
 	 * @Author: Jay Park
 	 */
 	/* detect And display */
-	public  boolean detect(String id) throws IOException{
+	public  boolean detect(String id,String path) throws IOException{
 		boolean isSuccess=true;
-		String path="C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
+		//String path="C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
 		 // Create a face detector from the cascade file in the resources directory
 		CascadeClassifier faceDetector = new CascadeClassifier(GuideService.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
 		CascadeClassifier faceDetector2 = new CascadeClassifier(GuideService.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
@@ -204,13 +204,13 @@ public class GuideService{
 	 * @Author: Jay Park
 	 * @Reference: minikim
 	 */
-	public boolean recog(String id){
+	public boolean recog(String id,String path){
 		int retVal = 0;
 		//long startTime = System.currentTimeMillis();
 		
 		
 		// Directory
-		String warnDir = "C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
+		String warnDir = path+"\\save\\GuideFace\\";
 		String fileName=warnDir+id+"face_result.png";
 
 		// Load images to compare

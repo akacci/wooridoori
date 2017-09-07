@@ -977,8 +977,8 @@ a {
 	width:2.9%;
 	height:35px;
 	position:fixed;
-	right:8%;
-	bottom:7%;
+	right:7%;
+	bottom:9%;
 	
 }
 
@@ -986,17 +986,17 @@ a {
 	width:2.9%;
 	height:35px;
 	position:fixed;
-	right:5%;
-	bottom:7%;
+	right:4%;
+	bottom:9%;
 	
 }
 
 .fixed_box{
 	width:21%;
-	height:28%; 
+	height:34%; 
 	position:fixed;
 	right:3%;
-	bottom:5%;
+	bottom:8%;
 }
 
 .w3-panel {

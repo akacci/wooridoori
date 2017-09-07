@@ -107,7 +107,7 @@
 <body>
 
 	<header>
-		<%@ include file= "../layout/wtopmenu.jsp" %>
+		<%@ include file= "../layout/top.jsp" %>
 	</header>
 	<div class="city">
 		

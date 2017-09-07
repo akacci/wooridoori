@@ -1,20 +1,13 @@
 package com.wooridoori.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.MemberDTO;
-import com.wooridoori.service.GuideService;
 import com.wooridoori.service.MemberService;
 
 @Controller
@@ -79,12 +71,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage.wd")
-	public String mypageAction(Model model, HttpSession session)
+	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1)
 	{
-		if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
-			String data = "admin.wd";
-			model.addAttribute("data", data);
-		}
+
+		String data = "";
+		model.addAttribute("data", data);
+
 		return "/mypage/MyPageFrame";
 	}
 	

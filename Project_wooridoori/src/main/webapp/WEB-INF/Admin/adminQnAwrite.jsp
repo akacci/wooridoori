@@ -55,7 +55,7 @@
 </tr>
 <tr>
 	<td colspan="2"">
-		<span style="float:right"><input type="button" class="btn write_qna" value="작성하기"> </span>
+		<span style="float:right"><input type="submit" class="btn write_qna" value="작성하기"> </span>
 	</td>
 </tr>
 </table>
@@ -77,7 +77,6 @@ $(function(){
               // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
               bUseModeChanger : true,         
               fOnBeforeUnload : function(){
-                   
               }
           },
           fCreator: "createSEditor2"
@@ -85,10 +84,12 @@ $(function(){
       
       //저장버튼 클릭시 form 전송
       $(".write_qna").click(function(){
-          oEditors.getById["content_qna"].exec("UPDATE_CONTENTS_FIELD", []);
-      $(".write_qna").click(function(){
-    	  
-      });
+    	  $.ajax({
+    		  url: 'answer_qnawrite.wd',
+    		  success: function(){
+    			  
+    		  }
+    	  });
       });   
 });
 </script>

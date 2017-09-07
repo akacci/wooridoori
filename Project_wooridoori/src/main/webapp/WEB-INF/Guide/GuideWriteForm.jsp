@@ -318,11 +318,8 @@
 
 </script>
 </head>
-<%-- 	<header>
-		<%@ include file= "../layout/top.jsp" %>
-	</header>  --%>
-<body>
 
+<body> 
 	<form action="GuideWriteAction.wd"
 	  method="post" enctype="multipart/form-data"
 	   id="frm">
