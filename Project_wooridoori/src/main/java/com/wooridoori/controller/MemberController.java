@@ -41,6 +41,7 @@ public class MemberController {
 		req.getSession().setAttribute("prevPage", req.getHeader("Referer"));
 		session.setAttribute("LOGIN", "YES");
 		session.setAttribute("ID", mdto.getM_id());
+		session.setAttribute("ID_NUM", mService.getID_NUM(mdto));
 
 		boolean log=mdao.loginCheck(mdto);
 		if(log){	    
@@ -60,6 +61,7 @@ public class MemberController {
 	@RequestMapping("/logoutaction.wd")
 	public String logoutAction(HttpSession session){
 	    session.setAttribute("ID", null);
+	    session.setAttribute("ID_NUM", null);
 	    session.setAttribute("LOGIN", "NO");
 	    session.setAttribute("id", null);
 	    session.setAttribute("name", null);

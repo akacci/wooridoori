@@ -10,8 +10,22 @@ public class QnABoardDTO {
 	private Date wdate;
 	private String acheck;
 	private String anum;
+	private Date adate;
+	public Date getAdate() {
+		return adate;
+	}
+	public void setAdate(Date adate) {
+		this.adate = adate;
+	}
 	private String kind;
 	private String deleteboard;
+	private String id_num;
+	public String getId_num() {
+		return id_num;
+	}
+	public void setId_num(String id_num) {
+		this.id_num = id_num;
+	}
 	public String getNum() {
 		return num;
 	}

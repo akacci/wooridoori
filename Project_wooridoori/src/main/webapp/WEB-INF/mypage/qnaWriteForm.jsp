@@ -51,6 +51,7 @@
 	<div class="qna_container">
 		<h3>QnA</h3>
 		<form action="qnaaction.wd" method="post">
+		<input type="hidden" value="${sessionScope.ID_NUM}" name="id_num">
 			<div class="qna_title">문의종류</div>
 			<div class="qna_contents">
 				<input class="qna_radio" type="radio" name="kind" value="1" checked>일반문의
