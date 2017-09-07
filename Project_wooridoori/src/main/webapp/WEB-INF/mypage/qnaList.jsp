@@ -68,7 +68,7 @@
 		<div class="qna_list" style="border: 1px solid red;">
 			<div><span class="qno">번호</span><span class="qkind">문의</span><span class="qtitle" style="text-align: center;">제목</span><span class="qdate">날짜</span><span class="qcheck">답변여부</span></div>
 		<c:forEach var="data" items="${list}" varStatus="i">
-			<div><span class="qno">${data.num}</span><span class="qkind"><c:choose><c:when test="${data.kind==1}">[일반문의]</c:when><c:when test="${data.kind==2}">[회원문의]</c:when><c:when test="${data.kind==3}">[신고]</c:when></c:choose></span><span class="qtitle">${data.title}</span><span class="qdate"><fmt:formatDate value="${data.wdate}" pattern="YY.MM.dd HH:mm"/></span><span class="qcheck">${data.acheck}</span></div>
+			<div><span class="qno">${data.num}</span><span class="qkind"><c:choose><c:when test="${data.kind==1}">[일반문의]</c:when><c:when test="${data.kind==2}">[회원문의]</c:when><c:when test="${data.kind==3}">[신고]</c:when></c:choose></span><span class="qtitle">${data.title}</span><span class="qdate"><fmt:formatDate value="${data.wdate}" pattern="YY.MM.dd"/></span><span class="qcheck">${data.acheck}</span></div>
 		</c:forEach>
 		</div>
 		<div class="tlist_arrange">
