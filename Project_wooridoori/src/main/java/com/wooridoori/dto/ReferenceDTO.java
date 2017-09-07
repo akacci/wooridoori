@@ -25,7 +25,16 @@ public class ReferenceDTO {
 	private String title;
 	private char pre_rence;
 	private String purpose_code;
+    private String stay_code;
+    
+    
 	
+	public String getStay_code() {
+		return stay_code;
+	}
+	public void setStay_code(String stay_code) {
+		this.stay_code = stay_code;
+	}
 	public String getContentid() {
 		return contentid;
 	}

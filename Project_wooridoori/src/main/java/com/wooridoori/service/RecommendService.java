@@ -113,6 +113,22 @@ public class RecommendService {
 		char bookmark = refdto.getBookmark();
 		float grade_point = refdto.getGrade_point();			
 		char pre_rence = refdto.getPre_rence();
+		
+		List<HashMap<String, String>> list = refdao.searchOfpreference(refdto.getM_id());
+		HashMap<String, String> hashmap = list.get(0);
+		String age = hashmap.get("AGE");
+		String grouptrip = hashmap.get("GROUPRRIP");
+		String purpose_code = hashmap.get("PURPOSE_CODE");
+		String stay_code = hashmap.get("STAY_CODE");
+		
+		if(!(age.equals("0")))
+		{
+			refdto.setAge(age);
+			refdto.setGrouptrip(grouptrip);
+			refdto.setPurpose_code(purpose_code);
+			refdto.setStay_code(stay_code);
+		}
+		
 		if(firsttrip!='x')
 		{
 			refdao.insertFirsttrip(refdto);
