@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.wooridoori.dto.ContentCodeDTO;
+import com.wooridoori.dto.ReferenceDTO;
 import com.wooridoori.dto.TourInquiryDTO;
 
 public class RecommendFavoriteSurveyDAO extends SqlSessionDaoSupport {
@@ -38,5 +39,4 @@ public class RecommendFavoriteSurveyDAO extends SqlSessionDaoSupport {
 	public void insertPreference(Map<String, String> map){
 		getSqlSession().update("insertPreference", map);
 	}
-	
 }

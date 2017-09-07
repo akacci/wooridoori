@@ -49,8 +49,8 @@
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" name="first_trip" value="n">
-											<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
+										<span class="first_trip_click" value="n" >
+											<span class = "glyphicon glyphicon-ok-circle" style="right:5px; top:5px; font-size: 2em; color: pink;"></span>
 										</span>
 									</div>
 									<div class="select_blockB">
@@ -59,11 +59,13 @@
 											<li>
 												<div class="rateit bigstars"></div>
 											</li>
-											<li>							
-												<!-- <div class="glyphicon glyphicon-heart-empty" style="font-size: 2em; color: red;"></div> -->
-												<%-- <span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span> --%>
-												
-												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png" >즐겨찾기</span>
+											<li>
+												<span class="_ccimg" value="n">
+													<span class="glyphicon glyphicon-heart" style="font-size: 2em; color: pink;"></span>
+												</span>						
+												<span class="_jcimg" value="n">												
+													<span class="glyphicon glyphicon-book" style="font-size: 2em; color: pink;"></span>
+												</span>												
 											</li>				
 										</ul>
 									</div>								 

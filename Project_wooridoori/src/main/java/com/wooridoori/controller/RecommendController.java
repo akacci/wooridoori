@@ -250,30 +250,34 @@ public class RecommendController {
 	
 	@RequestMapping(value="/select_data.wd", method=RequestMethod.POST)
 	@ResponseBody
-	public void select_data(@RequestParam Float grade_point, 
-				@RequestParam char firsttrip, 
-				@RequestParam char bookmark,
-				@RequestParam String contentid,
-				@RequestParam char pre_rence,
+	public void select_data(@RequestParam(value="grade_point", defaultValue="0") Float grade_point, 
+				@RequestParam(value="firsttrip", defaultValue="x") char firsttrip, 
+				@RequestParam(value="bookmark", defaultValue="x") char bookmark,
+				@RequestParam(value="contentid", defaultValue="x") String contentid,
+				@RequestParam(value="pre_rence", defaultValue="x") char pre_rence,
+				/*@RequestParam(value="areacode", defaultValue="no_code") String areacode,*/
+				@RequestParam(value="grouptrip",defaultValue="x")String grouptrip,
+				@RequestParam(value="age",defaultValue="0")String age,
+				@RequestParam(value="purpose_code", defaultValue="no_code")String purpose_code,
+				@RequestParam(value="stay_code", defaultValue="no_code")String stay_code,
 				ReferenceDTO refdto,
 				HttpSession session)
 	{	
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
-		String m_id = id;
-		String age = "20";
-		char solotrip = 'n';
-		String grouptrip = "n";
+		String m_id = id;		
 		/*session.setAttribute("m_id", "adimn");*/
-		
-		refdto.setSeq_member(1);
+				
 		refdto.setM_id(m_id);
-		refdto.setContent_id(contentid);
-		refdto.setAge(age);
+		refdto.setContent_id(contentid);		
 		refdto.setFirsttrip(firsttrip);
 		refdto.setBookmark(bookmark);
-		refdto.setSolotrip(solotrip);
+		refdto.setPre_rence(pre_rence);
+		refdto.setGrade_point(grade_point);
+		refdto.setAge(age);
+		/*refdto.setAreacode_ref(areacode);*/
 		refdto.setGrouptrip(grouptrip);
-		refdto.setGrade_point(grade_point);		
+		refdto.setPurpose_code(purpose_code);
+		refdto.setStay_code(stay_code);		
 		
 		service.insertOrUpdateFirsttrip(refdto);
 	}

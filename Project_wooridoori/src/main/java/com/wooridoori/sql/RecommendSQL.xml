@@ -7,10 +7,9 @@
 		select distinct c.pre_cat1 as pre_cat1,
 			   c.pre_cat2 as pre_cat2,
 			   c.pre_cat3 as pre_cat3
-        from preference a,
-             wmember b, 
+        from wmember b, 
              PRE_FOREIGN_COUNTRY c
-        where b.m_id = #{value}
+             where b.m_id = #{value}
 		  and b.NATION = c.NATION
         <if test="value != 'GUEST' or value.equals('GUEST')">
 	      and a.m_id = b.m_id
@@ -129,6 +128,11 @@
 		from preference
 		where m_id = #{id}
 	</select>
+	<select id="searchOfPreference" parameterType="String" resultType="HashMap">
+		select *
+		from preference
+		where m_id = #{id}		
+	</select>
    
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *
@@ -189,9 +193,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -209,7 +216,10 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})						
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)						
 	</insert>
 	
 	<!-- book_mark insert, update -->
@@ -235,16 +245,19 @@
 	                ref.CONTENTTYPEID_ref,
 	                FIRSTTRIP,
 	                AGE,
-	                BOOKMARK,
-	                SOLOTRIP,
+	                BOOKMARK,	                
 	                GROUPTRIP,
 	                CREATE_DATE,
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
-	            VALUES(
-	                #{seq_member},
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq
+	                )
+	            VALUES(	            	
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -262,7 +275,11 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})	
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval	                	                
+	                )	
 	</insert>
 	
 	<!-- grade_point insert, update -->
@@ -295,9 +312,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -346,9 +366,12 @@
 	                modified_date,
 	                GRADE_POINT,	                
 	                ref.TITLE_ref,
-	                pre_rence)
+	                pre_rence,
+	                purpose_code,
+	                stay_code,
+	                preference_seq)
 	            VALUES(
-	                #{seq_member},
+	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -366,6 +389,9 @@
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	                #{pre_rence})
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval)
 	</insert>
 </mapper>
