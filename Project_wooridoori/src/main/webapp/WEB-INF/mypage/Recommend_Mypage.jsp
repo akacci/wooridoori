@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/font-awesome.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/ionicons.min.css?t=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/dataTables.min.css?t=<%=System.currentTimeMillis()%>">
+<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/dataTables.min.css?t=<%=System.currentTimeMillis()%>"> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/morris.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/AdminLTE.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/_all-skins.min.css?t=<%=System.currentTimeMillis()%>">
@@ -84,8 +84,7 @@
 	                <th>Date modified</th>
                 </tr>
                 </thead>
-                <tbody id="mypage_list">
-                	
+                <tbody id="mypage_list">  	
                 </tbody>                
               </table>
               

@@ -1,19 +1,76 @@
 @CHARSET "UTF-8";
+.mtable_cover{
+	margin-bottom: 100px;
+	width: 100%;
+}
 
 .allmem_table{
-	margin-bottom: 100px;
-	width: 80%;
-	height: auto;
+	width: 90%;
 	margin: 0 auto;
+}
+
+.allmem_headrow{
+	display: table-row;
+	width: 100%;
+	height: 30px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.allmem_headrow span{
+	display: table-cell;
 }
 
 .allmem_row{
+	display: table-row;
 	width: 90%;
 	margin: 0 auto;
 	text-align: center;
+}
+.allmem_row:hover{
+	display: table-row;
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+	background: #ddd;
+}
+	
+.allmem_row span{
+	display: table-cell;
+	padding: 3px;
 	border-bottom: 1px solid gray;
 }
 
-.allmem_cellcol{
-	
+.allmem_row span a{
+	text-decoration: none;
+	color: #313131;
 }
+
+.allmem_row span a:hover{
+	text-decoration: none;
+	color: red;
+}
+
+.allmem_cellcol1{
+	width: 70px;
+}
+
+.allmem_cellcol2{
+	width: 70px;
+}
+
+.allmem_cellcol3{
+	width: 70px;
+}
+
+.allmem_cellcol11 button{
+}
+
+.mtable_cover.qna_write .table{border-spacing:0;border-collapse:collapse}td,th{padding:0}
+.mtable_cover.qna_write .table td, .qna_write .table th{background-color:#fff!important}
+.mtable_cover.qna_write .btn{display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px}
+.mtable_cover.qna_write .btn:hover{background-color: #aaa;}
+.mtable_cover.qna_write .btn.active.focus,.qna_write .btn.active:focus,.qna_write .btn.focus,.qna_write .btn:active.focus,.qna_write .btn:active:focus,.qna_write .btn:focus{outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
+.mtable_cover.qna_write .btn.focus,.qna_write .btn:focus,.qna_write .btn:hover{color:#333;text-decoration:none}
+.mtable_cover.qna_write .btn.active,.qna_write .btn:active{background-image:none;outline:0;-webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,.125);box-shadow:inset 0 3px 5px rgba(0,0,0,.125)}
+.mtable_cover.qna_write .btn.disabled, .qna_write .btn[disabled],.qna_write fieldset[disabled] .btn{cursor:not-allowed;filter:alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none;opacity:.65}

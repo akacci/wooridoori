@@ -50,4 +50,8 @@ public class AdminService {
 	public List<MemberDTO> getAllMemberList(){
 		return adminDao.getAllMemberList();
 	}
+	
+	public String doDeleteMember(String wnum){
+		return adminDao.doDeleteMember(wnum);
+	}
 }

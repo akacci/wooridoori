@@ -145,7 +145,7 @@
 		<c:if test="${depth eq '2'}">
 				<c:set var="search" value="${searchkey}"></c:set>
 				<div class="tText_2">
-					<a href="#"  class="tText_2_a">
+					<a href="goguide.wd?areaname=${a}"  class="tText_2_a">
 <%-- 					${sigungu}${areaname}${a.addr1 }${a.title } --%>
 						<div class="tText_2_1" name="${s}">		
 							<c:if test="${a != '' && a ne null}">

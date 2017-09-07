@@ -35,4 +35,10 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		List<MemberDTO> list = getSqlSession().selectList("qna_admin.getAllMemberList");
 		return list;
 	}
+	
+	public String doDeleteMember(String wnum){
+		getSqlSession().delete("member.doDeleteMember", wnum);
+		String data = "'adminMemberList.wd'";
+		return data;
+	}
 }
