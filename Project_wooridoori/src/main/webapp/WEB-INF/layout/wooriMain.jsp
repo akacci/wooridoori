@@ -190,7 +190,7 @@
 <style>
 body,html{width: 100%;height: 100%;}
 .bgimg {
-    min-height: 100%;
+    min-height: 90%;
     width : 100%;
     background-position: center;
     background-size: cover;

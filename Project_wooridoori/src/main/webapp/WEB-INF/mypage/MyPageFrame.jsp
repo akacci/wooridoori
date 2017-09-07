@@ -81,18 +81,18 @@
  		
  		<script type="text/javascript">
  		$(function(){
- 			var data = ${data}
+ 			var data = ${data}+"";
  			if(data != null && data.length != 0){
  				changePage(data);
  				data = null;
  			}
- 		})
+ 		});
  			function userInfo(){
  				$("#page").load("userInfo.wd");  	
  			} 
 			function Recommend_Info()
  			{
- 				$("#page").load("re_mypage.wd")
+ 				$("#page").load("re_mypage.wd");
  			}
 		    function qnaBoard(){
 		        $("#page").load("qna.wd"); 
