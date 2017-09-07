@@ -40,6 +40,9 @@ public class AdminController {
 	}
 	@RequestMapping("adminMemberList.wd")
 	public String goAdminMemberList(Model model){
+		List<MemberDTO> mlist = adminService.getAllMemberList();
+		
+		model.addAttribute("mlist", mlist);
 		return "Admin/adminMemberList";
 	}
 	@RequestMapping("adminQnAList.wd")

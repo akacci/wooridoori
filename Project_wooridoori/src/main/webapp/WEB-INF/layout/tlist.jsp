@@ -77,7 +77,7 @@
 
 	});
 </script>
-<title>Insert title here</title>
+<title>관광지 검색</title>
 </head>
 <body style="width: 100%; height: auto; min-height: 1000px;">
 	<header> 
