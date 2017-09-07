@@ -40,13 +40,14 @@
 	border-bottom: 1px solid lightgray;
 }
 
-.table_cover{
+.Ttable_cover{
 	width: 100%;
 }
 
 .tlist_arrange{
+	margin-top: 30px;
 	margin: 0 auto;
-	width: 15%;
+	width: 23%;
 	height: 50px;
 	text-align: center;
 }
@@ -56,19 +57,25 @@
 	margin: 0 auto;
 	text-align: center;
 	display: inline-block;
+}
+
+.tlist_arrange a{
+	text-decoration: none;
 	font-size: 15pt;
+	color: #313131;
 }
 
 .tlist_arrange ul{
-	margin: 0;
 	padding: 0;
+	margin-left: 20px;
+	margin-top: 30px;
 }
 
 .goTop{
     z-index: 99999;
     position: fixed;
     bottom: 40px;
-    left: 50%;
+    right: 10%;
     display: block;
     width: 40px;
     height: 55px;
@@ -76,9 +83,14 @@
     padding: 0;
     margin-left: 559px;
     outline: white;
+    background: url('../image/tlist/goTop.png') no-repeat center;
+    background-size: 57px;
+    border: none;
+    cursor: pointer;
 }
 
 .tText_1{
+	margin-top: 50px;
 	height: 70px;
 	position: relative;
 	background: #e2ece2;
@@ -120,10 +132,29 @@
     border-top: 3px solid black;
     float: left;
     margin-top: 30px;
+	/* box-shadow: 10px -10px #eee; */
+}
+
+.sigungu_list:hover{
+	width: 130px;
+    height: auto;
+    position: relative;
+    border: 1px solid lightgray;
+    border-top: 3px solid black;
+    float: left;
+    margin-top: 30px;
+    transform:perspective(700px) translateZ(55px);
+   /*  transform:perspective(500px) rotateX(45deg); */
+	/* box-shadow: 15px -13px #bbb; */ 
 }
 
 .sigungu_span{
 	width: 100%;
+	height: 70px;
+}
+
+.sigungu_span:hover{
+	width: 120px;
 	height: 70px;
 }
 
@@ -157,14 +188,29 @@
 .tText_2_1{
 	float: left;
 	width: 510px;
+	min-width: 510px;
 	line-height: 70px;
 	background: url('../image/tlist/go.png') no-repeat right center;
 	background-size: 30px; 
 	margin-left: 10px;
 	cursor: pointer;
 }
+
+.tText_2_1:hover{
+	float: left;
+	width: auto;
+	min-width: 510px;
+	line-height: 70px;
+	background: url('../image/tlist/go.png') no-repeat right center;
+	background-size: 30px; 
+	margin-left: 10px;
+	cursor: pointer;
+	color: red;
+}
+
 .tText_2_1 b{
 	vertical-align: middle;
+	margin-left: -8px;
 }
 
 .tText_2_2{
@@ -180,6 +226,20 @@
 	cursor: pointer;
 }
 
+.tText_2_2:hover{
+	display:inline-block;
+	float: right;
+	padding-right: 10px;
+	margin-right: 10px;
+	width: 300px;
+	line-height: 70px;
+	background: url('../image/tlist/back.png') no-repeat right center;
+	background-size: 20px; 
+	margin-left: 10px;
+	cursor: pointer;
+	color: red;
+}
+
 .tText_2_2 b{
 	margin-right: 15px;
 	float: right;
@@ -189,13 +249,24 @@
 	position: relative;
 }
 
+.first_cat:hover{
+	position: relative;
+	transform:perspective(500px) translateZ(60px);	
+}
+
 .text_info{
-	position: absolute;
-	vertical-align: bottom;
-	height: 40px;
-	bottom: 10px;
-	left: 10px;
-	color: #e4d2d2;
+    position: absolute;
+    vertical-align: bottom;
+    height: 40px;
+    top: 40px;
+    font-size: 18px;
+    right: 46px;
+    color: #f2f3f4;
+    text-shadow: black -1px -1px;
+}
+
+.area_img{
+	-webkit-border-radius: 80px;
 }
 
 .area_choice{
@@ -214,6 +285,10 @@
 	height: 100px;
 }
 
+.sigungu_img > img:hover{
+	
+}
+
 .t_standard{
 	text-decoration: none;
 	color: #313131;
@@ -221,7 +296,6 @@
 .t_standard:hover{
 	text-decoration: underline;
 	color: #313131;
-	background-color: #e2ece2;
 }
 
 .tlist_item{
@@ -234,4 +308,8 @@
 	height: 45px;
 	color: #313131;
 	background-color: #e2ece2;
+}
+
+.Ttext_red{
+    color: red;
 }

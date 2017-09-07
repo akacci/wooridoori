@@ -14,14 +14,21 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!-- 평점 먹이는 별 -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script> -->
-<%-- <script src="<%=request.getContextPath()%>/resources/js/rateit/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/rateit/scripts/rateit.css"> --%>
-
 <!-- my js, css -->
 <script src="<%=request.getContextPath()%>/resources/js/recommend/Re_Body.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/recommend/recommend.css?t=<%=System.currentTimeMillis()%>">
+
+<!-- icon -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/font-awesome.min.css?t=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/ionicons.min.css?t=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/AdminLTE.min.css?t=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/_all-skins.min.css?t=<%=System.currentTimeMillis()%>">
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/bootstrap.min.js?j=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/fastclick.js?j=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/adminlte.min.js?j=<%=System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/demo.js?j=<%=System.currentTimeMillis()%>"></script>
 
 <title>관광지 추천</title>
 </head>
@@ -53,7 +60,9 @@
 												<div class="rateit bigstars"></div>
 											</li>
 											<li>							
-												<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png" >추천</span>
+												<!-- <div class="glyphicon glyphicon-heart-empty" style="font-size: 2em; color: red;"></div> -->
+												<%-- <span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span> --%>
+												
 												<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png" >즐겨찾기</span>
 											</li>				
 										</ul>

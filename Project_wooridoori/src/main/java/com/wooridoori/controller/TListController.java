@@ -22,60 +22,23 @@ public class TListController {
 	GuanDAO gdao;
 	@Autowired
 	ContentService cService;
-	
-	
-	@RequestMapping("/tlist.wd")
-	public String tlist(Model model,
-						@RequestParam(value="areaname", defaultValue="") String areaname,
-						@RequestParam(value="sigungu", defaultValue="") String sigungu,
-						@RequestParam(value="depth", defaultValue="0") String depth,
-						@RequestParam(value="pageNum",defaultValue="1")	int currentPage){
-		List<String> list = null;
 		
-		if(areaname.equals("")&&sigungu.equals("")){
-			list = gdao.selectList1();
-		
-			model.addAttribute("depth", depth);
-			model.addAttribute("list", list);
-			return "/layout/tlist";
-		}else if(!areaname.equals("")&&sigungu.equals("")){
-			
-			list = gdao.selectList2(areaname);
-			
-			String areacode = gdao.getAreaCode(areaname);
-			
-			
-			List<GuanDTO> imglist = gdao.getSigunguInfo(areacode);
-			
-			depth = "1";
-			model.addAttribute("areaname", areaname);
-			model.addAttribute("depth", depth);
-			model.addAttribute("imglist", imglist);
-			//model.addAttribute("list", list);
-			return "/layout/tlist";
-		}else{
-			
-			depth = "2";
-			model.addAttribute("depth", depth);
-			model.addAttribute("sigungu", sigungu);
-			return "forward:/category.wd?depth="+depth;
-		}
-		
-	}
-	
 	@RequestMapping("/category.wd")
 	public String cat(Model model,
 			@RequestParam(value="standard", defaultValue="") String standard,
-			@RequestParam String sigungu,
-			@RequestParam String areaname,
-			@RequestParam String depth,
-			@RequestParam(value="pageNum",defaultValue="1")	int currentPage){
+			@RequestParam(value="sigungu", defaultValue="") String sigungu,
+			@RequestParam(value="areaname", defaultValue="") String areaname,
+			@RequestParam(value="depth", defaultValue="") String depth,
+			@RequestParam(value="pageNum",defaultValue="1")	int currentPage,
+			@RequestParam(value="searchkey", defaultValue="") String searchkey,
+			@RequestParam(value="cat2_name", defaultValue="") String cat2_name){
 		
-		GuanDTO gdto = gdao.getCode(areaname, sigungu);
-		String areacode = gdto.getAreacode();
-		String  sigungucode = gdto.getSigungucode();
-
-		//페이징 처리해봅시다
+		GuanDTO gdto = new GuanDTO();
+		int totalCount= 0;
+		String areacode ="";
+		String sigungucode ="";
+		String cat2 ="";
+		//페이징 처리
 		int perPage=10; //한페이지당 보여지는 글의 갯수
 		int perBlock=5; //한블럭당 보여지는 페이지번호의 수
 		int totalPage; //총 페이지의 갯수
@@ -89,9 +52,22 @@ public class TListController {
 		startNum=(currentPage-1)*perPage+1;
 		endNum=startNum+perPage-1;
 		
+		//선택으로 넘어왔을 때 필요한 값 추출
+		if(!areaname.equals("")&&!sigungu.equals("")){
+			gdto = gdao.getCode(areaname, sigungu);
+			areacode = gdto.getAreacode();
+			sigungucode = gdto.getSigungucode();
+			totalCount= gdao.getTotalCount(areacode, sigungucode);
+		}else if(!searchkey.equals("")){
+			totalCount= gdao.getTotalSCount(searchkey);
+			
+		}else if(!cat2_name.equals("")){
+			cat2=gdao.getCat2Name(cat2_name);
+			totalCount= gdao.getTotalCCount(cat2);
+		}else{
+			
+		}
 		//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
-		int totalCount= gdao.getTotalCount(areacode, sigungucode);
-		System.out.println("글 몇개 출력할꺼니"+totalCount);
 		no=totalCount-((currentPage-1)*perPage);
 		//총 페이지수
 		totalPage=(totalCount/perPage)+(totalCount%perPage>0?1:0);
@@ -99,7 +75,6 @@ public class TListController {
 		//마지막 페이지는 endnum 이 45 가 되야함
 		if(endNum>totalCount)
 			endNum=totalCount;
-
 		//각 블럭에 보여질 시작 페이지번호와 끝 페이지 번호 구하기
 		startPage= (currentPage-1)/perBlock*perBlock+1;
 		endPage=startPage+perBlock-1;
@@ -109,18 +84,28 @@ public class TListController {
 			endPage=totalPage;
 		
 		List<GuanDTO> tlist = new ArrayList<GuanDTO>();
-		if(standard.equals("")){
-			tlist = gdao.listView(areacode, sigungucode, startNum, endNum);
-		}else if(standard.equals("1")){
-			tlist = gdao.listViewWithName(areacode, sigungucode, startNum, endNum);
-		}else if(standard.equals("2")){
-			tlist = gdao.listViewWithCat(areacode, sigungucode, startNum, endNum);
-		}else if(standard.equals("3")){
-			tlist = gdao.listViewWithAvg(areacode, sigungucode, startNum, endNum);
+		if(!areaname.equals("")&&!sigungu.equals("")){
+			if(standard.equals("")){
+				tlist = gdao.listView(areacode, sigungucode, startNum, endNum);
+			}else if(standard.equals("1")){
+				tlist = gdao.listViewWithName(areacode, sigungucode, startNum, endNum);
+			}else if(standard.equals("2")){
+				tlist = gdao.listViewWithCat(areacode, sigungucode, startNum, endNum);
+			}else if(standard.equals("3")){
+				tlist = gdao.listViewWithAvg(areacode, sigungucode, startNum, endNum);
+			}else{
+				tlist = gdao.listViewWithCount(areacode, sigungucode, startNum, endNum);
+			}
+		}else if(!searchkey.equals("")){
+				tlist = gdao.tSearchList(searchkey, startNum, endNum);
+				depth="2";
+		}else if(!cat2_name.equals("")){
+				System.out.println();
+				tlist = gdao.ListofCat2(cat2, startNum, endNum);
+				depth="2";
 		}else{
-			tlist = gdao.listViewWithCount(areacode, sigungucode, startNum, endNum);
+			
 		}
-		
 		model.addAttribute("no", no);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", startPage);
@@ -131,6 +116,8 @@ public class TListController {
 		model.addAttribute("areaname", areaname);
 		model.addAttribute("sigungu", sigungu);
 		model.addAttribute("depth", depth);
+		model.addAttribute("searchkey", searchkey);
+		model.addAttribute("cat2_name", cat2_name);
 		return "/layout/tlist";
 	}
 	
@@ -153,6 +140,17 @@ public class TListController {
 		model.addAttribute("depth", depth);
 		model.addAttribute("contentid", contentid);
 		return "/layout/detail";
+	}
+	
+	@RequestMapping("/tsearch.wd")
+	public String tsearch(@RequestParam (value="depth", defaultValue="") String depth,
+						@RequestParam(value="searchkey", defaultValue="") String searchkey){
+		depth = "2";
+		if(!searchkey.equals("")){
+			return "forward:/category.wd?depth="+depth+"&searchkey="+searchkey;
+		}else{
+			return "redirect:/index";
+		}
 	}
 	
 }
