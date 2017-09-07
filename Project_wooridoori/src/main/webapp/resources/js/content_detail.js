@@ -4,7 +4,6 @@
 function content_writer(data){
 	basic_writer(data.contentid, data.contenttypeid);
 	detail_writer(data.contentid, data.contenttypeid);
-	weater_writer(data.x, data.y);
 }
 function basic_writer(contentid, contenttypeid){
 	var contentId = contentid;
@@ -118,29 +117,7 @@ function detail_writer(contentid, contenttypeid){
 		}
 	});
 }
-function weater_writer(x, y){
-	var longitude = x;
-	var latitude = y;
-	var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+latitude+"&lon="+longitude+"&city=&county=&village=&appKey=32235c48-92ac-3a82-bf93-7fbee73f7069";
-	$.ajax({
-		/*http://apis.skplanetx.com/weather/current/minutely?version=1&lat=1&lon=1&city=&county=&village=&appKey=32235c48-92ac-3a82-bf93-7fbee73f7069,32235c48-92ac-3a82-bf93-7fbee73f7061 */
-		url:Wurl,
-		type:"GET",
-		dataType:"JSON",
-		cache:false,
-		success:function(data){
-			var result = data.result.message;
-			var city= data.weather.minutely[0].station.name;
-			var weather= data.weather.minutely[0].sky.name;
-			$(".content_detail .weather").text(city+"의 날씨는 ["+weather+"] 입니다.");
-					
-		},complete : function(data) {
-			//alert("complete");
-	    },error : function(xhr, status, error) {
-			//alert("error"+error);
-		}
-	});
-}
+
 
 // 승훈
 var btn_title;
@@ -254,6 +231,7 @@ function getData(contentType,lng,lat){
       				{
       					btn_title="문화시설";
       					culture_markers_position[i]={lat: parseFloat(searched_lat), lng: parseFloat(searched_lng)};
+      					
       				}
       				
       				if(name.length<17)
@@ -346,6 +324,10 @@ function dropCulture(){
 	 $("#dropCulture").children().css("color","green");
 	 printList(culture_markers_position);
  }  
+function searchDir(dest_lat,dest_lng){
+	console.log(dest_lat+","+dest_lng);
+	window.open("https://www.google.co.kr/maps/dir/"+current_lat+","+current_lng+"/"+dest_lat+","+dest_lng+"/@37.5540901,126.8517682,12z/am=t/data=!3m1!4b1","길 찾기","width=1100,height=550,location=no,fullscreen=no,left=100, top=100");
+}
 
 function printList(empty_markers_position)
 {//${cdata.title}
@@ -354,6 +336,7 @@ function printList(empty_markers_position)
 	
 	for(var i = 0; i<empty_markers_position.length; i++)
 	{
+		console.log(empty_markers_position[i].lat);
 		if(infos_tel[i]==""){tel="<br>";}
 		else{tel=infos_tel[i];}
 	li=
@@ -364,7 +347,7 @@ function printList(empty_markers_position)
 		+"( "+infos_dist[i]+"m )"+"</a></h3>"
 		+"<p class='addr'>"+infos_addr[i]+"</p>"
 		+"<p class='tel'>"+tel+"</p>"
-		+"<img src='resources/image/marker/search_dir.png' width='50px' style='float:right; bottom:0'/>"
+		+"<img src='resources/image/marker/search_dir.png' width='50px' style='float:right; cursor:pointer' onclick='searchDir("+empty_markers_position[i].lat+","+empty_markers_position[i].lng+")'/>"
 		+"</div></li><hr>";
 	}
 	
@@ -431,7 +414,7 @@ function addMarkers(position, index, markers){
       //각 마커에 infowindow 등록
       var infowindow = new google.maps.InfoWindow({ 
     	
-			content: '<div style="white-space: pre-line; word-break:break-all; width:150px;">'
+			content: '<div style="white-space: pre-line; word-break:break-all; width:150px; overflow:hidden">'
 			+'<b>'+infos_name[index]+'</b><br>' 
 			+'<img style="display:block;" border="0" SRC="'+infos_image[index]+'"'
 			+'width="150" height="100">'

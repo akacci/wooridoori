@@ -24,7 +24,7 @@ $(function(){
 
 	
     <!-- Bootstrap core CSS -->
-    <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/mypage.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="resources/css/simple-sidebar.css" rel="stylesheet">
@@ -34,7 +34,7 @@ $(function(){
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
          <%@include file="../layout/top.jsp"%>
    </header>
-<body style="height: 945px; margin-top: 55px; z-index: -100">    
+<body style="height: 945px; margin-top: 55px;">     
  
     <div id="wrapper"> 
 
@@ -64,7 +64,7 @@ $(function(){
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a onclick="admintest2()" href="#">admin</a>
                 </li>
                 <li>
                     <a onclick="qnaBoard()" href="#">QnA</a>
@@ -88,9 +88,12 @@ $(function(){
  			{
  				$("#page").load("re_mypage.wd")
  			}
-      function qnaBoard(){
-        $("#page").load("qna.wd"); 
-      }
+		    function qnaBoard(){
+		        $("#page").load("qna.wd"); 
+		    }
+		    function admintest2(){
+		   	  	$("#page").load("admintest2.wd");
+		    }
  		</script>
  		
         <!-- Page Content -->
@@ -108,17 +111,13 @@ $(function(){
     </div>
     <!-- /#wrapper -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
-    <script src="resources/vendor/popper/popper.min.js"></script>
-    <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
 
     var b = 0;
     
-    $("body").mousemove(function(e){
+    $("body").mousemove(function(e){ 
    		if(e.pageX<30&&b==0)
    		{
            e.preventDefault();

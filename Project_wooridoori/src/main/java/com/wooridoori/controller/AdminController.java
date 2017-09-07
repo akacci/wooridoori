@@ -31,4 +31,11 @@ public class AdminController {
 		model.addAttribute("noncheckCount", adminService.getnoncheckcount());
 		return "Admin/adminPage";
 	}
+	
+	@RequestMapping("admintest2.wd")
+	public String admintest(Model model){
+		List<MemberDTO> mlist = adminService.getAllMemberList();
+		model.addAttribute("mlist", mlist);
+		return "Admin/admintest2";
+	}
 }
