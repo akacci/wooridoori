@@ -13,6 +13,8 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
+	
+	
 	//Member Info
 	public MemberDTO getMemberInfo(String id){
 		return sqlSessionTemplate.selectOne("member.selectInfoOfMember", id);

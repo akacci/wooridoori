@@ -13,8 +13,7 @@
              where b.m_id = #{value}
 		  and b.NATION = c.NATION
         <if test="value != 'GUEST' or value.equals('GUEST')">
-	      and a.m_id = b.m_id
-	      and a.seq_member = b.num
+	      and a.m_id = b.m_id	      
         </if>
 	</select>
 
@@ -105,7 +104,7 @@
 								from content_code 
 								where a.category2 = cat2) as cat2_name
 							from PREFERENCE a
-							where a.m_id like 'admin'
+							where a.m_id like #{id}
 							group by a.category2
 	</select>
 	<select id="barchartsOfData" parameterType="String" resultType="Hashmap">
@@ -176,7 +175,7 @@
 	            firsttrip = #{firsttrip},
 	            modified_date = sysdate
 	        WHEN not matched THEN
-	            insert (SEQ_MEMBER, 
+	            insert (
 	                M_ID, 
 	                ref.AREACODE_ref,
 	                ref.SIGUNGUCODE_ref,
@@ -188,7 +187,6 @@
 	                FIRSTTRIP,
 	                AGE,
 	                BOOKMARK,
-	                SOLOTRIP,
 	                GROUPTRIP,
 	                CREATE_DATE,
 	                modified_date,
@@ -199,7 +197,6 @@
 	                stay_code,
 	                preference_seq)
 	            VALUES(
-	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -211,7 +208,6 @@
 	                #{firsttrip},
 	                #{age},
 	                #{bookmark},
-	                #{solotrip},
 	                #{grouptrip},
 	                sysdate,
 	                sysdate,
@@ -235,7 +231,7 @@
 	            bookmark = #{bookmark},
 	            modified_date = sysdate
 	        WHEN not matched THEN
-	            insert (SEQ_MEMBER, 
+	            insert (
 	                M_ID, 
 	                ref.AREACODE_ref,
 	                ref.SIGUNGUCODE_ref,
@@ -257,8 +253,7 @@
 	                stay_code,
 	                preference_seq
 	                )
-	            VALUES(	            	
-	                (select seq_member from wmember where m_id = #{m_id}),
+	            VALUES(
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -270,7 +265,6 @@
 	                #{firsttrip},
 	                #{age},
 	                #{bookmark},
-	                #{solotrip},
 	                #{grouptrip},
 	                sysdate,
 	                sysdate,
@@ -295,7 +289,7 @@
 	            GRADE_POINT = #{grade_point},
 	            modified_date = sysdate
 	        WHEN not matched THEN
-	            insert (SEQ_MEMBER, 
+	            insert ( 
 	                M_ID, 
 	                ref.AREACODE_ref,
 	                ref.SIGUNGUCODE_ref,
@@ -306,8 +300,7 @@
 	                ref.CONTENTTYPEID_ref,
 	                FIRSTTRIP,
 	                AGE,
-	                BOOKMARK,
-	                SOLOTRIP,
+	                BOOKMARK,	                
 	                GROUPTRIP,
 	                CREATE_DATE,
 	                modified_date,
@@ -316,10 +309,10 @@
 	                pre_rence,
 	                purpose_code,
 	                stay_code,
-	                preference_seq)
+	                preference_seq
+	                )
 	            VALUES(
-	                (select seq_member from wmember where m_id = #{m_id}),
-	                #{m_id},
+	                 #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
 	                ti.cat1,
@@ -330,13 +323,16 @@
 	                #{firsttrip},
 	                #{age},
 	                #{bookmark},
-	                #{solotrip},
 	                #{grouptrip},
 	                sysdate,
 	                sysdate,
 	                #{grade_point},
 	                ti.title,
-	             	#{pre_rence})	
+	                #{pre_rence},
+	                #{purpose_code},
+	                #{stay_code},
+	                preference_seq.nextval	                	                
+	                )	
 	</insert>
 	<insert id="insertOfPreference" parameterType="refdto">
 		MERGE INTO preference ref
@@ -349,7 +345,7 @@
 	            pre_rence = #{pre_rence},
 	            modified_date = sysdate
 	        WHEN not matched THEN
-	            insert (SEQ_MEMBER, 
+	            insert (
 	                M_ID, 
 	                ref.AREACODE_ref,
 	                ref.SIGUNGUCODE_ref,
@@ -361,7 +357,6 @@
 	                FIRSTTRIP,
 	                AGE,
 	                BOOKMARK,
-	                SOLOTRIP,
 	                GROUPTRIP,
 	                CREATE_DATE,
 	                modified_date,
@@ -372,7 +367,6 @@
 	                stay_code,
 	                preference_seq)
 	            VALUES(
-	                (select seq_member from wmember where m_id = #{m_id}),
 	                #{m_id},
 	                ti.AREACODE,
 	                ti.sigungucode,
@@ -384,7 +378,6 @@
 	                #{firsttrip},
 	                #{age},
 	                #{bookmark},
-	                #{solotrip},
 	                #{grouptrip},
 	                sysdate,
 	                sysdate,

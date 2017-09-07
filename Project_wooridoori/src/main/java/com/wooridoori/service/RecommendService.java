@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSInput;
 
 import com.wooridoori.dao.ContentCodeDAO;
 import com.wooridoori.dao.RecommendDAO;
@@ -138,20 +139,22 @@ public class RecommendService {
 		float grade_point = refdto.getGrade_point();			
 		char pre_rence = refdto.getPre_rence();
 		
-		List<HashMap<String, String>> list = refdao.searchOfpreference(refdto.getM_id());
-		HashMap<String, String> hashmap = list.get(0);
-		String age = hashmap.get("AGE");
-		String grouptrip = hashmap.get("GROUPRRIP");
-		String purpose_code = hashmap.get("PURPOSE_CODE");
-		String stay_code = hashmap.get("STAY_CODE");
-		
-		if(!(age.equals("0")))
+		/*List<HashMap<String, String>> list = refdao.searchOfpreference(refdto.getM_id());
+		if(list.size() > 0)
 		{
-			refdto.setAge(age);
-			refdto.setGrouptrip(grouptrip);
-			refdto.setPurpose_code(purpose_code);
-			refdto.setStay_code(stay_code);
-		}
+			HashMap<String, String> hashmap = list.get(0);
+			String age = hashmap.get("AGE");
+			String grouptrip = hashmap.get("GROUPRRIP");
+			String purpose_code = hashmap.get("PURPOSE_CODE");
+			String stay_code = hashmap.get("STAY_CODE");
+			if(!(age.equals("0")))
+			{
+				refdto.setAge(age);
+				refdto.setGrouptrip(grouptrip);
+				refdto.setPurpose_code(purpose_code);
+				refdto.setStay_code(stay_code);
+			}
+		}*/		
 		
 		if(firsttrip!='x')
 		{
@@ -161,9 +164,11 @@ public class RecommendService {
 		{
 			refdao.insertBookmark(refdto);
 		}
-		if(grade_point != 0)
+		if(grade_point > 0)
 		{
+			
 			refdao.insertGradePoint(refdto);
+			System.out.println("--------------------------service"+refdto);
 		}
 		if(pre_rence != 'x')
 		{
@@ -173,17 +178,18 @@ public class RecommendService {
 	}
 	
 	/*recommend mypage*/
-	public List<HashMap<String, Object>> bubble_Data(String id, int currentPage)
+	public List<HashMap<String, Object>> bubble_Data(String id)
 	{
 		
 		Date date = new Date();
-		SimpleDateFormat sdf;
-		sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		List<HashMap<String, Object>> list = refdao.selectBubbleData(id);		
-				
+		
 		for(int i = 0; i<list.size(); i++)
 		{
-			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));
+			System.out.println("============================================================"+list.get(i));
+			/*String dt = (String) list.get(i).get("MODIFIED_DATE");*/
+			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));			
 			list.get(i).put("MODIFIED_DATE", MOD_DATE);				
 		}		
 		

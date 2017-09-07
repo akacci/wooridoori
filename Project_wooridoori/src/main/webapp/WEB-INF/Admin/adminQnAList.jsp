@@ -16,12 +16,22 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/AdminLTE.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/_all-skins.min.css?t=<%=System.currentTimeMillis()%>">
 
+<script type="text/javascript">
+$(function(){
+	$(".table-striped .content_qna").hide();
+	$(".table-striped .write_qna").click(function(){
+		var id= $(this).attr("id");
+		console.log(id);
+		$("#qna_"+id).show();
+	});
+});
+</script>
 <title>QnA관리자페이지</title>
 </head>
 <body>
 	<div style="width: 800px; margin-left: auto; margin-right: auto;">
 		<h3>QnA관리페이지</h3>
-	     <div id="donut_chart_box" style="width: 45%; float: left; margin-left: 20px;">
+	    <div id="donut_chart_box" style="width: 40%; float: left; margin-left: 20px;">
 		<div class="box box-danger">
 			<div class="box-header with-border">
 			  <h3 class="box-title">문의현황(문의종류)</h3>			
@@ -35,20 +45,20 @@
 			<!-- /.box-body -->
 			</div>
 		<!-- /.box -->
-	</div>
+	
     </div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>No</th>
 					<th style="width: 100px;">Kind</th>
-					<th style="width: 250px;">Title</th>
+					<th style="width: 300px;">Title</th>
 					<th>writer</th>
 					<th style="width: 100px;">Date</th>
 					<th>Answer</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="awds">
 			<c:forEach var="data" items="${list}">
 				<tr>
 					<td>${data.num}</td>
@@ -59,17 +69,18 @@
 						<c:when test="${data.kind==3}"><font style="color:#00a65a;">[신고]</font></c:when>
 					</c:choose>
 					</td>
-					<td>${data.title}</td>
+					<td><a class="write_qna" id="qna${data.num}" onclick="changePage('answerqna.wd?num=${data.num}')">[${data.title}]</a></td>
 					<td>${data.writer}</td>
 					<td><fmt:formatDate value="${data.wdate}" pattern="YY.MM.dd"/></td>
 					<td>
-						<c:if test="${data.acheck eq 'N'}"><a>답글쓰기</a></c:if>
-						<c:if test="${data.acheck eq 'Y'}"><a>답글보기</a></c:if>
+						<c:if test="${data.acheck eq 'N'}">미답변</c:if>
+						<c:if test="${data.acheck eq 'Y'}"><a>답변완료</a></c:if>
 					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
+	</div>
 	<script type="text/javascript">
 $(function () {
 	//DONUT CHART

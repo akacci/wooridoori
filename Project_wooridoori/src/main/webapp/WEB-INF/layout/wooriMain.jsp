@@ -12,7 +12,7 @@
  
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	var slideIndex= Math.floor(Math.random()*18+1);
+	var slideIndex= Math.floor(Math.random()*17+1);
 	var imageUrl="";
 	var message_title="";
 	var message="";
@@ -188,7 +188,6 @@
 </script>
 
 <style>
-body,h1 {font-family: "Raleway", sans-serif}
 body,html{width: 100%;height: 100%;}
 .bgimg {
     min-height: 100%;
