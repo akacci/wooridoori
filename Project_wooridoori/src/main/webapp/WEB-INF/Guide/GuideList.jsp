@@ -172,7 +172,7 @@
 	}
 	.contentImg{
 		display: inline;
-		height:159px;
+		height:152px;
 		width: 235px; 
 		overflow: hidden;
 		position: absolute;
@@ -252,7 +252,8 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		if(("${addr}")=="서울특별시"){	
+		if(("${addr}")=="서울특별시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/seoul.jpg')");	
 			$("#comment").append("대한민국의 심장 [Hi Seoul]");
 		}
 		else if(("${addr}")=="경기도"){
@@ -363,7 +364,7 @@
 			var city=($("#city").attr("addr")).substring(0,2);
 		/* 	var county="용산구";
 			var village="갈월동"; */
-		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&appKey=e08ba558-1e6b-326b-986e-9526ca7a0532";
+		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&appKey=b0ce2fbf-97ab-393b-92a5-b4398c836a2e";
 		   $.ajax({
 		      url:Wurl,
 		      type:"GET",
@@ -396,7 +397,7 @@
 		   
 		   var fIcon=["SKY_S0038","SKY_S0101,08","SKY_S0202,09","SKY_S0303,10","SKY_S0412,40","SKY_S0513,41", "SKY_S0614,42","SKY_S0718" ,"SKY_S0821","SKY_S0932","SKY_S1004","SKY_S1129","SKY_S1226","SKY_S1327", "SKY_S1428" ];  
 		   /* 2day forecast */
- 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=5c3c93ac-4dfc-3678-b291-a4b92caea652";
+ 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=53a83a8a-6a67-3026-aa64-97d8851d6223";
 			$.ajax({
 			      url:Furl,
 			      type:"GET",
@@ -483,7 +484,7 @@
 		   
 		  var pIcon=["SKY_W0038","SKY_W0101,08","SKY_W0202,09","SKY_W0303,10","SKY_W0418","SKY_W0721","SKY_W0912,40","SKY_W1021","SKY_W1104","SKY_W1213,41","SKY_W1332" ];
 		   /* 중기예보 */
- 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=e08ba558-1e6b-326b-986e-9526ca7a0532";
+ 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=b0ce2fbf-97ab-393b-92a5-b4398c836a2e";
 		$.ajax({
 		      url:Purl,
 		      type:"GET",

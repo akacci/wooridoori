@@ -174,6 +174,7 @@ public class AdminController {
 		System.out.println(qnaDto.getNum());
 		adminService.writeAnswer(qnaDto, content_qna);
 		return "adminQnAList.wd";
+	}
 
 
 	@RequestMapping("answerqna.wd")

@@ -438,7 +438,16 @@ public class GuideController {
 
 			gService.writeGuide(dto);
 			
-			m.addAttribute("addr",(dto.getGb_category_addr()).substring(0,dto.getGb_category_addr().indexOf(" ")));
+			if(dto.getGb_category_addr().contains(" ")){
+				m.addAttribute("addr",(dto.getGb_category_addr()).substring(0,dto.getGb_category_addr().indexOf(" ")));
+				
+			}
+			
+			else{
+				m.addAttribute("addr",(dto.getGb_category_addr()));
+			}
+			
+			
 			//m.addAttribute("list",gService.getList(addr));
 			return "redirect:guideList.wd";
 		}
