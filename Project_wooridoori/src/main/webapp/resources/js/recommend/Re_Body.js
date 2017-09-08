@@ -1,15 +1,14 @@
 $(function(){
 	
 	$("#recommend_detail").hide();
-	$(".check_img").hide();
-
+	
 	firstAreaData(); //처음 화면에 나오는 지역 데이터
 	firstThemaData(); //처음 화면에 나오는 테마 데이터
-	firstFavoriteRecommendData(); //처음 화면에 나오는 추천하고 싶은곳 데이터	
+	firstFavoriteRecommendData(); //처음 화면에 나오는 추천하고 싶은곳 데이터
 	
 	/*image slider*/
 	var num = 0;
-	var slideWidth = $(".select_box_div").width();
+	var slideWidth = $(".select_box_div").width() * 2;
 	var slideLength;
 	
 	$("div.slider a.slide_left").click(function(e){
@@ -25,7 +24,8 @@ $(function(){
 	
 	$("div.slider a.slide_right").click(function(e){
 		var topClass = $(e.target).parent().parent().parent();
-		slideLength = $("#"+topClass.attr("id")+" .select_box_div").length
+		slideLength = $("#"+topClass.attr("id")+" .select_box_div").length / 2;
+		
 		num--;
 		if (num <= "-"+(slideLength-1)){
 			num = -(slideLength-2);
@@ -40,79 +40,71 @@ $(function(){
 	var fir_val = "x";
 	var ja_val = "x";
 	var cc_val = "x";
-	$(".rateit").click(function(e){		
+	
+	$(".rateit").click(function(e){
+		e.stopPropagation();
+		
 		re_val = $(this).rateit('value');
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
+		
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
-		/*$(".rateit").rateit();
-	    $("#rateit_false").rateit("readonly", false);
-	     for(var j = 0; j < data.length; j++){
-	        $("#rateit_"+j).rateit("readonly", true);
-	        $("#rateit_"+j).rateit("value",data[j].pre_score);
-	     }*/
 	});
 	
 	$(".first_trip_click").click(function(e){
 		e.stopPropagation();
+		
 		fir_val = $(this).attr("value");		
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
+		
 		if(fir_val=="n")
 		{
-			/*$(".check_img").show();*/
-			$(this).find(".glyphicon glyphicon-check").css("color","red");
 			fir_val = $(this).attr("value","y");
 		}
 		if(fir_val=="y")
 		{
-			/*$(".check_img").hide();*/
-			$(this).find(".glyphicon glyphicon-check").css("color","black");
 			fir_val = $(this).attr("value","n");
 		}
 		fir_val = $(this).attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
-	$("._jcimg").click(function(e){
+	
+	$("._jcimg").unbind("click").bind("click",function(e){
 		e.stopPropagation();
+		
 		ja_val = $(this).attr("value");
 		var index = $(this).attr("inx");		
 		_contentid = $(".contentid:eq("+index+")").attr("value");
+		
 		if(ja_val=="n")
 		{
-			$(this).css("color","blue");
-			$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_2.png");
 			ja_val = $(this).attr("value","y");
 		}
 		if(ja_val=="y")
 		{
-			$(this).css("color","black");
-			$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_1.png");
 			ja_val = $(this).attr("value","n");
 		}
 		ja_val = $(this).attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
+	
 	$("._ccimg").click(function(e){
 		e.stopPropagation();		
+		
 		cc_val = $(this).attr("value");
 		var index = $(this).attr("inx");
 		_contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
+		
 		if(cc_val == 'n')
 		{
-			$(this).css("color","red");
-			$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_2.png");
 			cc_val = $(this).attr("value","y");
 		}
 		if(cc_val == 'y')
 		{
-			$(this).css("color","black");
-			$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_1.png");
-			cc_val = $(this).attr("value","n");
+			cc_val = $(this).attr("value","y");
 		}
 		cc_val = $(this).attr("value");
-		alert(cc_val);
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 		
 	});
@@ -171,9 +163,6 @@ function firstThemaData(){
 				$("#thema ._jcimg:eq("+i+")").attr("inx",i);
 				$("#thema .btn_first_trip:eq("+i+")").attr("inx",i);
 				if(s_data[i].title != null){
-					if(s_data[i].title.length >= 10){
-					    return s_data[i].title.substr(0,10)+"...";
-					}
 					$("#thema .tour_title").eq(i).text(s_data[i].title);
 				}
 			}
@@ -220,7 +209,6 @@ function select_data(re_val,fir_val,ja_val,_contentid,cc_val){
 		data : {"grade_point": re_val, "firsttrip":fir_val,"bookmark":ja_val,"contentid":_contentid,"pre_rence":cc_val},
 		success : function(data){
 			alert("저장되었습니다");
-			
 		}
 	});
 }

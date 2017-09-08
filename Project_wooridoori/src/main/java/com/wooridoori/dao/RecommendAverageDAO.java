@@ -10,8 +10,8 @@ import com.wooridoori.dto.RecommendAverageDTO;
 
 public class RecommendAverageDAO extends SqlSessionDaoSupport {
 	
-	public List<RecommendAverageDTO> selectRecommendAverage(String contentid){
-		List<RecommendAverageDTO> list = getSqlSession().selectList("selectRecommendAverage", contentid);
+	public List<RecommendAverageDTO> selectRecommendAverage(Map<String, Object> map){
+		List<RecommendAverageDTO> list = getSqlSession().selectList("selectRecommendAverage", map);
 		return list;
 	}
 	
