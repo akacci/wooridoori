@@ -249,10 +249,14 @@
 	#write{
 		margin-left: 1100px;
 	}
+	#bottom_g{
+		margin-bottom: 200px;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		if(("${addr}")=="서울특별시"){	
+		if(("${addr}")=="서울특별시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/seoul.jpg')");	
 			$("#comment").append("대한민국의 심장 [Hi Seoul]");
 		}
 		else if(("${addr}")=="경기도"){
