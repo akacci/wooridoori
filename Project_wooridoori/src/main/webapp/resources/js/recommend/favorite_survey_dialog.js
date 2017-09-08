@@ -11,7 +11,7 @@ $(function(){
 	  	modal: true,
 	  	resizable: false,
 	  	width: 400,
-	  	height: 500,
+	  	height: 450,
 	  	buttons:{
 	  		"확인":function(){
 	  			insertPreference();

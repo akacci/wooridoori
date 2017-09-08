@@ -8,7 +8,7 @@ $(function(){
 	
 	/*image slider*/
 	var num = 0;
-	var slideWidth = $(".select_box_div").width();
+	var slideWidth = $(".select_box_div").width() * 2;
 	var slideLength;
 	
 	$("div.slider a.slide_left").click(function(e){
@@ -24,7 +24,8 @@ $(function(){
 	
 	$("div.slider a.slide_right").click(function(e){
 		var topClass = $(e.target).parent().parent().parent();
-		slideLength = $("#"+topClass.attr("id")+" .select_box_div").length
+		slideLength = $("#"+topClass.attr("id")+" .select_box_div").length / 2;
+		
 		num--;
 		if (num <= "-"+(slideLength-1)){
 			num = -(slideLength-2);
@@ -39,21 +40,24 @@ $(function(){
 	var fir_val = "x";
 	var ja_val = "x";
 	var cc_val = "x";
+	
 	$(".rateit").click(function(e){
 		e.stopPropagation();
+		
 		re_val = $(this).rateit('value');
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
+		
 		select_data(re_val);
 	});
 	
 	$(".first_trip_click").click(function(e){
 		e.stopPropagation();
+		
 		fir_val = $(this).attr("value");		
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
+		
 		if(fir_val=="n")
 		{
 			fir_val = $(this).attr("value","y");
@@ -65,12 +69,14 @@ $(function(){
 		fir_val = $(this).attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
+	
 	$("._jcimg").unbind("click").bind("click",function(e){
 		e.stopPropagation();
+		
 		ja_val = $(this).attr("value");
 		var index = $(this).attr("inx");		
 		_contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
+		
 		if(ja_val=="n")
 		{
 			ja_val = $(this).attr("value","y");
@@ -82,12 +88,14 @@ $(function(){
 		ja_val = $(this).attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
+	
 	$("._ccimg").click(function(e){
 		e.stopPropagation();		
+		
 		cc_val = $(this).attr("value");
 		var index = $(this).attr("inx");
 		_contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
+		
 		if(cc_val == 'n')
 		{
 			cc_val = $(this).attr("value","y");

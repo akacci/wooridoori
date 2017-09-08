@@ -39,7 +39,7 @@
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">지역</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
 							<div class="select_box_div">
 								<input type="hidden" value="${i.index}" id="cnt">
@@ -82,7 +82,7 @@
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">테마</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
 							<div class="select_box_div">
 								<input type="hidden" value="${i.index}" id="cnt">
@@ -121,7 +121,7 @@
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">추천하고 싶은 곳</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
 							<div class="select_box_div">
 								<input type="hidden" value="${i.index}" id="cnt">
@@ -158,9 +158,9 @@
 	</div>
 	<!-- recommend detail data list  -->
 	<div id="recommend_detail">
-		<div style="width:1200px; height:800px;">
-			<div style="width:1200px; height:800px;">
-				<div id="list" style="width:1200px; height:800px;">
+		<div style="width:1300px; height:800px;">
+			<div style="width:1300px; height:800px;">
+				<div id="list" style="width:1300px; height:800px;">
 			<!-- <div class="select_box_div"> -->
 				<%-- <input type="hidden" value="${i.index}" id="cnt">
 				<input type="hidden" class="contentid" id="contentid">

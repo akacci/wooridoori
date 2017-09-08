@@ -1,6 +1,8 @@
 package com.wooridoori.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,11 @@ public class RecommendAverageService {
 	@Autowired
 	RecommendAverageDAO radao;
 	
-	public List<RecommendAverageDTO> selectRecommendAverage(String contentid){
-		List<RecommendAverageDTO> list = radao.selectRecommendAverage(contentid);
+	public List<RecommendAverageDTO> selectRecommendAverage(String contentid, int end){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("contentid", contentid);
+		map.put("end", end);
+		List<RecommendAverageDTO> list = radao.selectRecommendAverage(map);
 		return list;
 	}
 	
