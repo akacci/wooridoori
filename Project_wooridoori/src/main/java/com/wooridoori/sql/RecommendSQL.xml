@@ -131,8 +131,26 @@
 	<select id="searchOfPreference" parameterType="String" resultType="HashMap">
 		select *
 		from preference
-		where m_id = #{id}		
+		where m_id = #{id}	
 	</select>
+	<update id="updateClickBookmark" parameterType="HashMap">
+		update preference 
+		set bookmark = #{bookmark} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
+	<update id="updateClickFirsttrip" parameterType="HashMap">
+		update preference 
+		set bookmark = #{firsttrip} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
+	<update id="updateClickPre_rence" parameterType="HashMap">
+		update preference 
+		set bookmark = #{preference} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
    
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *

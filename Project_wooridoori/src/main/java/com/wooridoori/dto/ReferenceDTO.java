@@ -15,8 +15,7 @@ public class ReferenceDTO {
 	private String contentid;
 	private char firsttrip;
 	private String age;
-	private char bookmark;
-	private char solotrip;
+	private char bookmark;	
 	private String grouptrip;
 	private Timestamp cre_date;
 	private Timestamp modified_date;
@@ -25,9 +24,16 @@ public class ReferenceDTO {
 	private char pre_rence;
 	private String purpose_code;
     private String stay_code;
+    private String preference_seq;
     
     
 	
+	public String getPreference_seq() {
+		return preference_seq;
+	}
+	public void setPreference_seq(String preference_seq) {
+		this.preference_seq = preference_seq;
+	}
 	public String getStay_code() {
 		return stay_code;
 	}
@@ -105,12 +111,6 @@ public class ReferenceDTO {
 	}
 	public void setBookmark(char bookmark) {
 		this.bookmark = bookmark;
-	}
-	public char getSolotrip() {
-		return solotrip;
-	}
-	public void setSolotrip(char solotrip) {
-		this.solotrip = solotrip;
 	}
 	public String getGrouptrip() {
 		return grouptrip;

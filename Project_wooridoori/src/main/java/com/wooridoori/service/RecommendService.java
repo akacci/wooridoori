@@ -263,4 +263,20 @@ public class RecommendService {
 		List<ReferenceDTO> list = refdao.bubble_Count(id);
 		return list;			
 	}
+	
+	public void updateCilckData(HashMap<String, Object> hashmap, int i)
+	{
+		if(i == 1)
+		{
+			refdao.updateClickFirsttrip(hashmap);
+		}
+		if(i == 2)
+		{
+			refdao.updateClickBookmark(hashmap);
+		}
+		if(i == 3)
+		{
+			refdao.updateClickPre_rence(hashmap);
+		}
+	}
 }
