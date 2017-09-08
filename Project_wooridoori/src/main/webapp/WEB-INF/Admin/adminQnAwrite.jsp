@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,7 @@
 <div class="qna_write" style="width: 800px; margin-left: auto;margin-right: auto;">
 <h3>QnA</h3>
 <form action="answer_qnawrite.wd" id="frm_qna">
+<input type="hidden" name="num" value="${data.num}">
 <table class="table table-striped">
 <tr>
 	<td width="100px;">No</td>
@@ -45,22 +47,25 @@
 	<td colspan="2">
 	</td>
 </tr>
-<tr>
-	<td colspan="2">답변쓰기</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<textarea id="content_qna" name="content_qna" rows="10" style="width: 100%;"></textarea>
-	</td>
-</tr>
-<tr>
-	<td colspan="2"">
-		<span style="float:right"><input type="button" class="btn write_qna" value="작성하기"> </span>
-	</td>
-</tr>
+<c:if test="${data.acheck eq 'N'}">
+	<tr>
+		<td colspan="2">답변쓰기</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<textarea id="content_qna" name="content_qna" rows="10" style="width: 100%;">${data.content}<br><br>====================================<br><br></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<span style="float:right"><input type="button" class="btn write_qna" value="작성하기"> </span>
+		</td>
+	</tr>
+</c:if>
 </table>
 </form>
 </div>
+<c:if test="${data.acheck eq 'N'}">
 <script type="text/javascript">
 var oEditors = [];
 $(function(){
@@ -77,20 +82,26 @@ $(function(){
               // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
               bUseModeChanger : true,         
               fOnBeforeUnload : function(){
-                   
               }
           },
           fCreator: "createSEditor2"
       });
       
       //저장버튼 클릭시 form 전송
-      $(".write_qna").click(function(){
-          oEditors.getById["content_qna"].exec("UPDATE_CONTENTS_FIELD", []);
-      $(".write_qna").click(function(){
-    	  
-      });
-      });   
+	$(".write_qna").click(function(){
+		oEditors.getById["content_qna"].exec("UPDATE_CONTENTS_FIELD", []);
+		var frm_data = $("#frm_qna").serialize();
+		$.ajax({
+			type: 'POST',
+			url: 'answer_qnawrite.wd',
+			data: frm_data,
+			success: function(data){
+				changePage(data);
+			}
+		});
+	});   
 });
 </script>
+</c:if>
 </body>
 </html>

@@ -18,4 +18,16 @@ public class GuideScoreService {
 	public int guideIsRated(GuideScoreDTO dto){
 		return gsDAO.guideIsRated(dto);
 	}
+	public void guideScoreUpdate(GuideScoreDTO dto){
+		gsDAO.guideScoreUpdate(dto);
+	}
+	public float guideScoreAverage(String num){
+		return gsDAO.guideScoreAverage(Integer.parseInt(num));
+	}
+	public void guideRate(GuideScoreDTO dto){
+		gsDAO.guideRate(dto);
+	}
+	public String guideRateCount(int num){
+		return gsDAO.guideRateCount(num);
+	}
 }

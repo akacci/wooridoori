@@ -338,6 +338,9 @@
     </script>
   </head>
   <body>
+   	<header>
+		<%@ include file= "../layout/top.jsp" %>
+	</header>  
   <div id="dialog-confirm" title="관리자에게 문의하세요.">
  		 <p>
  		 	<span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
@@ -418,7 +421,10 @@
 </div>
 
 
-
+	<footer>
+	      <jsp:include page= "../layout/wfooter.jsp"/>
+	      <%-- <%@include file="../layout/wfooter.jsp"%> --%>
+	</footer>
 
   </body>
 </html>

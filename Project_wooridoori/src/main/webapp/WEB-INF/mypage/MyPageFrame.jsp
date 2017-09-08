@@ -1,7 +1,10 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +35,7 @@
             <ul class="sidebar-nav">
             
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="#">                    	
                     	<img src="resources/image/main/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
                 </li>  
@@ -44,14 +47,12 @@
                     <a href="javascript:void(0)" onclick="Recommend_Info()">Recommend Page</a> 
                 </li>
                 <li> 
-                    <a href="#">Overview</a>
+                    <a href="javascript:void(0)" onclick="guideReservation()">Guide Reservation</a>
                 </li>
-                <li>
-                    <a href="#">Events</a>
+                <li> 
+                    <a href="javascript:void(0)" onclick="guideReuest()">Guide Request</a>
                 </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
+
                 <li>
                     <a onclick="changePage('qna.wd')" href="#">QnA</a>
                 </li>
@@ -65,9 +66,6 @@
 	                <li>
 	                    <a onclick="changePage('adminMemberList.wd')" href="#">전체회원관리페이지</a>
 	                </li>
-	                <li>
-	                    <a onclick="changePage('adminGuideList.wd')" href="#">가이드관리페이지</a>
-	                </li>
 				</c:if>
             </ul>
         </div>
@@ -80,13 +78,32 @@
         </div> 
  		
  		<script type="text/javascript">
- 		$(function(){
- 			var data = ${data}+"";
- 			if(data != null && data.length != 0){
- 				changePage(data);
- 				data = null;
- 			}
- 		});
+
+ 			$(function(){
+
+ 				$("#page").load("userInfo.wd");
+
+ 				var data1 = ${data1}+"";
+ 				if(data1!=null && data1.length != 0){
+ 					
+ 					changePage(data1);
+ 					data1=null;
+ 				}
+ 				var data2 = ${data2}+"";
+ 				if(data2!=null && data2.length != 0){
+ 					var searchkey = '<c:out value="${searchkey}"/>';
+ 					var currentPage = "&currentPage="+'<c:out value="${currentPage}"/>';
+ 					alert(currentPage);
+ 					var data3 = data2+searchkey+currentPage;
+ 					alert(data3);
+ 					changePage(data3);
+ 					data2=null;
+ 				}
+ 				
+ 			});
+ 			
+
+
  			function userInfo(){
  				$("#page").load("userInfo.wd");  	
  			} 
@@ -94,10 +111,15 @@
  			{
  				$("#page").load("re_mypage.wd");
  			}
+			function guideReservation(){
+ 				$("#page").load("guideReservationList.wd");
+ 			}
+ 			function guideReuest(){
+ 				$("#page").load("selectRequestList.wd");
+ 			}
 		    function qnaBoard(){
 		        $("#page").load("qna.wd"); 
 		    }
-      
 			function changePage(data){
 				$("#page").load(data);
 			}
@@ -106,11 +128,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid" id="page">
-           		
-                <h1>Simple Sidebar</h1>
-                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+            	
             </div>
         </div> 
         <!-- /#page-content-wrapper -->

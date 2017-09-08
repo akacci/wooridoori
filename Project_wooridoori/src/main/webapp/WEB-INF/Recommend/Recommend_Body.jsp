@@ -30,6 +30,7 @@
 <body>
 	<div id="success_message"></div>
 	<div id="recommend_main">
+		<input type="hidden" id="login_val">
 		<div id="area">
 			<div class="slider">
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
@@ -91,7 +92,7 @@
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" name="first_trip" value="Y">
+										<span class="first_trip_click" name="first_trip" value="n" inx="${i.count}">
 											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
@@ -128,15 +129,14 @@
 					<span class="category">추천하고 싶은 곳</span>
 					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
-							<div class="select_box_div">
-								<input type="hidden" value="${i.index}" id="cnt">
+							<div class="select_box_div">																
 								<input type="hidden" class="contentid" id="contentid">
 								<div class="select_tourbox">
 									<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" name="first_trip" value="Y">
+										<span class="first_trip_click" name="first_trip" value="n" inx="${i.count}">
 											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>

@@ -6,8 +6,9 @@
 	<typeAliases>
 		<!-- Jay -->
 		<typeAlias type="com.wooridoori.dto.GuideDTO" alias="gdto"/>
-
 		<typeAlias type="com.wooridoori.dto.GuideScoreDTO" alias="gsdto"/>
+		<typeAlias type="com.wooridoori.dto.GuideReservationDTO" alias="grdto"/>
+		<typeAlias type="com.wooridoori.dto.GuideReplyDTO" alias="grpdto"/>
 		<!-- suzan -->
 		<typeAlias type="com.wooridoori.dto.MemberDTO" alias="mdto"/>
 		<typeAlias type="com.wooridoori.dto.ContentDTO" alias="cdto"/>
@@ -28,6 +29,8 @@
 		<mapper resource="/com/wooridoori/sql/LoginSQL.xml"/>
 		<mapper resource="/com/wooridoori/sql/GuideSQL.xml"/>
 		<mapper resource="/com/wooridoori/sql/GuideScoreSQL.xml"/>
+		<mapper resource="/com/wooridoori/sql/GuideReservationSQL.xml"/>
+		<mapper resource="/com/wooridoori/sql/GuideReplySQL.xml"/>
 		<!-- suzan -->
 		<mapper resource="com/wooridoori/sql/MemberSQL.xml"/>
 		<mapper resource="com/wooridoori/sql/ContentSQL.xml"/>
