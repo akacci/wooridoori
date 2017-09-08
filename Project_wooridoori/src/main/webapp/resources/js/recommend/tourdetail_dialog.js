@@ -73,6 +73,7 @@ $(function(){
     /*dialog_review_write 확인버튼 click event*/
     $("#insert_btn").unbind("click").bind("click", function(){
     	review_insert();
+    	dialog_review($("#dialog_review_write #contentid").val(),5);
     	$("#m_id").val("");
     	$("#pre_review").val("");
     	$("#rateit_write").rateit("value", "");
@@ -86,11 +87,11 @@ $(function(){
     var btnMore_cnt = 1;
     $(document).on("click", "#review_dialog_btn", function(){
     	btnMore_cnt++;
-    	var reply_length = dialog_review($("#dialog_review_write #contentid").val(), 5*btnMore_cnt);
-    	if( reply_length < 5*btnMore_cnt){
+    	dialog_review($("#dialog_review_write #contentid").val(), 5*btnMore_cnt);
+    	
+    	/*if( reply_length < 5*btnMore_cnt){
     		alert("마지막 댓글입니다");
-    		$(this).on("css","display:none");
-    	}
+    	}*/
     });
     
 });
@@ -208,14 +209,12 @@ function dialog_content(contentid, e){
 
 /*dialog_review data*/ 
 function dialog_review(contentid, end){
-	var review_length = 0;
 	$.ajax({
 		url: "todialogreview.wd",
 		type: "post",
 		data: {"contentid": contentid, "end": end},
 		success: function(resData){
 			var data = JSON.parse(resData);
-			review_length = data.length;
 			
 			var html = "";
 			for(var i = 0; i < data.length; i++){
@@ -243,7 +242,6 @@ function dialog_review(contentid, end){
 			
 		}
 	});
-	return review_length;
 }
 
 /*dialog_review_write data insert*/

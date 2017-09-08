@@ -29,8 +29,8 @@
 	
 	div#div_more{
 		position: fixed;
-		left: 37%;
-		width: 25%;
+		left: 90%;
+		width: 5%;
 		height: 25px;
 		bottom: 55px;
 		background-color: #313131;
@@ -168,7 +168,6 @@
    
    div#re_body{
    	width: 100%;
-   	margin-bottom: 60px;
    	z-index: 1;
    }
    
@@ -315,14 +314,18 @@
 	}
 	
 	/* recommend detail 아래 부분 */
+	#recommend_detail{
+		margin-bottom: 50px;
+	}
+	
 	#recommend_detail div.select_box_div{
 		position: relative;
 		float: left;
-		left:25px;
+		left:125px;
 		margin-left:5px;
 		margin-top:20px;
 		margin-right:5px;	
-		margin-bottom: 20px;	
+		margin-bottom: 20px;
 		width: 250px;
 		height: 200px;
 	}
@@ -387,41 +390,63 @@
 	}
 
 	/* 다시 전체 */
-	span.first_trip_click{
-		margin-left: 80%;
-		width: 10%;
-		height: 5%;
-	}
-	
-	img.btn_first_trip{
-		width: 20px;
-		height: 20px;
-	}
-	
-	div.select_tourbox > img.tour_image{
-		width: 250px;
-		height: 100%;
-	}
-	
-	span._ccimg, span._jcimg, span.first_trip_click{
-		width: 50px;
-		height: 50px;
-		cursor: pointer;	
-	}
-	
-	span.glyphicon glyphicon-heart-empty{		
-		font-size: 2em; 
-		color: red; 
-		font-weight: 0.5px;		
-	}	
-	
-	span.glyphicon glyphicon-heart-empty:hover{
-		color: bule;
-	}
-	
-	span.filter_tag_exit{
-		cursor: pointer;
-	}
+   img.check_img{
+      width: 50px;
+      height: 50px;
+   }
+   li.rateit_box{
+      padding-left: 50px;
+   }
+   div._ccimg, div._jcimg, span.first_trip_click{
+      width: 80px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 6;
+   }
+   
+   div._ccimg, div._jcimg{
+      margin-top: 10px;
+      float: left;
+   }
+   
+   div._jcimg{
+      margin-left: 5px;
+   }
+   
+   img.ccimg, img.jcimg{
+      width: 20px;
+      height: 20px;
+   }
+   
+   span.first_trip_click{
+      margin-left: 80%;
+      width: 10%;
+      height: 5%;
+   }
+   
+   img.btn_first_trip{
+      width: 20px;
+      height: 20px;
+   }
+   span._jcimg{
+      margin-left: 40px;
+   }
+   
+   /* div.select_tourbox > img.tour_image{
+      width: 250px;
+      height: 100%;
+   } */
+   
+   /* span.tour_name{
+      width: 300px;
+      height: 20px;
+      text-align: center;
+   } */
+   
+   
+   span.filter_tag_exit{
+      cursor: pointer;
+   }
 	
 	.brightness {-webkit-filter: brightness(250%);filter: brightness(250%);}
    

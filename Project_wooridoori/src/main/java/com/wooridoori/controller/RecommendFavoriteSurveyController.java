@@ -117,45 +117,39 @@ public class RecommendFavoriteSurveyController {
 		}
 	}
 	
-	@RequestMapping(value="selectinsertpreference.wd", method=RequestMethod.POST)
-	public void insertPreference(@RequestParam(value="areacode") String areacode,
+	@RequestMapping(value="selectupdatepreference.wd", method=RequestMethod.POST)
+	public void updatePreference(@RequestParam(value="areacode") String areacode,
 								@RequestParam(value="age") String age,
 								@RequestParam(value="purpose") String purpose,
 								@RequestParam(value="person") String person,
 								@RequestParam(value="stay") String stay,
-								HttpSession session,
-								HttpServletResponse response){
+								HttpSession session){
 		
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		Map<String, String> map = new HashMap<String, String>();
 		
-		ObjectMapper mapper = new ObjectMapper();
-		
 		int totcnt = rfsService.totalCountPreference(id);		
 		if(login.equals("YES")){
 			if(totcnt > 0){
-			map.put("m_id", id);
-			map.put("areacode", areacode);
-			map.put("age", age);
-			map.put("grouptrip", person);
-			map.put("purpose_code", purpose);
-			map.put("stay_code", stay);
-			
-			rfsService.insertPreference(map);
+				map.put("m_id", id);
+				map.put("areacode", areacode);
+				map.put("age", age);
+				map.put("grouptrip", person);
+				map.put("purpose_code", purpose);
+				map.put("stay_code", stay);
+				
+				rfsService.updatePreference(map);
 			}else{
 				map.put("error", "insert_error");
 			}
 		}
-		try {
-			response.getWriter().print(mapper.writeValueAsString(map));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	}
+	
+	@RequestMapping("selectTotalCountPreference.wd")
+	public int selectTotalCountPreference(@RequestParam String id){
+		int totalCnt = rfsService.totalCountPreference(id);
+		return totalCnt;
 	}
 
 }
