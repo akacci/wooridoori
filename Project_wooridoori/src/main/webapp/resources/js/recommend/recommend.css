@@ -61,6 +61,7 @@
 	}
 	
 	a.slide_left img, a.slide_right img{
+		margin-top: 40px;
 		background-color: #fff;
 		width: 100%;
 		height: 100%;
@@ -312,7 +313,8 @@
 		z-index: 5;
 		width: 250px;
 		height: 100px;				
-	}
+	}	
+	
 	
 	/* recommend detail 아래 부분 */
 	#recommend_detail div.select_box_div{
@@ -328,7 +330,13 @@
 	}
 	
 	#recommend_detail div>ul.select_box_ul{
+		padding-left: 0px;
 		list-style: none;
+	}
+	
+	#recommend_detail li.select_box_li{
+		left: 0px;
+		width: 250px;
 	}
 	
 	#recommend_detail div>ul>li.select_box{
@@ -387,6 +395,34 @@
 	}
 
 	/* 다시 전체 */
+	img.check_img{
+		width: 50px;
+		height: 50px;
+	}
+	li.rateit_box{
+		padding-left: 50px;
+	}
+	div._ccimg, div._jcimg, span.first_trip_click{
+		width: 80px;
+		height: 20px;
+		cursor: pointer;
+		z-index: 6;
+	}
+	
+	div._ccimg, div._jcimg{
+		margin-top: 10px;
+		float: left;
+	}
+	
+	div._jcimg{
+		margin-left: 5px;
+	}
+	
+	img.ccimg, img.jcimg{
+		width: 20px;
+		height: 20px;
+	}
+	
 	span.first_trip_click{
 		margin-left: 80%;
 		width: 10%;
@@ -397,12 +433,16 @@
 		width: 20px;
 		height: 20px;
 	}
-	
-	div.select_tourbox > img.tour_image{
-		width: 250px;
-		height: 100%;
+	span._jcimg{
+		margin-left: 40px;
 	}
 	
+	/* div.select_tourbox > img.tour_image{
+		width: 250px;
+		height: 100%;
+	} */
+	
+<<<<<<< HEAD
 	span._ccimg, span._jcimg, span.first_trip_click{
 		width: 50px;
 		height: 50px;
@@ -418,6 +458,14 @@
 	span.glyphicon glyphicon-heart-empty:hover{
 		color: bule;
 	}
+=======
+	/* span.tour_name{
+		width: 300px;
+		height: 20px;
+		text-align: center;
+	} */
+	
+>>>>>>> branch 'master' of https://github.com/akacci/wooridoori
 	
 	span.filter_tag_exit{
 		cursor: pointer;
@@ -445,5 +493,15 @@
 		padding: 0 0 0 0;
 		border: 0;
 		visibility: hidden;
+	}
+	
+	#success_message{
+		position: absolute;
+		top: 50px;
+		left: 500px;
+		border: 2px solid balck;
+		background-color: red;
+		z-index: 12;
+		
 	}
    

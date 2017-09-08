@@ -45,6 +45,9 @@ public class MemberService {
 	    System.out.println(addr);
 	    return addr;
 	}
+	public String getID_NUM(MemberDTO mdto){
+		return mDao.getID_NUM(mdto);
+	}
 
 	public void memberInsert(MemberDTO mdto){
 		mDao.memberInsert(mdto);

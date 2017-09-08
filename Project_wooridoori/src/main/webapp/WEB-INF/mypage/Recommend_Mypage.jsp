@@ -8,10 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- 평점 먹이는 별 -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-<script src="startStyle/scripts/jquery.rateit.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="startStyle/scripts/rateit.css">
- -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/rateit/scripts/jquery.rateit.js?t=<%=System.currentTimeMillis()%>" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/js/rateit/scripts/rateit.css?t=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/Recommend_Mypage.css?t=<%=System.currentTimeMillis()%>">
+
 <!-- mypage table css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/bootstrap.min.css?t=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/font-awesome.min.css?t=<%=System.currentTimeMillis()%>">
@@ -24,8 +25,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/recommend_mycss/Recommend_Mypage.css"> -->
 </head>
 <body>
-     <!-- DONUT CHART -->
-     
+     <!-- DONUT CHART -->     
      <div id="chart_total_box" style="margin-left: 40px;">
      <div id="donut_chart_box" style="width: 45%; float: left; margin-left: 20px;">
 		<div class="box box-danger">
@@ -84,10 +84,12 @@
 	                <th>Date modified</th>
                 </tr>
                 </thead>
-                <tbody id="mypage_list">  	
-                </tbody>                
-              </table>
-              
+                <tbody id="mypage_list"> 
+                	
+                </tbody>
+                <tr id="mypage_paging">
+                </tr>              
+              </table>              
             </div>
             <!-- /.box-body -->
           </div>
@@ -96,7 +98,7 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    
+   	
     <!-- mypage table script -->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/bootstrap.min.js?j=<%=System.currentTimeMillis()%>"></script>

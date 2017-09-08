@@ -80,13 +80,15 @@
         </div> 
  		
  		<script type="text/javascript">
- 		$(function(){
- 			var data = ${data}+"";
- 			if(data != null && data.length != 0){
- 				changePage(data);
- 				data = null;
- 			}
- 		});
+
+ 			$(function(){
+ 				var data1 = ${data1}+"";
+ 				if(data1!=null && data1.length != 0){
+ 					changePage(data1);
+ 					data1=null;
+ 				}
+ 			});
+
  			function userInfo(){
  				$("#page").load("userInfo.wd");  	
  			} 
@@ -94,10 +96,6 @@
  			{
  				$("#page").load("re_mypage.wd");
  			}
-		    function qnaBoard(){
-		        $("#page").load("qna.wd"); 
-		    }
-      
 			function changePage(data){
 				$("#page").load(data);
 			}

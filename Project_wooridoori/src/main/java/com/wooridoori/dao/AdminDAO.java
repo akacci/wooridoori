@@ -29,10 +29,19 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public QnABoardDTO getQnABoard(String num){
 		return getSqlSession().selectOne("qna_admin.getQnABoard", num);
 	}
+	public void writeAnswer(QnABoardDTO qnaDto){
+		getSqlSession().update("qnaboard.writeAnswer", qnaDto);
+	}
 	
 	/* Member */
 	public List<MemberDTO> getAllMemberList(){
 		List<MemberDTO> list = getSqlSession().selectList("qna_admin.getAllMemberList");
 		return list;
+	}
+	
+	public String doDeleteMember(String wnum){
+		getSqlSession().delete("member.doDeleteMember", wnum);
+		String data = "'adminMemberList.wd'";
+		return data;
 	}
 }

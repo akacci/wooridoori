@@ -48,7 +48,7 @@ $(function(){
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
 		
-		select_data(re_val);
+		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 	});
 	
 	$(".first_trip_click").click(function(e){
