@@ -32,7 +32,7 @@
             <ul class="sidebar-nav">
             
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="#">                    	
                     	<img src="resources/image/main/profile.png" width="30" height="30">The Suzan Maestro
                     </a>
                 </li>  
