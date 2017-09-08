@@ -4,7 +4,7 @@ $(function(){
 	selectAreaCodeName();
 	selectCat2Code();
 	selectStayCode();
-	
+
 	/*favorite_survey dialog*/
 	$("#favorite_survey").dialog({
 	  	autoOpen: false,
@@ -32,7 +32,8 @@ $(function(){
 		if($(this).attr("name") == "_3"){
 			if($("#login_val").val() == "YES"){
 				//추천,즐찾,별점,처음방문 여부 하나라도 클릭시
-				if(selectTotalCountPreference(id) > 0){
+				var totPreference = selectTotalCountPreference(id);
+				if( totPreference > 0){
 					$("#favorite_survey").attr("style", "visibility:visible");
 					$("#favorite_survey").dialog("open");
 				}else{
@@ -46,14 +47,16 @@ $(function(){
 });
 
 function sessionLogin(){
-	var sessionId = "";
+	var sessionId;
 	$.ajax({
 		url:"sessionlogin.wd",
 		type: "post",
+		async: false,
 		success:function(resData){
+			
 			var login = resData.substr(0, resData.indexOf(",")).trim();
 			sessionId = resData.substr(resData.indexOf(",") + 1, resData.length);
-			
+
 			$("#login_val").val(login);
 		}
 	});
@@ -124,11 +127,13 @@ function selectStayCode(){
 }
 
 //추천 테이블 count 가져오기
-function selectTotalCountPreference(){
-	var pre_cnt = 0;
+function selectTotalCountPreference(id){
+	var pre_cnt;
 	$.ajax({
 		url: "selectTotalCountPreference.wd",
 		type:"post",
+		async: false,
+		data:{"id":id},
 		success:function(resData){
 			pre_cnt = resData;
 		}
