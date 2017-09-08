@@ -93,9 +93,7 @@
  				if(data2!=null && data2.length != 0){
  					var searchkey = '<c:out value="${searchkey}"/>';
  					var currentPage = "&currentPage="+'<c:out value="${currentPage}"/>';
- 					alert(currentPage);
  					var data3 = data2+searchkey+currentPage;
- 					alert(data3);
  					changePage(data3);
  					data2=null;
  				}

@@ -364,7 +364,7 @@
 			var city=($("#city").attr("addr")).substring(0,2);
 		/* 	var county="용산구";
 			var village="갈월동"; */
-		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&appKey=b0ce2fbf-97ab-393b-92a5-b4398c836a2e";
+		   var Wurl="http://apis.skplanetx.com/weather/current/minutely?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&appKey=1411e872-d9bb-397e-94df-02669b0cc4bb";
 		   $.ajax({
 		      url:Wurl,
 		      type:"GET",
@@ -397,7 +397,7 @@
 		   
 		   var fIcon=["SKY_S0038","SKY_S0101,08","SKY_S0202,09","SKY_S0303,10","SKY_S0412,40","SKY_S0513,41", "SKY_S0614,42","SKY_S0718" ,"SKY_S0821","SKY_S0932","SKY_S1004","SKY_S1129","SKY_S1226","SKY_S1327", "SKY_S1428" ];  
 		   /* 2day forecast */
- 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=53a83a8a-6a67-3026-aa64-97d8851d6223";
+ 			var Furl="http://apis.skplanetx.com/weather/forecast/3days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=9af01817-3f1d-33a0-9ffb-b2cf9a7485e1";
 			$.ajax({
 			      url:Furl,
 			      type:"GET",
@@ -484,7 +484,7 @@
 		   
 		  var pIcon=["SKY_W0038","SKY_W0101,08","SKY_W0202,09","SKY_W0303,10","SKY_W0418","SKY_W0721","SKY_W0912,40","SKY_W1021","SKY_W1104","SKY_W1213,41","SKY_W1332" ];
 		   /* 중기예보 */
- 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=b0ce2fbf-97ab-393b-92a5-b4398c836a2e";
+ 		var Purl="http://apis.skplanetx.com/weather/forecast/6days?version=1&lat="+lat+"&lon="+lng+"&city=&county=&village=&foretxt=Y&appKey=1411e872-d9bb-397e-94df-02669b0cc4bb";
 		$.ajax({
 		      url:Purl,
 		      type:"GET",

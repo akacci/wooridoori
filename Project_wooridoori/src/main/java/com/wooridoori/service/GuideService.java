@@ -221,6 +221,7 @@ public class GuideService{
 		
 		// Directory
 		String warnDir = path+"\\save\\GuideFace\\";
+		System.out.println(path);
 		File dir = new File(warnDir);
 	    if (!dir.exists()) {
 	    	dir.mkdirs();
@@ -285,7 +286,7 @@ public class GuideService{
 					
 				    // Extract good images (distances are under 35)
 					for (int i = 0; i < descriptors1.rows(); i++) {
-						if (match[i].distance <= 20) {
+						if (match[i].distance <= 23) {
 							retVal++;
 						}
 					}
