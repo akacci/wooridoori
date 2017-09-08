@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper	namespace="guideReply">
+	<insert id="insertReply" parameterType="grpdto">
+		insert into 
+			guide_reply(
+				seq_reply, num, m_id, name, gr_content, cre_date, upd_date
+			)
+		values(seq_reply.nextval, #{num}, #{m_id}, #{name}, #{gr_content}, sysdate, null)
+	</insert>
+	
+	<select id="getReplyList" parameterType="int" resultType="grpdto">
+		select
+			*
+		from
+			guide_reply
+		where
+			num=#{num}	
+	</select>
+	
+	
+</mapper>

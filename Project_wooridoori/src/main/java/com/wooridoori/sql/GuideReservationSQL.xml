@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper	namespace="guideReservation">
+	<select id="selectLoginUserData" resultType="HashMap" parameterType="String">
+		select num,
+		       m_id,
+		       name,
+		       tel
+		from wmember
+		where m_id = #{id}
+	</select>
+	
+	<insert id="insertGuideReservation" parameterType="grdto"> 
+		insert into 
+			guide_reservation(
+			SEQ_RESERVATION,
+			SEQ_GUIDE,
+			M_ID,
+			GR_THEMA,
+			GR_NAME,
+			GR_TEL,
+			GR_DAY,
+			GR_PRICE,
+			GR_MEET_ADDR,
+			GR_MEET_TIME,
+			CRE_DATE,
+			UPD_DATE,
+			GR_ADDR
+			)
+		values (seq_reservation.nextval,
+				to_number(#{seq_guide}),
+				#{m_id},
+				#{gr_thema},
+				#{gr_name},
+				#{gr_tel},
+				#{gr_day},
+				#{gr_price},
+				#{gr_meet_addr},
+				#{gr_meet_time},
+				sysdate,
+				sysdate,
+				#{gr_addr}
+				)
+	</insert>
+	
+	<select id="selectTotalReservation" resultType="int"  parameterType="String">
+		select count(*) as cnt
+		from guide_reservation
+		where
+			m_id = #{m_id}
+	</select>
+	
+	<select id="selectReservationList" resultType="grdto" parameterType="HashMap">
+		select a.* 
+		from (select ROWNUM as RNUM,b.* 
+			  from (select * 
+			  		from guide_reservation 
+			  		where
+						m_id = #{m_id}
+			  		order by seq_reservation desc)b
+			 )a 
+		where a.RNUM <![CDATA[>=]]> #{start} 
+		and a.RNUM <![CDATA[<=]]> #{end}
+	</select>
+	
+	<select id="selectGuideTotalReservation" parameterType="String" resultType="int">
+		select count(*) as cnt
+		from
+			guide_reservation
+		where
+			m_id = #{m_id}
+			
+	</select>
+	
+	<select id="selectGuideReservationList" resultType="grdto" parameterType="HashMap">
+		select a.* 
+		from (select ROWNUM as RNUM,b.* 
+			  from (select * 
+			  		from 
+			  			guide_reservation 
+			  		where
+						m_id = #{m_id}
+			  		order by seq_reservation desc)b
+			 )a 
+		where a.RNUM <![CDATA[>=]]> #{start} 
+		and a.RNUM <![CDATA[<=]]> #{end}
+	</select>
+	
+</mapper>

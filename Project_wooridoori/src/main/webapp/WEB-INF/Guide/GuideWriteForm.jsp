@@ -15,8 +15,8 @@
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script><!-- 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -34,7 +34,7 @@
 
 <style type="text/css">
 	#cl-dashboard{display: none;} 
-	table{
+/* 	table{
 		border:1px solid aqua;
 	}
 	tr,td,th{
@@ -48,8 +48,8 @@
 	a:HOVER {
 		color: blue;
 		text-decoration: underline;
-	}
-	#wirteForm{
+	} */
+	body #wirteForm{
 		padding-left: 100px;
 		padding-top: 100px;
 	}
@@ -135,21 +135,24 @@
 		$(".fileup").hide();
         $('.image-editor').cropit();
 		//Address to Map
+		var lat=37.484283;
+		var lng=126.929583;
+		var address="신림역";
 		$("#addChk").click(function(){
-			$address = $("#address").val();
-			var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $address + "&key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds";
+			 address = $("#address").val();
+			var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCd4AIIG7caN6x_v-qyPXoSwfg7EuDqbds";
 			$.ajax({
 				url : url ,
 				dataType : "json" ,
 				type : "post" ,
 				success : function(data) {
 					// 결과 받아서 처리할 내용
-					var lat = data.results[0].geometry.location.lat;
-					var lng = data.results[0].geometry.location.lng;
+					 lat = data.results[0].geometry.location.lat;
+					 lng = data.results[0].geometry.location.lng;
 					$("#lat").val(lat);
 					$("#lon").val(lng);
 					$("#map").css("display", "block"); 
-					initMap(lat, lng , $address);
+					initMap(lat, lng , address);
 				} ,
 				error : function (xh, code, msg) {
 					alert("주소양식이 적절하지 않습니다.");
@@ -254,21 +257,25 @@
 			/* Get language */
 			var lang=""; 
 			$("input[name=check]:checked").each(function(idx) {
-				if($('input[name="check"]:checked').length==idx+1){
+				if($('input[name="check"]:checked').length==idx){//+1
 					lang+= $(this).val();
-					alert($('input[name="check"]:checked').length);
+					//alert($('input[name="check"]:checked').length);
 				}
 				else{
 					lang+= $(this).val()+", ";
 				 	$("#gb_language").val(lang);
 				}
-				alert("---"+lang);
 			});
 			/* Get service */
 			var serv=""; 
-			$("input[name=check2]:checked").each(function() {
+			$("input[name=check2]:checked").each(function(idx) {
+				if($('input[name="check2"]:checked').length==idx){
+					serv+= $(this).val();
+				}
+				else{
 					serv+= $(this).val()+" ";
 				  $("#gb_service").val(serv);
+				}
 			});
 			/* Send to form */
 			$("#frm").submit();
@@ -298,7 +305,7 @@
 	    });
 		
 
-	    map.addListener('center_changed', function() {
+/* 	    map.addListener('center_changed', function() {
 	      // 3 seconds after the center of the map has changed, pan back to the
 	      // marker.
 	      window.setTimeout(function() {
@@ -309,16 +316,16 @@
 	    marker.addListener('click', function() {
 	      map.setZoom(8);
 	      map.setCenter(marker.getPosition());
-	    });
+	    }); */
 	}
 
 </script>
 </head>
-	<header>
-		<%@ include file= "../layout/top.jsp" %>
-	</header> 
-<body>
 
+<body> 
+   	<header>
+		<%@ include file= "../layout/top.jsp" %>
+	</header>   
 	<form action="GuideWriteAction.wd"
 	  method="post" enctype="multipart/form-data"
 	   id="frm">
