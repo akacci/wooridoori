@@ -173,10 +173,8 @@ public class RecommendService {
 			refdao.insertBookmark(refdto);
 		}
 		if(grade_point > 0)
-		{
-			
+		{			
 			refdao.insertGradePoint(refdto);
-			System.out.println("--------------------------service"+refdto);
 		}
 		if(pre_rence != 'x')
 		{
@@ -195,7 +193,6 @@ public class RecommendService {
 		
 		for(int i = 0; i<list.size(); i++)
 		{
-			System.out.println("============================================================"+list.get(i));
 			/*String dt = (String) list.get(i).get("MODIFIED_DATE");*/
 			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));			
 			list.get(i).put("MODIFIED_DATE", MOD_DATE);				
@@ -265,9 +262,9 @@ public class RecommendService {
 	}
 	
 	public void updateCilckData(HashMap<String, Object> hashmap, int i)
-	{
+	{		
 		if(i == 1)
-		{
+		{			
 			refdao.updateClickFirsttrip(hashmap);
 		}
 		if(i == 2)

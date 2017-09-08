@@ -41,76 +41,94 @@ $(function(){
 	var ja_val = "x";
 	var cc_val = "x";
 	$(".rateit").click(function(e){		
-		re_val = $(this).rateit('value');
-		var index = $(this).attr("inx");
-		var _contentid = $(".contentid:eq("+index+")").attr("value");
-		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
-		
+		e.stopPropagation();
+		if($("#login_val").val() == "YES"){
+			re_val = $(this).rateit('value');
+			var index = $(this).attr("inx");
+			var _contentid = $(".contentid:eq("+index+")").attr("value");
+			select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		}else alert("로그인을 해주세요!!!");
 	});
 	
 	$(".first_trip_click").click(function(e){
 		e.stopPropagation();
-		fir_val = $(this).attr("value");		
-		var index = $(this).attr("inx");
-		var _contentid = $(".contentid:eq("+index+")").attr("value");
-		if(fir_val=="n")
-		{
-			/*$(".check_img").show();*/
-			$(this).find(".glyphicon glyphicon-check").css("color","red");
-			fir_val = $(this).attr("value","y");
-		}
-		if(fir_val=="y")
-		{
-			/*$(".check_img").hide();*/
-			$(this).find(".glyphicon glyphicon-check").css("color","black");
-			fir_val = $(this).attr("value","n");
-		}
-		fir_val = $(this).attr("value");
-		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		if($("#login_val").val() == "YES"){
+			fir_val = $(this).attr("value");		
+			var index = $(this).attr("inx");
+			_contentid = $(".contentid:eq("+index+")").attr("value");
+			if(fir_val=="n" || fir_val=="N")
+			{
+				/*$(this).find(".glyphicon glyphicon-check").css("color","red");*/
+				fir_val = $(this).attr("value","y");
+			}
+			if(fir_val=="y" || fir_val=="Y")
+			{
+				/*$(this).find(".glyphicon glyphicon-check").css("color","black");*/
+				fir_val = $(this).attr("value","n");
+			}
+			fir_val = $(this).attr("value");
+			select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		}else alert("로그인을 해주세요!!!");
 	});
 	$("._jcimg").click(function(e){
 		e.stopPropagation();
-		ja_val = $(this).attr("value");
-		var index = $(this).attr("inx");		
-		_contentid = $(".contentid:eq("+index+")").attr("value");
-		if(ja_val=="n")
-		{
-			$(this).css("color","blue");
-			$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_2.png");
-			ja_val = $(this).attr("value","y");
-		}
-		if(ja_val=="y")
-		{
-			$(this).css("color","black");
-			$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_1.png");
-			ja_val = $(this).attr("value","n");
-		}
-		ja_val = $(this).attr("value");
-		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		if($("#login_val").val() == "YES"){
+			ja_val = $(this).attr("value");
+			var index = $(this).attr("inx");		
+			_contentid = $(".contentid:eq("+index+")").attr("value");
+			if(ja_val=="n" || ja_val=="N")
+			{
+				$(this).css("color","blue");
+				$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_2.png");
+				ja_val = $(this).attr("value","y");
+			}
+			if(ja_val=="y" || ja_val=="Y")
+			{
+				$(this).css("color","black");
+				$(this).find(".jcimg").attr("src","resources/image/Recommend/jc_img_1.png");
+				ja_val = $(this).attr("value","n");
+			}
+			ja_val = $(this).attr("value");
+			select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		}else alert("로그인을 해주세요!!!");
 	});
 	$("._ccimg").click(function(e){
 		e.stopPropagation();		
-		cc_val = $(this).attr("value");
-		var index = $(this).attr("inx");
-		_contentid = $(".contentid:eq("+index+")").attr("value");
-		if(cc_val == 'n')
-		{
-			$(this).css("color","red");
-			$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_2.png");
-			cc_val = $(this).attr("value","y");
-		}
-		if(cc_val == 'y')
-		{
-			$(this).css("color","black");
-			$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_1.png");
-			cc_val = $(this).attr("value","n");
-		}
-		cc_val = $(this).attr("value");
-		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
-		
+		if($("#login_val").val() == "YES"){
+			cc_val = $(this).attr("value");
+			var index = $(this).attr("inx");
+			_contentid = $(".contentid:eq("+index+")").attr("value");
+			if(cc_val == 'n' || cc_val == 'N')
+			{
+				$(this).css("color","red");
+				$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_2.png");
+				cc_val = $(this).attr("value","y");
+			}
+			if(cc_val == 'y' || cc_val == "Y")
+			{
+				$(this).css("color","black");
+				$(this).find(".ccimg").attr("src","resources/image/Recommend/cc_img_1.png");
+				cc_val = $(this).attr("value","n");
+			}
+			cc_val = $(this).attr("value");
+			select_data(re_val,fir_val,ja_val,_contentid,cc_val);
+		}else alert("로그인을 해주세요!!!");
 	});
 	
 });
+
+/*로그인 확인*/
+function sessionLogin(){
+	
+	$.ajax({
+		url:"sessionlogin.wd",
+		type: "post",
+		success:function(resData){
+			var login = resData.substr(0, resData.indexOf(",")).trim();
+			$("#login_val").val(login);
+		}
+	});
+}
 
 /*처음 로딩시 지역 데이타*/
 function firstAreaData(){
