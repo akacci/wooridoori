@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="selectCat2OfSurvey" resultType="HashMap" parameterType="String">
-		select a.seq_preference as seq_preference,
+		select a.preference_seq as preference_seq,
 			   a.areacode_ref as areacode,
 			   a.purpose_code as purpose_code,
 			   a.stay_code as stay_code,
@@ -51,14 +51,14 @@
 		order by readcount desc
 	</select>
 	
-	<update id="insertPreference" parameterType="HashMap">
+	<update id="updatePreference" parameterType="HashMap">
 		update preference
 		set areacode_ref = #{areacode},
 			age = #{age},
 		    grouptrip = #{grouptrip},
 		    purpose_code = #{purpose_code},
 		    stay_code = #{stay_code}
-		where seq_preference = #{seq_preference}
+		where preference_seq = #{preference_seq}
 		  and m_id = #{m_id}
 	</update>
 </mapper>

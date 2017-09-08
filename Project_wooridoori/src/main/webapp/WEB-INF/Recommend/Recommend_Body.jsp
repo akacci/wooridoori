@@ -169,35 +169,9 @@
 	</div>
 	<!-- recommend detail data list  -->
 	<div id="recommend_detail">
-		<div style="width:1300px; height:800px;">
-			<div style="width:1300px; height:800px;">
-				<div id="list" style="width:1300px; height:800px;">
-			<!-- <div class="select_box_div"> -->
-				<%-- <input type="hidden" value="${i.index}" id="cnt">
-				<input type="hidden" class="contentid" id="contentid">
-				<div class="select_tourbox">
-					<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
-				</div>
-				<div class="div_hover_box">				
-					<div class="select_blockA">
-						<span class="first_trip_click" name="first_trip" value="Y">
-							<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
-						</span>
-					</div>
-					<div class="select_blockB">
-						<ul class="select_box_ul">
-							<li><span class="tour_title">관광지명</span></li>
-							<li>
-								<div class="rateit bigstars"></div>
-							</li>
-							<li>							
-								<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
-								<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
-							</li>				
-						</ul>
-					</div>								 
-				</div> --%>
-			<!-- </div> -->
+		<div style="width:1200px; height:800px;">
+			<div style="width:1200px; height:800px;">
+				<div id="list" style="width:1200px; height:800px;">
 				</div>
 				<div id="div_more">
 					<a href="javascript:void(0);" id="btn_more">더보기</a>
