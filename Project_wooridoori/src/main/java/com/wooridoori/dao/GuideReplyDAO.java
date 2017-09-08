@@ -18,4 +18,7 @@ public class GuideReplyDAO extends SqlSessionDaoSupport{
 	public List<GuideReplyDTO> getReplyList(int num){
 		return sqlSessionTemplate.selectList("guideReply.getReplyList",num);
 	}
+	public int getReplyCount(int num){
+		return sqlSessionTemplate.selectOne("guideReply.getReplyCount",num);
+	}
 }

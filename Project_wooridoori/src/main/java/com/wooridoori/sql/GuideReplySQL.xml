@@ -19,5 +19,14 @@
 			num=#{num}	
 	</select>
 	
+	<select id="getReplyCount" parameterType="int" resultType="int">
+		select
+			count(*)
+		from
+			guide_reply
+		where
+			num=#{num}	
+	</select>
+	
 	
 </mapper>
