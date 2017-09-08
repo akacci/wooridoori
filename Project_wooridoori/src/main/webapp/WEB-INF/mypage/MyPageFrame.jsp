@@ -1,7 +1,10 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,12 +85,26 @@
  		<script type="text/javascript">
 
  			$(function(){
+ 				//$("#page").load("userInfo.wd");
  				var data1 = ${data1}+"";
  				if(data1!=null && data1.length != 0){
  					changePage(data1);
  					data1=null;
  				}
+ 				var data2 = ${data2}+"";
+ 				if(data2!=null && data2.length != 0){
+ 					var searchkey = '<c:out value="${searchkey}"/>';
+ 					var currentPage = "&currentPage="+'<c:out value="${currentPage}"/>';
+ 					alert(currentPage);
+ 					var data3 = data2+searchkey+currentPage;
+ 					alert(data3);
+ 					changePage(data3);
+ 					data2=null;
+ 				}
+ 				
  			});
+ 			
+
 
  			function userInfo(){
  				$("#page").load("userInfo.wd");  	

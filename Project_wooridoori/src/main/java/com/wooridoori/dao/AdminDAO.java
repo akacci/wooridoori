@@ -31,8 +31,20 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	}
 	
 	/* Member */
+	
+	public int getWTotalCount(){
+		int totalCount = getSqlSession().selectOne("qna_admin.getWTotalCount");
+		return totalCount;
+	}
+	
 	public List<MemberDTO> getAllMemberList(){
 		List<MemberDTO> list = getSqlSession().selectList("qna_admin.getAllMemberList");
+		return list;
+	}
+	
+	public List<MemberDTO> getAllMemberList2(HashMap<String , Object> map){
+		
+		List<MemberDTO> list = getSqlSession().selectList("qna_admin.getAllMemberList2", map);
 		return list;
 	}
 	
@@ -40,5 +52,15 @@ public class AdminDAO extends SqlSessionDaoSupport{
 		getSqlSession().delete("member.doDeleteMember", wnum);
 		String data = "'adminMemberList.wd'";
 		return data;
+	}
+	
+	public int doSearchCount(){
+		int totalCount = getSqlSession().selectOne("qna_admin.doSearchCount");
+		return totalCount;
+	}
+	
+	public List<MemberDTO> doSearchMember(HashMap<String , Object> map){
+		List<MemberDTO> list = getSqlSession().selectList("qna_admin.doSearchMember",map);
+		return list;
 	}
 }
