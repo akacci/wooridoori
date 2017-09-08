@@ -147,6 +147,7 @@ public class RecommendFavoriteSurveyController {
 	}
 	
 	@RequestMapping("selectTotalCountPreference.wd")
+	@ResponseBody
 	public int selectTotalCountPreference(@RequestParam String id){
 		int totalCnt = rfsService.totalCountPreference(id);
 		return totalCnt;
