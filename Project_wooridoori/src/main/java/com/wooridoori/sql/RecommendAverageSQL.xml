@@ -3,11 +3,17 @@
 
 <mapper namespace="recommendaverage">
 
-	<select id="selectRecommendAverage" resultType="radto" parameterType="String">
-		select * 
-		from recommend_average
-		where contentid = #{contentid}
-		order by pre_score desc
+	<select id="selectRecommendAverage" resultType="radto" parameterType="HashMap">
+		select a.*
+		from (select rownum as rnum,
+			       b.*
+			from (select *
+				   from recommend_average
+				   where contentid = #{contentid}
+		order by num desc, pre_score desc) b
+				 )a
+		where a.rnum <![CDATA[>=]]> 1
+		and a.rnum <![CDATA[<=]]> #{end}
 	</select>
 	
 	<select id="selectTotalReviewScore" parameterType="String" resultType="String">

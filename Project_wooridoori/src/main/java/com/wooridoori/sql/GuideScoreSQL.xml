@@ -31,5 +31,44 @@
 			gb_num=#{gb_num}
 	</select>
 	
+	<select id="guideScoreAvg" parameterType="int" resultType="float">
+	    select 
+       		s.total_score/n.people
+	    from
+	        (
+	        select   sum(score) total_score
+	        from   guide_score
+	        where gb_num=#{num}
+	        group by   gb_num
+	        )s,
+	        
+	        (
+	        select    count(*) people
+	        from   guide_score
+	        where    gb_num=#{num}
+	        )n  
+	
+	</select>
+	
+	<update id="guideRate"  parameterType="HashMap">
+		update 
+			guide_board 
+		set 
+			gb_score=#{score}
+		where
+			seq_guide=#{gb_num}
+	
+	</update>
+	
+	<select id="guideRateCount" parameterType="int" resultType="String">
+		select 
+			count(*)
+		from 
+			guide_score
+		where
+			gb_num=#{num}
+		
+	</select>
+	
 	
 </mapper>

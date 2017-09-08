@@ -27,7 +27,7 @@
 	
 	#dialog_content{
 		position: absolute;
-		width: 790px;
+		width: 750px;
 		height: 200px;
 		top: 350px;
 		border: 0;
@@ -57,14 +57,14 @@
 	
 	#dialog_review_write{
 		position: absolute;
-		width: 790px;
+		width: 750px;
 		top: 550px;
 		height: 100px;
 	}
 	
 	#dialog_review_read{
 		position: absolute;
-		width: 790px;
+		width: 750px;
 		top: 670px;
 	}
 	
@@ -77,17 +77,20 @@
 	}
 	
 	#dialog_review_write #pre_review{
-		width: 650px;
+		width: 620px;
 	}
 	
 	#dialog_review_read .review{
-		width: 790px;
+		width: 750px;
 		left: 0px;
 		margin: 0 0 0 0;
 		padding: 0 0 0 0;
 	}
 	
-	#ialog_review_read{
+	#div_review_btn{
+		position: absolute;
 		bottom: 0px;
 		height: 30px;
+		left: 20px;
 	}
+	

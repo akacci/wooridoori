@@ -29,6 +29,8 @@ public class RecommendFavoriteSurveyService {
 	
 	public List<TourInquiryDTO> selectPreferenceOfArea(String id){
 		Map<String, String> catMap = rfsdao.selectCat2OfSurvey(id);
+		//아래 3개 null 처리 해야됨
+		//recommend랑 비슷함 근데 애초에 막아야 할듯
 		List<TourInquiryDTO> list = rfsdao.selectPreferenceOfArea(catMap);
 		return list;
 	}
@@ -46,6 +48,10 @@ public class RecommendFavoriteSurveyService {
 	}
 	
 	public void insertPreference(Map<String, String> map){
+		Map<String, String> selSurvey = rfsdao.selectCat2OfSurvey(map.get("id"));
+		System.out.println("service------------------------ insert " + map.get("id"));
+		System.out.println("service------------------------ insert " + selSurvey.get("seq_preference"));
+		map.put("seq_preference", selSurvey.get("seq_preference"));
 		rfsdao.insertPreference(map);
 	}
 	

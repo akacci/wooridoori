@@ -29,11 +29,10 @@
 	
 	div#div_more{
 		position: fixed;
-		margin-top: 50px;
-		left: 1150px;
-		width: 8%;
+		left: 37%;
+		width: 25%;
 		height: 25px;
-		bottom: 42px;
+		bottom: 55px;
 		background-color: #313131;
 		color: #fff;
 		/* z-index: 9; */
@@ -76,26 +75,25 @@
 	
 	#area div.slider a {
 		position:absolute;
-		top:200px;
+		top:225px;
 	}
 	
 	#area div.slider a.slide_left {
-		left:100px;
+		left:20px;
 		width:50px;
 	}
 	
 	#area div.slider a.slide_right {
-		right:100px;
+		right:20px;
 		width:50px;
 	}   
 	
 	#area div.slider div#slider_body {
 		overflow:hidden;
-		width:1000px;
-		height:250px;
+		width:1200px;
+		height:260px;
 		padding:0 auto;
 		margin:0 auto;
-		/* border:1px solid black; */
 	}
 	
 	#thema div.slider {
@@ -110,18 +108,18 @@
 	}
 	
 	#thema div.slider a.slide_left {
-		left:100px;
+		left:20px;
 		width:50px;
 	}
 	
 	#thema div.slider a.slide_right {
-		right:100px;
+		right:20px;
 		width:50px;
 	}   
 	
 	#thema div.slider div#slider_body {
 		overflow:hidden;
-		width:1000px;
+		width:1200px;
 		height:250px;
 		padding:0 auto;
 		margin:0 auto;
@@ -139,18 +137,18 @@
 	}
 	
 	#non_favorite div.slider a.slide_left {
-		left:100px;
+		left:20px;
 		width:50px;
 	}
 	
 	#non_favorite div.slider a.slide_right {
-		right:100px;
+		right:20px;
 		width:50px;
 	}   
 	
 	#non_favorite div.slider div#slider_body {
 		overflow:hidden;
-		width:1000px;
+		width:1200px;
 		height:250px;
 		padding:0 auto;
 		margin:0 auto;
@@ -171,7 +169,7 @@
    
    div#re_body{
    	width: 100%;
-   	hight: 100%;
+   	margin-bottom: 60px;
    	z-index: 1;
    }
    
@@ -219,8 +217,10 @@
 		opacity:0.99;
 		list-style: none;
 		width: 150px;
-		left: 980px;
-		top: 27px;
+		left: 1040px;
+		top: 37px;
+		padding-top:10px;
+		padding-bottom:10px;
 		z-index:11;
 	}
 	
@@ -230,8 +230,10 @@
 		list-style: none;
 		background-color: #313131;
 		width: 150px;		
-		left: 1030px;
-		top: 27px;
+		left: 1085px;
+		top: 37px;
+		padding-top:10px;
+		padding-bottom:10px;
 		z-index:11;
 	}
 	
@@ -245,12 +247,13 @@
 	div.select_box_div{
 		position: relative;
 		float: left;
-		left:30px;
-		margin-left:10px;
+		/* left:30px; */
+		margin-left:5px;
 		margin-top:20px;
-		margin-right:80px;		
+		margin-right:5px;		
 		width: 250px;
 		height: 200px;
+		z-index: 1;
 	}
 	
 	div>ul.select_box_ul{
@@ -296,7 +299,7 @@
 		position: relative;
 		padding: 0;
 		z-index: 4;
-		background: #999;
+		background: #eee;
 		opacity:0.4;
 		width: 250px;
 		height: 100px;
@@ -305,8 +308,8 @@
 	div.select_blockB{
 		position: relative;
 		padding: 0;
-		background-color: #777;
-		opacity:0.99;
+		background-color: #fff;
+		opacity:0.9;
 		z-index: 5;
 		width: 250px;
 		height: 100px;				
@@ -317,11 +320,11 @@
 	#recommend_detail div.select_box_div{
 		position: relative;
 		float: left;
-		left:160px;
-		margin-left:10px;
+		left:25px;
+		margin-left:5px;
 		margin-top:20px;
-		margin-right:80px;	
-		margin-bottom: 50px;	
+		margin-right:5px;	
+		margin-bottom: 20px;	
 		width: 250px;
 		height: 200px;
 	}
@@ -375,7 +378,7 @@
 		position: relative;
 		padding: 0;
 		z-index: 4;
-		background: #999;
+		background: #eee;
 		opacity:0.4;
 		width: 250px;
 		height: 100px;
@@ -384,8 +387,8 @@
 	#recommend_detail div.select_blockB{
 		position: relative;
 		padding: 0;
-		background-color: #777;
-		opacity:0.99;
+		background-color: #fff;
+		opacity:0.9;
 		z-index: 5;
 		width: 250px;
 		height: 100px;				
@@ -439,12 +442,30 @@
 		height: 100%;
 	} */
 	
+<<<<<<< HEAD
+	span._ccimg, span._jcimg, span.first_trip_click{
+		width: 50px;
+		height: 50px;
+		cursor: pointer;	
+	}
+	
+	span.glyphicon glyphicon-heart-empty{		
+		font-size: 2em; 
+		color: red; 
+		font-weight: 0.5px;		
+	}	
+	
+	span.glyphicon glyphicon-heart-empty:hover{
+		color: bule;
+	}
+=======
 	/* span.tour_name{
 		width: 300px;
 		height: 20px;
 		text-align: center;
 	} */
 	
+>>>>>>> branch 'master' of https://github.com/akacci/wooridoori
 	
 	span.filter_tag_exit{
 		cursor: pointer;

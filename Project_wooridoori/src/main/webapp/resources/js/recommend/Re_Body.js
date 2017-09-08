@@ -45,12 +45,7 @@ $(function(){
 		var index = $(this).attr("inx");
 		var _contentid = $(".contentid:eq("+index+")").attr("value");
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
-		/*$(".rateit").rateit();
-	    $("#rateit_false").rateit("readonly", false);
-	     for(var j = 0; j < data.length; j++){
-	        $("#rateit_"+j).rateit("readonly", true);
-	        $("#rateit_"+j).rateit("value",data[j].pre_score);
-	     }*/
+		
 	});
 	
 	$(".first_trip_click").click(function(e){
@@ -98,7 +93,6 @@ $(function(){
 		cc_val = $(this).attr("value");
 		var index = $(this).attr("inx");
 		_contentid = $(".contentid:eq("+index+")").attr("value");
-		alert(_contentid);
 		if(cc_val == 'n')
 		{
 			$(this).css("color","red");
@@ -112,7 +106,6 @@ $(function(){
 			cc_val = $(this).attr("value","n");
 		}
 		cc_val = $(this).attr("value");
-		alert(cc_val);
 		select_data(re_val,fir_val,ja_val,_contentid,cc_val);
 		
 	});
@@ -171,9 +164,9 @@ function firstThemaData(){
 				$("#thema ._jcimg:eq("+i+")").attr("inx",i);
 				$("#thema .btn_first_trip:eq("+i+")").attr("inx",i);
 				if(s_data[i].title != null){
-					if(s_data[i].title.length >= 10){
+					/*if(s_data[i].title.length >= 10){
 					    return s_data[i].title.substr(0,10)+"...";
-					}
+					}*/
 					$("#thema .tour_title").eq(i).text(s_data[i].title);
 				}
 			}

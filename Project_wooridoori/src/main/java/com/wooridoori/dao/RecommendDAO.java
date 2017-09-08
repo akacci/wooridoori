@@ -68,7 +68,7 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 		return list;
 	}
 	
-	public List<TourInquiryDTO> selectLoginRecommendThema(List<Map<String, String>> pre_cat){
+	public List<TourInquiryDTO> selectLoginRecommendThema(Map<String, String> pre_cat){
 		List<TourInquiryDTO> list = getSqlSession().selectList("selectLoginRecommendThema", pre_cat);
 		return list;
 	}
@@ -78,7 +78,7 @@ public class RecommendDAO extends SqlSessionDaoSupport{
 		return list;
 	}
 	
-	public List<TourInquiryDTO> selectLoginRecommendNonFavorite(List<Map<String, String>> pre_cat){
+	public List<TourInquiryDTO> selectLoginRecommendNonFavorite(Map<String, String> pre_cat){
 		List<TourInquiryDTO> list = getSqlSession().selectList("selectLoginRecommendNonFavorite", pre_cat);
 		return list;
 	}
