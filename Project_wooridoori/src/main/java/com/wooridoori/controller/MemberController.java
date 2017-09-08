@@ -73,12 +73,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage.wd")
-	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1)
+	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1,
+			HttpServletRequest req)
 	{
 
 		String data = "";
 		model.addAttribute("data", data);
-
 		return "/mypage/MyPageFrame";
 	}
 	

@@ -157,13 +157,13 @@
 <body style="margin: 0;">
    <div style="top:0; width:100%; height: 60px; background-color: #313131; margin:0; min-width: 900px;">
       <div class="bar-item-t">
-         <a href="tlist.wd">더</a>
+         <a href="tlist.wd">TourList</a>
       </div> 
       <div class="bar-item-t">
-         <a href="#">그레이트</a> 
+         <a href="#">Guide</a> 
       </div>
       <div class="bar-item-t">
-         <a href="recommend.wd">수잔</a>
+         <a href="recommend.wd">Recommend</a>
       </div>  
        
       <div class="bar-item-icon dropdown">

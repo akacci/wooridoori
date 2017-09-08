@@ -71,8 +71,7 @@
               <!-- /input-group -->
             </div>
             <div class="col-sm-6">
-            <h4 style="color:#00b1b1;">${dto.name} </h4>
-              <span><p>더 킹 그레이트 제너럴</p></span>            
+            <h4 style="color:#00b1b1;">${dto.name} </h4>   
             </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
