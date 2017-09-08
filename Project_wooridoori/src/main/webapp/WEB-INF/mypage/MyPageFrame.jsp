@@ -49,15 +49,7 @@
                 <li> 
                     <a href="javascript:void(0)" onclick="guideReuest()">Guide Request</a>
                 </li>
-                <li> 
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
+
                 <li>
                     <a onclick="changePage('qna.wd')" href="#">QnA</a>
                 </li>
@@ -70,9 +62,6 @@
 	                </li>
 	                <li>
 	                    <a onclick="changePage('adminMemberList.wd')" href="#">전체회원관리페이지</a>
-	                </li>
-	                <li>
-	                    <a onclick="changePage('adminGuideList.wd')" href="#">가이드관리페이지</a>
 	                </li>
 				</c:if>
             </ul>
@@ -88,8 +77,10 @@
  		<script type="text/javascript">
 
  			$(function(){
+ 				$("#page").load("userInfo.wd");
  				var data1 = ${data1}+"";
  				if(data1!=null && data1.length != 0){
+ 					
  					changePage(data1);
  					data1=null;
  				}
@@ -119,11 +110,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid" id="page">
-           		
-                <h1>Simple Sidebar</h1>
-                <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+            	
             </div>
         </div> 
         <!-- /#page-content-wrapper -->

@@ -79,7 +79,7 @@
 </script>
 <title>관광지 검색</title>
 </head>
-<body style="width: 100%; height: auto; min-height: 1000px;">
+<body style="width: 100%; height: auto; min-height: 1000px; margin:0">
 	<header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
          <%@include file="../layout/top.jsp"%>
