@@ -8,6 +8,15 @@
 		values
 			(mem_seq.nextval, #{m_id}, #{name}, #{password}, #{e_mail}, #{nation}, #{tel}, 'N', null, sysdate, sysdate)
 	</insert>
+	
+	<select id="getID_NUM" parameterType="mdto" resultType="String">
+		select
+			num
+		from
+			wmember
+		where
+			m_id = #{m_id} and password = #{password}
+	</select>
 	<select id="idCheck" parameterType="String" resultType="int">
 		select
 			count(m_id) as id

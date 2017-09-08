@@ -101,10 +101,12 @@ public class RecommendService {
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
 		
 		if(catMap.size() > 0){
-			for(int i = 0; i <catMap.size(); i++){
-				catMap.get(i).remove("PRE_CAT1");
+			Map<String, String> map = new HashMap<String, String>();
+			for(int i = 0; i < catMap.size(); i++){
+				map.put("PRE_CAT2", catMap.get(i).get("PRE_CAT2"));
+				map.put("PRE_CAT3", catMap.get(i).get("PRE_CAT3"));
 			}
-			list = rdao.selectLoginRecommendThema(catMap);
+			list = rdao.selectLoginRecommendThema(map);
 		}else{
 			list = rdao.selectFirstRecommendThema();
 		}
@@ -119,9 +121,15 @@ public class RecommendService {
 	public List<TourInquiryDTO> selectLoginRecommendNonFavorite(String id){
 		List<Map<String, String>> catMap = rdao.selectNationOfTourRank(id);
 		List<TourInquiryDTO> list = new ArrayList<TourInquiryDTO>();
-		
+
 		if(catMap.size() > 0){
-			list = rdao.selectLoginRecommendNonFavorite(catMap); 
+			Map<String, String> map = new HashMap<String, String>();
+			for(int i = 0; i < catMap.size(); i++){
+				map.put("PRE_CAT1", catMap.get(i).get("PRE_CAT1"));
+				map.put("PRE_CAT2", catMap.get(i).get("PRE_CAT2"));
+				map.put("PRE_CAT3", catMap.get(i).get("PRE_CAT3"));
+			}
+			list = rdao.selectLoginRecommendNonFavorite(map); 
 		}else{
 			list = rdao.selectFirstRecommendNonFavorite();
 		}
@@ -254,5 +262,21 @@ public class RecommendService {
 	{
 		List<ReferenceDTO> list = refdao.bubble_Count(id);
 		return list;			
+	}
+	
+	public void updateCilckData(HashMap<String, Object> hashmap, int i)
+	{
+		if(i == 1)
+		{
+			refdao.updateClickFirsttrip(hashmap);
+		}
+		if(i == 2)
+		{
+			refdao.updateClickBookmark(hashmap);
+		}
+		if(i == 3)
+		{
+			refdao.updateClickPre_rence(hashmap);
+		}
 	}
 }

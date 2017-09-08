@@ -30,7 +30,7 @@ import org.opencv.features2d.DMatch;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
-//import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgcodecs.Imgcodecs;
 
 
 //import org.opencv.imgcodecs.Imgcodecs;
@@ -50,22 +50,27 @@ public class GuideService{
 	static boolean isLoad=false;
 	
 	//	static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
-	/*static {	//Never use loadLibrary!! 
+	static {	//Never use loadLibrary!! 
 		if(isLoad==false){
 			System.load("C:\\opencv_2.4\\build\\java\\x64\\opencv_java2413.dll");
 			System.load("C:\\opencv\\build\\java\\x64\\opencv_java320.dll");
 			isLoad=true;
 		}
-	}*/
+	}
 	
 	
-	public List<GuideDTO> getList(String addr){
-		return  gdao.getList(addr);
+	public List<GuideDTO> getList(String addr,int start,int end){
+		return  gdao.getList(addr,start,end);
 	}
 	
 	public String getListCount(String addr){
 		return  gdao.getListCount(addr);
 	}
+	
+	public void guideAuthUpdate(String m_id){
+		gdao.guideAuthUpdate(m_id);
+	}
+	
 	public String isGuide(String id){
 		return gdao.isGuide(id);
 	}
@@ -77,17 +82,25 @@ public class GuideService{
 		return gdao.getContent(num);
 	}
 	
-	public List<GuideDTO> hashSearch(String addr,String hash){
-		return gdao.hashSearch(addr,hash);		
+	public List<GuideDTO> hashSearch(String addr,String hash,int start,int end){
+		return gdao.hashSearch(addr,hash,start,end);		
+	}
+	public String getGuideHashListCount(String addr,String hash){
+		return gdao.getGuideHashListCount(addr, hash);
+	}
+	public List<GuideDTO> themeSearch(String addr,String theme,int start,int end){
+		return gdao.themeSearch(addr,theme,start,end);		
+	}
+	public String getGuideThemeListCount(String addr,String theme){
+		return gdao.getGuideThemeListCount(addr, theme);
+	}
+	public List<GuideDTO> guideNearestOfList(double lat,double lon){
+		return gdao.guideNearestOfList(lat, lon);
 	}
 	
-	public void guideRate(){
-		
-	}
 	
 	
-	
-	public boolean faceRecog(String id) throws IOException{
+	public boolean faceRecog(String id,String path) throws IOException{
 /*		//Load the cascades
 		 CascadeClassifier faceDetector = new CascadeClassifier(GuideService.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
 		 CascadeClassifier face_cascade = new CascadeClassifier("haarcascade_frontalface_default.xml");
@@ -104,7 +117,7 @@ public class GuideService{
 		 //org.opencv.contrib.FaceRecognizer
 		
 		//detect(id);
-		boolean isWarn=recog(id);
+		boolean isWarn=recog(id,path);
 		return true;
 	}
 	
@@ -113,9 +126,13 @@ public class GuideService{
 	 * @Author: Jay Park
 	 */
 	/* detect And display */
-	public  boolean detect(String id) throws IOException{
+	public  boolean detect(String id,String path) throws IOException{
 		boolean isSuccess=true;
-		String path="C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
+		File dir = new File(path);
+	    if (!dir.exists()) {
+	        dir.mkdirs();
+	    }
+		//String path="C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
 		 // Create a face detector from the cascade file in the resources directory
 		CascadeClassifier faceDetector = new CascadeClassifier(GuideService.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
 		CascadeClassifier faceDetector2 = new CascadeClassifier(GuideService.class.getResource("haarcascade_frontalface_alt.xml").getPath().substring(1));
@@ -197,13 +214,17 @@ public class GuideService{
 	 * @Author: Jay Park
 	 * @Reference: minikim
 	 */
-	public boolean recog(String id){
+	public boolean recog(String id,String path){
 		int retVal = 0;
 		//long startTime = System.currentTimeMillis();
 		
 		
 		// Directory
-		String warnDir = "C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
+		String warnDir = path+"\\save\\GuideFace\\";
+		File dir = new File(warnDir);
+	    if (!dir.exists()) {
+	    	dir.mkdirs();
+	    }
 		String fileName=warnDir+id+"face_result.png";
 
 		// Load images to compare

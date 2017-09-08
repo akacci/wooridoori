@@ -66,9 +66,6 @@
 			</div>
 			<div id="dialog_review_read">
 			</div>
-			<div id="div_review_btn">
-				<button id="review_dialog_btn">더보기</button>
-			</div>
 		</div>
 	</body>
 </html>

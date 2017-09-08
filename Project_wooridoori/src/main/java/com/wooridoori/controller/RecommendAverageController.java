@@ -39,11 +39,12 @@ public class RecommendAverageController {
 	@ResponseBody
 	public void selectDialogReview(Model model,
 						   @RequestParam("contentid") String contentid,
+						   @RequestParam("end") int end,
 						   HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");//json 한글 깨짐때문에
 		ObjectMapper mapper = new ObjectMapper();
 		
-		List<RecommendAverageDTO> list = raService.selectRecommendAverage(contentid);
+		List<RecommendAverageDTO> list = raService.selectRecommendAverage(contentid, end);
 		
 		try {
 			response.getWriter().print(mapper.writeValueAsString(list));

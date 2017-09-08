@@ -29,6 +29,9 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public QnABoardDTO getQnABoard(String num){
 		return getSqlSession().selectOne("qna_admin.getQnABoard", num);
 	}
+	public void writeAnswer(QnABoardDTO qnaDto){
+		getSqlSession().update("qnaboard.writeAnswer", qnaDto);
+	}
 	
 	/* Member */
 	

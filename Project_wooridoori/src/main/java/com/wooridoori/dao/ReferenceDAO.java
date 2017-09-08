@@ -57,4 +57,17 @@ public class ReferenceDAO extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("totalcountOfPreference", id);
 	}
+	
+	public void updateClickBookmark(HashMap<String, Object> hashmap)
+	{
+		getSqlSession().update("updateClickBookmark", hashmap);
+	}
+	public void updateClickFirsttrip(HashMap<String, Object> hashmap)
+	{
+		getSqlSession().update("updateClickFirsttrip", hashmap);
+	}
+	public void updateClickPre_rence(HashMap<String, Object> hashmap)
+	{
+		getSqlSession().update("updateClickPre_rence", hashmap);
+	}
 }

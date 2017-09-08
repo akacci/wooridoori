@@ -21,7 +21,7 @@
 		select *
 		from TOUR_INQUIRY
 		where areacode in (1, 6, 39) 
-		and rownum <![CDATA[<]]> 11
+		and rownum <![CDATA[<]]> 21
 	</select>
 	
 	<select resultType="tdto" id="selectLoginRecommendArea" parameterType="String">
@@ -29,14 +29,14 @@
 		from tour_inquiry
 		where areacode in (1, 6, 39)
 		and cat2 = #{PRE_CAT1}
-		and rownum <![CDATA[<]]> 11
+		and rownum <![CDATA[<]]> 21
 	</select>
 	
 	<select resultType="tdto" id="selectFirstRecommendThema">
 			select *
 			from TOUR_INQUIRY
 			where cat1 = 'A02'
-			and rownum <![CDATA[<]]> 11
+			and rownum <![CDATA[<]]> 21
 	</select>
 	
 	<select resultType="tdto" id="selectLoginRecommendThema" parameterType="HashMap">
@@ -44,14 +44,14 @@
 		from tour_inquiry
 		where areacode in (1, 6, 39)
 		and cat2 in (#{PRE_CAT2}, #{PRE_CAT3}) 
-		and rownum <![CDATA[<]]> 11
+		and rownum <![CDATA[<]]> 21
 	</select>
 	
 	<select resultType="tdto" id="selectFirstRecommendNonFavorite">
 			select a.* 
 			from tour_inquiry a
 			where a.areacode not in (1, 6, 39)
-			and rownum <![CDATA[<]]> 11
+			and rownum <![CDATA[<]]> 21
 			order by a.readcount desc
 	</select>
 	
@@ -60,7 +60,7 @@
 		from tour_inquiry
 		where areacode not in (1, 6, 39)
 		and cat2 in (#{PRE_CAT1}, #{PRE_CAT2}, #{PRE_CAT3})
-		and rownum <![CDATA[<]]> 11
+		and rownum <![CDATA[<]]> 21
 		order by readcount desc
 	</select>
 	
@@ -131,8 +131,26 @@
 	<select id="searchOfPreference" parameterType="String" resultType="HashMap">
 		select *
 		from preference
-		where m_id = #{id}		
+		where m_id = #{id}	
 	</select>
+	<update id="updateClickBookmark" parameterType="HashMap">
+		update preference 
+		set bookmark = #{bookmark} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
+	<update id="updateClickFirsttrip" parameterType="HashMap">
+		update preference 
+		set bookmark = #{firsttrip} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
+	<update id="updateClickPre_rence" parameterType="HashMap">
+		update preference 
+		set bookmark = #{preference} 
+		where m_id=#{id} 
+		and contentid_ref = #{contentid}
+	</update>
    
 	<!-- <select id="selectAreaCodeOfTourList" resultType="tdto" parameterType="HashMap">
 		select *

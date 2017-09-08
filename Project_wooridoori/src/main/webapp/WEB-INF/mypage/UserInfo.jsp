@@ -17,6 +17,14 @@
 	th{
 		width:100px;
 	}
+		#guide{
+		max-height:105px;
+	 	border-radius: 50%;
+		border-top-left-radius: 50% 50%;
+	  	border-top-right-radius: 50% 50%;
+	  	border-bottom-right-radius: 50% 50%;
+	  	border-bottom-left-radius: 50% 50%; 
+	  }
 	
 	input.hidden {
 	    position: absolute;
@@ -58,11 +66,19 @@
         
             <div class="box-body">
                      <div class="col-sm-6">
-                     <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
-                
-                <input id="profile-image-upload" class="hidden">
+                     <div  align="center"> <!-- <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                 -->
+                <!-- <input id="profile-image-upload" class="hidden"> -->
+                <c:if test="${dto.imagepath ne null}">
+					<img src="save/GuideFace/${dto.imagepath}" id="guide"  >
+					<div style="color:#999;" >profile image</div>
+				</c:if>
+				<c:if test="${dto.imagepath eq null}">
+					<img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+					<div style="color:#999;" >not exist</div>
+				</c:if>
 				
-				<div style="color:#999;" >profile image</div>
+				
                 <!--Upload Image Js And Css-->             
                 </div>
               
@@ -71,8 +87,7 @@
               <!-- /input-group -->
             </div>
             <div class="col-sm-6">
-            <h4 style="color:#00b1b1;">${dto.name} </h4>
-              <span><p>더 킹 그레이트 제너럴</p></span>            
+            <h4 style="color:#00b1b1;">${dto.name} </h4>   
             </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
