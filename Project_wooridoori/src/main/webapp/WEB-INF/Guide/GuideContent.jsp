@@ -189,9 +189,7 @@
 	.hash:HOVER{
 		cursor: pointer;
 	}
-	#hash_g{
-		margin-top: 160px;
-	}
+
 </style>
 </head>
 <script type="text/javascript">
@@ -302,6 +300,7 @@
         			if(data==="ok"){
         				alert("댓글이 등록되었습니다.");
         				$("#r_content").attr("value","");
+        				 location.reload();
         			}
         			//댓글리스트 출력 컨트롤러에서 아작스 요청시 한번에
 		      	}
@@ -440,7 +439,7 @@
 		<br>
 		
 		<p>예약일: <input type="text" id="datepicker" class="form-control" style="width: 220px;"></p>
-		<br><br><br>
+		<br><br>
 		
 		<div id="hash_g">
 			<c:forTokens items="${gdto.gb_keyword}" delims="#" var="hash" varStatus="i" >
@@ -455,7 +454,7 @@
 	<br>
 		<!-- reply -->
 		<div id="replyArea">
-		<a class="reply" style="cursor: pointer;">Reply : 0</a></b>
+		<a class="reply" style="cursor: pointer;">Reply : ${rpCnt}</a></b>
 		
 					<div class="replyform" align="left"	 style="background-color: #f5f5f5; margin-top : 10px;padding-left: 10px; padding-top: 0px;" >
 					<!--Reply List  -->					
@@ -528,7 +527,10 @@
 			</c:import>
 		</div>
 	
-	
+		<footer>
+	      <jsp:include page= "../layout/wfooter.jsp"/>
+	      <%-- <%@include file="../layout/wfooter.jsp"%> --%>
+	</footer>
 
 </body>
 

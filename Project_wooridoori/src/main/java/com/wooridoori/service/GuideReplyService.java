@@ -19,5 +19,7 @@ public class GuideReplyService {
 	public List<GuideReplyDTO> getReplyList(int num){
 		return grDAO.getReplyList(num);
 	}
-		
+	public int getReplyCount(int num){
+		return grDAO.getReplyCount(num);
+	}
 }

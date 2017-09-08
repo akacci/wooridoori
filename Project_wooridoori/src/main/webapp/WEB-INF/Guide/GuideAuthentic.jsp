@@ -421,7 +421,10 @@
 </div>
 
 
-
+	<footer>
+	      <jsp:include page= "../layout/wfooter.jsp"/>
+	      <%-- <%@include file="../layout/wfooter.jsp"%> --%>
+	</footer>
 
   </body>
 </html>

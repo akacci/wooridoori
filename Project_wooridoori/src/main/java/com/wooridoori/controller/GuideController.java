@@ -469,6 +469,11 @@ public class GuideController {
 		double lon=Double.parseDouble(gdto.getGb_lon());
 		List<GuideDTO> nList=gService.guideNearestOfList(lat, lon);
 		m.addAttribute("nList",nList);
+		
+		//guideReplyCount
+		int rpCnt=grService.getReplyCount(Integer.parseInt(num));
+		m.addAttribute("rpCnt",rpCnt);
+		
 		return "Guide/GuideContent";
 	}
 	

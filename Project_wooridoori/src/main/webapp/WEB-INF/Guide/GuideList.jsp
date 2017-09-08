@@ -246,6 +246,9 @@
 		top: 5px;
 		right: 5px
 	}
+	#write{
+		margin-left: 1100px;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -815,7 +818,7 @@
 											한줄 설명
 											해시태그  -->
 			<span id="korea">대한민국<br>
-				<span id="city" addr="${addr }" lat="${lat }"  lng="${lng }" > ${addr } 	∨ <br>
+				<span id="city" addr="${addr }" lat="${lat }"  lng="${lng }" > ${addr } 	<br>
 					<span id="comment"></span>
 				</span>
 			</span>
@@ -846,8 +849,10 @@
 			<a href="" class="hash" id="hash">#한강</a>	
 			<a href="" class="hash" id="hash">#여의도</a>	
 		</div>
-	
-<input type="button" id="write" value="write" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd?addr=${addr}'">
+		
+		<c:if test="${sessionScope.id ne null }">	
+			<input type="button" id="write" value="가이드 등록하기" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd?addr=${addr}'">
+		</c:if>
 	
 		<!-- 메뉴와 리스트는 같은 div  -->
 		<div class="form-horizontal" id="bottom_g">
