@@ -48,7 +48,6 @@ function bubble_Data()
 					var bookmark = $.trim(s_data[i].BOOKMARK);
 					var preference = $.trim(s_data[i].PRE_RENCE);
 					var firsttrip = $.trim(s_data[i].FIRSTTRIP);
-					alert(bookmark);
 					if(bookmark == 'y' || bookmark == 'Y')
 					{						
 						mypage += "<td class='mypage_bookmark' book="+bookmark+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-thumbs-up'></span></td>";						

@@ -1,10 +1,10 @@
 $(function(){
 	
-	sessionLogin();
+	var id = sessionLogin();
 	selectAreaCodeName();
 	selectCat2Code();
 	selectStayCode();
-	
+
 	/*favorite_survey dialog*/
 	$("#favorite_survey").dialog({
 	  	autoOpen: false,
@@ -14,7 +14,7 @@ $(function(){
 	  	height: 450,
 	  	buttons:{
 	  		"확인":function(){
-	  			insertPreference();
+	  			updatePreference();
 	  			selectPreferenceOfArea();
 	  			selectPreferenceOfPurpose();
 	  			selectPreferenceOfStay();
@@ -31,24 +31,36 @@ $(function(){
 		//로그인 했을 경우만 open
 		if($(this).attr("name") == "_3"){
 			if($("#login_val").val() == "YES"){
-				$("#favorite_survey").attr("style", "visibility:visible");
-				$("#favorite_survey").dialog("open");
+				//추천,즐찾,별점,처음방문 여부 하나라도 클릭시
+				var totPreference = selectTotalCountPreference(id);
+				if( totPreference > 0){
+					$("#favorite_survey").attr("style", "visibility:visible");
+					$("#favorite_survey").dialog("open");
+				}else{
+					alert("하나라도 클릭 좀 하고 와라");
+				}
 			}else alert("로그인을 해주세요!!!");
+			
 		}
 	});
 	
 });
 
 function sessionLogin(){
-	
+	var sessionId;
 	$.ajax({
 		url:"sessionlogin.wd",
 		type: "post",
+		async: false,
 		success:function(resData){
+			
 			var login = resData.substr(0, resData.indexOf(",")).trim();
+			sessionId = resData.substr(resData.indexOf(",") + 1, resData.length);
+
 			$("#login_val").val(login);
 		}
 	});
+	return sessionId;
 }
 
 /*지역 코드 조회*/
@@ -114,8 +126,23 @@ function selectStayCode(){
 	
 }
 
+//추천 테이블 count 가져오기
+function selectTotalCountPreference(id){
+	var pre_cnt;
+	$.ajax({
+		url: "selectTotalCountPreference.wd",
+		type:"post",
+		async: false,
+		data:{"id":id},
+		success:function(resData){
+			pre_cnt = resData;
+		}
+	});
+	return pre_cnt;
+}
+
 /*선호도 조사 추가*/
-function insertPreference(){
+function updatePreference(){
 	
 	var areacode = $("#sel_area").val();
 	var age = $("input[type=radio][name=chk_age]:checked").val();
@@ -124,7 +151,7 @@ function insertPreference(){
 	var stay = $("#sel_stay").val();
 	
 	$.ajax({
-		url:"selectinsertpreference.wd",
+		url:"selectupdatePreference.wd",
 		type:"post",
 		data: {"areacode":areacode,"age":age, "purpose":purpose, "person":person, "stay":stay},
 		success:function(){

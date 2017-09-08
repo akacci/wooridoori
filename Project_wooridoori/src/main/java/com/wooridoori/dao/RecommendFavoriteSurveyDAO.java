@@ -36,7 +36,7 @@ public class RecommendFavoriteSurveyDAO extends SqlSessionDaoSupport {
 		return list;
 	}
 	
-	public void insertPreference(Map<String, String> map){
-		getSqlSession().update("insertPreference", map);
+	public void updatePreference(Map<String, String> map){
+		getSqlSession().update("updatePreference", map);
 	}
 }

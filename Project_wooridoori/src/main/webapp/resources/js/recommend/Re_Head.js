@@ -78,9 +78,9 @@ $(function(){
 				var cnt = 1;
 				
 				/*더보기 클릭 시*/
-				$("#btn_more").click(function(){
+				$(document).on("click","#btn_more",function(){
 					cnt++;
-					var end = 24 * cnt;
+					var end = 20 * cnt;
 					
 					selectCodeOfTourList(areaCode, themaCode, end);
 				});
@@ -179,7 +179,7 @@ function menuThemaName(){
 function selectCodeOfTourList(areacode, themacode, end){
 	if(areacode != null || areacode != "") areaOfList.push(areacode);
 	if(themacode != null || themacode != "") cat2OfList.push(themacode);
-	if(end == null || end == "" || end == 0) end = 12;
+	if(end == null || end == "" || end == 0) end = 20;
 	
 	var dataList = {"areacode": areaOfList, "themacode": cat2OfList, "end": end};
 	
@@ -203,7 +203,7 @@ function selectCodeOfTourList(areacode, themacode, end){
 				html += '<div class="div_hover_box">';				
 				html += '<div class="select_blockA">';
 				html +=	'<span class="first_trip_click" name="first_trip" value="Y">';
-				html += '<img src="/Project_wooridoori/resources/image/Recommend/delete.gif" class="btn_first_trip">';
+				html += '<img src="/Project_wooridoori/resources/image/Recommend/Check-icon.png" class="btn_first_trip">';
 				html +=	'</span>';
 				html += '</div>';
 				html += '<div class="select_blockB">';
@@ -213,28 +213,26 @@ function selectCodeOfTourList(areacode, themacode, end){
 				html += '<div id="totla_score" class="rateit"></div>';
 				html += '</li>';
 				html += '<li>';							
-				html += '<span class="_cc_img"><img class="_ccimg" name="cc_name" src="/Project_wooridoori/resources/image/Recommend/like2.png">추천</span>';
-				html += '<span class="_jc_img"><img class="_jcimg" name="jc_name" src="/Project_wooridoori/resources/image/Recommend/like3.png">즐겨찾기</span>';
+				html += '<div class="_ccimg"><img class="ccimg" name="cc_name" src="/Project_wooridoori/resources/image/Recommend/cc_img_1.png">추천</div>';
+				html += '<div class="_jcimg"><img class="jcimg" name="jc_name" src="/Project_wooridoori/resources/image/Recommend/jc_img_1.png">즐겨찾기</div>';
 				html += '</li>';				
 				html += '</ul>';
 				html += '</div>';								 
 				html += '</div>';
 				html += '</div>';
 			}
-
+			
 			if(data.length > 0){
 				$("#recommend_detail #list").empty().html(html);
 				$("#recommend_detail .rateit").rateit();
 				$("#recommend_detail .div_hover_box").hide();
-				$("#recommend_detail #div_more").show();
+				$("#recommend_detail #div_more").attr("css", "visibility:visible");
 			}else{
-				html += "<span style='align:center;font-weight:bold;font-size:24pt;margin-top:100px;'>조회된 데이터가 없습니다.</span>";
+				html += "<span style='align:center;font-weight:bold;font-size:24pt;margin-top:100px;left:45%;'>조회된 데이터가 없습니다.</span>";
 				$("#recommend_detail #list").empty().html(html);
 			}
 			
 			for(var i = 0; i < data.length; i++){
-				/*$("#recommend_detail #contentid").eq(i).val(data[i].contentid);
-				$("#recommend_detail .select_img").eq(i).attr("src", data[i].firstimage);*/
 				$("#recommend_detail .select_img").eq(i).onError = function(){
 					this.src = no_image;
 				}
@@ -244,54 +242,4 @@ function selectCodeOfTourList(areacode, themacode, end){
 			}
 		}
 	});
-	
 }
-
-/*menu에서 지역 클릭시 select list*/
-/*function selectAreaCodeOfTourList(areacode){
-	areaOfList.push(areacode);
-	var dataList = {"areacode": areaOfList};
-	$.ajax({
-		url: "selectareacodeoftourlist.wd",
-		type: "post",
-		data: dataList,
-		success:function(resData){
-			var data = JSON.parse(resData);
-			for(var i = 0; i < data.length; i++){
-				$("#area #contentid").eq(i).val(data[i].contentid);
-				$("#area .select_img").eq(i).attr("src", data[i].firstimage);
-				$("#area .select_img").eq(i).onError = function(){
-					this.src = "/Project_wooridoori/resources/image/Recommend/no_image.png";
-				}
-				if(data[i].title != null){
-					$("#area .tour_title").eq(i).text(data[i].title);
-				}
-			}
-		}
-	});
-}
-
-메뉴에서 테마 클릭시 select list 
-function selectCat2OfTourList(cat2){
-	cat2OfList.push(cat2);
-	var dataList = {"cat2": cat2OfList};
-	$.ajax({
-		url: "selectcat2oftourlist.wd",
-		type: "post",
-		data: dataList,
-		success:function(resData){
-			var data = JSON.parse(resData);
-
-			for(var i = 0; i < data.length; i++){
-				$("#thema #contentid").eq(i).val(data[i].contentid);
-				$("#thema .select_img").eq(i).attr("src", data[i].firstimage);
-				$("#thema .select_img").eq(i).onError = function(){
-					this.src = "/Project_wooridoori/resources/image/Recommend/no_image.png";
-				}
-				if(data[i].title != null){
-					$("#thema .tour_title").eq(i).text(data[i].title);
-				}
-			}
-		}
-	});
-}*/
