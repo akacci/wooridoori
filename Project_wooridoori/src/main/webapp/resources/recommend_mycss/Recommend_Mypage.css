@@ -12,7 +12,7 @@
 
 /* average, bookmark, like list */
 
-td.mypage_title_span{
+td.mypage_title_span, td.mypage_bookmark, td.mypage_firsttrip, td.mypage_like{
 	cursor: pointer;
 }
 /* div#mypage_list_div{
