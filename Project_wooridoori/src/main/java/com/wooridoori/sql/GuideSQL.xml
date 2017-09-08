@@ -136,6 +136,38 @@
 	</select>
 			 
 	
+		<select id="themeSearch" parameterType="HashMap" resultType="gdto">
+	<![CDATA[
+		select a.* 
+		from
+			(select rownum as rnum, b.* from
+			(select
+				w.imagepath, g.*  
+			from 
+				wmember w, (select
+					* 
+				from
+					guide_board
+				where
+					gb_theme like   '%'||#{theme,jdbcType=VARCHAR}||'%')g
+			 where
+			 	gb_theme like   '%'||#{theme,jdbcType=VARCHAR}||'%'  and w.name= g.gb_name 
+			 order by seq_guide desc)b)a
+		where 
+	   		a.rnum >= to_number(#{start}) and a.rnum <= to_number(#{end})
+	]]>
+	</select>
+
+   	<select id="getGuideThemeListCount" parameterType="HashMap" resultType="String">
+		select 
+			count(*)
+		from 
+			 guide_board 
+		where
+   			 gb_theme like   '%'||#{theme,jdbcType=VARCHAR}||'%'
+	</select>
+			 
+	
 	<select id="guideNearestOfList" parameterType="HashMap" resultType="gdto">
 	<![CDATA[
 		select 
@@ -154,6 +186,37 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	
+	<select id="getGuideListOfEachTheme" parameterType="HashMap" resultType="String">
+		select 
+			gb_theme,
+			sum(  decode(sex,'M',1,0)) 남자, 
+			sum(  decode(sex,'M',1,0)) 남자, 
+			sum(  decode(sex,'M',1,0)) 남자, 
+			sum(  decode(sex,'M',1,0)) 남자, 
+			sum(  decode(sex,'M',1,0)) 남자, 
+		from 
+			 guide_board 
+		where
+   			 gb_theme like   '%'||#{theme,jdbcType=VARCHAR}||'%'
+   			 
+   			 
+   			 
+   			 select 
+   dept, 
+   sum(  decode(sex,'M',1,0)) 남자, 
+   sum(  decode(sex,'F',1,0)) 여자, 
+   count(decode(sex,'M',1,'F',1)) 계
+from    emp
+group  by    dept ;
+
+	</select>
+
 	
 	
 	

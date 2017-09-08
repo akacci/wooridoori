@@ -52,6 +52,22 @@ public class GuideDAO extends SqlSessionDaoSupport {
 		data.put("hash", hash);
 		return sqlSessionTemplate.selectOne("guide.getGuideHashListCount",data);
 	}
+	
+	public List<GuideDTO> themeSearch(String addr,String theme,int start,int end){
+		HashMap<String,String> data=new HashMap<String, String>();
+		data.put("addr", addr);
+		data.put("theme", theme);
+		data.put("start", Integer.toString(start));
+		data.put("end",  Integer.toString(end));
+		return sqlSessionTemplate.selectList("guide.themeSearch",data);
+	}
+	public String getGuideThemeListCount(String addr,String theme){
+		HashMap<String,String> data=new HashMap<String, String>();
+		data.put("addr", addr);
+		data.put("theme", theme);
+		return sqlSessionTemplate.selectOne("guide.getGuideThemeListCount",data);
+	}
+	
 	public List<GuideDTO> guideNearestOfList(double lat,double lon){
 		HashMap<String,Double> data=new HashMap<String, Double>();
 		data.put("lat", lat);

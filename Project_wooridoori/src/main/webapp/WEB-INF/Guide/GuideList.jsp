@@ -30,6 +30,9 @@
 
 <style type="text/css">
 	#cl-dashboard{display: none;} 
+	ul, li{
+		 list-style:none;
+	}
 	/*상단 표시  */
 	.top_g{
 		background-image: url("/wooridoori/Guide_img/seoul.jpg"); 	/* 지역이미지 경로 */
@@ -50,7 +53,7 @@
 		z-index: 9;
 		position: relative;
 		top: 200px;
-		left: -20px;
+		left: -120px;
 		margin-right: 10px;
 		background-color: rgba( 10, 10, 10, 0.5 );
 	}	
@@ -67,6 +70,7 @@
 		z-index: 9;
 		top: 0px;
 		left: 0px;
+		cursor: pointer;
 	}
 	#korea{
 		font-size: 12pt;
@@ -205,9 +209,111 @@
 	.rateit{
 		color:yellow; 
 	}
+	#loc_sel{
+		display: none;
+	}
+	.submenu li a{
+		font-size: 14pt;
+		font-weight: bold;
+		color: gray;
+	}
+	.submenu li a:HOVER{
+		font-size: 17pt;
+		font-weight: bold;
+		color: gray;
+	}
+	.menu a{
+		font-size: 20pt;
+		font-weight: bold;
+		color: black;
+	}
+	/* exchange */
+	.exchange {
+	cursor: pointer;
+	}
+	
+	.popupLayer {
+		position: absolute;
+		display: none;
+		background-color: #eeeeee;
+		border: solid 2px #d0d0d0;
+		width: 350px;
+		height: 170px;
+		padding: 10px;
+	}
+	.popupLayer div {
+		position: absolute;
+		top: 5px;
+		right: 5px
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		if(("${addr}")=="서울특별시"){	
+			$("#comment").append("대한민국의 심장 [Hi Seoul]");
+		}
+		else if(("${addr}")=="경기도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/gg.jpg')");	
+			$("#comment").append("세계속의 경기도 [Global Inspiration]");
+		}
+		else 		if(("${addr}")=="인천광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/ic.jpg')");
+			$("#comment").append("동북아시아의 허브 [Fly Incheon]");
+		}
+		else 		if(("${addr}")=="강원도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/gw.jpg')");
+			$("#comment").append("산과 바다의 어울림 [Get in the Kangwon]");
+		}
+		else 		if(("${addr}")=="충청북도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/cb.jpg')");
+			$("#comment").append("생명과 태양의 땅 [Bio Valley & Solar Valley]");
+		}
+		else		if(("${addr}")=="충청남도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/cn.jpg')");
+			$("#comment").append("대한민국 역사의 중심지 [Heart of Korea]");
+		}
+		else		if(("${addr}")=="대전광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/dj.jpg')");
+			$("#comment").append("교통과 과학의 중심지 [It's Daejeon]");
+		}
+		else		if(("${addr}")=="전라북도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/jb.jpg')");
+			$("#comment").append("쳔넌의 비상 [We Make History]");
+		}
+		else		if(("${addr}")=="전라남도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/jn.jpg')");
+			$("#comment").append("생명의 땅 [Full of Life]");
+		}
+		else		if(("${addr}")=="경상북도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/kb.jpg')");	
+			$("#comment").append("한반도의 백두대간 [Pride GyeongBuk]");
+		}
+		else		if(("${addr}")=="경상남도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/kn.jpg')");
+			$("#comment").append("문명의 중심지[Feel GyeongNam]");
+		}
+		else		if(("${addr}")=="대구광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/dg.jpg')");	
+			$("#comment").append("조선의 도회지 [Colorful Daegu]");
+		}
+		else		if(("${addr}")=="울산광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/ulsan.jpg')");		
+			$("#comment").append("하늘도 물도 맑은 축복의 땅 [Ulsan for you]");
+		}
+		else		if(("${addr}")=="부산광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/bs.jpg')");	
+			$("#comment").append("사람과 기술, 문화로 융성하는 부산 [Dynamic Busan]");
+		}
+		else		if(("${addr}")=="제주특별자치도"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/jj.jpg')");
+			$("#comment").append("신비의 섬 [Only Jeju Island]");
+		}
+		else		if(("${addr}")=="광주광역시"){
+			$(".top_g").css("background-image","url('${root}/Guide_img/Location_info/kj.jpg')");	
+			$("#comment").append("문화의 수도 [Tour Partner Gwangju]");
+		}
+		
+		
 		 $(".menu").children("a").click(function(){
 		        $(this).next().slideToggle();	//ul	            
 	        });
@@ -332,7 +438,7 @@
 			        	 if(fIcon[i].indexOf(ta_path)>=0){
 			        		 if(fIcon[i].indexOf(",")>=0){	//tommorw am		
 			       	 			ta_img=fIcon[i].substring(fIcon[i].indexOf(ta_path)+7,fIcon[i].indexOf(","));
-			       	 		 }
+			        		 }
 			        		 else{
 				       	 		ta_img=fIcon[i].substring(fIcon[i].indexOf(ta_path)+7,fIcon[i].length);
 				       	 	 }
@@ -478,12 +584,13 @@
 		var utok_size="${fn:length(list)} ";
 		utok_size=parseInt(utok_size);
 		var i=0;
+		var utok=0;
+		var php,eur,cny,jpy,gbp;
 		$.ajax({
 			url:Curl,
 			type:"GET",
 			dataType:"XML",
-			success:function(data){
-				var utok=0;
+			success:function(data){				
 				$(data).find("results").find("rate").each(function(){
 					var rate=$(this).find("Ask").text();	
 					if(i==0){
@@ -495,35 +602,91 @@
 						}
 					}
 					else if(i==2){
+						php=(parseFloat(utok)*parseFloat(rate)).toFixed(2);
 						$("#currency").append("<b><img src='./Guide_img/ph.png'> 필리핀 PHP	₱");
-						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						$("#currency").append(php+"	: ￦1000<br>");	
 					}
 					else if(i==3){
+						eur=(parseFloat(utok)*parseFloat(rate)).toFixed(2);
 						$("#currency").append("<b><img src='./Guide_img/eu.png'> 유럽   EUR	€");
-						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						$("#currency").append(eur+"	: ￦1000<br>");
 					}
 					else if(i==4){
+						cny=(parseFloat(utok)*parseFloat(rate)).toFixed(2);
 						$("#currency").append("<b><img src='./Guide_img/ch.png'> 중국   CNY	¥");
-						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						$("#currency").append(cny+"	: ￦1000<br>");
+						
 					}
 					else if(i==5){
+						jpy=(parseFloat(utok)*parseFloat(rate)).toFixed(2);
 						$("#currency").append("<b><img src='./Guide_img/jp.png'> 일본   JPY	¥");
-						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						$("#currency").append(jpy+"	: ￦1000<br>");
+			
 					}
 					else if(i==6){
+						gbp=(parseFloat(utok)*parseFloat(rate)).toFixed(2);
 						$("#currency").append("<b><img src='./Guide_img/uk.png'> 영국   GBP	£");
-						$("#currency").append((parseFloat(utok)*parseFloat(rate)).toFixed(2)+"	: ￦1000<br>");
+						$("#currency").append(gbp+"	: ￦1000<br>");
+						
 					}
 					++i;
 				});				
-			} 
+			} 			
 			
+		
 		});  
 		
+
 		
 		
+		/* Exchange */
 		
+		$(".exchange").click(function(e)
+		{
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
+
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.pageX + 10;
+			var divTop = e.pageY + 150;
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+			if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if( divLeft < 0 ) divLeft = 0;
+			if( divTop < 0 ) divTop = 0;
+
+			$('.popupLayer').css({
+				"top": divTop,
+				"left": divLeft,
+				"position": "absolute"
+			})
+			$('.popupLayer b').empty();
+			$(".popupLayer").append("<b><img src='./Guide_img/ph.png'> 필리핀");
+			$('.popupLayer').append("<b> (PHP	₱"+(parseInt($(this).prev().attr("pri"))/1000*parseFloat(php)).toFixed(1)+")<br></b>");
+			
+			$(".popupLayer").append("<b><img src='./Guide_img/eu.png'> 유럽");
+			$('.popupLayer').append("<b> (EUR	€"+(parseInt($(this).prev().attr("pri"))/1000*parseFloat(eur)).toFixed(1)+")<br></b>");
+			
+			$(".popupLayer").append("<b><img src='./Guide_img/ch.png'> 중국");
+			$('.popupLayer').append("<b> (CNY	¥"+(parseInt($(this).prev().attr("pri"))/1000*parseFloat(cny)).toFixed(1)+")<br></b>");
+			
+			$(".popupLayer").append("<b><img src='./Guide_img/jp.png'> 일본");
+			$('.popupLayer').append("<b> (JPY	¥"+(parseInt($(this).prev().attr("pri"))/1000*parseFloat(jpy)).toFixed(1)+")<br></b>");
+			
+			$(".popupLayer").append("<b><img src='./Guide_img/uk.png'> 영국");
+			$('.popupLayer').append("<b> (GBP	£"+(parseInt($(this).prev().attr("pri"))/1000*parseFloat(gbp)).toFixed(1)+")<br></b>");
+			
+						
+			$('.popupLayer').show();
 		
+
+		});		
 		
 	/* 	$.ajax({
 			url:Curl_KtoU,
@@ -619,13 +782,20 @@
 		   		location.href="hashSearch.wd?addr="+addr+"&hash="+hash;   
 		   	});
 		
-		/* Rate was default */
-
+		/* Area  */
+		$("#city").click(function(){
+			$("#loc_sel").click();
+			//$("#loc_sel").css("display","inline");
+			
+		});
 		
 		
 		
 	});
 
+	function closeLayer( obj ) {
+		$(obj).parent().parent().hide();
+	}
 
 	
 	
@@ -645,16 +815,36 @@
 											한줄 설명
 											해시태그  -->
 			<span id="korea">대한민국<br>
-				<span id="city" addr="${addr }" lat="${lat }"  lng="${lng }" > ${addr } <br>
-					<span id="comment">대한민국의 심장</span>
+				<span id="city" addr="${addr }" lat="${lat }"  lng="${lng }" > ${addr } 	∨ <br>
+					<span id="comment"></span>
 				</span>
 			</span>
 			
-			<a href="" id="hash">#남산</a>
-			<a href="" id="hash">#경복궁</a>
-			<a href="" id="hash" >#강남</a>	
-			<a href="" id="hash" >#한강</a>	
-			<a href="" id="hash" >#여의도</a>	
+			<select name="loc_sel" id="loc_sel">
+			    <option value="서울특별시">서울특별시</option>
+			     <option value="경기도">경기도</option>
+			      <option value="인천광역시">인천광역시</option>
+			       <option value="강원도">강원도</option>
+			        <option value="충청북도">충청북도</option>
+			         <option value="충청남도">충청남도</option>
+			          <option value="대전광역시">대전광역시</option>
+			           <option value="전라북도">전라북도</option>
+			            <option value="전라남도">전라남도</option>
+			             <option value="광주광역시">광주광역시</option>
+			        <option value="제주도">제주도</option>
+			         <option value="경상북도">경상북도</option>
+			          <option value="경상남도">경상남도</option>
+			           <option value="대구광역시">대구광역시</option>
+			            <option value="부산광역시">부산광역시</option>
+			             <option value="울산광역시">울산광역시</option>
+			</select>
+			
+			
+			<a href="" class="hash" id="hash">#남산</a>
+			<a href="" class="hash" id="hash">#경복궁</a>
+			<a href="" class="hash" id="hash">#강남</a>	
+			<a href="" class="hash" id="hash">#한강</a>	
+			<a href="" class="hash" id="hash">#여의도</a>	
 		</div>
 	
 <input type="button" id="write" value="write" class="btn btn-info btn-xs" onclick="location.href='guideAuthentic.wd?addr=${addr}'">
@@ -674,11 +864,11 @@
 			        <li class="menu">
 			            <a><img src="${root }/Guide_img/list_img.png" alt="가이드 테마" width="10px"/>가이드 테마</a>
 			            <ul class="submenu">
-			                <li><a href="themeSearch.wd">문화재</a></li>
-			                <li><a href="themeSearch.wd">체험(예술)</a></li>
-			                <li><a href="themeSearch.wd">체험(레져)</a></li>
-			                <li><a href="themeSearch.wd">식도락</a></li>
-			                <li><a href="themeSearch.wd">자연</a></li>
+			                <li><a href="themeSearch.wd?theme=문화재&addr=${addr }">문화재</a></li>
+			                <li><a href="themeSearch.wd?theme=체험(예술)&addr=${addr }">체험(예술)</a></li>
+			                <li><a href="themeSearch.wd?theme=체험(레져)&addr=${addr }">체험(레져)</a></li>
+			                <li><a href="themeSearch.wd?theme=식도락&addr=${addr }">식도락</a></li>
+			                <li><a href="themeSearch.wd?theme=자연&addr=${addr }">자연</a></li>
 			            </ul>
 			        </li>
 			 
@@ -726,8 +916,9 @@
 							
 							<span id="price">
 								<fmt:formatNumber type="currency" currencySymbol="￦" value="${i.gb_price }"  />
-								<span class="price_d" id="price_d${stat.count}" pri${stat.count}="${i.gb_price }">
+								<span class="price_d" id="price_d${stat.count}" pri${stat.count}="${i.gb_price }" pri="${i.gb_price }">
 								</span>	
+								<img src="${root }/Guide_img/exchange.png" width="23px;" class="exchange">
 							</span>
 							<c:forTokens items="${i.gb_keyword}" delims="#" var="hash" varStatus="i" >
 								<a class="hash">#<b hash="${hash }">${hash } </b></a>
@@ -744,9 +935,19 @@
 			</div>
 		</div>
 
+	<!-- Exchage Layer -->
+	<div class="popupLayer">
+		Currency Rate<br>
+		<div>
+			<span onClick="closeLayer(this)" style="cursor:pointer;font-size:1.5em" title="닫기">X</span>
+		</div>
+		<span class="exl"></span>
+	</div>
+
+
 
 	<!-- 페이징처리 -->
-	<div style="margin-left: 350px; margin-bottom: 100px;" class="text-center" wid>
+	<div style="margin-left: 350px; margin-bottom: 100px;" class="text-center" >
 		<ul class="pagination">
 			<!-- 이전(첫블럭이 아니면 보이게하기) -->
 			<c:if test="${startPage>1}">

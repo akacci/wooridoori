@@ -6,9 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<c:set var="root" value="<%=request.getContextPath() %>"  />
+
 <script type="text/javascript"   src="<%=request.getContextPath()%>/resources/js/member.js"></script>
 <link rel="stylesheet" type="text/css"   href='resources/css/loginform.css'>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- tabs  -->
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+<!-- 1.preview pic  2.div to pic -->
+<script src="${root }/dist/jquery.cropit.js"></script>
+<script src="${root }/dist/html2canvas.js"></script>
+
 <script type="text/javascript">
    $(function(){
       $(".login").click(function(){

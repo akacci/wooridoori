@@ -118,14 +118,19 @@ public class GuideController {
 	//Get list	
 	@RequestMapping("guideList.wd")
 	public String getList(HttpSession session, String addr, Model m, 
-							@RequestParam(defaultValue="") String hash, HttpServletRequest request,
+							@RequestParam(defaultValue="") String hash,
+							@RequestParam(defaultValue="") String theme,
+							HttpServletRequest request,
 							@RequestParam(value="pageNum",defaultValue="1")int currentPage ){
 
 		int totalCount=0;
 		if(!(hash.isEmpty())){					//Hash Search List
 			totalCount=Integer.parseInt(gService.getGuideHashListCount(addr, hash));
 		}
-		else{						// Default List
+		else if(!(theme.isEmpty())){			//Theme Search List
+			totalCount=Integer.parseInt(gService.getGuideThemeListCount(addr, theme));
+		}
+		else{									// Default List
 			totalCount=Integer.parseInt(gService.getListCount(addr));
 		}
 		//리스트
@@ -169,15 +174,29 @@ public class GuideController {
 		
 	
 		if(!(hash.isEmpty())){					//Hash Search List
-			List<GuideDTO> sList =gService.hashSearch(addr,hash,startNum,endNum);
+			List<GuideDTO> hList =gService.hashSearch(addr,hash,startNum,endNum);
 			//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
 			no=totalCount-((currentPage-1)*perPage);
-			m.addAttribute("list",sList);
+			m.addAttribute("list",hList);
 			m.addAttribute("addr",addr);
-			String []rater=new String[sList.size()];
+			String []rater=new String[hList.size()];
 			
-			for(int i=0;i<sList.size();i++){
-				int idx=Integer.parseInt(sList.get(i).getSeq_guide());
+			for(int i=0;i<hList.size();i++){
+				int idx=Integer.parseInt(hList.get(i).getSeq_guide());
+				rater[i]= gsService.guideRateCount(idx);
+			}			
+			m.addAttribute("rater",rater);
+		}
+		else if(!(theme.isEmpty())){			//Theme Search List
+			List<GuideDTO> tList =gService.themeSearch(addr,theme,startNum,endNum);
+			//각 글에 보여질 번호구하기(총 100개라면 100부터 출력함)
+			no=totalCount-((currentPage-1)*perPage);
+			m.addAttribute("list",tList);
+			m.addAttribute("addr",addr);
+			String []rater=new String[tList.size()];
+			
+			for(int i=0;i<tList.size();i++){
+				int idx=Integer.parseInt(tList.get(i).getSeq_guide());
 				rater[i]= gsService.guideRateCount(idx);
 			}			
 			m.addAttribute("rater",rater);
@@ -463,7 +482,14 @@ public class GuideController {
 		return "redirect:guideList.wd";
 	}
 	
-
+	//Theme search
+	@RequestMapping("themeSearch.wd")
+	public String themeSearchList(String addr,String theme,Model m){
+		
+		m.addAttribute("theme",theme);
+		m.addAttribute("addr",addr);
+		return "redirect:guideList.wd";
+	}
 	
 	
 	////////////////////////////////////////////////////////////////////////

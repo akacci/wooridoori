@@ -338,7 +338,7 @@
     </script>
   </head>
   <body>
-  	<header>
+   	<header>
 		<%@ include file= "../layout/top.jsp" %>
 	</header>  
   <div id="dialog-confirm" title="관리자에게 문의하세요.">

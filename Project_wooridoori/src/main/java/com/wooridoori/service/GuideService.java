@@ -88,6 +88,12 @@ public class GuideService{
 	public String getGuideHashListCount(String addr,String hash){
 		return gdao.getGuideHashListCount(addr, hash);
 	}
+	public List<GuideDTO> themeSearch(String addr,String theme,int start,int end){
+		return gdao.themeSearch(addr,theme,start,end);		
+	}
+	public String getGuideThemeListCount(String addr,String theme){
+		return gdao.getGuideThemeListCount(addr, theme);
+	}
 	public List<GuideDTO> guideNearestOfList(double lat,double lon){
 		return gdao.guideNearestOfList(lat, lon);
 	}
@@ -122,6 +128,10 @@ public class GuideService{
 	/* detect And display */
 	public  boolean detect(String id,String path) throws IOException{
 		boolean isSuccess=true;
+		File dir = new File(path);
+	    if (!dir.exists()) {
+	        dir.mkdirs();
+	    }
 		//String path="C:\\Tour\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\wooridoori\\save\\GuideFace\\";
 		 // Create a face detector from the cascade file in the resources directory
 		CascadeClassifier faceDetector = new CascadeClassifier(GuideService.class.getResource("lbpcascade_frontalface.xml").getPath().substring(1));
@@ -211,6 +221,10 @@ public class GuideService{
 		
 		// Directory
 		String warnDir = path+"\\save\\GuideFace\\";
+		File dir = new File(warnDir);
+	    if (!dir.exists()) {
+	    	dir.mkdirs();
+	    }
 		String fileName=warnDir+id+"face_result.png";
 
 		// Load images to compare
