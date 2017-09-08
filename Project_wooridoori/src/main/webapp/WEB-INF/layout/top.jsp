@@ -171,7 +171,7 @@
          <a href="tlist.wd">TourList</a>
       </div> 
       <div class="bar-item-t">
-         <a href="#">Guide</a> 
+         <a href="guideSelect.wd">Guide</a> 
       </div>
       <div class="bar-item-t">
          <a href="recommend.wd">Recommend</a>
