@@ -118,7 +118,7 @@ public class GuideService{
 		
 		//detect(id);
 		boolean isWarn=recog(id,path);
-		return true;
+		return isWarn;
 	}
 	
 	/**
@@ -286,7 +286,7 @@ public class GuideService{
 					
 				    // Extract good images (distances are under 35)
 					for (int i = 0; i < descriptors1.rows(); i++) {
-						if (match[i].distance <= 23) {
+						if (match[i].distance <= 35) {
 							retVal++;
 						}
 					}
