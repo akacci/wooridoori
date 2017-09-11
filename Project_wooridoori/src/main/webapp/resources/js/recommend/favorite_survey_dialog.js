@@ -1,6 +1,6 @@
 $(function(){
 	
-	var id = sessionLogin();
+	favoriteSessionLogin();
 	selectAreaCodeName();
 	selectCat2Code();
 	selectStayCode();
@@ -32,7 +32,7 @@ $(function(){
 		if($(this).attr("name") == "_3"){
 			if($("#login_val").val() == "YES"){
 				//추천,즐찾,별점,처음방문 여부 하나라도 클릭시
-				var totPreference = selectTotalCountPreference(id);
+				var totPreference = selectTotalCountPreference($("#login_id").val());
 				if( totPreference > 0){
 					$("#favorite_survey").attr("style", "visibility:visible");
 					$("#favorite_survey").dialog("open");
@@ -46,21 +46,18 @@ $(function(){
 	
 });
 
-function sessionLogin(){
-	var sessionId;
+function favoriteSessionLogin(){
 	$.ajax({
-		url:"sessionlogin.wd",
+		url:"favoritesessionlogin.wd",
 		type: "post",
-		async: false,
 		success:function(resData){
-			
-			var login = resData.substr(0, resData.indexOf(",")).trim();
-			sessionId = resData.substr(resData.indexOf(",") + 1, resData.length);
+			var login = resData.substr(0, resData.indexOf(","));
+			var sessionId = resData.substr(resData.indexOf(",") + 1, resData.length);
 
 			$("#login_val").val(login);
+			$("#login_id").val(sessionId);
 		}
 	});
-	return sessionId;
 }
 
 /*지역 코드 조회*/
@@ -130,12 +127,13 @@ function selectStayCode(){
 function selectTotalCountPreference(id){
 	var pre_cnt;
 	$.ajax({
-		url: "selectTotalCountPreference.wd",
+		url: "selecttotalcountpreference.wd",
 		type:"post",
 		async: false,
 		data:{"id":id},
 		success:function(resData){
 			pre_cnt = resData;
+			alert("pre_cnt - " + resData);
 		}
 	});
 	return pre_cnt;
@@ -151,7 +149,7 @@ function updatePreference(){
 	var stay = $("#sel_stay").val();
 	
 	$.ajax({
-		url:"selectupdatePreference.wd",
+		url:"selectupdatepreference.wd",
 		type:"post",
 		data: {"areacode":areacode,"age":age, "purpose":purpose, "person":person, "stay":stay},
 		success:function(){
