@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="contextpath" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" type="text/css" href='resources/css/tlist.css?t=<%=System.currentTimeMillis()%>'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 
 </style>
@@ -79,7 +80,9 @@
 </script>
 <title>관광지 검색</title>
 </head>
-<body style="width: 100%; height: auto; min-height: 1000px;">
+
+<body style="width: 100%; height: auto; min-height: 1000px; margin:0">
+
 	<header> 
          <%-- <jsp:include page= "../layout/wtopmenu.jsp"/> --%>
          <%@include file="../layout/top.jsp"%>
@@ -90,8 +93,18 @@
 		<div class="tText_1_1"><b>가고싶은 곳을 선택하세요.</b><br>
 		</div>
 	</div>
-
-	<div class="subwrap" style="width: 100%; height: 90%;">
+		<c:if test="${depth eq '0' || depth eq '1'}">
+		<form action="category.wd" method="get" style="width:100%; height:50px; right: 0px; text-align: right; margin-top: 50px;">
+			<div style="vertical-align: bottom; width: 95%; right: -10px;" >
+				<input type="search" id="searchkey" name="searchkey" value="${searchkey}" 
+				style="width: 150px; border: 1px solid gray; height: 25px;" class="w3-large" title="검색">
+				<button type="submit" id="submitbtn" class="w3-large w3-text-black" style="margin-left:-3px; cursor: pointer;">
+				<i class="fa fa-search" ></i></button>
+			</div>
+		</form>
+		</c:if>
+			
+	<div class="subwrap" style="width: 100%; height: 90%; margin-top: -50px;">
 		<c:set var="depth" value="${depth}"></c:set>
 		<c:if test="${depth eq '0'}">
 		<div class="area_content">
@@ -167,6 +180,16 @@
 						</div>
 					</a>
 				</div>
+		<c:if test="${depth eq '2'}">
+		<form action="category.wd" method="get" style="width:90%; height:30px; right: 0px; text-align: right; margin-top: 50px;">
+			<div style="vertical-align: bottom;">
+				<input type="search" id="searchkey" name="searchkey" value="${searchkey}" 
+				style="width: 150px; border: 1px solid gray; height: 25px;" class="w3-large" title="검색">
+				<button type="submit" id="submitbtn" class="w3-large w3-text-black" style="margin-left:-3px; cursor: pointer;">
+				<i class="fa fa-search" ></i></button>
+			</div>
+		</form>
+		</c:if>
 				<div class="Ttable_cover" id="Ttable_cover">
 					<table class="tlist_table" id="tlist_table">
 						<tr class="tfirst_tr">

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class RecommendFavoriteSurveyDTO {
 	
-	private String seq_member;
+	private String preference_seq;
 	private String m_id;
 	private String areacode_ref;
 	private String sigungucode_ref;
@@ -26,11 +26,11 @@ public class RecommendFavoriteSurveyDTO {
 	private String purpose_code;
 	private String stay_code;
 	
-	public String getSeq_member() {
-		return seq_member;
+	public String getPreference_seq() {
+		return preference_seq;
 	}
-	public void setSeq_member(String seq_member) {
-		this.seq_member = seq_member;
+	public void setPreference_seq(String preference_seq) {
+		this.preference_seq = preference_seq;
 	}
 	public String getM_id() {
 		return m_id;

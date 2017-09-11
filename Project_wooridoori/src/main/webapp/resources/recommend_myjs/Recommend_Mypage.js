@@ -23,6 +23,7 @@
 	  labels: ['mygrade', 'totalgrade'],
 	  hideHover: 'auto'
 	});
+	updateClick(e);
 })(jQuery);
 
 function bubble_Data()
@@ -30,10 +31,10 @@ function bubble_Data()
 	$.ajax({
 		url: "bubble_Data.wd",
 		type: "post",
-		success: function(bubdata){
-			alert(bubdata);
+		success: function(bubdata){			
 			var s_data = JSON.parse(bubdata);
-			var mypage = "";					
+			var mypage = "";
+			$("#mypage_list").empty();
 				for (var i=0; i < s_data.length; i++)
 				{	
 					var title = $.trim(s_data[i].TITLE_REF);
@@ -47,23 +48,23 @@ function bubble_Data()
 					var bookmark = $.trim(s_data[i].BOOKMARK);
 					var preference = $.trim(s_data[i].PRE_RENCE);
 					var firsttrip = $.trim(s_data[i].FIRSTTRIP);
-					if(bookmark == 'y')
-					{
-						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-thumbs-up'></span></td>";						
+					if(bookmark == 'y' || bookmark == 'Y')
+					{						
+						mypage += "<td class='mypage_bookmark' book="+bookmark+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-thumbs-up'></span></td>";						
 					}else{
-						mypage += "<td class='mypage bookmark'><span class='glyphicon glyphicon-thumbs-down'></span></td>";						
+						mypage += "<td class='mypage_bookmark' book="+bookmark+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-thumbs-down'></span></td>";						
 					}
-					if(preference == 'y')
+					if(preference == 'y' || preference == 'Y')
 					{
-						mypage += "<td class='mypage like'><span class='glyphicon glyphicon-heart'></span></td>";
+						mypage += "<td class='mypage_like' pre="+preference+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-heart'></span></td>";
 					}else{
-						mypage += "<td class='mypage like'><span class='glyphicon glyphicon-heart-empty'></span></td>";
+						mypage += "<td class='mypage_like' pre="+preference+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-heart-empty'></span></td>";
 					}
-					if(firsttrip == 'y')
+					if(firsttrip == 'y' || firsttrip == 'Y')
 					{
-						mypage += "<td class='mypage_firsttrip_span'><span class='glyphicon glyphicon-ok'></span></td>";
+						mypage += "<td class='mypage_firsttrip_span' fir="+firsttrip+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-ok'></span></td>";
 					}else{
-						mypage += "<td class='mypage_firsttrip_span'><span class='glyphicon glyphicon-remove'></span></td>";
+						mypage += "<td class='mypage_firsttrip_span' fir="+firsttrip+" con="+contentid+" onclick='javascript:updateClick(this)'><span class='glyphicon glyphicon-remove'></span></td>";
 					}
 					mypage += "<td class='mypage_day_span'>"+s_data[i].MODIFIED_DATE+"</td>";					
 					mypage += "</tr>"					
@@ -82,27 +83,21 @@ function mypage_paging(currentPage)
 		data: {"currentPage":currentPage},
 		type: "post",
 		async: false,
-		success: function(data){
-			alert(data);
+		success: function(data){			
 			var s_data = JSON.parse(data);
 			
 			var mypage = "";
 			
 			mypage += "<tr>";
-			mypage += "<td colspan='5'>";			
+			mypage += "<td>";			
 			if(s_data.startPage > s_data.perBlock)
 			{
 				mypage += "<span class='glyphicon glyphicon-chevron-left'></span>";
 			}
 			for(var j = s_data.startPage; j <= s_data.endPage; j++)
 			{
-				mypage += "<button type='button' class='btn btn-success'>"+s_data.currentPage+"</button>";
+				mypage += "<button type='button' class='btn btn-success'>"+j+"</button>";
 			}
-			/*if(s_data[i].totalCount > 0)
-			{
-				mypage += "<button type='button' class='btn btn-success'>"+i+"</button>";
-			}*/
-			
 			if(s_data.endPage < s_data.totalPage)
 			{
 				mypage += "<span class='glyphicon glyphicon-chevron-right'></span>";
@@ -158,8 +153,50 @@ function chart_BubbleData(){
 	});
 	return str;
 };
+function updateClick(e)
+{
+	var bookmark = "x";
+	var preference = "x";
+	var firsttrip = "x";
+	var contentid = $(e).attr("con");
+		
+	bookmark = $(e).attr("book");
+	preference = $(e).attr("pre");
+	firsttrip = $(e).attr("fir");
+	
+	if(bookmark == 'y')
+	{
+		$(e).attr("book",'n');
+	}else{
+		$(e).attr("book",'y');
+	}
+	if(preference == 'y')
+	{
+		$(e).attr("pre",'n');
+	}else{
+		$(e).attr("pre",'y');
+	}
+	if(firsttrip == 'y')
+	{
+		$(e).attr("fir",'n');
+	}else{
+		$(e).attr("fir",'y');
+	}
+	
+	$.ajax({
+		url: "updateClickMyPage.wd",
+		data: {"bookmark":bookmark, "preference":preference,"firsttrip":firsttrip,"contentid":contentid},
+		async: false,
+		type: "post",
+		success: function(data){
+			alert("저장하였습니다.");			
+		}
+	});
+	setTimeout("bubble_Data()", 2000);	
+}
 
 function click_title(e){
 	var contentid = $(e).attr("value");
 	alert(contentid);
+	location.href = "detail.wd?contentid="+contentid;
 }

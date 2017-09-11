@@ -1,5 +1,5 @@
 $(function(){
-	var chart;
+
 	var chartVarN;
 	var chartVarY;
 	
@@ -10,7 +10,7 @@ $(function(){
 	  	autoOpen: false,
 	  	modal: true,
 	  	resizable: false,
-	  	width: 800,
+	  	width: 820,
 	  	height: 800,
 	  	open: function(){
 	  		$(".ui-widget-overlay").off("click");
@@ -73,6 +73,7 @@ $(function(){
     /*dialog_review_write 확인버튼 click event*/
     $("#insert_btn").unbind("click").bind("click", function(){
     	review_insert();
+    	dialog_review($("#dialog_review_write #contentid").val(),5);
     	$("#m_id").val("");
     	$("#pre_review").val("");
     	$("#rateit_write").rateit("value", "");
@@ -80,6 +81,17 @@ $(function(){
     	chartVarN = chartVisitData($("#dialog_review_write #contentid").val(), "N");
   		chartVarY = chartVisitData($("#dialog_review_write #contentid").val(), "Y");
     	new Highcharts.Chart(scoreChart(chartVarN, chartVarY));
+    });
+    
+    //더보기 버튼
+    var btnMore_cnt = 1;
+    $(document).on("click", "#review_dialog_btn", function(){
+    	btnMore_cnt++;
+    	dialog_review($("#dialog_review_write #contentid").val(), 5*btnMore_cnt);
+    	
+    	/*if( reply_length < 5*btnMore_cnt){
+    		alert("마지막 댓글입니다");
+    	}*/
     });
     
 });
@@ -186,29 +198,21 @@ function dialog_content(contentid, e){
 			/*total score rateit*/
 			totalScore(contentid);
 			/*dialog_review data list*/
-			dialog_review(contentid);
+			dialog_review(contentid, 5);
 			
-			if(!$(".rateit").has(e.target).length){
-				sessionLoginId();
-				$("#detail_tour").dialog("open");
-			}else if(!$("._ccimg").has(e.target).length){
-				alert(2);
-				/*sessionLoginId();
-				$("#detail_tour").dialog("open");*/
-			}else if(!$("._jcimg").has(e.target).length){
-				alert(3);
-			}
+			sessionLoginId();
+			$("#detail_tour").dialog("open");
 			
 		}
 	});
 }
 
 /*dialog_review data*/ 
-function dialog_review(contentid){
+function dialog_review(contentid, end){
 	$.ajax({
 		url: "todialogreview.wd",
 		type: "post",
-		data: {"contentid": contentid},
+		data: {"contentid": contentid, "end": end},
 		success: function(resData){
 			var data = JSON.parse(resData);
 			
@@ -220,13 +224,19 @@ function dialog_review(contentid){
 				html += "한줄평 : <span class='review'>"+data[i].pre_review+"</span>";
 				html += "<br><br>"
 			}
+			
+			//더보기 버튼 추가
+			if(data.length > 0){
+				html += "<div id='btn_div'><button class='form-control' id='review_dialog_btn'>더보기</button></div>";
+			}
+			
 			$("#dialog_review_read").html(html);
 
 			/*rateit reset 후 setting*/
 			$(".rateit").rateit();
-			$(".rateit").rateit("readonly", true);
-		    $("#rateit_write").rateit("readonly", false);
+			$("#rateit_write").rateit("readonly", false);
 		    for(var j = 0; j < data.length; j++){
+		    	$("#rateit_"+j).rateit("readonly", true);
 		    	$("#rateit_"+j).rateit("value",data[j].pre_score);
 		    }
 			

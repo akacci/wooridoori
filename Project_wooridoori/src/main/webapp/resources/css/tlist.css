@@ -6,6 +6,13 @@
 	margin: 0 auto;
 }
 
+.w3-large {
+	font-size: 18px !important
+}
+.w3-text-black{
+	color: #000 !important
+}
+
 .subrwap{
 	width: 100%;
 	min-height:500px;
@@ -48,7 +55,7 @@
 }
 
 .Ttable_cover{
-	margin-top: 50px;
+	margin-top: 5px;
 	width: 100%;
 }
 

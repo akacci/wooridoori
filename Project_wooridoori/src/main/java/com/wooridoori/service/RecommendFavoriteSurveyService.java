@@ -6,11 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wooridoori.dao.RecommendDAO;
 import com.wooridoori.dao.RecommendFavoriteSurveyDAO;
 import com.wooridoori.dao.ReferenceDAO;
 import com.wooridoori.dto.ContentCodeDTO;
-import com.wooridoori.dto.ReferenceDTO;
 import com.wooridoori.dto.TourInquiryDTO;
 
 @Service
@@ -45,8 +43,12 @@ public class RecommendFavoriteSurveyService {
 		return list;
 	}
 	
-	public void insertPreference(Map<String, String> map){
-		rfsdao.insertPreference(map);
+	public void updatePreference(Map<String, String> map){
+		Map<String, String> selSurvey = rfsdao.selectCat2OfSurvey(map.get("id"));
+		System.out.println("service------------------------ insert " + map.get("id"));
+		System.out.println("service------------------------ insert " + selSurvey.get("preference_seq"));
+		map.put("seq_preference", selSurvey.get("seq_preference"));
+		rfsdao.updatePreference(map);
 	}
 	
 	public int totalCountPreference(String id)

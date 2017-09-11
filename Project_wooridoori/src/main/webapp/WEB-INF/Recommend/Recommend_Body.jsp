@@ -30,12 +30,13 @@
 <body>
 	<div id="success_message"></div>
 	<div id="recommend_main">
+		<input type="hidden" id="login_val">
 		<div id="area">
 			<div class="slider">
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">지역</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
 							<div class="select_box_div">
 								<input type="hidden" value="${i.index}" id="cnt">
@@ -81,7 +82,7 @@
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">테마</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
 							<div class="select_box_div">
 								<input type="hidden" value="${i.index}" id="cnt">
@@ -91,7 +92,7 @@
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" name="first_trip" value="Y">
+										<span class="first_trip_click" name="first_trip" value="n" inx="${i.count}">
 											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
@@ -126,17 +127,16 @@
 				<a href="#none" class="slide_left"><img src="<%=request.getContextPath()%>/resources/image/Recommend/left.png"></a>
 				<div id="slider_body">
 					<span class="category">추천하고 싶은 곳</span>
-					<c:forEach begin="1" end="10" varStatus="i">
+					<c:forEach begin="1" end="20" varStatus="i">
 						<div id="slide_div">
-							<div class="select_box_div">
-								<input type="hidden" value="${i.index}" id="cnt">
+							<div class="select_box_div">																
 								<input type="hidden" class="contentid" id="contentid">
 								<div class="select_tourbox">
 									<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
 								</div>
 								<div class="div_hover_box">				
 									<div class="select_blockA">
-										<span class="first_trip_click" name="first_trip" value="Y">
+										<span class="first_trip_click" name="first_trip" value="n" inx="${i.count}">
 											<span class = "glyphicon glyphicon-check" style="right:20px; top:20px; font-size: 2em; color: black;"></span>
 										</span>
 									</div>
@@ -172,32 +172,6 @@
 		<div style="width:1200px; height:800px;">
 			<div style="width:1200px; height:800px;">
 				<div id="list" style="width:1200px; height:800px;">
-			<!-- <div class="select_box_div"> -->
-				<%-- <input type="hidden" value="${i.index}" id="cnt">
-				<input type="hidden" class="contentid" id="contentid">
-				<div class="select_tourbox">
-					<img class="select_img" onError="this.src='/Project_wooridoori/resources/image/Recommend/no_image.png'">
-				</div>
-				<div class="div_hover_box">				
-					<div class="select_blockA">
-						<span class="first_trip_click" name="first_trip" value="Y">
-							<img src="<%=request.getContextPath()%>/resources/image/Recommend/delete.gif" class="btn_first_trip">
-						</span>
-					</div>
-					<div class="select_blockB">
-						<ul class="select_box_ul">
-							<li><span class="tour_title">관광지명</span></li>
-							<li>
-								<div class="rateit bigstars"></div>
-							</li>
-							<li>							
-								<span class="_cc_img"><img class="_ccimg" name="cc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like2.png">추천</span>
-								<span class="_jc_img"><img class="_jcimg" name="jc_name" src="<%=request.getContextPath()%>/resources/image/Recommend/like3.png">즐겨찾기</span>
-							</li>				
-						</ul>
-					</div>								 
-				</div> --%>
-			<!-- </div> -->
 				</div>
 				<div id="div_more">
 					<a href="javascript:void(0);" id="btn_more">더보기</a>

@@ -41,6 +41,7 @@
 		var data = {contentid : contentId, contenttypeid : contentTypeid, x : mapx, y : mapy};
 		var title = "${cdata.title}";
 		//var appKey = "4e235220-bbba-3ed6-a61d-7dfd07f58a39";
+		var appKey = "416fb546-67f9-3e5a-864f-bc9ba88958f6";
 		
 		content_writer(data);
 		
@@ -70,7 +71,7 @@
 		        		 }
 		        	 }
 		         }
-		         $("#weather").append("<b style='font-size:15pt'>현재 ["+title+"]</b><br><img src='"+root+"/weather/"+img+".png' width='100px' style='vertical-align:middle;'><b style='color:green; font-size:25pt'>"+temp.substring(0,temp.length-3)+"°C</b> <hr>");
+		         $("#weather").append("<b style='font-size:12pt'>현재 ["+title+"]</b><br><img src='"+root+"/weather/"+img+".png' width='50px' style='vertical-align:middle;'><b style='color:green; font-size:15pt'>"+temp.substring(0,temp.length-3)+"°C</b> <hr>");
 		         
 		      },complete : function(data) {
 		         //alert("complete");
@@ -155,8 +156,8 @@
 			        		 }
 			        	 }
 			         } 
-			         $("#weather").append("내일 오전  /  오후<br><img src='"+root+"/weather/"+ta_img+".png' width='70px;'>/ <img src='"+root+"/weather/"+tp_img+".png' width='70px;'><br><b style='color:red; font-size:22pt;'>"+parseFloat(tempH).toFixed(0)+"°C</b> / <b style='color:blue; font-size:22pt;'>"+parseFloat(tempM).toFixed(0)+"°C</b><hr>");
-			         $("#weather").append("모레 오전  /  오후<br><img src='"+root+"/weather/"+ta2_img+".png' width='70px;'>/ <img src='"+root+"/weather/"+tp2_img+".png' width='70px;'><br><b style='color:red; font-size:22pt;'>"+parseFloat(tempH2).toFixed(0)+"°C</b> / <b style='color:blue; font-size:22pt;'>"+parseFloat(tempM2).toFixed(0)+"°C</b><br>");
+			         $("#weather").append("내일 오전  /  오후<br><img src='"+root+"/weather/"+ta_img+".png' width='35px;'>/ <img src='"+root+"/weather/"+tp_img+".png' width='35px;'><br><b style='color:red; font-size:12pt;'>"+parseFloat(tempH).toFixed(0)+"°C</b> / <b style='color:blue; font-size:12pt;'>"+parseFloat(tempM).toFixed(0)+"°C</b><hr>");
+			         $("#weather").append("모레 오전  /  오후<br><img src='"+root+"/weather/"+ta2_img+".png' width='35px;'>/ <img src='"+root+"/weather/"+tp2_img+".png' width='35px;'><br><b style='color:red; font-size:12pt;'>"+parseFloat(tempH2).toFixed(0)+"°C</b> / <b style='color:blue; font-size:12pt;'>"+parseFloat(tempM2).toFixed(0)+"°C</b><br>");
 			      },complete : function(data) {
 			         //alert("complete");
 			       },error : function(xhr, status, error) {
@@ -192,7 +193,7 @@
          <%@include file="../layout/top.jsp"%>
 </header>
 <body>
-	<div style="position:fixed; right: 2.5%; bottom: 8%; width:17.5%; background-color: #ffffff; z-index: -1;">
+	<div style="position:fixed; right: 2%; bottom: 10%; width:12%; background-color: #ffffff; z-index: -1;">
 		<div id="weather" root="<%=request.getContextPath()%>" style="font-size: 12pt; color:black; border-style: groove; border-width: 1px; border-color: black; text-align: center; box-shadow: 5px 5px 5px 0px gray;"></div>
 	</div>
 	
@@ -275,7 +276,7 @@
 		</div>
 		
 		
-		<div class="content_detail" style="width: 60%; margin-left: 17.5%; overflow: hidden">
+		<div class="content_detail" style="width: 66%; margin-left: 17%; overflow: hidden">
 			<ul class="list"></ul> 
 			<a href="searchlist.wd">리스트로 ㄱㄱ</a>
 		</div>

@@ -56,15 +56,41 @@
 	</select>
 	<!-- QnA end -->
 	<!-- member -->
+	<select id="getAllMemberList2" resultType="mdto" parameterType="HashMap">
+		<![CDATA[
+		select a.* from (select ROWNUM as RNUM,b.* from 
+		(select	* from	wmember	where m_id != 'admin' and guide != 'D'	
+		order by to_char(cre_date,'YY.MM.DD') desc)b)a 
+		where a.RNUM>=#{startNum} and a.RNUM<=#{endNum}
+		]]>
+	</select>
 	<select id="getAllMemberList" resultType="mdto">
-		select
-			*
-		from
-			wmember
-		where
-			m_id != 'admin' and guide != 'D'
-		order by
-			to_char(cre_date,'YY.MM.DD') desc
+		<![CDATA[
+		select	* from	wmember	where m_id != 'admin' and guide != 'D'	
+		order by to_char(cre_date,'YY.MM.DD') desc
+		]]>
+	</select>
+	<select id="getWTotalCount" resultType="int" >
+		<![CDATA[
+		select count(*) from (select ROWNUM as RNUM,b.* from 
+		(select	* from	wmember	where m_id != 'admin' and guide != 'D'	
+		order by to_char(cre_date,'YY.MM.DD') desc)b)a 
+		]]>
+	</select>
+	<select id="doSearchCount" resultType="int">
+		<![CDATA[
+		select count(*) from (select ROWNUM as RNUM,b.* from 
+		(select	* from	wmember	where m_id != 'admin' and guide != 'D'	
+		order by to_char(cre_date,'YY.MM.DD') desc)b where b.m_id LIKE '%${searchkey}%')a 
+		]]>
+	</select>
+	<select id="doSearchMember" resultType="mdto" parameterType="HashMap">
+		<![CDATA[
+		select a.* from (select ROWNUM as RNUM,b.* from 
+		(select	* from	wmember	where m_id != 'admin' and guide != 'D'	
+		order by to_char(cre_date,'YY.MM.DD') desc)b where b.m_id LIKE '%${searchkey}%')a 
+		where a.RNUM>=#{startNum} and a.RNUM<=#{endNum}		
+		]]>
 	</select>
 	<select id="getChartListDay" parameterType="HashMap"  resultType="HashMap">
 		select

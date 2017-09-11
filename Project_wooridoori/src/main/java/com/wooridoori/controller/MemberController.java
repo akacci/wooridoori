@@ -72,18 +72,25 @@ public class MemberController {
 		return "redirect:wooriMain.wd";
 	}
 	
-	   @RequestMapping("/mypage.wd")
-	   public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1
-	        )
-	   {
-	      if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
-	         String data = "admin.wd";
-	         System.out.println(data1);
-	         model.addAttribute("data", data);
-	         model.addAttribute("data1", data1);
-	      }
-	      return "/mypage/MyPageFrame";
-	   }
+	@RequestMapping("/mypage.wd")
+	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1,
+			@RequestParam(value="data2", defaultValue="") String data2, 
+			@RequestParam(value="searchkey", defaultValue="") String searchkey,
+			@RequestParam(value="pageNum",defaultValue="1")int currentPage)
+	{
+		if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
+			String data = "admin.wd";
+			System.out.println(data1);
+			model.addAttribute("data", data);
+			model.addAttribute("data1", data1);
+			model.addAttribute("data2", data2);
+			model.addAttribute("searchkey", searchkey);
+			model.addAttribute("currentPage", currentPage);
+		}
+
+		return "/mypage/MyPageFrame";
+	}
+
 	
 	@RequestMapping(value="ajax_mypage.wd", method=RequestMethod.GET)
 	@ResponseBody

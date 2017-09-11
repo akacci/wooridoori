@@ -11,15 +11,15 @@ import com.wooridoori.dao.GuideDAO;
 import com.wooridoori.dao.GuideScoreDAO;
 import com.wooridoori.dao.MemberDAO;
 import com.wooridoori.dto.GuideScoreDTO;
+import com.wooridoori.service.GuideScoreService;
+import com.wooridoori.service.GuideService;
 
 @Controller
 public class GuideScoreController {
 	@Autowired
-	GuideScoreDAO gsDAO;
+	GuideScoreService gsService;
 	@Autowired
-	GuideDAO gDAO;
-	@Autowired
-	MemberDAO mDAO;
+	GuideService gService;
 	
 	@RequestMapping("guideRate.wd")
 	@ResponseBody
@@ -30,13 +30,19 @@ public class GuideScoreController {
 		dto.setScore(score);
 		dto.setGb_num(num);
 		
-		int isRate=gsDAO.guideIsRated(dto);
-		if(isRate>0){
-			gsDAO.guideScoreUpdate(dto);
+	
+		int isRate=gsService.guideIsRated(dto);	
+		if(isRate>0){													//Guide re-rating
+			gsService.guideScoreUpdate(dto);					//User rate to guide
+			float rate=gsService.guideScoreAverage(num);		//Rate of target guide
+			dto.setScore(rate);
+			gsService.guideRate(dto);							//Guide rate insert
 			return 1;
 		}
 		else{
-			gsDAO.guideScoreInsert(dto);	
+			gsService.guideScoreInsert(dto);						//Guide rating
+			float rate=gsService.guideScoreAverage(num);	
+			gsService.guideRate(dto);
 			return 0;
 		}
 	}

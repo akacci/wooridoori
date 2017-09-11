@@ -372,6 +372,40 @@ public class RecommendController {
 		}
 	}
 	
+	@RequestMapping(value="updateClickMyPage.wd", method=RequestMethod.POST)
+	public void updateClickMyPage(@RequestParam(value="firsttrip", defaultValue="x")char firsttrip,
+							@RequestParam(value="preference", defaultValue="x")char preference,
+							@RequestParam(value="bookmark", defaultValue="x")char bookmark,
+							@RequestParam String contentid,
+							HttpSession session)
+	{
+		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();
+		int i = 0;
+		if(firsttrip != 'x')
+		{
+			i = 1;
+			hashmap.put("id", id);
+			hashmap.put("firsttrip", firsttrip);
+			hashmap.put("contentid", contentid);
+		}
+		if(bookmark != 'x')
+		{
+			i = 2;
+			hashmap.put("id", id);
+			hashmap.put("bookmark", bookmark);
+			hashmap.put("contentid", contentid);
+		}
+		if(preference != 'x')
+		{
+			i = 3;
+			hashmap.put("id", id);
+			hashmap.put("preference", preference);
+			hashmap.put("contentid", contentid);
+		}		
+		service.updateCilckData(hashmap,i);
+	}
+	
 	/*@RequestMapping(value="openBoardList.wd")
 	public ModelAndView openBoardList(CommandMap commandMap) throws Exception{
 	    ModelAndView mv = new ModelAndView("/sample/boardList");
