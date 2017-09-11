@@ -64,9 +64,14 @@ public class AdminController {
 	@RequestMapping("adminQnAList.wd")
 	public String goAdminQnAList(Model model){
 		HashMap<String, String> kmap = adminService.getQnAKindCount();
+		HashMap<String, String> tmap = adminService.getHandlingCount();
+		System.out.println(tmap);
 		model.addAttribute("r", kmap.get("r"));
 		model.addAttribute("m", kmap.get("m"));
 		model.addAttribute("n", kmap.get("n"));
+		model.addAttribute("T", tmap.get("T"));
+		model.addAttribute("Y", tmap.get("Y"));
+		model.addAttribute("N", tmap.get("N"));
 		model.addAttribute("list", adminService.getQnAList());
 		return "Admin/adminQnAList";
 	}

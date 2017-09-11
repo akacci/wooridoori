@@ -50,7 +50,7 @@
 .admin #div_detail .M_list .preview{
 	position: relative;
 	float: left;
-	height: 300px;
+	height: 270px;
 	width: 400px;
 	margin: 7px;
 }
@@ -126,12 +126,11 @@
 		var mnum = ${m};
 		var rnum = ${r};
 		var data = google.visualization.arrayToDataTable([
-				[ "kind", "count", { role : "style" } ],
-				[ "일반문의", nnum, "orange" ],
-				[ "회원문의", mnum, "green" ],
-				[ "신고", rnum, "blue" ],
+				[ "Kind", "Num", { role : "style" } ],
+				[ "일반문의", nnum, "#3c8dbc" ],
+				[ "회원문의", mnum, "#f56954" ],
+				[ "신고", rnum, 	 "#00a65a" ],
 			]);
-
 		var view = new google.visualization.DataView(data);
 		view.setColumns([ 0, 1, {
 			calc : "stringify",
@@ -189,13 +188,13 @@
 	<div class="a_contents admin">
 		<div id="div_detail">
 			<div class="M_list">
-				<div class="p_title">QnA질문리스트(${noncheckCount})<hr class="title_hr"></div>
+				<div class="p_title"><a onclick="changePage('adminQnAList.wd')" href="#">QnA질문리스트(${noncheckCount})</a><hr class="title_hr"></div>
 				<div class="preview bgcolor_black">
 					<div class="Q_list">
 						<hr class="p_hr"><div style="text-align: center;"><div class="q_title">TITLE</div><span class="q_writer">Writer</span></div><hr class="p_hr">
 						<div>
 							<c:forEach var="data" items="${qlist}" end="10">
-								<div class="q_title">${data.title}</div><span class="q_writer">${data.writer}</span>
+								<div class="q_title"><a onclick="changePage('answerqna.wd?num=${data.num}')">${data.title}</a></div><span class="q_writer">${data.writer}</span>
 							</c:forEach>
 						</div>
 					</div>
@@ -205,13 +204,13 @@
 			</div>
 			</div>
 			<div class="M_list">
-				<div class="p_title">회원관리(9)<hr class="title_hr"></div>
+				<div class="p_title"><a onclick="changePage('adminMemberList.wd')" href="#">회원관리(9)</a><hr class="title_hr"></div>
 				<div class="preview" id="chart_member"></div>
 				<div class="preview bgcolor_black">
 					<div class="Q_list">
 						<hr class="p_hr"><div style="text-align: center;"><div class="m_id">ID</div><span class="sign_date">Sign date</span></div><hr class="p_hr">
 						<div>
-						<c:forEach var="m" items="${mlist}" end="7">
+						<c:forEach var="m" items="${mlist}" end="9">
 							<div class="m_id">${m.m_id}</div><span class="sign_date"><fmt:formatDate value="${m.cre_date}" pattern="YY.MM.dd"/></span>
 						</c:forEach>
 						</div>

@@ -72,15 +72,18 @@ public class MemberController {
 		return "redirect:wooriMain.wd";
 	}
 	
-	@RequestMapping("/mypage.wd")
-	public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1)
-	{
-
-		String data = "";
-		model.addAttribute("data", data);
-
-		return "/mypage/MyPageFrame";
-	}
+	   @RequestMapping("/mypage.wd")
+	   public String mypageAction(Model model, HttpSession session, @RequestParam(value="data1", defaultValue="") String data1
+	        )
+	   {
+	      if(session.getAttribute("ID").equals("admin")&&session.getAttribute("LOGIN").equals("YES")){
+	         String data = "admin.wd";
+	         System.out.println(data1);
+	         model.addAttribute("data", data);
+	         model.addAttribute("data1", data1);
+	      }
+	      return "/mypage/MyPageFrame";
+	   }
 	
 	@RequestMapping(value="ajax_mypage.wd", method=RequestMethod.GET)
 	@ResponseBody
@@ -95,7 +98,6 @@ public class MemberController {
 		
 		String id = session.getAttribute("id").toString();
 		MemberDTO dto = mService.getMemberInfo(id);
-		
 		
 		try {
 			response.getWriter().print(mapper.writeValueAsString(dto));

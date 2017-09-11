@@ -27,6 +27,14 @@
 		where
 			id_num=#{id_num} and deleteboard = 'N'
 	</select>
+	<select id="getHandlingCount" resultType="HashMap">
+		select
+			tt.cnt t, yy.cnt y, nn.cnt n
+		from
+			(select count(*) cnt from qnaboard) tt,
+			(select count(*) cnt from qnaboard where acheck = 'Y') yy,
+			(select count(*) cnt from qnaboard where acheck = 'N') nn
+	</select>
 	<update id="writeAnswer" parameterType="qnaDto">
 		update
 			qnaboard

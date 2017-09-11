@@ -65,9 +65,6 @@
 	                <li>
 	                    <a onclick="changePage('adminMemberList.wd')" href="#">전체회원관리페이지</a>
 	                </li>
-	                <li>
-	                    <a onclick="changePage('adminGuideList.wd')" href="#">가이드관리페이지</a>
-	                </li>
 				</c:if>
             </ul>
         </div>
@@ -82,8 +79,12 @@
  		<script type="text/javascript">
 
  			$(function(){
+ 				$("#page").load("userInfo.wd");
+ 				
  				var data1 = ${data1}+"";
+ 				alert(data1);
  				if(data1!=null && data1.length != 0){
+ 					alert(data1);
  					changePage(data1);
  					data1=null;
  				}
