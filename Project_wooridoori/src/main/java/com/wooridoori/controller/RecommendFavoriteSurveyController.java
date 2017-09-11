@@ -29,12 +29,13 @@ public class RecommendFavoriteSurveyController {
 	@Autowired
 	RecommendFavoriteSurveyService rfsService;
 		
-	@RequestMapping(value="sessionlogin.wd", method=RequestMethod.POST)
+	@RequestMapping(value="favoritesessionlogin.wd", method=RequestMethod.POST)
 	@ResponseBody
 	public String sessionLogin(HttpSession session){
 		String login = (String)session.getAttribute("LOGIN") == null?"NO":(String)session.getAttribute("LOGIN");
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		String str = login + "," + id;
+
 		return str;
 	}
 	
@@ -146,10 +147,12 @@ public class RecommendFavoriteSurveyController {
 		}
 	}
 	
-	@RequestMapping("selectTotalCountPreference.wd")
+	@RequestMapping("selecttotalcountpreference.wd")
 	@ResponseBody
 	public int selectTotalCountPreference(@RequestParam String id){
 		int totalCnt = rfsService.totalCountPreference(id);
+		System.out.println("totalCnt --------------------- "+totalCnt);
+		System.out.println("id ---------------------------- "+id);
 		return totalCnt;
 	}
 

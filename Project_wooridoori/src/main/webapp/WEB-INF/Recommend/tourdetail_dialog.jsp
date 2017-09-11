@@ -31,9 +31,10 @@
 				<img id='top_img' onError='this.src="/Project_wooridoori/resources/image/Recommend/no_image.png"'>
 			</div>
 			<div id="dialog_content">
-				<div id="dialog_preperence">
-					좋아요 [그림] &nbsp;&nbsp;&nbsp;&nbsp;
-					즐겨찾기 [그림]
+				<div id="dialog_preperence" class="form-inline">
+					 <div id="dialog_favorite" class="_ccimg" value="n">좋아요&nbsp;<img class="ccimg" src="resources/image/Recommend/cc_img_1.png"></div>
+					 &nbsp;&nbsp;&nbsp;&nbsp;
+					 <div id="dialog_bookmark" class="_jcimg" value="n">즐겨찾기&nbsp;<img class="jcimg" src="resources/image/Recommend/jc_img_1.png"></div>
 				</div>
 				<div id="inner_content">
 					관광지명 : <span id="span_title"></span>

@@ -406,7 +406,7 @@
       padding-left: 50px;
    }
    div._ccimg, div._jcimg, span.first_trip_click{
-      width: 80px;
+      width: 100px;
       height: 20px;
       cursor: pointer;
       z-index: 6;

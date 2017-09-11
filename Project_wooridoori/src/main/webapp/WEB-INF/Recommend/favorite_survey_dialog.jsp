@@ -20,6 +20,7 @@
 	<body>
 		<div id="survey">
 			<input type="hidden" id="login_val">
+			<input type="hidden" id="login_id">
 			<br>
 			<div>
 				<span>Q1. 연령대를 선택하세요.</span><br>
