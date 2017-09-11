@@ -90,6 +90,7 @@ public class MemberController {
 
 		return "/mypage/MyPageFrame";
 	}
+
 	
 	@RequestMapping(value="ajax_mypage.wd", method=RequestMethod.GET)
 	@ResponseBody
@@ -104,7 +105,6 @@ public class MemberController {
 		
 		String id = session.getAttribute("id").toString();
 		MemberDTO dto = mService.getMemberInfo(id);
-		
 		
 		try {
 			response.getWriter().print(mapper.writeValueAsString(dto));

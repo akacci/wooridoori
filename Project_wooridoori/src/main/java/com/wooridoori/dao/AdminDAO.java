@@ -32,7 +32,9 @@ public class AdminDAO extends SqlSessionDaoSupport{
 	public void writeAnswer(QnABoardDTO qnaDto){
 		getSqlSession().update("qnaboard.writeAnswer", qnaDto);
 	}
-	
+	public HashMap<String, String> getHandlingCount(){
+		return getSqlSession().selectOne("qnaboard.getHandlingCount");
+	}
 	/* Member */
 	
 	public int getWTotalCount(){

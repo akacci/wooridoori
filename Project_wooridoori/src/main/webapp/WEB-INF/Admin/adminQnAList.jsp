@@ -31,22 +31,12 @@ $(function(){
 <body>
 	<div style="width: 800px; margin-left: auto; margin-right: auto;">
 		<h3>QnA관리페이지</h3>
-	    <div id="donut_chart_box" style="width: 40%; float: left; margin-left: 20px;">
-		<div class="box box-danger">
-			<div class="box-header with-border">
-			  <h3 class="box-title">문의현황(문의종류)</h3>			
-			  <div class="box-tools pull-right">
-			    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-			  </div>
-			</div>
+
 			<div class="box-body chart-responsive">
-			  <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+			  <div class="chart" id="barchart" style="width: 45%;float:right;"></div>
+			  <div class="chart" id="donutchart" style="width: 45%;"></div>
 			</div>
-			<!-- /.box-body -->
-			</div>
-		<!-- /.box -->
 	
-    </div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -81,25 +71,58 @@ $(function(){
 			</tbody>
 		</table>
 	</div>
-	<script type="text/javascript">
-$(function () {
-	//DONUT CHART
-	var r = ${r}
-	var n = ${n}
-	var m = ${m}
-	var donut = new Morris.Donut({
-		element: 'sales-chart',
-		resize: true,
-		colors: ["#3c8dbc", "#f56954", "#00a65a"],
-		data: [
-			{label: "일반문의", value: n},
-			{label: "회원문의", value: m},
-			{label: "신고", value: r}
-    	],
-		hideHover: 'auto'
-	});
-});
-</script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+    	var nnum = ${n};
+  		var mnum = ${m};
+  		var rnum = ${r};
+        var data = google.visualization.arrayToDataTable([
+          ['Kind', 'Num', { role : "style" }],
+          ['일반문의',	nnum	, "#3c8dbc" ],
+          ['회원문의',	mnum	, "#f56954" ],
+          ['신고',	rnum	,"#00a65a"]     
+        ]);
+		
+        var options = {
+        		legend: 'none',
+                pieSliceText: 'label',
+                title: '문의현황(문의종류)',
+                pieStartAngle: 100,
+                fontSize: 17,
+                textStyle: {bold:true},
+                'width':300,
+                'height':300,
+                chartArea: {left: 10, bottom:20, top:25,right:10,}
+        };
+        var tt = ${T};
+  		var yy = ${Y};
+  		var nn = ${N};
+        var data2 = google.visualization.arrayToDataTable([
+          ['Kind', 'Num', { role : "style" }],
+          ['전체문의',	tt	, "#3c8dbc" ],
+          ['답변완료',	yy	, "#f56954" ],
+          ['미답변',	nn	,"#00a65a"]     
+        ]);
+		
+        var options2 = {
+        		legend: 'none',
+                pieSliceText: 'label',
+                title: '처리현황',
+                pieStartAngle: 100,
+                fontSize: 17,
+                textStyle: {bold:true},
+                'width':350,
+                'height':300,
+                chartArea: {left: 30, bottom:20, top:25,right:20,}
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+        var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        chart.draw(data2, options2);
+      }
+    </script>
 <!-- script -->
     <!-- mypage table script -->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/recommend_myjs/jquery.min.js?j=<%=System.currentTimeMillis()%>"></script>

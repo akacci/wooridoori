@@ -51,6 +51,9 @@ public class AdminService {
 		qnaDto.setContent(content_qna);
 		adminDao.writeAnswer(qnaDto);
 	}
+	public HashMap<String, String> getHandlingCount(){
+		return adminDao.getHandlingCount();
+	}
 	
 	/* Member */
 	public int getWTotalCount(){
