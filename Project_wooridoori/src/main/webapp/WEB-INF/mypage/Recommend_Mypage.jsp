@@ -30,7 +30,7 @@
      <div id="donut_chart_box" style="width: 45%; float: left; margin-left: 20px;">
 		<div class="box box-danger">
 			<div class="box-header with-border">
-			  <h3 class="box-title">Donut Chart</h3>			
+			  <h3 class="box-title">Theme Chart</h3>			
 			  <div class="box-tools pull-right">
 			    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 			    </button>
@@ -48,7 +48,7 @@
 	<div id="bar_chart_box" style="float: left; width: 45%; margin-left: 20px;">
 		<div class="box box-success">
 		  <div class="box-header with-border">
-		    <h3 class="box-title">Bar Chart</h3>
+		    <h3 class="box-title">Grade Chart</h3>
 		    <div class="box-tools pull-right">
 		      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 		      </button>
@@ -67,7 +67,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title">My Data</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -84,11 +84,8 @@
 	                <th>Date modified</th>
                 </tr>
                 </thead>
-                <tbody id="mypage_list"> 
-                	
-                </tbody>
-                <tr id="mypage_paging">
-                </tr>              
+                <tbody id="mypage_list"></tbody>
+                <tr id="mypage_paging"><td colspan="8" style="text-align: center;"></td></tr>              
               </table>              
             </div>
             <!-- /.box-body -->

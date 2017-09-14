@@ -184,7 +184,7 @@ public class RecommendService {
 	}
 	
 	/*recommend mypage*/
-	public List<HashMap<String, Object>> bubble_Data(String id)
+	public HashMap<String, Object> bubble_Data(String id,int currentPage)
 	{
 		
 		Date date = new Date();
@@ -196,9 +196,16 @@ public class RecommendService {
 			/*String dt = (String) list.get(i).get("MODIFIED_DATE");*/
 			String MOD_DATE = sdf.format(list.get(i).get("MODIFIED_DATE"));			
 			list.get(i).put("MODIFIED_DATE", MOD_DATE);				
-		}		
+		}
 		
-		return list;
+		HashMap<String, Object> hashmap = new HashMap<String, Object>();		
+				
+		int totalCount = refdao.totalCount_Mypage(id);
+			
+		hashmap.put("totalCount", totalCount);
+		hashmap.put("dataList", list);
+		
+		return hashmap;
 	}
 	public HashMap<String, Object> paging_Data(String id, int currentPage)
 	{		
@@ -244,6 +251,7 @@ public class RecommendService {
 		hashmap.put("startPage",startPage);
 		hashmap.put("endPage",endPage);
 		hashmap.put("currentPage", currentPage);
+		hashmap.put("dataList", currentPage);
 		
 		
 		return hashmap;

@@ -275,9 +275,7 @@ public class RecommendController {
 		refdto.setGrouptrip(grouptrip);
 		refdto.setPurpose_code(purpose_code);
 		refdto.setStay_code(stay_code);	
-		
-		System.out.println("------++++++++++++++++++------------"+refdto.getGrade_point());
-		
+				
 		service.insertOrUpdateFirsttrip(refdto);
 	}
 	
@@ -290,18 +288,18 @@ public class RecommendController {
 	}
 	
 	@RequestMapping(value="bubble_Data.wd", method=RequestMethod.POST)
-	public void bubble_data(/*@RequestParam(value="currentPage", defaultValue="1") int currentPage,*/
+	public void bubble_data(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 							HttpSession session,
 							HttpServletResponse response)
 	{
 		response.setContentType("text/html;charset=UTF-8");
 		String id = (String)session.getAttribute("ID") == null?"GUEST":(String)session.getAttribute("ID");
 		
-		List<HashMap<String, Object>> list = service.bubble_Data(id);
+		HashMap<String, Object> dataMap = service.bubble_Data(id,currentPage);
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
-			response.getWriter().print(mapper.writeValueAsString(list));
+			response.getWriter().print(mapper.writeValueAsString(dataMap));
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

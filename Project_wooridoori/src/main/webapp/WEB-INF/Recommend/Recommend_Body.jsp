@@ -100,7 +100,7 @@
 										<ul class="select_box_ul">
 											<li><span class="tour_title">관광지명</span></li>
 											<li class="rateit_box">
-												<div class="rateit bigstars"></div>
+												<div class="rateit bigstars" id="rateit_false" inx="${i.count}"></div>
 											</li>
 											<li>							
 												<div class="_ccimg" value="n" inx="${i.count}">
@@ -144,7 +144,7 @@
 										<ul class="select_box_ul">
 											<li><span class="tour_title">관광지명</span></li>
 											<li class="rateit_box">
-												<div class="rateit bigstars"></div>
+												<div class="rateit bigstars" id="rateit_false" inx="${i.count}"></div>
 											</li>
 											<li>							
 												<div class="_ccimg" value="n" inx="${i.count}">
