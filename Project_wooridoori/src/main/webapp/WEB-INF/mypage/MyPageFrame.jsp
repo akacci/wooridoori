@@ -82,7 +82,6 @@
  			$(function(){
  				$("#page").load("userInfo.wd");
  				var data1 = ${data1}+"";
- 				alert(data1);
  				if(data1!=null && data1.length != 0){
 
  					changePage(data1);
