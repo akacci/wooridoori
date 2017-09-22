@@ -43,7 +43,6 @@ function Pager(){
 			type: 'POST',
 			data: { currentPage: currentPage, limit: limit },
 			success: function(ret){
-				/*console.log('test - ' + ret + '\n\n\n');*/
 				var parsedData = null;
 				
 				try{ parsedData = JSON.parse(ret); } catch(e){ console.log(e); }
@@ -60,12 +59,12 @@ function Pager(){
 	this.drawList = function(s_data){
 		var mypage = "";
 		$("#mypage_list").empty();
-		
-		var lastNum = (currentPage + limit) - 1;
-		var startNum = (currentPage - 1) * limit;
+				
+		var startNum =(currentPage-1)*limit;
+		var lastNum = startNum+limit;
 		if(lastNum > totalCount) {lastNum = totalCount;}
 		
-		console.log(startNum + " , " + lastNum + " , " + currentPage);
+		console.log(startNum + " , " + lastNum + " , " + currentPage + " , " + totalCount);
 		
 		if(s_data.length > 0){
 			for (var i = startNum; i < lastNum; i++)
@@ -116,12 +115,13 @@ function Pager(){
 	
 	this.drawPage = function(){
 		
-		var left = currentPage > 5 ? true : false;
-		var right = currentPage < 5 ? true : false;
-		var perBlock = 5;
-		var startPage = startPage = (currentPage)/perBlock*perBlock;
+		var perBlock = 5;		
+		var startPage = parseInt((currentPage)/(perBlock+1))*perBlock+1;
+		console.log(startPage);
 		var endPage = startPage + perBlock - 1;
 		var maxPage = parseInt(totalCount / limit) + 1;
+		var left = startPage > perBlock ? true : false;
+		var right = endPage < maxPage ? true : false;
 		
 		if(endPage > maxPage) endPage=maxPage;
 		
@@ -133,8 +133,9 @@ function Pager(){
 		
 		if(left) wrapper.append(leftBtn);
 		
-		for(i = startPage; i <= (maxPage < endPage ? (maxPage == 1 ? 2 : maxPage) : endPage); i++){
+		for(i = startPage; i <= endPage; i++){
 			var pageBtn = $('<button id="page_' + i + '" type="button" class="btn btn-success">' + i + '</button>');			
+						
 			wrapper.append(pageBtn);
 			
 			pageBtn.click(function(){ var idx = $(this).text(); thisobj.clickPage(idx); });
