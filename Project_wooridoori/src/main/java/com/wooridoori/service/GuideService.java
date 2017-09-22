@@ -358,7 +358,6 @@ public class GuideService{
 		// source: http://answers.opencv.org/question/10344/opencv-java-load-image-to-gui/
 		// Fastest code
 		// The output can be assigned either to a BufferedImage or to an Image
-
 		    int type = BufferedImage.TYPE_BYTE_GRAY;
 		    if ( m.channels() > 1 ) {
 		        type = BufferedImage.TYPE_3BYTE_BGR;
@@ -370,7 +369,5 @@ public class GuideService{
 		    byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		    System.arraycopy(b, 0, targetPixels, 0, b.length);  
 		    return image;
-
 		}*/
 }
-
